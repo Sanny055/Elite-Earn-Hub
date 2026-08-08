@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Elite Earn Hub - Register</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #07111f;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .register-box {
+      width: 100%;
+      max-width: 400px;
+      background: #0d1b2e;
+      padding: 30px;
+      border-radius: 18px;
+      border: 1px solid #29445f;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .welcome {
+      text-align: center;
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #ffffff, #38bdf8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand {
+      text-align: center;
+      color: #38bdf8;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #8da3ba;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      color: #d6e2ee;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #29445f;
+      border-radius: 9px;
+      background: #081522;
+      color: white;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: #38bdf8;
+    }
+
+    .password-input {
+      padding-right: 45px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #8da3ba;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 9px;
+      background: #1687d9;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .register-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .login {
+      text-align: center;
+      margin-top: 20px;
+      color: #8da3ba;
+      font-size: 13px;
+    }
+
+    .login a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .whatsapp-section {
+      text-align: center;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #21384e;
+    }
+
+    .whatsapp-text {
+      color: #8da3ba;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .whatsapp-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      font-size: 25px;
+    }
+
+    @media (max-width: 450px) {
+      .register-box {
+        padding: 25px 20px;
+      }
+
+      .welcome {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="register-box">
+
+    <div class="welcome">
+      CREATE ACCOUNT
+    </div>
+
+    <div class="brand">
+      Elite Earn Hub
+    </div>
+
+    <div class="subtitle">
+      Create your account
+    </div>
+
+
+    <form id="registerForm">
+
+      <label for="name">Full Name</label>
+
+      <div class="input-box">
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter your full name"
+          required
+        >
+      </div>
+
+
+      <label for="email">Email</label>
+
+      <div class="input-box">
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        >
+      </div>
+
+
+      <label for="password">Password</label>
+
+      <div class="input-box">
+
+        <input
+          type="password"
+          id="password"
+          class="password-input"
+          placeholder="Create a password"
+          minlength="6"
+          required
+        >
+
+        <span
+          class="show-password"
+          id="togglePassword"
+        >👁️</span>
+
+      </div>
+
+
+      <label for="confirmPassword">Confirm Password</label>
+
+      <div class="input-box">
+
+        <input
+          type="password"
+          id="confirmPassword"
+          class="password-input"
+          placeholder="Confirm your password"
+          minlength="6"
+          required
+        >
+
+        <span
+          class="show-password"
+          id="toggleConfirmPassword"
+        >👁️</span>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="register-btn"
+        id="registerBtn"
+      >
+        Create Account
+      </button>
+
+    </form>
+
+
+    <div id="message"></div>
+
+
+    <div class="login">
+      Already have an account?
+      <a href="login.html">
+        Login
+      </a>
+    </div>
+
+
+    <div class="whatsapp-section">
+
+      <div class="whatsapp-text">
+        Need Help? Contact us on WhatsApp
+      </div>
+
+      <a
+        class="whatsapp-icon"
+        href="https://wa.me/923XXXXXXXXX"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ☎
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =====================================
+       SUPABASE CONFIG
+       ===================================== */
+
+    const SUPABASE_URL = "https://cdgmtleyzggeryvugcrf.supabase.co";
+
+    const SUPABASE_PUBLIC_KEY = "sb_publishable_9veiB1eRPPyLHR8X2oldMQ_AcLz9Jb2";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLIC_KEY
+    );
+
+
+    /* =====================================
+       SHOW / HIDE PASSWORD
+       ===================================== */
+
+    document
+      .getElementById("togglePassword")
+      .addEventListener("click", function () {
+
+        const input =
+          document.getElementById("password");
+
+        if (input.type === "password") {
+          input.type = "text";
+          this.textContent = "🙈";
+        } else {
+          input.type = "password";
+          this.textContent = "👁️";
+        }
+
+      });
+
+
+    document
+      .getElementById("toggleConfirmPassword")
+      .addEventListener("click", function () {
+
+        const input =
+          document.getElementById("confirmPassword");
+
+        if (input.type === "password") {
+          input.type = "text";
+          this.textContent = "🙈";
+        } else {
+          input.type = "password";
+          this.textContent = "👁️";
+        }
+
+      });
+
+
+    /* =====================================
+       REGISTER
+       ===================================== */
+
+    document
+      .getElementById("registerForm")
+      .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const name =
+          document.getElementById("name").value.trim();
+
+        const email =
+          document.getElementById("email").value.trim();
+
+        const password =
+          document.getElementById("password").value;
+
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+
+        const registerBtn =
+          document.getElementById("registerBtn");
+
+        const message =
+          document.getElementById("message");
+
+
+        if (password !== confirmPassword) {
+
+          message.textContent =
+            "Passwords do not match.";
+
+          message.style.color = "#ff6b7a";
+
+          return;
+        }
+
+
+        registerBtn.disabled = true;
+        registerBtn.textContent = "Creating Account...";
+
+        message.textContent = "";
+        message.style.color = "";
+
+
+        try {
+
+          const { data, error } =
+            await supabaseClient.auth.signUp({
+
+              email: email,
+
+              password: password,
+
+              options: {
+                data: {
+                  full_name: name
+                }
+              }
+
+            });
+
+
+          if (error) {
+
+            message.textContent =
+              error.message;
+
+            message.style.color = "#ff6b7a";
+
+            registerBtn.disabled = false;
+            registerBtn.textContent = "Create Account";
+
+            return;
+          }
+
+
+          message.textContent =
+            "Account created successfully!";
+
+          message.style.color = "#5ee68a";
+
+
+          setTimeout(function() {
+
+            window.location.href = "login.html";
+
+          }, 1200);
+
+
+        } catch (error) {
+
+          message.textContent =
+            "Something went wrong. Please try again.";
+
+          message.style.color = "#ff6b7a";
+
+          registerBtn.disabled = false;
+          registerBtn.textContent = "Create Account";
+
+        }
+
+      });
+
+  </script>
+
+</body>
+          </html>
