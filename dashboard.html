@@ -17,141 +17,316 @@
     }
 
     body {
-      min-height: 100vh;
       background: #07111f;
-      color: white;
-      padding: 20px;
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 14px;
     }
 
-    .dashboard {
+    .container {
       width: 100%;
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
     }
 
-    .header {
+    .header,
+    .announcement,
+    .balance-card,
+    .section-box {
       background: #0d1b2e;
       border: 1px solid #29445f;
-      border-radius: 18px;
-      padding: 25px;
-      margin-bottom: 20px;
+      border-radius: 17px;
     }
 
-    .welcome {
-      font-size: 28px;
+    /* HEADER */
+
+    .header {
+      padding: 22px;
+      margin-bottom: 14px;
+    }
+
+    .brand {
+      font-size: 26px;
       font-weight: 800;
       color: #38bdf8;
     }
 
-    .email {
+    .welcome {
+      font-size: 14px;
+      margin-top: 5px;
+      color: #d8e4ef;
+    }
+
+    .user-email {
       color: #8da3ba;
-      font-size: 13px;
-      margin-top: 8px;
+      font-size: 12px;
+      margin-top: 7px;
       word-break: break-word;
     }
 
-    .balance {
-      background: #0d1b2e;
-      border: 1px solid #29445f;
-      border-radius: 18px;
-      padding: 28px;
-      text-align: center;
-      margin-bottom: 20px;
+    /* ANNOUNCEMENT */
+
+    .announcement {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .announcement-title {
+      background: #1687d9;
+      padding: 13px 15px;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .ticker {
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      white-space: nowrap;
+      padding-left: 100%;
+      animation: ticker 18s linear infinite;
+      color: #dcecff;
+      font-size: 12px;
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* BALANCES */
+
+    .balance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 15px;
+    }
+
+    .balance-card {
+      padding: 20px;
     }
 
     .balance-title {
       color: #8da3ba;
-      font-size: 14px;
+      font-size: 13px;
+      margin-bottom: 8px;
     }
 
-    .balance-amount {
+    .senax {
       color: #38bdf8;
-      font-size: 40px;
+      font-size: 29px;
       font-weight: 800;
-      margin-top: 8px;
     }
 
-    .balance-name {
-      color: #8da3ba;
-      font-size: 12px;
-      margin-top: 5px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    .currency-row {
+      display: flex;
       gap: 15px;
+      margin-top: 7px;
+      color: #c5d2df;
+      font-size: 12px;
     }
 
-    .card {
-      background: #0d1b2e;
+    /* SECTIONS */
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 22px 0 11px;
+    }
+
+    .section-box {
+      padding: 18px;
+    }
+
+    /* MENU */
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
+    }
+
+    .menu-item {
+      background: #081522;
       border: 1px solid #29445f;
-      border-radius: 15px;
-      padding: 22px;
+      border-radius: 13px;
+      padding: 18px 10px;
       text-align: center;
       cursor: pointer;
       transition: 0.2s;
     }
 
-    .card:hover {
-      transform: translateY(-2px);
+    .menu-item:hover {
       border-color: #38bdf8;
+      transform: translateY(-2px);
     }
 
     .icon {
-      font-size: 30px;
-      margin-bottom: 10px;
+      font-size: 27px;
+      margin-bottom: 8px;
     }
 
-    .card-title {
-      font-size: 16px;
+    .item-name {
+      font-size: 13px;
       font-weight: bold;
     }
 
-    .card-text {
+    .item-description {
       color: #8da3ba;
-      font-size: 12px;
-      margin-top: 6px;
+      font-size: 10px;
+      margin-top: 5px;
+      line-height: 1.4;
     }
+
+    /* YOUTUBE */
+
+    .youtube-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .youtube-btn {
+      background: #081522;
+      border: 1px solid #29445f;
+      color: white;
+      border-radius: 10px;
+      padding: 13px 7px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .youtube-btn:hover {
+      border-color: #38bdf8;
+    }
+
+    /* REFERRAL */
+
+    .referral-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #081522;
+      border: 1px solid #203a52;
+      border-radius: 10px;
+      padding: 13px;
+    }
+
+    .referral-rate {
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+    /* LEADERBOARD */
+
+    .leaderboard-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .leaderboard-btn {
+      background: #081522;
+      border: 1px solid #29445f;
+      color: white;
+      padding: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .leaderboard-btn:hover {
+      border-color: #38bdf8;
+    }
+
+    /* SUPPORT */
+
+    .support-buttons,
+    .social-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .support-btn,
+    .social-btn {
+      text-decoration: none;
+      text-align: center;
+      background: #081522;
+      border: 1px solid #29445f;
+      color: white;
+      padding: 13px 7px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    .support-btn:hover,
+    .social-btn:hover {
+      border-color: #38bdf8;
+    }
+
+    /* LOGOUT */
 
     .logout {
       width: 100%;
-      margin-top: 20px;
-      padding: 14px;
       border: none;
-      border-radius: 10px;
       background: #b42335;
       color: white;
+      padding: 14px;
+      border-radius: 11px;
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 22px;
     }
 
     .logout:disabled {
       opacity: 0.6;
     }
 
-    #pageMessage {
+    #loading {
       text-align: center;
-      padding: 40px 10px;
+      padding: 60px 10px;
       color: #8da3ba;
     }
 
-    @media (max-width: 550px) {
-      body {
-        padding: 14px;
-      }
+    /* MOBILE */
 
-      .cards {
+    @media (max-width: 650px) {
+
+      .balance-grid {
         grid-template-columns: 1fr;
       }
 
-      .welcome {
-        font-size: 24px;
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .balance-amount {
-        font-size: 34px;
+      .youtube-buttons,
+      .support-buttons,
+      .social-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .brand {
+        font-size: 22px;
+      }
+
+      .senax {
+        font-size: 26px;
       }
     }
   </style>
@@ -159,91 +334,324 @@
 
 <body>
 
-  <div id="pageMessage">
-    Checking your account...
+  <div id="loading">
+    Checking account...
   </div>
 
 
-  <div class="dashboard" id="dashboard" style="display:none;">
+  <div class="container" id="dashboard" style="display:none;">
+
+    <!-- HEADER -->
 
     <div class="header">
 
-      <div class="welcome">
-        Welcome to Elite Earn Hub
+      <div class="brand">
+        Elite Earn Hub
       </div>
 
-      <div class="email" id="userEmail">
+      <div class="welcome">
+        Welcome to your earning dashboard
+      </div>
+
+      <div class="user-email" id="userEmail">
         Loading...
       </div>
 
     </div>
 
 
-    <div class="balance">
+    <!-- ANNOUNCEMENT -->
 
-      <div class="balance-title">
-        Your Balance
+    <div class="announcement">
+
+      <div class="announcement-title">
+        📢 ANNOUNCEMENT
       </div>
 
-      <div class="balance-amount">
-        0
-      </div>
+      <div class="ticker">
 
-      <div class="balance-name">
-        Points
+        <div class="ticker-text" id="announcementText">
+          Welcome to Elite Earn Hub • Stay connected for latest updates.
+        </div>
+
       </div>
 
     </div>
 
 
-    <div class="cards">
+    <!-- BALANCES -->
 
-      <div class="card">
+    <div class="balance-grid">
+
+      <div class="balance-card">
+
+        <div class="balance-title">
+          💰 Main Balance
+        </div>
+
+        <div class="senax">
+          0 Senax
+        </div>
+
+        <div class="currency-row">
+          <span>0 PKR</span>
+          <span>$0.00 USD</span>
+        </div>
+
+      </div>
+
+
+      <div class="balance-card">
+
+        <div class="balance-title">
+          📢 Advertisement Balance
+        </div>
+
+        <div class="senax">
+          0 Senax
+        </div>
+
+        <div class="currency-row">
+          <span>0 PKR</span>
+          <span>$0.00 USD</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- MAIN DASHBOARD -->
+
+    <div class="section-title">
+      Dashboard
+    </div>
+
+    <div class="menu-grid">
+
+      <div class="menu-item">
         <div class="icon">🎯</div>
-        <div class="card-title">Tasks</div>
-        <div class="card-text">
-          Complete available tasks
+        <div class="item-name">Tasks</div>
+        <div class="item-description">
+          Complete website tasks
         </div>
       </div>
 
 
-      <div class="card">
-        <div class="icon">👥</div>
-        <div class="card-title">Referrals</div>
-        <div class="card-text">
-          Manage your referrals
+      <div class="menu-item">
+        <div class="icon">🌐</div>
+        <div class="item-name">Surfing</div>
+        <div class="item-description">
+          Browse available websites
         </div>
       </div>
 
 
-      <div class="card">
+      <div class="menu-item">
+        <div class="icon">🏆</div>
+        <div class="item-name">Competition</div>
+        <div class="item-description">
+          Participate in competitions
+        </div>
+      </div>
+
+
+      <div class="menu-item">
         <div class="icon">💸</div>
-        <div class="card-title">Withdraw</div>
-        <div class="card-text">
-          Manage withdrawal requests
+        <div class="item-name">Withdraw</div>
+        <div class="item-description">
+          Manage your withdrawal
         </div>
       </div>
 
 
-      <div class="card">
+      <div class="menu-item">
         <div class="icon">📊</div>
-        <div class="card-title">History</div>
-        <div class="card-text">
-          View your activity
+        <div class="item-name">History</div>
+        <div class="item-description">
+          View your transactions
         </div>
       </div>
 
 
-      <div class="card">
+      <div class="menu-item">
         <div class="icon">👤</div>
-        <div class="card-title">Profile</div>
-        <div class="card-text">
-          Manage your account
+        <div class="item-name">Profile</div>
+        <div class="item-description">
+          Manage your profile
         </div>
       </div>
 
     </div>
 
+
+    <!-- WEBSITE TASKS -->
+
+    <div class="section-title">
+      🎯 Website Tasks
+    </div>
+
+    <div class="section-box">
+
+      <div style="color:#8da3ba;font-size:12px;">
+        Website tasks added by the administrator will appear here.
+      </div>
+
+    </div>
+
+
+    <!-- YOUTUBE -->
+
+    <div class="section-title">
+      ▶️ YouTube Tasks
+    </div>
+
+    <div class="section-box">
+
+      <div class="youtube-buttons">
+
+        <button class="youtube-btn">
+          👍 Like
+        </button>
+
+        <button class="youtube-btn">
+          👁️ View
+        </button>
+
+        <button class="youtube-btn">
+          🔔 Subscribe
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- REFERRAL -->
+
+    <div class="section-title">
+      👥 Referral Commission
+    </div>
+
+    <div class="section-box">
+
+      <div class="referral-row">
+
+        <span>
+          Level 1
+        </span>
+
+        <span class="referral-rate">
+          0.5%
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- LEADERBOARD -->
+
+    <div class="section-title">
+      🏆 Leaderboard
+    </div>
+
+    <div class="section-box">
+
+      <div class="leaderboard-buttons">
+
+        <button class="leaderboard-btn">
+          👤 User Leaderboard
+        </button>
+
+        <button class="leaderboard-btn">
+          📢 Advertiser Leaderboard
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- 24 HOURS SUPPORT -->
+
+    <div class="section-title">
+      🛟 24 Hours Support
+    </div>
+
+    <div class="section-box">
+
+      <div class="support-buttons">
+
+        <a
+          href="#"
+          class="support-btn"
+          id="contactAdmin"
+        >
+          📞 Contact Admin
+        </a>
+
+        <a
+          href="#"
+          class="support-btn"
+          id="whatsapp"
+        >
+          💬 WhatsApp
+        </a>
+
+        <a
+          href="#"
+          class="support-btn"
+          id="telegram"
+        >
+          ✈️ Telegram
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- SOCIAL MEDIA -->
+
+    <div class="section-title">
+      📱 Social Media
+    </div>
+
+    <div class="section-box">
+
+      <div class="social-buttons">
+
+        <a
+          href="#"
+          class="social-btn"
+          id="youtubeSocial"
+        >
+          ▶️ YouTube
+        </a>
+
+        <a
+          href="#"
+          class="social-btn"
+          id="instagramSocial"
+        >
+          📸 Instagram
+        </a>
+
+        <a
+          href="#"
+          class="social-btn"
+          id="facebookSocial"
+        >
+          📘 Facebook
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- LOGOUT -->
 
     <button
       class="logout"
@@ -258,12 +666,14 @@
   <script>
 
     /* =====================================
-       SUPABASE CONFIG
+       SUPABASE
        ===================================== */
 
-    const SUPABASE_URL = "https://cdgmtleyzggeryvugcrf.supabase.co";
+    const SUPABASE_URL =
+      "https://cdgmtleyzggeryvugcrf.supabase.co";
 
-    const SUPABASE_PUBLIC_KEY = "sb_publishable_9veiB1eRPPyLHR8X2oldMQ_AcLz9Jb2";
+    const SUPABASE_PUBLIC_KEY =
+      "sb_publishable_9veiB1eRPPyLHR8X2oldMQ_AcLz9Jb2";
 
 
     const supabaseClient =
@@ -274,7 +684,70 @@
 
 
     /* =====================================
-       CHECK LOGIN SESSION
+       ANNOUNCEMENT
+       Change this text later
+       ===================================== */
+
+    const ANNOUNCEMENT_TEXT =
+      "Welcome to Elite Earn Hub • Stay connected for latest updates.";
+
+
+    document.getElementById(
+      "announcementText"
+    ).textContent =
+      ANNOUNCEMENT_TEXT;
+
+
+    /* =====================================
+       TEMPORARY CONTACT LINKS
+       These will later come from Admin Panel
+       ===================================== */
+
+    const CONTACT_ADMIN_LINK = "#";
+
+    const WHATSAPP_LINK = "#";
+
+    const TELEGRAM_LINK = "#";
+
+    const YOUTUBE_LINK = "#";
+
+    const INSTAGRAM_LINK = "#";
+
+    const FACEBOOK_LINK = "#";
+
+
+    document.getElementById(
+      "contactAdmin"
+    ).href = CONTACT_ADMIN_LINK;
+
+
+    document.getElementById(
+      "whatsapp"
+    ).href = WHATSAPP_LINK;
+
+
+    document.getElementById(
+      "telegram"
+    ).href = TELEGRAM_LINK;
+
+
+    document.getElementById(
+      "youtubeSocial"
+    ).href = YOUTUBE_LINK;
+
+
+    document.getElementById(
+      "instagramSocial"
+    ).href = INSTAGRAM_LINK;
+
+
+    document.getElementById(
+      "facebookSocial"
+    ).href = FACEBOOK_LINK;
+
+
+    /* =====================================
+       CHECK SESSION
        ===================================== */
 
     async function checkUser() {
@@ -282,30 +755,41 @@
       const {
         data,
         error
-      } = await supabaseClient.auth.getSession();
+      } =
+        await supabaseClient.auth.getSession();
 
 
-      if (error || !data.session) {
+      if (
+        error ||
+        !data.session
+      ) {
 
-        window.location.replace("login.html");
+        window.location.replace(
+          "login.html"
+        );
 
         return;
       }
 
 
-      const user = data.session.user;
+      document.getElementById(
+        "userEmail"
+      ).textContent =
+        data.session.user.email ||
+        "User";
 
 
-      document.getElementById("userEmail")
-        .textContent = user.email || "User";
+      document.getElementById(
+        "loading"
+      ).style.display =
+        "none";
 
 
-      document.getElementById("pageMessage")
-        .style.display = "none";
+      document.getElementById(
+        "dashboard"
+      ).style.display =
+        "block";
 
-
-      document.getElementById("dashboard")
-        .style.display = "block";
     }
 
 
@@ -318,40 +802,53 @@
 
     document
       .getElementById("logoutBtn")
-      .addEventListener("click", async function() {
+      .addEventListener(
+        "click",
+        async function() {
 
-        const logoutBtn =
-          document.getElementById("logoutBtn");
-
-
-        logoutBtn.disabled = true;
-        logoutBtn.textContent = "Logging out...";
-
-
-        const { error } =
-          await supabaseClient.auth.signOut();
+          const button =
+            document.getElementById(
+              "logoutBtn"
+            );
 
 
-        if (error) {
+          button.disabled = true;
 
-          logoutBtn.disabled = false;
-          logoutBtn.textContent = "Logout";
+          button.textContent =
+            "Logging out...";
 
-          alert(
-            "Logout failed. Please try again."
+
+          const {
+            error
+          } =
+            await supabaseClient.auth.signOut();
+
+
+          if (error) {
+
+            button.disabled = false;
+
+            button.textContent =
+              "Logout";
+
+            alert(
+              "Logout failed. Please try again."
+            );
+
+            return;
+          }
+
+
+          window.location.replace(
+            "login.html"
           );
 
-          return;
         }
-
-
-        window.location.replace("login.html");
-
-      });
+      );
 
 
     /* =====================================
-       SESSION CHANGE
+       SESSION LISTENER
        ===================================== */
 
     supabaseClient.auth.onAuthStateChange(
@@ -361,7 +858,11 @@
           event === "SIGNED_OUT" ||
           !session
         ) {
-          window.location.replace("login.html");
+
+          window.location.replace(
+            "login.html"
+          );
+
         }
 
       }
