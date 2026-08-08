@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Elite Earn Hub - Dashboard</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #07111f;
+      color: white;
+      padding: 20px;
+    }
+
+    .dashboard {
+      width: 100%;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .header {
+      background: #0d1b2e;
+      border: 1px solid #29445f;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .welcome {
+      color: #38bdf8;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      color: #8da3ba;
+      margin-top: 7px;
+      font-size: 14px;
+    }
+
+    .balance {
+      background: #0d1b2e;
+      border: 1px solid #29445f;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .balance-title {
+      color: #8da3ba;
+      font-size: 14px;
+    }
+
+    .balance-amount {
+      font-size: 38px;
+      font-weight: bold;
+      color: #38bdf8;
+      margin-top: 8px;
+    }
+
+    .coin-name {
+      color: #8da3ba;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .feature {
+      background: #0d1b2e;
+      border: 1px solid #29445f;
+      border-radius: 15px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .feature-text {
+      color: #8da3ba;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .logout {
+      width: 100%;
+      margin-top: 20px;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: #b42335;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 550px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="dashboard">
+
+    <div class="header">
+      <div class="welcome">
+        Welcome to Elite Earn Hub
+      </div>
+
+      <div class="subtitle">
+        Your earning dashboard
+      </div>
+    </div>
+
+
+    <div class="balance">
+
+      <div class="balance-title">
+        Your Senax Balance
+      </div>
+
+      <div class="balance-amount">
+        0
+      </div>
+
+      <div class="coin-name">
+        SENAX
+      </div>
+
+    </div>
+
+
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Tasks</div>
+        <div class="feature-text">
+          Complete tasks and earn Senax
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">👥</div>
+        <div class="feature-title">Referrals</div>
+        <div class="feature-text">
+          Invite friends and earn rewards
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💸</div>
+        <div class="feature-title">Withdraw</div>
+        <div class="feature-text">
+          Request your withdrawal
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">History</div>
+        <div class="feature-text">
+          View your earning history
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">👤</div>
+        <div class="feature-title">Profile</div>
+        <div class="feature-text">
+          Manage your account
+        </div>
+      </div>
+
+    </div>
+
+
+    <button class="logout" id="logoutBtn">
+      Logout
+    </button>
+
+  </div>
+
+
+  <script>
+    document
+      .getElementById("logoutBtn")
+      .addEventListener("click", function() {
+
+        window.location.href = "login.html";
+
+      });
+  </script>
+
+</body>
+        </html>
