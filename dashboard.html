@@ -1,387 +1,634 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Earn Hub</title>
 
-  <title>Elite Earn Hub</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+body{
+  background:#06101c;
+  color:#fff;
+  min-height:100vh;
+}
 
-    body {
-      background: #07111f;
-      color: #ffffff;
-      min-height: 100vh;
-    }
+.container{
+  width:100%;
+  max-width:1050px;
+  margin:auto;
+  padding:14px;
+}
 
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: auto;
-      padding: 16px;
-    }
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 4px 18px;
+}
 
-    /* HEADER */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+.logo{
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:#39bdf8;
+}
 
-    .brand {
-      font-size: 25px;
-      font-weight: 900;
-      color: #38bdf8;
-    }
+.logo-sub{
+  font-size:11px;
+  color:#8097aa;
+  margin-top:3px;
+}
 
-    .welcome {
-      color: #91a8bd;
-      font-size: 12px;
-      margin-top: 3px;
-    }
+.user-name{
+  margin-top:5px;
+  font-size:13px;
+  color:#d8e5ef;
+}
 
-    .logout {
-      border: 1px solid #29445d;
-      background: #0d1d2e;
-      color: #fff;
-      padding: 9px 13px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-size: 12px;
-    }
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 
-    /* ANNOUNCEMENT */
-    .announcement {
-      height: 32px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: #0b1b2b;
-      border: 1px solid #203b54;
-      border-radius: 8px;
-      margin-bottom: 14px;
-      white-space: nowrap;
-    }
+.icon-btn,
+.logout-btn{
+  border:1px solid #24445e;
+  background:#0b1b2b;
+  color:white;
+  border-radius:10px;
+  padding:10px 12px;
+  cursor:pointer;
+}
 
-    .announcement-title {
-      padding: 0 9px;
-      color: #38bdf8;
-      font-size: 11px;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
+.notification-badge{
+  position:relative;
+}
 
-    .ticker {
-      overflow: hidden;
-      flex: 1;
-    }
+.notification-badge span{
+  position:absolute;
+  top:-5px;
+  right:-5px;
+  background:#ef4444;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  font-size:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .ticker span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: ticker 18s linear infinite;
-      color: #c6d6e5;
-      font-size: 11px;
-    }
+/* ANNOUNCEMENT */
+.announcement{
+  height:34px;
+  display:flex;
+  align-items:center;
+  background:#0a1a2a;
+  border:1px solid #203b52;
+  border-radius:8px;
+  overflow:hidden;
+  margin-bottom:13px;
+}
 
-    @keyframes ticker {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
+.announcement-icon{
+  padding:0 10px;
+  color:#38bdf8;
+  font-size:14px;
+}
 
-    /* PRICE */
-    .price {
-      text-align: center;
-      color: #8fa7bb;
-      font-size: 11px;
-      margin: 7px 0 15px;
-    }
+.announcement-window{
+  overflow:hidden;
+  white-space:nowrap;
+  flex:1;
+}
 
-    .price strong {
-      color: #38bdf8;
-    }
+.announcement-text{
+  display:inline-block;
+  padding-left:100%;
+  animation:scrollText 20s linear infinite;
+  font-size:11px;
+  color:#cbd8e3;
+}
 
-    /* BALANCES */
-    .balances {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 15px;
-    }
+@keyframes scrollText{
+  from{transform:translateX(0);}
+  to{transform:translateX(-100%);}
+}
 
-    .balance-card {
-      background: #0c1c2d;
-      border: 1px solid #23445e;
-      border-radius: 15px;
-      padding: 17px;
-    }
+/* WELCOME */
+.hero{
+  text-align:center;
+  padding:12px 5px 20px;
+}
 
-    .balance-label {
-      color: #8fa7bb;
-      font-size: 11px;
-      margin-bottom: 8px;
-    }
+.hero-title{
+  font-size:29px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
 
-    .balance-value {
-      font-size: 24px;
-      font-weight: 900;
-      color: #ffffff;
-    }
+.hero-title span{
+  color:#38bdf8;
+}
 
-    .balance-unit {
-      color: #38bdf8;
-      font-size: 11px;
-      margin-left: 4px;
-    }
+.hero-text{
+  color:#7f96a9;
+  font-size:12px;
+  margin-top:7px;
+}
 
-    /* CONVERT */
-    .convert-box {
-      background: #0c1c2d;
-      border: 1px solid #23445e;
-      border-radius: 15px;
-      padding: 16px;
-      margin-bottom: 15px;
-    }
+/* PRICE */
+.price-line{
+  text-align:center;
+  color:#71899d;
+  font-size:11px;
+  margin-bottom:15px;
+}
 
-    .convert-box h3 {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
+.price-line strong{
+  color:#38bdf8;
+}
 
-    .convert-row {
-      display: flex;
-      gap: 8px;
-    }
+/* BALANCES */
+.balance-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
 
-    .convert-row input {
-      flex: 1;
-      background: #071522;
-      border: 1px solid #29475f;
-      color: white;
-      padding: 12px;
-      border-radius: 9px;
-      outline: none;
-    }
+.balance-card{
+  background:linear-gradient(145deg,#0d2134,#091725);
+  border:1px solid #24465f;
+  border-radius:17px;
+  padding:19px;
+  position:relative;
+  overflow:hidden;
+}
 
-    .primary-btn {
-      border: none;
-      background: #1387d4;
-      color: white;
-      font-weight: 800;
-      padding: 11px 15px;
-      border-radius: 9px;
-      cursor: pointer;
-    }
+.balance-card::after{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  right:-40px;
+  top:-40px;
+  border-radius:50%;
+  background:rgba(56,189,248,.05);
+}
 
-    .small-note {
-      color: #71889c;
-      font-size: 10px;
-      margin-top: 8px;
-    }
+.balance-title{
+  font-size:11px;
+  color:#8199ad;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
 
-    /* GRID */
-    .section-title {
-      font-size: 15px;
-      margin: 18px 0 10px;
-    }
+.balance-number{
+  font-size:28px;
+  font-weight:900;
+  margin-top:8px;
+}
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
+.balance-unit{
+  font-size:11px;
+  color:#38bdf8;
+  margin-left:3px;
+}
 
-    .feature {
-      background: #0c1c2d;
-      border: 1px solid #23445e;
-      border-radius: 13px;
-      padding: 15px 10px;
-      text-align: center;
-      cursor: pointer;
-      transition: .2s;
-    }
+.balance-note{
+  color:#60788d;
+  font-size:9px;
+  margin-top:7px;
+}
 
-    .feature:hover {
-      border-color: #38bdf8;
-      transform: translateY(-2px);
-    }
+/* CONVERT */
+.convert-card{
+  margin-top:13px;
+  padding:17px;
+  border-radius:16px;
+  border:1px solid #24465f;
+  background:#0b1b2b;
+}
 
-    .feature-icon {
-      font-size: 22px;
-      margin-bottom: 7px;
-    }
+.card-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
 
-    .feature-title {
-      font-size: 12px;
-      font-weight: 800;
-    }
+.card-heading h3{
+  font-size:14px;
+}
 
-    .feature-desc {
-      color: #71889c;
-      font-size: 9px;
-      margin-top: 4px;
-    }
+.card-heading small{
+  color:#5e788d;
+  font-size:9px;
+}
 
-    /* YOUTUBE */
-    .youtube {
-      margin-top: 16px;
-      background: #0c1c2d;
-      border: 1px solid #23445e;
-      border-radius: 15px;
-      padding: 16px;
-    }
+.convert-row{
+  display:flex;
+  gap:9px;
+}
 
-    .youtube-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
+.convert-input{
+  flex:1;
+  background:#071522;
+  color:white;
+  border:1px solid #284961;
+  border-radius:9px;
+  padding:12px;
+  outline:none;
+}
 
-    .youtube-header h3 {
-      font-size: 15px;
-    }
+.primary-btn{
+  background:#1387d4;
+  color:white;
+  border:0;
+  border-radius:9px;
+  padding:11px 17px;
+  font-weight:800;
+  cursor:pointer;
+}
 
-    .youtube-label {
-      color: #ff5b65;
-      font-size: 10px;
-      font-weight: 800;
-    }
+.message{
+  font-size:10px;
+  color:#8097aa;
+  margin-top:8px;
+}
 
-    .youtube-buttons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
-    }
+/* SECTION */
+.section-title{
+  font-size:15px;
+  font-weight:800;
+  margin:21px 0 10px;
+}
 
-    .youtube-btn {
-      background: #111f2f;
-      border: 1px solid #29445c;
-      color: white;
-      border-radius: 9px;
-      padding: 12px 5px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 800;
-    }
+/* MENU */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
 
-    /* LEADERBOARD */
-    .leaderboard {
-      margin-top: 15px;
-      background: #0c1c2d;
-      border: 1px solid #23445e;
-      border-radius: 15px;
-      padding: 15px;
-      text-align: center;
-      cursor: pointer;
-    }
+.menu-card{
+  min-height:105px;
+  padding:14px 9px;
+  text-align:center;
+  background:#0b1b2b;
+  border:1px solid #213f57;
+  border-radius:14px;
+  cursor:pointer;
+  transition:.2s;
+}
 
-    .leaderboard h3 {
-      font-size: 14px;
-    }
+.menu-card:hover{
+  transform:translateY(-2px);
+  border-color:#38bdf8;
+}
 
-    .coming {
-      color: #38bdf8;
-      font-size: 10px;
-      margin-top: 5px;
-    }
+.menu-icon{
+  font-size:24px;
+  margin-bottom:8px;
+}
 
-    /* SUPPORT */
-    .support {
-      margin-top: 15px;
-      background: #0c1c2d;
-      border: 1px solid #23445e;
-      border-radius: 15px;
-      padding: 15px;
-    }
+.menu-name{
+  font-size:12px;
+  font-weight:800;
+}
 
-    .support h3 {
-      font-size: 14px;
-      margin-bottom: 11px;
-    }
+.menu-description{
+  color:#71899c;
+  font-size:9px;
+  margin-top:5px;
+  line-height:1.4;
+}
 
-    .support-buttons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
-    }
+/* MANDATORY TASK */
+.mandatory{
+  margin-top:15px;
+  padding:17px;
+  background:linear-gradient(145deg,#101d2c,#0a1725);
+  border:1px solid #6b4c22;
+  border-radius:16px;
+}
 
-    .support-btn {
-      border: 1px solid #29445c;
-      background: #101f30;
-      color: white;
-      padding: 11px 5px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 700;
-    }
+.mandatory-title{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:15px;
+  font-weight:900;
+}
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      color: #627a8f;
-      font-size: 10px;
-      padding: 25px 0 12px;
-    }
+.mandatory-description{
+  color:#8da0b0;
+  font-size:10px;
+  line-height:1.6;
+  margin:9px 0 12px;
+}
 
-    footer strong {
-      color: #38bdf8;
-    }
+.task-preview{
+  background:#081522;
+  border:1px solid #213b50;
+  border-radius:11px;
+  padding:12px;
+}
 
-    /* MOBILE */
-    @media (max-width: 700px) {
+.task-preview-title{
+  font-size:12px;
+  font-weight:800;
+}
 
-      .container {
-        padding: 12px;
-      }
+.task-preview-status{
+  color:#f0b65b;
+  font-size:9px;
+  margin-top:5px;
+}
 
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-      }
+.screenshot-btn{
+  margin-top:10px;
+  border:1px solid #34566e;
+  background:#102437;
+  color:white;
+  border-radius:8px;
+  padding:9px 11px;
+  font-size:10px;
+  cursor:pointer;
+}
 
-      .balances {
-        grid-template-columns: 1fr 1fr;
-      }
+/* YOUTUBE */
+.youtube{
+  margin-top:15px;
+  padding:17px;
+  background:#0b1b2b;
+  border:1px solid #213f57;
+  border-radius:16px;
+}
 
-      .youtube-buttons {
-        grid-template-columns: repeat(3, 1fr);
-      }
+.youtube-buttons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:12px;
+}
 
-      .header {
-        align-items: flex-start;
-      }
+.youtube-btn{
+  padding:12px 5px;
+  background:#101f30;
+  color:white;
+  border:1px solid #29465d;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:800;
+}
 
-      .brand {
-        font-size: 21px;
-      }
-    }
+/* LEADERBOARD */
+.leaderboard{
+  margin-top:15px;
+  padding:17px;
+  background:#0b1b2b;
+  border:1px solid #213f57;
+  border-radius:16px;
+}
 
-    @media (max-width: 420px) {
+.leaderboard-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:12px;
+}
 
-      .balances {
-        grid-template-columns: 1fr;
-      }
+.tab-btn{
+  padding:10px;
+  border:1px solid #29465d;
+  background:#0d2132;
+  color:#a9bac8;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:10px;
+}
 
-      .convert-row {
-        flex-direction: column;
-      }
-    }
-  </style>
+.tab-btn.active{
+  background:#1387d4;
+  color:#fff;
+}
+
+.rank-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.rank-item{
+  display:grid;
+  grid-template-columns:38px 1fr auto;
+  align-items:center;
+  gap:8px;
+  padding:11px;
+  background:#081522;
+  border:1px solid #1c3549;
+  border-radius:10px;
+}
+
+.rank-number{
+  font-weight:900;
+  color:#38bdf8;
+  text-align:center;
+}
+
+.rank-name{
+  font-size:11px;
+  font-weight:800;
+}
+
+.rank-details{
+  color:#71899d;
+  font-size:8px;
+  margin-top:4px;
+}
+
+.rating{
+  text-align:right;
+  color:#f3c65c;
+  font-size:11px;
+  font-weight:800;
+}
+
+/* WITHDRAWAL */
+.withdrawal{
+  margin-top:15px;
+  padding:17px;
+  background:#0b1b2b;
+  border:1px solid #213f57;
+  border-radius:16px;
+}
+
+.withdrawal-methods{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.withdrawal-method{
+  padding:12px 7px;
+  background:#0d2031;
+  color:white;
+  border:1px solid #29465d;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:800;
+}
+
+.withdrawal-method small{
+  display:block;
+  color:#6f879a;
+  margin-top:4px;
+  font-size:8px;
+}
+
+.withdrawal-note{
+  margin-top:10px;
+  color:#6f879a;
+  font-size:9px;
+  line-height:1.6;
+}
+
+/* ACCOUNT */
+.account{
+  margin-top:15px;
+  padding:17px;
+  background:#0b1b2b;
+  border:1px solid #213f57;
+  border-radius:16px;
+}
+
+.account-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:9px 0;
+  border-bottom:1px solid #162d40;
+}
+
+.account-row:last-child{
+  border-bottom:0;
+}
+
+.account-label{
+  color:#71899d;
+  font-size:10px;
+}
+
+.account-value{
+  font-size:10px;
+  font-weight:800;
+}
+
+.status-active{
+  color:#36d68a;
+}
+
+.status-warning{
+  color:#f4b94e;
+}
+
+.status-blocked{
+  color:#ef5b63;
+}
+
+/* SUPPORT */
+.support{
+  margin-top:15px;
+  padding:17px;
+  background:#0b1b2b;
+  border:1px solid #213f57;
+  border-radius:16px;
+}
+
+.support-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:11px;
+}
+
+.support-btn{
+  padding:11px 5px;
+  background:#102132;
+  border:1px solid #29465d;
+  color:white;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:700;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  color:#60788c;
+  font-size:10px;
+  line-height:1.7;
+  padding:25px 0 12px;
+}
+
+footer strong{
+  color:#38bdf8;
+}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  .menu-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:500px){
+  .balance-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .convert-row{
+    flex-direction:column;
+  }
+
+  .withdrawal-methods{
+    grid-template-columns:1fr;
+  }
+
+  .support-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-title{
+    font-size:24px;
+  }
+
+  .logo{
+    font-size:24px;
+  }
+}
+
+@media(max-width:370px){
+  .balance-number{
+    font-size:22px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -392,26 +639,36 @@
   <header class="header">
 
     <div>
-      <div class="brand">Elite</div>
+      <div class="logo">ELITE</div>
 
-      <div class="welcome">
-        Hello, Welcome to Elite Earn Hub
+      <div class="logo-sub">
+        Earn • Complete • Grow
       </div>
 
-      <div
-        id="username"
-        class="welcome"
-      >
+      <div class="user-name" id="username">
         Loading...
       </div>
     </div>
 
-    <button
-      class="logout"
-      id="logoutBtn"
-    >
-      Logout
-    </button>
+    <div class="header-right">
+
+      <button
+        class="icon-btn notification-badge"
+        id="notificationBtn"
+        title="Notifications"
+      >
+        🔔
+        <span id="notificationCount">0</span>
+      </button>
+
+      <button
+        class="logout-btn"
+        id="logoutBtn"
+      >
+        Logout
+      </button>
+
+    </div>
 
   </header>
 
@@ -419,45 +676,61 @@
   <!-- ANNOUNCEMENT -->
   <div class="announcement">
 
-    <div class="announcement-title">
-      📢 ANNOUNCEMENT
+    <div class="announcement-icon">
+      📢
     </div>
 
-    <div class="ticker">
-      <span id="announcementText">
-        Welcome to Elite Earn Hub • New tasks will appear here
-      </span>
+    <div class="announcement-window">
+
+      <div
+        class="announcement-text"
+        id="announcementText"
+      >
+        Welcome to Elite Earn Hub • Complete tasks and earn SNX • Stay active for more opportunities
+      </div>
+
     </div>
 
   </div>
 
 
+  <!-- BRAND -->
+  <section class="hero">
+
+    <div class="hero-title">
+      ELITE <span>EARN HUB</span>
+    </div>
+
+    <div class="hero-text">
+      Your earning dashboard
+    </div>
+
+  </section>
+
+
   <!-- CURRENT PRICE -->
-  <div class="price">
+  <div class="price-line">
     Current Price:
     <strong>1 SNX = 4 PKR</strong>
   </div>
 
 
   <!-- BALANCES -->
-  <div class="balances">
+  <div class="balance-grid">
 
     <div class="balance-card">
 
-      <div class="balance-label">
+      <div class="balance-title">
         Main Balance
       </div>
 
-      <div class="balance-value">
+      <div class="balance-number">
+        <span id="mainBalance">0</span>
+        <span class="balance-unit">SNX</span>
+      </div>
 
-        <span id="mainBalance">
-          0
-        </span>
-
-        <span class="balance-unit">
-          SNX
-        </span>
-
+      <div class="balance-note">
+        Available earning balance
       </div>
 
     </div>
@@ -465,20 +738,17 @@
 
     <div class="balance-card">
 
-      <div class="balance-label">
+      <div class="balance-title">
         Advertisement Balance
       </div>
 
-      <div class="balance-value">
+      <div class="balance-number">
+        <span id="advertisementBalance">0</span>
+        <span class="balance-unit">SNX</span>
+      </div>
 
-        <span id="advertisementBalance">
-          0
-        </span>
-
-        <span class="balance-unit">
-          SNX
-        </span>
-
+      <div class="balance-note">
+        Used for advertising & pin tasks
       </div>
 
     </div>
@@ -487,19 +757,28 @@
 
 
   <!-- CONVERT -->
-  <div class="convert-box">
+  <div class="convert-card">
 
-    <h3>
-      Convert Main Balance → Advertisement Balance
-    </h3>
+    <div class="card-heading">
+
+      <h3>
+        🔄 Convert Balance
+      </h3>
+
+      <small>
+        Main → Advertisement
+      </small>
+
+    </div>
 
     <div class="convert-row">
 
       <input
         id="convertAmount"
+        class="convert-input"
         type="number"
         min="100"
-        placeholder="Minimum 100 SNX"
+        placeholder="Enter SNX amount"
       >
 
       <button
@@ -511,87 +790,141 @@
 
     </div>
 
-    <div class="small-note">
+    <div class="message" id="convertMessage">
       Minimum conversion: 100 SNX
     </div>
 
-    <div
-      id="convertMessage"
-      class="small-note"
-    ></div>
-
   </div>
 
 
-  <!-- FEATURES -->
+  <!-- MAIN FEATURES -->
   <div class="section-title">
-    Earn & Explore
+    Earn & Manage
   </div>
 
-  <div class="features">
+  <div class="menu-grid">
 
-    <div
-      class="feature"
-      id="tasksBtn"
-    >
-      <div class="feature-icon">📋</div>
-      <div class="feature-title">Tasks</div>
-      <div class="feature-desc">
-        Complete tasks
+    <div class="menu-card" id="tasksBtn">
+      <div class="menu-icon">📋</div>
+      <div class="menu-name">Tasks</div>
+      <div class="menu-description">
+        Complete tasks and earn SNX
       </div>
     </div>
 
 
-    <div
-      class="feature"
-      id="surfingBtn"
-    >
-      <div class="feature-icon">🌐</div>
-      <div class="feature-title">Surfing</div>
-      <div class="feature-desc">
-        Visit websites
+    <div class="menu-card" id="surfingBtn">
+      <div class="menu-icon">🌐</div>
+      <div class="menu-name">Surfing</div>
+      <div class="menu-description">
+        Visit available websites
       </div>
     </div>
 
 
-    <div
-      class="feature"
-      id="profileBtn"
-    >
-      <div class="feature-icon">👤</div>
-      <div class="feature-title">Profile</div>
-      <div class="feature-desc">
-        Your account
+    <div class="menu-card" id="youtubeBtn">
+      <div class="menu-icon">▶️</div>
+      <div class="menu-name">YouTube</div>
+      <div class="menu-description">
+        View, like & subscribe
       </div>
     </div>
 
 
-    <div
-      class="feature"
-      id="referralBtn"
-    >
-      <div class="feature-icon">👥</div>
-      <div class="feature-title">Referral</div>
-      <div class="feature-desc">
-        Level 1 • 0.5%
+    <div class="menu-card" id="referralBtn">
+      <div class="menu-icon">👥</div>
+      <div class="menu-name">Referral</div>
+      <div class="menu-description">
+        Level 1 commission: 0.5%
+      </div>
+    </div>
+
+
+    <div class="menu-card" id="pinTaskBtn">
+      <div class="menu-icon">📌</div>
+      <div class="menu-name">Pin Task</div>
+      <div class="menu-description">
+        Promote your task in top positions
+      </div>
+    </div>
+
+
+    <div class="menu-card" id="withdrawalBtn">
+      <div class="menu-icon">💸</div>
+      <div class="menu-name">Withdrawal</div>
+      <div class="menu-description">
+        Withdraw your available SNX
+      </div>
+    </div>
+
+
+    <div class="menu-card" id="profileBtn">
+      <div class="menu-icon">👤</div>
+      <div class="menu-name">Profile</div>
+      <div class="menu-description">
+        View your account information
+      </div>
+    </div>
+
+
+    <div class="menu-card" id="leaderboardMenuBtn">
+      <div class="menu-icon">🏆</div>
+      <div class="menu-name">Leaderboard</div>
+      <div class="menu-description">
+        Compete for weekly rewards
       </div>
     </div>
 
   </div>
+
+
+  <!-- MANDATORY TASKS -->
+  <section class="mandatory">
+
+    <div class="mandatory-title">
+      ⚡ Mandatory Website Tasks
+    </div>
+
+    <div class="mandatory-description">
+      Complete all required website tasks to become eligible
+      for withdrawal. Screenshot proof may be required.
+      Tasks are verified by Admin.
+    </div>
+
+    <div class="task-preview">
+
+      <div class="task-preview-title">
+        Required tasks will appear here
+      </div>
+
+      <div class="task-preview-status">
+        Pending Admin Tasks
+      </div>
+
+      <button
+        class="screenshot-btn"
+        id="screenshotBtn"
+      >
+        📸 Submit Screenshot
+      </button>
+
+    </div>
+
+  </section>
 
 
   <!-- YOUTUBE -->
-  <div class="youtube">
+  <section class="youtube">
 
-    <div class="youtube-header">
+    <div class="card-heading">
 
       <h3>
-        ▶ YouTube Tasks
+        ▶️ YouTube Tasks
       </h3>
 
-      <div class="youtube-label">
-        EARN SNX
-      </div>
+      <small>
+        Earn by completing verified tasks
+      </small>
 
     </div>
 
@@ -620,34 +953,247 @@
 
     </div>
 
-  </div>
+  </section>
 
 
   <!-- LEADERBOARD -->
-  <div
-    class="leaderboard"
-    id="leaderboardBtn"
-  >
+  <section class="leaderboard">
 
-    <h3>
-      🏆 Leaderboard
-    </h3>
+    <div class="card-heading">
 
-    <div class="coming">
-      Coming Soon
+      <h3>
+        🏆 Leaderboard
+      </h3>
+
+      <small>
+        Weekly ranking & rewards
+      </small>
+
     </div>
 
-  </div>
+
+    <div class="leaderboard-tabs">
+
+      <button
+        class="tab-btn active"
+        id="earningLeaderboard"
+      >
+        Earning
+      </button>
+
+      <button
+        class="tab-btn"
+        id="advertiserLeaderboard"
+      >
+        Advertiser
+      </button>
+
+    </div>
+
+
+    <div
+      class="rank-list"
+      id="rankList"
+    >
+
+      <div class="rank-item">
+
+        <div class="rank-number">
+          #1
+        </div>
+
+        <div>
+          <div class="rank-name">
+            Leaderboard
+          </div>
+
+          <div class="rank-details">
+            Rating • Tasks • Withdrawals
+          </div>
+        </div>
+
+        <div class="rating">
+          ⭐ 0
+        </div>
+
+      </div>
+
+
+      <div class="rank-item">
+
+        <div class="rank-number">
+          #2
+        </div>
+
+        <div>
+          <div class="rank-name">
+            Waiting for users
+          </div>
+
+          <div class="rank-details">
+            Complete tasks to climb
+          </div>
+        </div>
+
+        <div class="rating">
+          ⭐ 0
+        </div>
+
+      </div>
+
+
+      <div class="rank-item">
+
+        <div class="rank-number">
+          #3
+        </div>
+
+        <div>
+          <div class="rank-name">
+            Waiting for users
+          </div>
+
+          <div class="rank-details">
+            Weekly ranking
+          </div>
+        </div>
+
+        <div class="rating">
+          ⭐ 0
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WITHDRAWAL -->
+  <section class="withdrawal">
+
+    <div class="card-heading">
+
+      <h3>
+        💸 Withdrawal
+      </h3>
+
+      <small>
+        Rating-based limits apply
+      </small>
+
+    </div>
+
+
+    <div class="withdrawal-methods">
+
+      <button
+        class="withdrawal-method"
+        id="jazzcashBtn"
+      >
+        JazzCash
+        <small>Minimum 25 SNX</small>
+      </button>
+
+
+      <button
+        class="withdrawal-method"
+        id="easypaisaBtn"
+      >
+        EasyPaisa
+        <small>Minimum 20 SNX</small>
+      </button>
+
+
+      <button
+        class="withdrawal-method"
+        id="binanceBtn"
+      >
+        Binance UID
+        <small>Minimum 50 SNX</small>
+      </button>
+
+    </div>
+
+
+    <div class="withdrawal-note">
+
+      Rating 0–49: 1 withdrawal/day, maximum 25 SNX.<br>
+      Rating 50–199: 2 withdrawals/day, maximum 50 SNX.<br>
+      Rating 200+: 3 withdrawals/day, maximum 75 SNX.
+
+    </div>
+
+  </section>
+
+
+  <!-- ACCOUNT STATUS -->
+  <section class="account">
+
+    <div class="card-heading">
+
+      <h3>
+        👤 Account Information
+      </h3>
+
+      <small>
+        Account status
+      </small>
+
+    </div>
+
+
+    <div class="account-row">
+
+      <div class="account-label">
+        Account Status
+      </div>
+
+      <div
+        class="account-value status-active"
+        id="accountStatus"
+      >
+        Active
+      </div>
+
+    </div>
+
+
+    <div class="account-row">
+
+      <div class="account-label">
+        Join Date
+      </div>
+
+      <div
+        class="account-value"
+        id="joinDate"
+      >
+        Loading...
+      </div>
+
+    </div>
+
+  </section>
 
 
   <!-- SUPPORT -->
-  <div class="support">
+  <section class="support">
 
-    <h3>
-      💬 24 Hours Support
-    </h3>
+    <div class="card-heading">
 
-    <div class="support-buttons">
+      <h3>
+        💬 24 Hours Support
+      </h3>
+
+      <small>
+        We're here to help
+      </small>
+
+    </div>
+
+
+    <div class="support-grid">
 
       <button
         class="support-btn"
@@ -672,14 +1218,17 @@
 
     </div>
 
-  </div>
+  </section>
 
 
   <!-- FOOTER -->
   <footer>
-    Elite Earn Hub
-    <br>
-    Created by <strong>Sanny</strong>
+
+    Elite Earn Hub<br>
+
+    Created by
+    <strong>Sanny Jatt</strong>
+
   </footer>
 
 </div>
@@ -687,362 +1236,536 @@
 
 <script>
 
-  /* =========================================
-     SUPABASE CONFIG
-     ========================================= */
+/* =====================================================
+   SUPABASE CONFIGURATION
+   ===================================================== */
 
-  const SUPABASE_URL =
-    "https://cdgmtleyzggeryvugcrf.supabase.co";
+const SUPABASE_URL =
+"YOUR_SUPABASE_URL";
 
-  const SUPABASE_ANON_KEY =
-    "sb_publishable_9veiB1eRPPyLHR8X2oldMQ_AcLz9Jb2";
-
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
+const SUPABASE_ANON_KEY =
+"YOUR_SUPABASE_ANON_KEY";
 
 
-  /* =========================================
-     PROFILE DATA
-     ========================================= */
-
-  let currentUser = null;
-  let currentProfile = null;
-
-
-  async function loadDashboard() {
-
-    const {
-      data: {
-        user
-      },
-      error: userError
-    } =
-      await supabaseClient.auth.getUser();
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
 
 
-    if (userError || !user) {
+/* =====================================================
+   USER DATA
+   ===================================================== */
 
-      window.location.href =
-        "login.html";
-
-      return;
-
-    }
+let currentUser = null;
+let currentProfile = null;
 
 
-    currentUser = user;
+/* =====================================================
+   LOAD USER
+   ===================================================== */
+
+async function loadUser(){
+
+  const {
+    data: {
+      user
+    },
+    error
+  } =
+  await supabaseClient.auth.getUser();
 
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "id, username, main_balance, advertisement_balance"
-        )
-        .eq("id", user.id)
-        .single();
+  if(error || !user){
+
+    window.location.href =
+    "login.html";
+
+    return;
+  }
 
 
-    if (error) {
-
-      console.error(error);
-
-      document.getElementById(
-        "username"
-      ).textContent =
-        "Profile loading error";
-
-      return;
-
-    }
+  currentUser = user;
 
 
-    currentProfile = data;
+  const {
+    data: profile,
+    error: profileError
+  } =
+  await supabaseClient
+  .from("profiles")
+  .select("*")
+  .eq("id", user.id)
+  .single();
 
+
+  if(profileError){
+
+    console.error(profileError);
 
     document.getElementById(
       "username"
     ).textContent =
-      "@" + (data.username || "User");
+    "Profile error";
 
+    return;
+  }
+
+
+  currentProfile = profile;
+
+
+  /* USERNAME */
+
+  document.getElementById(
+    "username"
+  ).textContent =
+  "@" + (
+    profile.username ||
+    user.email?.split("@")[0] ||
+    "User"
+  );
+
+
+  /* BALANCES */
+
+  document.getElementById(
+    "mainBalance"
+  ).textContent =
+  Number(
+    profile.main_balance || 0
+  ).toLocaleString();
+
+
+  document.getElementById(
+    "advertisementBalance"
+  ).textContent =
+  Number(
+    profile.advertisement_balance || 0
+  ).toLocaleString();
+
+
+  /* JOIN DATE */
+
+  const joined =
+  profile.created_at ||
+  user.created_at;
+
+
+  if(joined){
 
     document.getElementById(
-      "mainBalance"
+      "joinDate"
     ).textContent =
-      Number(data.main_balance || 0);
-
-
-    document.getElementById(
-      "advertisementBalance"
-    ).textContent =
-      Number(data.advertisement_balance || 0);
+    new Date(joined)
+    .toLocaleDateString();
 
   }
 
 
-  /* =========================================
-     LOGOUT
-     ========================================= */
+  /* ACCOUNT STATUS */
+
+  const status =
+  profile.account_status ||
+  "active";
+
+
+  const statusElement =
+  document.getElementById(
+    "accountStatus"
+  );
+
+
+  statusElement.textContent =
+  status.charAt(0).toUpperCase() +
+  status.slice(1);
+
+
+  statusElement.className =
+  "account-value " +
+  (
+    status === "blocked"
+    ? "status-blocked"
+    : status === "warning"
+    ? "status-warning"
+    : "status-active"
+  );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+"click",
+async function(){
+
+  await supabaseClient.auth.signOut();
+
+  window.location.href =
+  "login.html";
+
+});
+
+
+/* =====================================================
+   CONVERSION
+   ===================================================== */
+
+document
+.getElementById("convertBtn")
+.addEventListener(
+"click",
+function(){
+
+  const amount =
+  Number(
+    document
+    .getElementById("convertAmount")
+    .value
+  );
+
+
+  const message =
+  document
+  .getElementById("convertMessage");
+
+
+  if(!amount || amount < 100){
+
+    message.textContent =
+    "Minimum conversion is 100 SNX.";
+
+    return;
+  }
+
+
+  if(
+    currentProfile &&
+    amount >
+    Number(
+      currentProfile.main_balance || 0
+    )
+  ){
+
+    message.textContent =
+    "Insufficient Main Balance.";
+
+    return;
+  }
+
+
+  message.textContent =
+  "Conversion will be processed through the secure system.";
+
+});
+
+
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
+
+function openPage(page){
+
+  window.location.href =
+  page;
+
+}
+
+
+document
+.getElementById("tasksBtn")
+.addEventListener(
+"click",
+() => openPage("tasks.html")
+);
+
+
+document
+.getElementById("surfingBtn")
+.addEventListener(
+"click",
+() => openPage("surfing.html")
+);
+
+
+document
+.getElementById("referralBtn")
+.addEventListener(
+"click",
+() => openPage("referral.html")
+);
+
+
+document
+.getElementById("pinTaskBtn")
+.addEventListener(
+"click",
+() => openPage("pin-task.html")
+);
+
+
+document
+.getElementById("profileBtn")
+.addEventListener(
+"click",
+() => openPage("profile.html")
+);
+
+
+document
+.getElementById("withdrawalBtn")
+.addEventListener(
+"click",
+() => openPage("withdrawal.html")
+);
+
+
+document
+.getElementById("leaderboardMenuBtn")
+.addEventListener(
+"click",
+() => {
 
   document
-    .getElementById("logoutBtn")
-    .addEventListener(
-      "click",
-      async function() {
+  .querySelector(".leaderboard")
+  .scrollIntoView({
+    behavior:"smooth"
+  });
 
-        await supabaseClient.auth.signOut();
-
-        window.location.href =
-          "login.html";
-
-      }
-    );
+});
 
 
-  /* =========================================
-     CONVERT
-     ========================================= */
+document
+.getElementById("youtubeBtn")
+.addEventListener(
+"click",
+() => {
 
   document
-    .getElementById("convertBtn")
-    .addEventListener(
-      "click",
-      async function() {
+  .querySelector(".youtube")
+  .scrollIntoView({
+    behavior:"smooth"
+  });
 
-        const amount =
-          Number(
-            document
-              .getElementById("convertAmount")
-              .value
-          );
+});
 
 
-        const message =
-          document.getElementById(
-            "convertMessage"
-          );
+/* =====================================================
+   YOUTUBE
+   ===================================================== */
+
+document
+.getElementById("youtubeView")
+.addEventListener(
+"click",
+function(){
+
+  alert(
+  "Verified YouTube View tasks will appear here."
+  );
+
+});
 
 
-        if (!amount || amount < 100) {
+document
+.getElementById("youtubeLike")
+.addEventListener(
+"click",
+function(){
 
-          message.textContent =
-            "Minimum conversion is 100 SNX.";
+  alert(
+  "Verified YouTube Like tasks will appear here."
+  );
 
-          return;
-
-        }
-
-
-        if (
-          !currentProfile ||
-          Number(currentProfile.main_balance) <
-          amount
-        ) {
-
-          message.textContent =
-            "Insufficient Main Balance.";
-
-          return;
-
-        }
+});
 
 
-        /*
-          IMPORTANT:
+document
+.getElementById("youtubeSubscribe")
+.addEventListener(
+"click",
+function(){
 
-          Real balance conversion should later
-          be performed by a secure backend/RPC
-          transaction.
+  alert(
+  "Verified YouTube Subscribe tasks will appear here."
+  );
 
-          We do NOT directly update balances
-          from frontend JavaScript here.
-        */
-
-        message.textContent =
-          "Conversion system will be connected to the secure backend.";
-
-      }
-    );
+});
 
 
-  /* =========================================
-     BUTTONS
-     ========================================= */
+/* =====================================================
+   SCREENSHOT
+   ===================================================== */
 
-  document
-    .getElementById("tasksBtn")
-    .addEventListener(
-      "click",
-      function() {
+document
+.getElementById("screenshotBtn")
+.addEventListener(
+"click",
+function(){
 
-        window.location.href =
-          "tasks.html";
+  alert(
+  "Screenshot upload will be connected with the Admin verification system."
+  );
 
-      }
-    );
-
-
-  document
-    .getElementById("surfingBtn")
-    .addEventListener(
-      "click",
-      function() {
-
-        window.location.href =
-          "surfing.html";
-
-      }
-    );
+});
 
 
-  document
-    .getElementById("profileBtn")
-    .addEventListener(
-      "click",
-      function() {
+/* =====================================================
+   WITHDRAWAL
+   ===================================================== */
 
-        window.location.href =
-          "profile.html";
+document
+.getElementById("jazzcashBtn")
+.addEventListener(
+"click",
+function(){
 
-      }
-    );
+  openPage("withdrawal.html");
 
-
-  document
-    .getElementById("referralBtn")
-    .addEventListener(
-      "click",
-      function() {
-
-        window.location.href =
-          "referral.html";
-
-      }
-    );
+});
 
 
-  /* =========================================
-     YOUTUBE
-     ========================================= */
+document
+.getElementById("easypaisaBtn")
+.addEventListener(
+"click",
+function(){
+
+  openPage("withdrawal.html");
+
+});
+
+
+document
+.getElementById("binanceBtn")
+.addEventListener(
+"click",
+function(){
+
+  openPage("withdrawal.html");
+
+});
+
+
+/* =====================================================
+   LEADERBOARD TABS
+   ===================================================== */
+
+document
+.getElementById("earningLeaderboard")
+.addEventListener(
+"click",
+function(){
 
   document
-    .getElementById("youtubeView")
-    .addEventListener(
-      "click",
-      function() {
-
-        alert(
-          "YouTube View Tasks will be available soon."
-        );
-
-      }
-    );
+  .getElementById(
+    "earningLeaderboard"
+  )
+  .classList.add("active");
 
 
   document
-    .getElementById("youtubeLike")
-    .addEventListener(
-      "click",
-      function() {
+  .getElementById(
+    "advertiserLeaderboard"
+  )
+  .classList.remove("active");
 
-        alert(
-          "YouTube Like Tasks will be available soon."
-        );
+});
 
-      }
-    );
+
+document
+.getElementById("advertiserLeaderboard")
+.addEventListener(
+"click",
+function(){
+
+  document
+  .getElementById(
+    "advertiserLeaderboard"
+  )
+  .classList.add("active");
 
 
   document
-    .getElementById("youtubeSubscribe")
-    .addEventListener(
-      "click",
-      function() {
+  .getElementById(
+    "earningLeaderboard"
+  )
+  .classList.remove("active");
 
-        alert(
-          "YouTube Subscribe Tasks will be available soon."
-        );
-
-      }
-    );
+});
 
 
-  /* =========================================
-     LEADERBOARD
-     ========================================= */
+/* =====================================================
+   NOTIFICATIONS
+   ===================================================== */
 
-  document
-    .getElementById("leaderboardBtn")
-    .addEventListener(
-      "click",
-      function() {
+document
+.getElementById("notificationBtn")
+.addEventListener(
+"click",
+function(){
 
-        alert(
-          "Leaderboard — Coming Soon"
-        );
+  alert(
+  "Your notifications will appear here."
+  );
 
-      }
-    );
-
-
-  /* =========================================
-     SUPPORT
-     ========================================= */
-
-  document
-    .getElementById("contactSupport")
-    .addEventListener(
-      "click",
-      function() {
-
-        alert(
-          "24 Hours Support will be connected from Admin Panel."
-        );
-
-      }
-    );
+});
 
 
-  document
-    .getElementById("whatsappBtn")
-    .addEventListener(
-      "click",
-      function() {
+/* =====================================================
+   SUPPORT
+   ===================================================== */
 
-        alert(
-          "WhatsApp support will be connected from Admin Panel."
-        );
+document
+.getElementById("contactSupport")
+.addEventListener(
+"click",
+function(){
 
-      }
-    );
+  alert(
+  "24 Hours Support will be connected from Admin Panel."
+  );
 
-
-  document
-    .getElementById("telegramBtn")
-    .addEventListener(
-      "click",
-      function() {
-
-        alert(
-          "Telegram support will be connected from Admin Panel."
-        );
-
-      }
-    );
+});
 
 
-  /* =========================================
-     START
-     ========================================= */
+document
+.getElementById("whatsappBtn")
+.addEventListener(
+"click",
+function(){
 
-  loadDashboard();
+  alert(
+  "WhatsApp support will be connected from Admin Panel."
+  );
+
+});
+
+
+document
+.getElementById("telegramBtn")
+.addEventListener(
+"click",
+function(){
+
+  alert(
+  "Telegram support will be connected from Admin Panel."
+  );
+
+});
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+loadUser();
 
 </script>
 
