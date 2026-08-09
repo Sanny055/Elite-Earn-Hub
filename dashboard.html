@@ -6,1098 +6,1045 @@
 
   <title>Elite Earn Hub</title>
 
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  >
 
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      min-height: 100vh;
-      background: #06101d;
+      background: #07111f;
       color: #ffffff;
-      padding: 14px;
+      min-height: 100vh;
     }
 
     .container {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
+      padding: 16px;
     }
 
-    /* =========================
-       TOP HEADER
-    ========================= */
-
+    /* HEADER */
     .header {
-      background: linear-gradient(145deg, #0e2035, #091827);
-      border: 1px solid #24445f;
-      border-radius: 20px;
-      padding: 25px 20px;
-      margin-bottom: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.20);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .brand {
-      color: #38bdf8;
-      font-size: 28px;
+      font-size: 25px;
       font-weight: 900;
-      letter-spacing: 0.3px;
+      color: #38bdf8;
     }
 
     .welcome {
-      color: #e6f4ff;
-      font-size: 17px;
-      font-weight: 700;
-      margin-top: 8px;
+      color: #91a8bd;
+      font-size: 12px;
+      margin-top: 3px;
     }
 
-    .welcome span {
-      color: #38bdf8;
+    .logout {
+      border: 1px solid #29445d;
+      background: #0d1d2e;
+      color: #fff;
+      padding: 9px 13px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 12px;
     }
 
-    /* =========================
-       ANNOUNCEMENT
-    ========================= */
-
+    /* ANNOUNCEMENT */
     .announcement {
+      height: 32px;
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: #0d1b2e;
-      border: 1px solid #24445f;
-      border-radius: 14px;
-      margin-bottom: 15px;
+      background: #0b1b2b;
+      border: 1px solid #203b54;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      white-space: nowrap;
     }
 
     .announcement-title {
-      background: #1687d9;
-      padding: 13px 15px;
-      font-size: 12px;
+      padding: 0 9px;
+      color: #38bdf8;
+      font-size: 11px;
       font-weight: 800;
-      white-space: nowrap;
-      z-index: 2;
+      flex-shrink: 0;
     }
 
-    .ticker-area {
-      flex: 1;
+    .ticker {
       overflow: hidden;
+      flex: 1;
     }
 
-    .ticker-text {
+    .ticker span {
       display: inline-block;
-      white-space: nowrap;
       padding-left: 100%;
       animation: ticker 18s linear infinite;
-      color: #dcecff;
-      font-size: 12px;
+      color: #c6d6e5;
+      font-size: 11px;
     }
 
     @keyframes ticker {
-      from {
+      0% {
         transform: translateX(0);
       }
-
-      to {
+      100% {
         transform: translateX(-100%);
       }
     }
 
-    /* =========================
-       BALANCE
-    ========================= */
+    /* PRICE */
+    .price {
+      text-align: center;
+      color: #8fa7bb;
+      font-size: 11px;
+      margin: 7px 0 15px;
+    }
 
-    .balance-grid {
+    .price strong {
+      color: #38bdf8;
+    }
+
+    /* BALANCES */
+    .balances {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 15px;
     }
 
     .balance-card {
-      background: linear-gradient(145deg, #0e2035, #091827);
-      border: 1px solid #24445f;
-      border-radius: 18px;
-      padding: 21px;
+      background: #0c1c2d;
+      border: 1px solid #23445e;
+      border-radius: 15px;
+      padding: 17px;
     }
 
     .balance-label {
-      color: #8fa7bd;
-      font-size: 13px;
-      margin-bottom: 9px;
+      color: #8fa7bb;
+      font-size: 11px;
+      margin-bottom: 8px;
     }
 
     .balance-value {
-      color: #38bdf8;
-      font-size: 29px;
+      font-size: 24px;
       font-weight: 900;
+      color: #ffffff;
     }
 
-    .currency-row {
-      display: flex;
-      gap: 16px;
-      margin-top: 8px;
-      color: #c8d6e3;
-      font-size: 12px;
+    .balance-unit {
+      color: #38bdf8;
+      font-size: 11px;
+      margin-left: 4px;
     }
 
-    /* =========================
-       SECTION TITLE
-    ========================= */
-
-    .section-title {
-      margin: 22px 0 11px;
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    /* =========================
-       FEATURE CARDS
-    ========================= */
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 11px;
-    }
-
-    .feature-card {
-      background: #0d1b2e;
-      border: 1px solid #24445f;
+    /* CONVERT */
+    .convert-box {
+      background: #0c1c2d;
+      border: 1px solid #23445e;
       border-radius: 15px;
-      padding: 19px 10px;
+      padding: 16px;
+      margin-bottom: 15px;
+    }
+
+    .convert-box h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .convert-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .convert-row input {
+      flex: 1;
+      background: #071522;
+      border: 1px solid #29475f;
+      color: white;
+      padding: 12px;
+      border-radius: 9px;
+      outline: none;
+    }
+
+    .primary-btn {
+      border: none;
+      background: #1387d4;
+      color: white;
+      font-weight: 800;
+      padding: 11px 15px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .small-note {
+      color: #71889c;
+      font-size: 10px;
+      margin-top: 8px;
+    }
+
+    /* GRID */
+    .section-title {
+      font-size: 15px;
+      margin: 18px 0 10px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .feature {
+      background: #0c1c2d;
+      border: 1px solid #23445e;
+      border-radius: 13px;
+      padding: 15px 10px;
       text-align: center;
       cursor: pointer;
-      transition: 0.2s;
+      transition: .2s;
     }
 
-    .feature-card:hover {
+    .feature:hover {
       border-color: #38bdf8;
       transform: translateY(-2px);
     }
 
     .feature-icon {
-      font-size: 27px;
-      margin-bottom: 9px;
+      font-size: 22px;
+      margin-bottom: 7px;
     }
 
-    .feature-name {
-      font-size: 13px;
+    .feature-title {
+      font-size: 12px;
       font-weight: 800;
     }
 
-    .feature-text {
-      color: #8fa7bd;
-      font-size: 10px;
-      margin-top: 5px;
-      line-height: 1.4;
+    .feature-desc {
+      color: #71889c;
+      font-size: 9px;
+      margin-top: 4px;
     }
 
-    /* =========================
-       YOUTUBE
-    ========================= */
-
-    .youtube-box {
-      background: linear-gradient(145deg, #111d2d, #091827);
-      border: 1px solid #24445f;
-      border-radius: 18px;
-      padding: 19px;
+    /* YOUTUBE */
+    .youtube {
+      margin-top: 16px;
+      background: #0c1c2d;
+      border: 1px solid #23445e;
+      border-radius: 15px;
+      padding: 16px;
     }
 
     .youtube-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
-    .youtube-logo {
-      width: 45px;
-      height: 32px;
-      border-radius: 9px;
-      background: #ff0000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
+    .youtube-header h3 {
+      font-size: 15px;
     }
 
-    .youtube-title {
-      font-size: 17px;
+    .youtube-label {
+      color: #ff5b65;
+      font-size: 10px;
       font-weight: 800;
     }
 
-    .youtube-subtitle {
-      color: #8fa7bd;
-      font-size: 11px;
-      margin-top: 3px;
+    .youtube-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
     }
 
-    .youtube-button {
-      width: 100%;
-      border: none;
-      border-radius: 11px;
-      padding: 13px;
-      background: #e50914;
+    .youtube-btn {
+      background: #111f2f;
+      border: 1px solid #29445c;
       color: white;
-      font-size: 13px;
+      border-radius: 9px;
+      padding: 12px 5px;
+      cursor: pointer;
+      font-size: 11px;
       font-weight: 800;
+    }
+
+    /* LEADERBOARD */
+    .leaderboard {
+      margin-top: 15px;
+      background: #0c1c2d;
+      border: 1px solid #23445e;
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
       cursor: pointer;
     }
 
-    .youtube-button:hover {
-      opacity: 0.9;
+    .leaderboard h3 {
+      font-size: 14px;
     }
 
-    /* =========================
-       REFERRAL
-    ========================= */
-
-    .referral-box {
-      background: #0d1b2e;
-      border: 1px solid #24445f;
-      border-radius: 16px;
-      padding: 17px;
-    }
-
-    .referral-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #081522;
-      border-radius: 10px;
-      padding: 14px;
-    }
-
-    .referral-level {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .referral-rate {
+    .coming {
       color: #38bdf8;
-      font-size: 15px;
-      font-weight: 900;
+      font-size: 10px;
+      margin-top: 5px;
     }
 
-    /* =========================
-       SUPPORT
-    ========================= */
-
-    .support-box {
-      background: #0d1b2e;
-      border: 1px solid #24445f;
-      border-radius: 18px;
-      padding: 18px;
+    /* SUPPORT */
+    .support {
+      margin-top: 15px;
+      background: #0c1c2d;
+      border: 1px solid #23445e;
+      border-radius: 15px;
+      padding: 15px;
     }
 
-    .support-main {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-bottom: 16px;
-    }
-
-    .support-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: #1687d9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 21px;
-    }
-
-    .support-title {
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .support-text {
-      color: #8fa7bd;
-      font-size: 11px;
-      margin-top: 4px;
+    .support h3 {
+      font-size: 14px;
+      margin-bottom: 11px;
     }
 
     .support-buttons {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 9px;
     }
 
     .support-btn {
-      text-decoration: none;
+      border: 1px solid #29445c;
+      background: #101f30;
       color: white;
-      background: #081522;
-      border: 1px solid #24445f;
-      border-radius: 11px;
-      padding: 13px 8px;
-      text-align: center;
-      font-size: 12px;
+      padding: 11px 5px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 11px;
       font-weight: 700;
     }
 
-    .support-btn i {
-      display: block;
-      font-size: 19px;
-      margin-bottom: 6px;
-    }
-
-    .support-btn:hover {
-      border-color: #38bdf8;
-    }
-
-    /* =========================
-       SOCIAL MEDIA
-    ========================= */
-
-    .social-box {
-      display: flex;
-      justify-content: center;
-      gap: 13px;
-      background: #0d1b2e;
-      border: 1px solid #24445f;
-      border-radius: 18px;
-      padding: 20px;
-    }
-
-    .social-icon {
-      width: 47px;
-      height: 47px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-decoration: none;
-      background: #081522;
-      border: 1px solid #24445f;
-      font-size: 19px;
-      transition: 0.2s;
-    }
-
-    .social-icon:hover {
-      transform: translateY(-3px);
-      border-color: #38bdf8;
-    }
-
-    /* =========================
-       LOGOUT
-    ========================= */
-
-    .logout {
-      width: 100%;
-      border: none;
-      background: #b42335;
-      color: white;
-      padding: 14px;
-      border-radius: 11px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      margin-top: 22px;
-    }
-
-    .logout:hover {
-      opacity: 0.9;
-    }
-
-    .logout:disabled {
-      opacity: 0.6;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    .footer {
+    /* FOOTER */
+    footer {
       text-align: center;
-      padding: 25px 10px 12px;
-      color: #70869a;
-      font-size: 11px;
-      line-height: 1.7;
+      color: #627a8f;
+      font-size: 10px;
+      padding: 25px 0 12px;
     }
 
-    .footer strong {
+    footer strong {
       color: #38bdf8;
     }
 
-    /* =========================
-       LOADING
-    ========================= */
+    /* MOBILE */
+    @media (max-width: 700px) {
 
-    #loading {
-      text-align: center;
-      padding: 60px 10px;
-      color: #8fa7bd;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 650px) {
-
-      .balance-grid {
-        grid-template-columns: 1fr;
+      .container {
+        padding: 12px;
       }
 
-      .feature-grid {
+      .features {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .support-buttons {
-        grid-template-columns: 1fr;
+      .balances {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .youtube-buttons {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .header {
+        align-items: flex-start;
       }
 
       .brand {
-        font-size: 23px;
-      }
-
-      .welcome {
-        font-size: 15px;
-      }
-
-      .balance-value {
-        font-size: 26px;
+        font-size: 21px;
       }
     }
 
+    @media (max-width: 420px) {
+
+      .balances {
+        grid-template-columns: 1fr;
+      }
+
+      .convert-row {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- LOADING -->
+<div class="container">
 
-  <div id="loading">
-    Checking account...
-  </div>
+  <!-- HEADER -->
+  <header class="header">
 
-
-  <!-- DASHBOARD -->
-
-  <div class="container" id="dashboard" style="display:none;">
-
-    <!-- HEADER -->
-
-    <div class="header">
-
-      <div class="brand">
-        Elite Earn Hub
-      </div>
+    <div>
+      <div class="brand">Elite</div>
 
       <div class="welcome">
-        Hello, <span>Welcome to Elite Earn Hub</span> ✨
+        Hello, Welcome to Elite Earn Hub
       </div>
 
-    </div>
-
-
-    <!-- ANNOUNCEMENT -->
-
-    <div class="announcement">
-
-      <div class="announcement-title">
-        📢 ANNOUNCEMENT
-      </div>
-
-      <div class="ticker-area">
-
-        <div class="ticker-text" id="announcementText">
-          Welcome to Elite Earn Hub • Stay connected for latest updates and opportunities.
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- BALANCES -->
-
-    <div class="balance-grid">
-
-      <!-- MAIN BALANCE -->
-
-      <div class="balance-card">
-
-        <div class="balance-label">
-          💰 Main Balance
-        </div>
-
-        <div class="balance-value">
-          0 Senax
-        </div>
-
-        <div class="currency-row">
-          <span>0 PKR</span>
-          <span>$0.00 USD</span>
-        </div>
-
-      </div>
-
-
-      <!-- ADVERTISEMENT BALANCE -->
-
-      <div class="balance-card">
-
-        <div class="balance-label">
-          📢 Advertisement Balance
-        </div>
-
-        <div class="balance-value">
-          0 Senax
-        </div>
-
-        <div class="currency-row">
-          <span>0 PKR</span>
-          <span>$0.00 USD</span>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- MAIN FEATURES -->
-
-    <div class="section-title">
-      Main Services
-    </div>
-
-    <div class="feature-grid">
-
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <div class="feature-name">Tasks</div>
-        <div class="feature-text">
-          Complete available website tasks
-        </div>
-      </div>
-
-
-      <div class="feature-card">
-        <div class="feature-icon">🌐</div>
-        <div class="feature-name">Surfing</div>
-        <div class="feature-text">
-          Visit available websites
-        </div>
-      </div>
-
-
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <div class="feature-name">Competition</div>
-        <div class="feature-text">
-          Participate and compete
-        </div>
-      </div>
-
-
-      <div class="feature-card">
-        <div class="feature-icon">💸</div>
-        <div class="feature-name">Withdraw</div>
-        <div class="feature-text">
-          Manage your withdrawal
-        </div>
-      </div>
-
-
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <div class="feature-name">History</div>
-        <div class="feature-text">
-          View your transactions
-        </div>
-      </div>
-
-
-      <div class="feature-card">
-        <div class="feature-icon">👤</div>
-        <div class="feature-name">Profile</div>
-        <div class="feature-text">
-          Manage your account
-        </div>
-      </div>
-
-    </div>
-
-
-    <!-- WEBSITE TASKS -->
-
-    <div class="section-title">
-      🎯 Website Tasks
-    </div>
-
-    <div class="referral-box">
-
-      <div style="color:#8fa7bd;font-size:12px;line-height:1.6;">
-        Website tasks added by the administrator will appear here.
-        Task links, rewards and instructions will be managed from the Admin Panel.
-      </div>
-
-    </div>
-
-
-    <!-- YOUTUBE -->
-
-    <div class="section-title">
-      ▶️ YouTube
-    </div>
-
-    <div class="youtube-box">
-
-      <div class="youtube-header">
-
-        <div class="youtube-logo">
-          <i class="fa-brands fa-youtube"></i>
-        </div>
-
-        <div>
-          <div class="youtube-title">
-            YouTube Tasks
-          </div>
-
-          <div class="youtube-subtitle">
-            Like, View & Subscribe tasks
-          </div>
-        </div>
-
-      </div>
-
-
-      <button
-        class="youtube-button"
-        id="youtubeTasksBtn"
+      <div
+        id="username"
+        class="welcome"
       >
-        Open YouTube Tasks
-      </button>
-
-    </div>
-
-
-    <!-- REFERRAL -->
-
-    <div class="section-title">
-      👥 Referral Commission
-    </div>
-
-    <div class="referral-box">
-
-      <div class="referral-row">
-
-        <div class="referral-level">
-          Level 1
-        </div>
-
-        <div class="referral-rate">
-          0.5%
-        </div>
-
+        Loading...
       </div>
-
     </div>
-
-
-    <!-- 24 HOURS SUPPORT -->
-
-    <div class="section-title">
-      🛟 24 Hours Support
-    </div>
-
-    <div class="support-box">
-
-      <div class="support-main">
-
-        <div class="support-icon">
-          <i class="fa-solid fa-headset"></i>
-        </div>
-
-        <div>
-
-          <div class="support-title">
-            Contact Support
-          </div>
-
-          <div class="support-text">
-            Need help? Contact our support team.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="support-buttons">
-
-        <a
-          href="#"
-          class="support-btn"
-          id="contactAdmin"
-        >
-          <i class="fa-solid fa-user-tie"></i>
-          Contact Admin
-        </a>
-
-
-        <a
-          href="#"
-          class="support-btn"
-          id="whatsapp"
-        >
-          <i class="fa-brands fa-whatsapp"></i>
-          WhatsApp
-        </a>
-
-
-        <a
-          href="#"
-          class="support-btn"
-          id="telegram"
-        >
-          <i class="fa-brands fa-telegram"></i>
-          Telegram
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <!-- SOCIAL MEDIA -->
-
-    <div class="section-title">
-      📱 Follow Us
-    </div>
-
-    <div class="social-box">
-
-      <a
-        href="#"
-        class="social-icon"
-        id="youtubeSocial"
-        aria-label="YouTube"
-      >
-        <i class="fa-brands fa-youtube"></i>
-      </a>
-
-
-      <a
-        href="#"
-        class="social-icon"
-        id="instagramSocial"
-        aria-label="Instagram"
-      >
-        <i class="fa-brands fa-instagram"></i>
-      </a>
-
-
-      <a
-        href="#"
-        class="social-icon"
-        id="facebookSocial"
-        aria-label="Facebook"
-      >
-        <i class="fa-brands fa-facebook-f"></i>
-      </a>
-
-
-      <a
-        href="#"
-        class="social-icon"
-        id="telegramSocial"
-        aria-label="Telegram"
-      >
-        <i class="fa-brands fa-telegram"></i>
-      </a>
-
-
-      <a
-        href="#"
-        class="social-icon"
-        id="whatsappSocial"
-        aria-label="WhatsApp"
-      >
-        <i class="fa-brands fa-whatsapp"></i>
-      </a>
-
-    </div>
-
-
-    <!-- LOGOUT -->
 
     <button
       class="logout"
       id="logoutBtn"
     >
-      <i class="fa-solid fa-right-from-bracket"></i>
       Logout
     </button>
 
+  </header>
 
-    <!-- FOOTER -->
 
-    <div class="footer">
+  <!-- ANNOUNCEMENT -->
+  <div class="announcement">
 
-      © 2026 Elite Earn Hub
+    <div class="announcement-title">
+      📢 ANNOUNCEMENT
+    </div>
 
-      <br>
+    <div class="ticker">
+      <span id="announcementText">
+        Welcome to Elite Earn Hub • New tasks will appear here
+      </span>
+    </div>
 
-      Created & Managed by
-      <strong>Sanny Jatt</strong> ❤️
+  </div>
+
+
+  <!-- CURRENT PRICE -->
+  <div class="price">
+    Current Price:
+    <strong>1 SNX = 4 PKR</strong>
+  </div>
+
+
+  <!-- BALANCES -->
+  <div class="balances">
+
+    <div class="balance-card">
+
+      <div class="balance-label">
+        Main Balance
+      </div>
+
+      <div class="balance-value">
+
+        <span id="mainBalance">
+          0
+        </span>
+
+        <span class="balance-unit">
+          SNX
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="balance-card">
+
+      <div class="balance-label">
+        Advertisement Balance
+      </div>
+
+      <div class="balance-value">
+
+        <span id="advertisementBalance">
+          0
+        </span>
+
+        <span class="balance-unit">
+          SNX
+        </span>
+
+      </div>
 
     </div>
 
   </div>
 
 
-  <script>
+  <!-- CONVERT -->
+  <div class="convert-box">
 
-    /* ==========================================
-       SUPABASE CONFIG
-       ========================================== */
+    <h3>
+      Convert Main Balance → Advertisement Balance
+    </h3>
 
-    const SUPABASE_URL =
-      "https://cdgmtleyzggeryvugcrf.supabase.co";
+    <div class="convert-row">
 
-    const SUPABASE_PUBLIC_KEY =
-      "sb_publishable_9veiB1eRPPyLHR8X2oldMQ_AcLz9Jb2";
+      <input
+        id="convertAmount"
+        type="number"
+        min="100"
+        placeholder="Minimum 100 SNX"
+      >
 
+      <button
+        class="primary-btn"
+        id="convertBtn"
+      >
+        Convert
+      </button>
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLIC_KEY
-      );
+    </div>
 
+    <div class="small-note">
+      Minimum conversion: 100 SNX
+    </div>
 
-    /* ==========================================
-       ANNOUNCEMENT
-       Later Admin Panel se dynamic hoga
-       ========================================== */
+    <div
+      id="convertMessage"
+      class="small-note"
+    ></div>
 
-    const ANNOUNCEMENT_TEXT =
-      "Welcome to Elite Earn Hub • Stay connected for latest updates and opportunities.";
-
-
-    document.getElementById(
-      "announcementText"
-    ).textContent =
-      ANNOUNCEMENT_TEXT;
-
-
-    /* ==========================================
-       TEMPORARY LINKS
-       Later Admin Panel se manage honge
-       ========================================== */
-
-    const CONTACT_ADMIN_LINK = "#";
-
-    const WHATSAPP_LINK = "#";
-
-    const TELEGRAM_LINK = "#";
-
-    const YOUTUBE_LINK = "#";
-
-    const INSTAGRAM_LINK = "#";
-
-    const FACEBOOK_LINK = "#";
+  </div>
 
 
-    document.getElementById(
-      "contactAdmin"
-    ).href =
-      CONTACT_ADMIN_LINK;
+  <!-- FEATURES -->
+  <div class="section-title">
+    Earn & Explore
+  </div>
+
+  <div class="features">
+
+    <div
+      class="feature"
+      id="tasksBtn"
+    >
+      <div class="feature-icon">📋</div>
+      <div class="feature-title">Tasks</div>
+      <div class="feature-desc">
+        Complete tasks
+      </div>
+    </div>
 
 
-    document.getElementById(
-      "whatsapp"
-    ).href =
-      WHATSAPP_LINK;
+    <div
+      class="feature"
+      id="surfingBtn"
+    >
+      <div class="feature-icon">🌐</div>
+      <div class="feature-title">Surfing</div>
+      <div class="feature-desc">
+        Visit websites
+      </div>
+    </div>
 
 
-    document.getElementById(
-      "telegram"
-    ).href =
-      TELEGRAM_LINK;
+    <div
+      class="feature"
+      id="profileBtn"
+    >
+      <div class="feature-icon">👤</div>
+      <div class="feature-title">Profile</div>
+      <div class="feature-desc">
+        Your account
+      </div>
+    </div>
 
 
-    document.getElementById(
-      "youtubeSocial"
-    ).href =
-      YOUTUBE_LINK;
+    <div
+      class="feature"
+      id="referralBtn"
+    >
+      <div class="feature-icon">👥</div>
+      <div class="feature-title">Referral</div>
+      <div class="feature-desc">
+        Level 1 • 0.5%
+      </div>
+    </div>
+
+  </div>
 
 
-    document.getElementById(
-      "instagramSocial"
-    ).href =
-      INSTAGRAM_LINK;
+  <!-- YOUTUBE -->
+  <div class="youtube">
+
+    <div class="youtube-header">
+
+      <h3>
+        ▶ YouTube Tasks
+      </h3>
+
+      <div class="youtube-label">
+        EARN SNX
+      </div>
+
+    </div>
+
+    <div class="youtube-buttons">
+
+      <button
+        class="youtube-btn"
+        id="youtubeView"
+      >
+        ▶ View
+      </button>
+
+      <button
+        class="youtube-btn"
+        id="youtubeLike"
+      >
+        👍 Like
+      </button>
+
+      <button
+        class="youtube-btn"
+        id="youtubeSubscribe"
+      >
+        🔔 Subscribe
+      </button>
+
+    </div>
+
+  </div>
 
 
-    document.getElementById(
-      "facebookSocial"
-    ).href =
-      FACEBOOK_LINK;
+  <!-- LEADERBOARD -->
+  <div
+    class="leaderboard"
+    id="leaderboardBtn"
+  >
+
+    <h3>
+      🏆 Leaderboard
+    </h3>
+
+    <div class="coming">
+      Coming Soon
+    </div>
+
+  </div>
 
 
-    document.getElementById(
-      "telegramSocial"
-    ).href =
-      TELEGRAM_LINK;
+  <!-- SUPPORT -->
+  <div class="support">
+
+    <h3>
+      💬 24 Hours Support
+    </h3>
+
+    <div class="support-buttons">
+
+      <button
+        class="support-btn"
+        id="contactSupport"
+      >
+        💬 Contact Support
+      </button>
+
+      <button
+        class="support-btn"
+        id="whatsappBtn"
+      >
+        WhatsApp
+      </button>
+
+      <button
+        class="support-btn"
+        id="telegramBtn"
+      >
+        Telegram
+      </button>
+
+    </div>
+
+  </div>
 
 
-    document.getElementById(
-      "whatsappSocial"
-    ).href =
-      WHATSAPP_LINK;
+  <!-- FOOTER -->
+  <footer>
+    Elite Earn Hub
+    <br>
+    Created by <strong>Sanny</strong>
+  </footer>
+
+</div>
 
 
-    /* ==========================================
-       YOUTUBE TASK BUTTON
-       ========================================== */
+<script>
 
-    document.getElementById(
-      "youtubeTasksBtn"
-    ).addEventListener(
-      "click",
-      function() {
+  /* =========================================
+     SUPABASE CONFIG
+     ========================================= */
 
-        alert(
-          "YouTube tasks will be available here."
-        );
+  const SUPABASE_URL =
+    "https://cdgmtleyzggeryvugcrf.supabase.co";
 
-      }
+  const SUPABASE_ANON_KEY =
+    "sb_publishable_9veiB1eRPPyLHR8X2oldMQ_AcLz9Jb2";
+
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
     );
 
 
-    /* ==========================================
-       CHECK LOGIN SESSION
-       ========================================== */
+  /* =========================================
+     PROFILE DATA
+     ========================================= */
 
-    async function checkUser() {
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.getSession();
+  let currentUser = null;
+  let currentProfile = null;
 
 
-      if (
-        error ||
-        !data.session
-      ) {
+  async function loadDashboard() {
 
-        window.location.replace(
-          "login.html"
-        );
-
-        return;
-      }
+    const {
+      data: {
+        user
+      },
+      error: userError
+    } =
+      await supabaseClient.auth.getUser();
 
 
-      document.getElementById(
-        "loading"
-      ).style.display =
-        "none";
+    if (userError || !user) {
 
+      window.location.href =
+        "login.html";
 
-      document.getElementById(
-        "dashboard"
-      ).style.display =
-        "block";
+      return;
 
     }
 
 
-    checkUser();
+    currentUser = user;
 
 
-    /* ==========================================
-       LOGOUT
-       ========================================== */
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "id, username, main_balance, advertisement_balance"
+        )
+        .eq("id", user.id)
+        .single();
+
+
+    if (error) {
+
+      console.error(error);
+
+      document.getElementById(
+        "username"
+      ).textContent =
+        "Profile loading error";
+
+      return;
+
+    }
+
+
+    currentProfile = data;
+
 
     document.getElementById(
-      "logoutBtn"
-    ).addEventListener(
+      "username"
+    ).textContent =
+      "@" + (data.username || "User");
+
+
+    document.getElementById(
+      "mainBalance"
+    ).textContent =
+      Number(data.main_balance || 0);
+
+
+    document.getElementById(
+      "advertisementBalance"
+    ).textContent =
+      Number(data.advertisement_balance || 0);
+
+  }
+
+
+  /* =========================================
+     LOGOUT
+     ========================================= */
+
+  document
+    .getElementById("logoutBtn")
+    .addEventListener(
       "click",
       async function() {
 
-        const button =
+        await supabaseClient.auth.signOut();
+
+        window.location.href =
+          "login.html";
+
+      }
+    );
+
+
+  /* =========================================
+     CONVERT
+     ========================================= */
+
+  document
+    .getElementById("convertBtn")
+    .addEventListener(
+      "click",
+      async function() {
+
+        const amount =
+          Number(
+            document
+              .getElementById("convertAmount")
+              .value
+          );
+
+
+        const message =
           document.getElementById(
-            "logoutBtn"
+            "convertMessage"
           );
 
 
-        button.disabled = true;
+        if (!amount || amount < 100) {
 
-        button.innerHTML =
-          '<i class="fa-solid fa-spinner fa-spin"></i> Logging out...';
-
-
-        const {
-          error
-        } =
-          await supabaseClient.auth.signOut();
-
-
-        if (error) {
-
-          button.disabled = false;
-
-          button.innerHTML =
-            '<i class="fa-solid fa-right-from-bracket"></i> Logout';
-
-          alert(
-            "Logout failed. Please try again."
-          );
+          message.textContent =
+            "Minimum conversion is 100 SNX.";
 
           return;
+
         }
 
 
-        window.location.replace(
-          "login.html"
+        if (
+          !currentProfile ||
+          Number(currentProfile.main_balance) <
+          amount
+        ) {
+
+          message.textContent =
+            "Insufficient Main Balance.";
+
+          return;
+
+        }
+
+
+        /*
+          IMPORTANT:
+
+          Real balance conversion should later
+          be performed by a secure backend/RPC
+          transaction.
+
+          We do NOT directly update balances
+          from frontend JavaScript here.
+        */
+
+        message.textContent =
+          "Conversion system will be connected to the secure backend.";
+
+      }
+    );
+
+
+  /* =========================================
+     BUTTONS
+     ========================================= */
+
+  document
+    .getElementById("tasksBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        window.location.href =
+          "tasks.html";
+
+      }
+    );
+
+
+  document
+    .getElementById("surfingBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        window.location.href =
+          "surfing.html";
+
+      }
+    );
+
+
+  document
+    .getElementById("profileBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        window.location.href =
+          "profile.html";
+
+      }
+    );
+
+
+  document
+    .getElementById("referralBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        window.location.href =
+          "referral.html";
+
+      }
+    );
+
+
+  /* =========================================
+     YOUTUBE
+     ========================================= */
+
+  document
+    .getElementById("youtubeView")
+    .addEventListener(
+      "click",
+      function() {
+
+        alert(
+          "YouTube View Tasks will be available soon."
         );
 
       }
     );
 
 
-    /* ==========================================
-       AUTH STATE
-       ========================================== */
+  document
+    .getElementById("youtubeLike")
+    .addEventListener(
+      "click",
+      function() {
 
-    supabaseClient.auth.onAuthStateChange(
-      function(event, session) {
-
-        if (
-          event === "SIGNED_OUT" ||
-          !session
-        ) {
-
-          window.location.replace(
-            "login.html"
-          );
-
-        }
+        alert(
+          "YouTube Like Tasks will be available soon."
+        );
 
       }
     );
 
-  </script>
+
+  document
+    .getElementById("youtubeSubscribe")
+    .addEventListener(
+      "click",
+      function() {
+
+        alert(
+          "YouTube Subscribe Tasks will be available soon."
+        );
+
+      }
+    );
+
+
+  /* =========================================
+     LEADERBOARD
+     ========================================= */
+
+  document
+    .getElementById("leaderboardBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        alert(
+          "Leaderboard — Coming Soon"
+        );
+
+      }
+    );
+
+
+  /* =========================================
+     SUPPORT
+     ========================================= */
+
+  document
+    .getElementById("contactSupport")
+    .addEventListener(
+      "click",
+      function() {
+
+        alert(
+          "24 Hours Support will be connected from Admin Panel."
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById("whatsappBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        alert(
+          "WhatsApp support will be connected from Admin Panel."
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById("telegramBtn")
+    .addEventListener(
+      "click",
+      function() {
+
+        alert(
+          "Telegram support will be connected from Admin Panel."
+        );
+
+      }
+    );
+
+
+  /* =========================================
+     START
+     ========================================= */
+
+  loadDashboard();
+
+</script>
 
 </body>
-    </html>
+  </html>
