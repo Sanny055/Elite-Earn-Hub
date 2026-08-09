@@ -1374,7 +1374,8 @@ async function loadUser(){
     profile.advertisement_balance || 0
   ).toLocaleString();
 
-
+document.getElementById("ratingPoints").textContent =
+  Number(profile.rating_points || 0).toLocaleString();
   /* JOIN DATE */
 
   const joined =
