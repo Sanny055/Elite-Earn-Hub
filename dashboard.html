@@ -196,7 +196,39 @@ body{
   padding:16px 20px;
   min-height:auto;
 }
-.balance-card::after{
+.activity-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.stat-card{
+  background:linear-gradient(145deg,#0d2438,#081827);
+  border:1px solid #24465f;
+  border-radius:16px;
+  padding:16px 10px;
+  text-align:center;
+}
+
+.stat-card div{
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+.stat-card strong{
+  display:block;
+  font-size:24px;
+  color:#38bdf8;
+}
+
+.stat-card span{
+  display:block;
+  margin-top:5px;
+  font-size:11px;
+  color:#8199ad;
+  }
+  .balance-card::after{
   content:"";
   position:absolute;
   width:100px;
