@@ -1735,11 +1735,12 @@ document
 
 document
 .getElementById("withdrawalBtn")
-.addEventListener(
-"click",
-() => openPage("withdrawal.html")
-);
-
+.addEventListener("click", () => {
+  document.getElementById("withdrawalSection").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
 
 document
 .getElementById("leaderboardMenuBtn")
