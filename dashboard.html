@@ -29,23 +29,30 @@ body{
 }
 
   .convert-btn{
-  display:block;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
   width:100%;
-  padding:12px;
+  padding:13px 18px;
   margin-top:12px;
-  border:1px solid #24465f;
-  border-radius:12px;
-  background:linear-gradient(135deg,#0d2a40,#123b57);
-  color:#38bdf8;
+  border:1px solid rgba(56,189,248,.35);
+  border-radius:14px;
+  background:linear-gradient(135deg,#071d2d,#0d4d70);
+  color:#ffffff;
   font-size:15px;
   font-weight:700;
-  text-align:center;
+  letter-spacing:.3px;
   cursor:pointer;
-  transition:0.2s ease;
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  transition:all .2s ease;
 }
 
 .convert-btn:active{
-  transform:scale(0.98);
+  transform:scale(.97);
+  box-shadow:0 3px 10px rgba(0,0,0,.25);
   }
   
   .deposit-btn{
