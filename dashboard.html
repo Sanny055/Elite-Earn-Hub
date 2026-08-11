@@ -735,6 +735,145 @@ footer div:last-child{
     cursor: pointer;
 }
 
+  /* ===== DARK PREMIUM WITHDRAWAL ===== */
+
+.withdrawal {
+  margin-top: 18px;
+  padding: 17px;
+
+  background: linear-gradient(
+    145deg,
+    #09141f,
+    #060e17
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+
+/* ===== WITHDRAWAL METHODS ===== */
+
+.withdrawal-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+
+/* ===== METHOD BUTTON ===== */
+
+.withdrawal-method {
+  padding: 12px 6px;
+
+  background: linear-gradient(
+    145deg,
+    #0d1c29,
+    #08131d
+  );
+
+  color: #e8f1f5;
+
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 13px;
+
+  cursor: pointer;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
+    0 5px 14px rgba(0, 0, 0, 0.28);
+
+  transition: all 0.22s ease;
+}
+
+
+/* ===== HOVER ===== */
+
+.withdrawal-method:hover {
+  background: linear-gradient(
+    145deg,
+    #122536,
+    #0a1722
+  );
+
+  border-color: rgba(255, 255, 255, 0.13);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.38);
+}
+
+
+/* ===== MINIMUM TEXT ===== */
+
+.withdrawal-method small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #617583;
+
+  font-size: 7px;
+  font-weight: 500;
+
+  letter-spacing: 0.15px;
+
+  line-height: 1.2;
+}
+
+
+/* ===== NOTE ===== */
+
+.withdrawal-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+
+  background: rgba(255, 255, 255, 0.018);
+
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  border-radius: 11px;
+
+  color: #627582;
+
+  font-size: 8px;
+  line-height: 1.7;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 600px) {
+
+  .withdrawal {
+    padding: 15px;
+    border-radius: 18px;
+  }
+
+  .withdrawal-methods {
+    gap: 7px;
+  }
+
+  .withdrawal-method {
+    padding: 12px 5px;
+    font-size: 9.5px;
+  }
+
+  .withdrawal-method small {
+    font-size: 6.8px;
+  }
+
+  .withdrawal-note {
+    font-size: 8px;
+  }
+  
   
   /* HEADER */
 .header{
