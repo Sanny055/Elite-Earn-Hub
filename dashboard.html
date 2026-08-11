@@ -597,6 +597,91 @@ footer div:last-child{
     }
       }
 
+  /* ===== PREMIUM EXPLORE SERVICES ===== */
+
+.explore-services-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin: 20px 0;
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(25, 48, 67, 0.98),
+        rgba(8, 25, 40, 0.98)
+    );
+
+    border: 1px solid rgba(168, 85, 247, 0.35);
+
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.explore-services-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(168, 85, 247, 0.12);
+
+    font-size: 22px;
+}
+
+.explore-services-content {
+    flex: 1;
+}
+
+.explore-services-content h3 {
+    margin: 0 0 5px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 750;
+
+    color: #ffffff;
+}
+
+.explore-services-content p {
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12.5px;
+    line-height: 1.45;
+
+    color: #8fa3b8;
+}
+
+.explore-services-btn {
+    flex-shrink: 0;
+
+    padding: 11px 16px;
+
+    border: 1px solid rgba(168, 85, 247, 0.45);
+    border-radius: 12px;
+
+    background: rgba(168, 85, 247, 0.10);
+
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+  }
+
   /* HEADER */
 .header{
   display:flex;
@@ -1846,6 +1931,25 @@ footer strong{
     </div>
 
   </section>
+
+  <!-- EXPLORE SERVICES -->
+
+<div class="explore-services-card">
+
+    <div class="explore-services-icon">
+        🛍️
+    </div>
+
+    <div class="explore-services-content">
+        <h3>Explore Services</h3>
+        <p>Discover services offered by our community</p>
+    </div>
+
+    <button class="explore-services-btn" id="exploreServicesBtn">
+        Explore
+    </button>
+
+</div>
 
   <!-- SERVICES SECTION -->
 <section class="services-section">
