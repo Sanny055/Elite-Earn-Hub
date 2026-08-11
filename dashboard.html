@@ -463,6 +463,140 @@ footer div:last-child{
     border-color: rgba(56,189,248,0.45) !important;
 }
 
+  /* ===== PREMIUM ADD SERVICE CARD ===== */
+
+.add-service-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin: 22px 0 20px;
+    padding: 18px 18px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(20, 55, 78, 0.98),
+        rgba(7, 24, 40, 0.98)
+    );
+
+    border: 1px solid rgba(56, 189, 248, 0.42);
+
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+    transition: all 0.25s ease;
+}
+
+.add-service-card:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(56, 189, 248, 0.65);
+
+    box-shadow:
+        0 15px 38px rgba(0, 0, 0, 0.42),
+        0 0 20px rgba(56, 189, 248, 0.08);
+}
+
+.add-service-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.20);
+
+    font-size: 22px;
+}
+
+.add-service-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.add-service-content h3 {
+    margin: 0 0 5px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 750;
+
+    color: #ffffff;
+}
+
+.add-service-content p {
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12.5px;
+    line-height: 1.45;
+
+    color: #8fa3b8;
+}
+
+.add-service-btn {
+    flex-shrink: 0;
+
+    padding: 11px 16px;
+
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    border-radius: 12px;
+
+    background: rgba(56, 189, 248, 0.10);
+
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.add-service-btn:hover {
+    background: rgba(56, 189, 248, 0.18);
+    border-color: rgba(56, 189, 248, 0.70);
+}
+
+@media (max-width: 600px) {
+
+    .add-service-card {
+        padding: 17px 15px;
+        gap: 12px;
+        border-radius: 19px;
+    }
+
+    .add-service-icon {
+        width: 43px;
+        height: 43px;
+        font-size: 20px;
+    }
+
+    .add-service-content h3 {
+        font-size: 17px;
+    }
+
+    .add-service-content p {
+        font-size: 12px;
+    }
+
+    .add-service-btn {
+        padding: 10px 13px;
+        font-size: 12.5px;
+    }
+      }
+
   /* HEADER */
 .header{
   display:flex;
