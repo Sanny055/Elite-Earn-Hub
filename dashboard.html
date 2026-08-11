@@ -106,39 +106,41 @@ footer div:last-child{
     color:#526277;
   }
   
-/* ===== PREMIUM ABOUT ME CARD ===== */
-.about-premium-card{
-    margin-top:32px !important;
-    margin-bottom:42px !important;
-    padding:28px 20px !important;
-    text-align:center;
+/* ===== ABOUT ME PREMIUM ===== */
 
-    background:
-        linear-gradient(145deg,
-        rgba(30,41,59,.95),
-        rgba(8,22,38,.98)) !important;
+.menu-card.about-premium-card{
+    margin-top:35px !important;
+    margin-bottom:45px !important;
+    padding:30px 20px !important;
+    text-align:center !important;
 
-    border:1px solid rgba(56,189,248,.35) !important;
-    border-radius:22px !important;
+    background:linear-gradient(
+        145deg,
+        #12283a,
+        #071722
+    ) !important;
+
+    border:1px solid rgba(56,189,248,.45) !important;
+    border-radius:24px !important;
 
     box-shadow:
-        0 12px 35px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.08),
-        0 0 25px rgba(56,189,248,.06) !important;
+        0 15px 40px rgba(0,0,0,.45),
+        0 0 25px rgba(56,189,248,.08),
+        inset 0 1px 0 rgba(255,255,255,.08) !important;
 
-    position:relative;
-    overflow:hidden;
-    transition:.3s ease;
+    position:relative !important;
+    overflow:hidden !important;
 }
 
-/* Premium top glow */
-.about-premium-card::before{
+/* Premium glow line */
+.menu-card.about-premium-card::before{
     content:"";
     position:absolute;
     top:0;
-    left:12%;
-    width:76%;
-    height:1px;
+    left:15%;
+    width:70%;
+    height:2px;
+
     background:linear-gradient(
         90deg,
         transparent,
@@ -148,26 +150,24 @@ footer div:last-child{
 }
 
 /* Icon */
-.about-premium-card .menu-icon{
-    font-size:38px !important;
+.menu-card.about-premium-card .menu-icon{
+    font-size:40px !important;
     margin-bottom:12px !important;
-    filter:drop-shadow(0 0 10px rgba(56,189,248,.25));
 }
 
 /* Title */
-.about-premium-card .menu-name{
-    font-size:20px !important;
+.menu-card.about-premium-card .menu-name{
+    font-size:21px !important;
     font-weight:800 !important;
-    letter-spacing:.5px;
+    letter-spacing:.6px !important;
 }
 
 /* Description */
-.about-premium-card .menu-description{
-    margin-top:8px !important;
-    color:#8fa3b8 !important;
+.menu-card.about-premium-card .menu-description{
+    margin-top:9px !important;
+    color:#8fa6ba !important;
     font-size:13px !important;
-    letter-spacing:.3px;
-}
+  }
 
   /* HEADER */
 .header{
