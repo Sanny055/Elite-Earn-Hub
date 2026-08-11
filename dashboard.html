@@ -106,7 +106,70 @@ footer div:last-child{
     color:#526277;
   }
   
-/* HEADER */
+/* ===== PREMIUM ABOUT ME CARD ===== */
+.about-premium-card{
+    margin-top:32px !important;
+    margin-bottom:42px !important;
+    padding:28px 20px !important;
+    text-align:center;
+
+    background:
+        linear-gradient(145deg,
+        rgba(30,41,59,.95),
+        rgba(8,22,38,.98)) !important;
+
+    border:1px solid rgba(56,189,248,.35) !important;
+    border-radius:22px !important;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.08),
+        0 0 25px rgba(56,189,248,.06) !important;
+
+    position:relative;
+    overflow:hidden;
+    transition:.3s ease;
+}
+
+/* Premium top glow */
+.about-premium-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:12%;
+    width:76%;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #38bdf8,
+        transparent
+    );
+}
+
+/* Icon */
+.about-premium-card .menu-icon{
+    font-size:38px !important;
+    margin-bottom:12px !important;
+    filter:drop-shadow(0 0 10px rgba(56,189,248,.25));
+}
+
+/* Title */
+.about-premium-card .menu-name{
+    font-size:20px !important;
+    font-weight:800 !important;
+    letter-spacing:.5px;
+}
+
+/* Description */
+.about-premium-card .menu-description{
+    margin-top:8px !important;
+    color:#8fa3b8 !important;
+    font-size:13px !important;
+    letter-spacing:.3px;
+}
+
+  /* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
