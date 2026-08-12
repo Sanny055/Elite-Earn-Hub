@@ -4061,6 +4061,77 @@ if (depositOverlay) {
 
     }
 
+    /* =====================================================
+   DEPOSIT PAYMENT METHOD
+   ===================================================== */
+
+const depositMethods = document.querySelectorAll(".deposit-method");
+const depositPaymentDetails = document.getElementById("depositPaymentDetails");
+
+depositMethods.forEach(function (method) {
+
+  method.addEventListener("click", function () {
+
+    depositMethods.forEach(function (btn) {
+      btn.classList.remove("active");
+    });
+
+    method.classList.add("active");
+
+    const selectedMethod = method.dataset.method;
+
+    if (selectedMethod === "binance") {
+
+      depositPaymentDetails.innerHTML = `
+        <strong>Binance BEP-20</strong><br><br>
+        Address: YOUR_BINANCE_BEP20_ADDRESS
+        <br><br>
+        <button type="button" onclick="copyDepositAddress('YOUR_BINANCE_BEP20_ADDRESS')">
+          📋 Copy Address
+        </button>
+      `;
+
+    }
+
+    else if (selectedMethod === "jazzcash") {
+
+      depositPaymentDetails.innerHTML = `
+        <strong>JazzCash</strong><br><br>
+        Account Number: YOUR_JAZZCASH_NUMBER
+        <br><br>
+        <button type="button" onclick="copyDepositAddress('YOUR_JAZZCASH_NUMBER')">
+          📋 Copy Number
+        </button>
+      `;
+
+    }
+
+    else if (selectedMethod === "easypaisa") {
+
+      depositPaymentDetails.innerHTML = `
+        <strong>EasyPaisa</strong><br><br>
+        Account Number: YOUR_EASYPAISA_NUMBER
+        <br><br>
+        <button type="button" onclick="copyDepositAddress('YOUR_EASYPAISA_NUMBER')">
+          📋 Copy Number
+        </button>
+      `;
+
+    }
+
+  });
+
+});
+
+
+function copyDepositAddress(value) {
+
+  navigator.clipboard.writeText(value);
+
+  alert("Payment details copied.");
+
+    }
+
   </script>
 
   <div class="menu-card about-premium-card" id="aboutBtn">
