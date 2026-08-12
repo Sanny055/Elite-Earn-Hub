@@ -2858,6 +2858,49 @@ footer strong{
 
     </div>
 
+<div class="deposit-instructions">
+  <strong>Payment Instructions</strong>
+
+  <p>1. Send the exact payment amount to the selected account/address.</p>
+
+  <p>2. Keep your payment receipt/screenshot after payment.</p>
+
+  <p>3. Submit the screenshot and transaction/reference ID below.</p>
+</div>
+
+ <div class="deposit-upload">
+
+  <label class="deposit-label">
+    Payment Screenshot
+  </label>
+
+  <input
+    type="file"
+    id="depositScreenshot"
+    accept="image/*"
+  >
+
+  <small>
+    Upload your payment receipt/screenshot
+  </small>
+
+ </div>   
+
+    <div class="deposit-reference">
+
+  <label class="deposit-label">
+    Transaction / Reference ID
+  </label>
+
+  <input
+    type="text"
+    id="depositReference"
+    class="deposit-input"
+    placeholder="Enter transaction ID"
+  >
+
+</div>
+    
     <button class="deposit-submit" id="depositSubmit">
       Submit Deposit
     </button>
