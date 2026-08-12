@@ -221,125 +221,7 @@ footer div:last-child{
   opacity: 0.9;
 }
 
-/* ===== TRANSACTION HISTORY PAGE ===== */
 
-.transaction-history-page {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-
-  width: 100%;
-  min-height: 100vh;
-  box-sizing: border-box;
-
-  padding: 22px 16px;
-
-  background: #071923;
-  color: #fff;
-
-  overflow-y: auto;
-}
-
-.transaction-history-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  margin-bottom: 22px;
-}
-
-.transaction-history-header h2 {
-  margin: 0;
-  font-size: 21px;
-}
-
-.transaction-history-header p {
-  margin: 4px 0 0;
-  font-size: 11px;
-  color: #78909c;
-}
-
-.history-back-btn {
-  width: 40px;
-  height: 40px;
-
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 12px;
-
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.history-tabs {
-  display: flex;
-  gap: 8px;
-
-  padding: 5px;
-  margin-bottom: 18px;
-
-  border-radius: 14px;
-  background: rgba(255,255,255,0.04);
-}
-
-.history-tab {
-  flex: 1;
-
-  padding: 11px 8px;
-
-  border: 0;
-  border-radius: 10px;
-
-  background: transparent;
-  color: #78909c;
-
-  font-size: 11px;
-  font-weight: 700;
-
-  cursor: pointer;
-}
-
-.history-tab.active {
-  background: linear-gradient(135deg, #159ac4, #2477b8);
-  color: #fff;
-
-  box-shadow: 0 5px 15px rgba(0,150,220,0.20);
-}
-
-.history-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 220px;
-  padding: 25px;
-
-  text-align: center;
-
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 18px;
-
-  background: rgba(255,255,255,0.035);
-}
-
-.history-empty div {
-  font-size: 34px;
-  margin-bottom: 12px;
-}
-
-.history-empty strong {
-  font-size: 15px;
-}
-
-.history-empty span {
-  margin-top: 6px;
-  font-size: 11px;
-  color: #78909c;
-  }
   
   /* PREMIUM COPY BUTTON */
 
@@ -3590,7 +3472,62 @@ footer strong{
 
 </div>
 
+<!-- TRANSACTION HISTORY PAGE -->
 
+<div id="transactionHistoryPage" class="transaction-history-page">
+
+  <div class="transaction-history-header">
+
+    <button
+      type="button"
+      id="historyBackBtn"
+      class="history-back-btn"
+    >
+      ←
+    </button>
+
+    <div>
+      <h2>Transaction History</h2>
+      <p>Deposits & Withdrawals</p>
+    </div>
+
+  </div>
+
+  <div class="history-tabs">
+
+    <button
+      type="button"
+      class="history-tab active"
+    >
+      Deposit History
+    </button>
+
+    <button
+      type="button"
+      class="history-tab"
+    >
+      Withdrawal History
+    </button>
+
+  </div>
+
+  <div class="history-content">
+
+    <div class="history-empty">
+
+      <div>📋</div>
+
+      <strong>No Transactions Yet</strong>
+
+      <span>
+        Your deposit and withdrawal history will appear here.
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
 
   <!-- EXPLORE SERVICES -->
   
