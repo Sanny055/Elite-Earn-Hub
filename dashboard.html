@@ -2221,7 +2221,107 @@ footer strong{
   💳 Deposit
   </button>
       
+  <!-- DEPOSIT POPUP -->
+
+<div class="deposit-overlay" id="depositOverlay">
+
+  <div class="deposit-popup">
+
+    <button class="deposit-close" id="depositClose">
+      ×
+    </button>
+
+    <div class="deposit-icon">
+      💳
     </div>
+
+    <h3>Deposit to Ad Balance</h3>
+
+    <p class="deposit-subtitle">
+      Add funds to your Advertisement Balance
+    </p>
+
+    <div class="deposit-method-title">
+      Select Payment Method
+    </div>
+
+    <div class="deposit-methods">
+
+      <button class="deposit-method" data-method="binance">
+        <strong>Binance</strong>
+        <small>BEP-20</small>
+      </button>
+
+      <button class="deposit-method" data-method="jazzcash">
+        <strong>JazzCash</strong>
+        <small>Instant Payment</small>
+      </button>
+
+      <button class="deposit-method" data-method="easypaisa">
+        <strong>EasyPaisa</strong>
+        <small>Instant Payment</small>
+      </button>
+
+    </div>
+
+    <label class="deposit-label">
+      Deposit Amount
+    </label>
+
+    <input
+      type="number"
+      id="depositAmount"
+      class="deposit-input"
+      placeholder="Enter amount"
+      min="1"
+    >
+
+    <div class="deposit-calculation">
+
+      <div>
+        <span>Deposit</span>
+        <strong id="depositBaseAmount">$0</strong>
+      </div>
+
+      <div>
+        <span>10% Fee</span>
+        <strong id="depositFee">$0</strong>
+      </div>
+
+      <div>
+        <span>You Pay</span>
+        <strong id="depositTotal">$0</strong>
+      </div>
+
+    </div>
+
+    <div class="deposit-receive">
+
+      <span>You Receive</span>
+
+      <strong>
+        <span id="depositReceive">0</span> SNX
+      </strong>
+
+    </div>
+
+    <div class="deposit-payment-details" id="depositPaymentDetails">
+
+      Select a payment method to view payment details.
+
+    </div>
+
+    <button class="deposit-submit" id="depositSubmit">
+      Submit Deposit
+    </button>
+
+    <div class="deposit-note">
+      Your deposit will be credited after Admin approval.
+    </div>
+
+  </div>
+
+</div>
 
   </div>
 
