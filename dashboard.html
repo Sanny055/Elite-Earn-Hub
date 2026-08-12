@@ -4132,6 +4132,53 @@ function copyDepositAddress(value) {
 
     }
 
+    /* =====================================================
+   DEPOSIT AMOUNT CALCULATION
+   ===================================================== */
+
+const depositAmount = document.getElementById("depositAmount");
+const depositBaseAmount = document.getElementById("depositBaseAmount");
+const depositFee = document.getElementById("depositFee");
+const depositTotal = document.getElementById("depositTotal");
+const depositReceive = document.getElementById("depositReceive");
+
+const DEPOSIT_FEE_PERCENT = 10;
+
+// 1 Dollar = 1 SNX
+const SNX_RATE = 1;
+
+if (depositAmount) {
+
+  depositAmount.addEventListener("input", function () {
+
+    let amount = parseFloat(depositAmount.value) || 0;
+
+    if (amount < 0) {
+      amount = 0;
+    }
+
+    const fee = amount * (DEPOSIT_FEE_PERCENT / 100);
+
+    const total = amount + fee;
+
+    const receiveSNX = amount * SNX_RATE;
+
+    depositBaseAmount.textContent =
+      "$" + amount.toFixed(2);
+
+    depositFee.textContent =
+      "$" + fee.toFixed(2);
+
+    depositTotal.textContent =
+      "$" + total.toFixed(2);
+
+    depositReceive.textContent =
+      receiveSNX.toFixed(2);
+
+  });
+
+    }
+
   </script>
 
   <div class="menu-card about-premium-card" id="aboutBtn">
