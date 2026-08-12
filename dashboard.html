@@ -4445,5 +4445,69 @@ if (depositAmount) {
     </div>
   </footer>
 
+  <!-- TRANSACTION HISTORY PAGE -->
+
+<div class="transaction-history-page" id="transactionHistoryPage">
+
+  <div class="transaction-history-header">
+    <button
+      type="button"
+      class="history-back-btn"
+      id="historyBackBtn"
+    >
+      ←
+    </button>
+
+    <div>
+      <h2>Transaction History</h2>
+      <p>Deposits & Withdrawals</p>
+    </div>
+  </div>
+
+  <div class="history-tabs">
+
+    <button
+      type="button"
+      class="history-tab active"
+      id="depositHistoryTab"
+    >
+      Deposit History
+    </button>
+
+    <button
+      type="button"
+      class="history-tab"
+      id="withdrawalHistoryTab"
+    >
+      Withdrawal History
+    </button>
+
+  </div>
+
+  <div class="history-content" id="depositHistoryContent">
+
+    <div class="history-empty">
+      <div>📋</div>
+      <strong>No Deposit History</strong>
+      <span>Your deposit transactions will appear here.</span>
+    </div>
+
+  </div>
+
+  <div
+    class="history-content"
+    id="withdrawalHistoryContent"
+    style="display:none;"
+  >
+
+    <div class="history-empty">
+      <div>📤</div>
+      <strong>No Withdrawal History</strong>
+      <span>Your withdrawal transactions will appear here.</span>
+    </div>
+
+  </div>
+
+</div>
 </body>
   </html>
