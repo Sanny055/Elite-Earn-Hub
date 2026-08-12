@@ -3789,6 +3789,42 @@ if (convertOverlay) {
 
     }
 
+    /* =====================================================
+   DEPOSIT POPUP
+   ===================================================== */
+
+const depositAdBtn = document.getElementById("depositAdBtn");
+const depositOverlay = document.getElementById("depositOverlay");
+const depositClose = document.getElementById("depositClose");
+
+if (depositAdBtn && depositOverlay) {
+
+  depositAdBtn.addEventListener("click", function () {
+    depositOverlay.style.display = "flex";
+  });
+
+}
+
+if (depositClose && depositOverlay) {
+
+  depositClose.addEventListener("click", function () {
+    depositOverlay.style.display = "none";
+  });
+
+}
+
+if (depositOverlay) {
+
+  depositOverlay.addEventListener("click", function (e) {
+
+    if (e.target === depositOverlay) {
+      depositOverlay.style.display = "none";
+    }
+
+  });
+
+    }
+
   </script>
 
   <div class="menu-card about-premium-card" id="aboutBtn">
