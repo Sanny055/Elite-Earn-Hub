@@ -3383,7 +3383,39 @@ function(){
 
 loadUser();
 
-</script>
+    const convertBtn = document.getElementById("convertBtn");
+const convertOverlay = document.getElementById("convertOverlay");
+const convertClose = document.getElementById("convertClose");
+
+if (convertBtn && convertOverlay) {
+
+  convertBtn.addEventListener("click", function () {
+    convertOverlay.style.display = "flex";
+  });
+
+}
+
+if (convertClose && convertOverlay) {
+
+  convertClose.addEventListener("click", function () {
+    convertOverlay.style.display = "none";
+  });
+
+}
+
+if (convertOverlay) {
+
+  convertOverlay.addEventListener("click", function (e) {
+
+    if (e.target === convertOverlay) {
+      convertOverlay.style.display = "none";
+    }
+
+  });
+
+    }
+
+  </script>
 
   <div class="menu-card about-premium-card" id="aboutBtn">
 
