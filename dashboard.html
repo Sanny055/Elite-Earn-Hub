@@ -1826,9 +1826,80 @@ footer strong{
       
     </div>
 
+<!-- CONVERT POPUP -->
+
+<div class="convert-overlay" id="convertOverlay">
+
+  <div class="convert-popup">
+
+    <button class="convert-close" id="convertClose">×</button>
+
+    <div class="convert-icon">🔄</div>
+
+    <h3>Convert to Ad Balance</h3>
+
+    <p class="convert-subtitle">
+      Convert your Main Balance into Advertisement Balance
+    </p>
+
+    <div class="convert-info">
+      <span>Available Main Balance</span>
+      <strong>
+        <span id="convertAvailable">0</span> SNX
+      </strong>
+    </div>
+
+    <label class="convert-label">
+      Amount to Convert
+    </label>
+
+    <input
+      type="number"
+      id="convertAmount"
+      class="convert-input"
+      placeholder="Minimum 300 SNX"
+      min="300"
+    >
+
+    <div class="convert-details">
+
+      <div>
+        <span>Minimum</span>
+        <strong>300 SNX</strong>
+      </div>
+
+      <div>
+        <span>Fee</span>
+        <strong>30 SNX</strong>
+      </div>
+
+    </div>
+
+    <div class="convert-receive">
+ 
+      <span>Advertisement Balance</span>
+
+      <strong>
+        <span id="convertReceive">0</span> SNX
+      </strong>
+    </div>
+
+    <button class="convert-confirm" id="convertConfirm">
+      Convert Now
+    </button>
+
+    <div class="convert-note">
+      30 SNX conversion fee will be deducted from your Main Balance.
+    </div>
+
+  </div>
+
+</div>
+    
 <div class="balance-card">
 
       <div class="balance-title">
+   
         Advertisement Balance
       </div>
 
