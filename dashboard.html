@@ -1136,7 +1136,281 @@ footer div:last-child{
   line-height: 1.5;
   }  
 
-  /* HEADER */
+  /* ===== PREMIUM DEPOSIT POPUP ===== */
+
+.deposit-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  background: rgba(5, 14, 22, 0.70);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.deposit-popup {
+  position: relative;
+
+  width: 100%;
+  max-width: 400px;
+
+  padding: 22px 20px 18px;
+
+  background: linear-gradient(
+    145deg,
+    #173b50,
+    #0b263a
+  );
+
+  border: 1px solid rgba(82, 202, 232, 0.25);
+  border-radius: 22px;
+
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+
+  color: #fff;
+}
+
+.deposit-close {
+  position: absolute;
+  top: 11px;
+  right: 12px;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.05);
+  color: #a9c1cc;
+
+  font-size: 19px;
+  cursor: pointer;
+}
+
+.deposit-icon {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 11px;
+
+  border-radius: 14px;
+
+  background: rgba(75,190,220,0.10);
+  border: 1px solid rgba(100,210,235,0.16);
+
+  font-size: 21px;
+}
+
+.deposit-popup h3 {
+  margin: 0;
+
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.deposit-subtitle {
+  margin: 6px 0 17px;
+
+  color: #88a8b7;
+
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.deposit-method-title {
+  margin-bottom: 8px;
+
+  color: #91adb9;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.deposit-methods {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 8px;
+
+  margin-bottom: 16px;
+}
+
+.deposit-method {
+  padding: 11px 5px;
+
+  background: linear-gradient(
+    145deg,
+    #1d4c63,
+    #103247
+  );
+
+  border: 1px solid rgba(100,205,230,0.16);
+  border-radius: 13px;
+
+  color: #edf9fc;
+
+  cursor: pointer;
+}
+
+.deposit-method strong {
+  display: block;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.deposit-method small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #82a5b4;
+
+  font-size: 6.5px;
+}
+
+.deposit-method:hover {
+  border-color: rgba(100,210,235,0.35);
+
+  transform: translateY(-1px);
+}
+
+.deposit-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #91acb8;
+
+  font-size: 9px;
+}
+
+.deposit-input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px;
+
+  background: rgba(5,17,27,0.50);
+
+  border: 1px solid rgba(100,195,220,0.15);
+  border-radius: 12px;
+
+  outline: none;
+
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.deposit-input::placeholder {
+  color: #58717e;
+}
+
+.deposit-calculation {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 7px;
+
+  margin-top: 10px;
+}
+
+.deposit-calculation div {
+  padding: 9px 6px;
+
+  background: rgba(255,255,255,0.025);
+
+  border: 1px solid rgba(255,255,255,0.045);
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.deposit-calculation span {
+  display: block;
+
+  color: #718b98;
+
+  font-size: 7px;
+}
+
+.deposit-calculation strong {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #dceef3;
+
+  font-size: 9px;
+}
+
+.deposit-receive {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 11px;
+  padding: 11px 12px;
+
+  background: rgba(65,195,225,0.07);
+
+  border: 1px solid rgba(80,200,225,0.12);
+  border-radius: 12px;
+}
+
+.deposit-receive span {
+  color: #82a3b1;
+
+  font-size: 8px;
+}
+
+.deposit-receive strong {
+  color: #c2edf6;
+
+  font-size: 12px;
+}
+
+.deposit-payment-details {
+  margin-top: 11px;
+  padding: 11px;
+
+  background: rgba(255,255,255,0.025);
+
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 11px;
+
+  color: #718c99;
+
+  font-size: 8px;
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+.deposit-submit {
+  width: 100%;
+
+  margin-top: 12px
+
+    /* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
