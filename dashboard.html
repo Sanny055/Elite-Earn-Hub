@@ -4518,6 +4518,28 @@ if (depositAmount) {
 
     }
 
+// ===== TRANSACTION HISTORY =====
+
+const transactionHistoryBtn = document.getElementById("transactionHistoryBtn");
+const transactionHistoryPage = document.getElementById("transactionHistoryPage");
+const historyBackBtn = document.getElementById("historyBackBtn");
+
+if (transactionHistoryBtn && transactionHistoryPage) {
+
+  transactionHistoryBtn.addEventListener("click", function () {
+    transactionHistoryPage.style.display = "block";
+  });
+
+}
+
+if (historyBackBtn && transactionHistoryPage) {
+
+  historyBackBtn.addEventListener("click", function () {
+    transactionHistoryPage.style.display = "none";
+  });
+
+    }
+    
   </script>
 
   <div class="menu-card about-premium-card" id="aboutBtn">
