@@ -105,8 +105,39 @@ footer div:last-child{
     font-size:11px;
     color:#526277;
   }
-  
-/* PREMIUM COPY BUTTON */
+
+  /* PREMIUM PAYMENT SCREENSHOT UPLOAD */
+
+.deposit-upload {
+  margin-top: 14px;
+}
+
+.deposit-upload input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.deposit-upload input[type="file"]::file-selector-button {
+  border: none;
+  padding: 10px 16px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #27b6e6, #1688b5);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deposit-upload input[type="file"]::file-selector-button:hover {
+  opacity: 0.9;
+}
+
+  /* PREMIUM COPY BUTTON */
 
 .copy-payment-btn {
   display: inline-flex;
