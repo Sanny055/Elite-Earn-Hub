@@ -6973,6 +6973,136 @@ if (submitFeedbackBtn) {
 
 }
       
+ // ===== ABOUT ME PAGE SYSTEM =====
+
+const aboutBtn = document.getElementById("aboutBtn");
+const aboutMePage = document.getElementById("aboutMePage");
+const aboutMeBackBtn = document.getElementById("aboutMeBackBtn");
+const aboutTranslateBtn = document.getElementById("aboutTranslateBtn");
+
+
+// ===== OPEN ABOUT ME PAGE =====
+
+if (aboutBtn && aboutMePage) {
+
+  aboutBtn.addEventListener("click", function () {
+
+    aboutMePage.style.display = "block";
+
+    aboutMePage.style.position = "fixed";
+    aboutMePage.style.inset = "0";
+    aboutMePage.style.zIndex = "100002";
+
+    aboutMePage.style.overflowY = "auto";
+
+    document.body.style.overflow = "hidden";
+
+    window.scrollTo(0, 0);
+
+  });
+
+}
+
+
+// ===== BACK TO DASHBOARD =====
+
+if (aboutMeBackBtn && aboutMePage) {
+
+  aboutMeBackBtn.addEventListener("click", function () {
+
+    aboutMePage.style.display = "none";
+
+    document.body.style.overflow = "";
+
+  });
+
+}
+
+
+// ===== ABOUT ME TRANSLATE =====
+
+let aboutEnglish = false;
+
+if (aboutTranslateBtn) {
+
+  aboutTranslateBtn.addEventListener("click", function () {
+
+    aboutEnglish = !aboutEnglish;
+
+
+    if (aboutEnglish) {
+
+      // ENGLISH
+
+      document.querySelector("#aboutMePage .about-me-header h2")
+        .textContent = "About Me";
+
+      document.querySelector("#aboutMePage .about-me-header p")
+        .textContent = "Get to know the founder";
+
+      document.querySelector("#aboutWhoAmI")
+        .textContent =
+        "I am Sanny Jatt, Founder & Team Leader of Elite Earn Hub. I work in the field of Forex Trading and also focus on educational content and digital projects to share knowledge with others.";
+
+      document.querySelector("#aboutVision")
+        .textContent =
+        "My vision is to build a simple, transparent and user-friendly digital platform where users can access useful earning opportunities and services with a better experience.";
+
+      document.querySelector("#aboutPlatform")
+        .textContent =
+        "Elite Earn Hub is being developed as a growing digital platform focused on providing useful earning opportunities and digital services to our community.";
+
+      document.querySelector("#aboutComingSoon")
+        .textContent =
+        "In the future, we will bring more new projects and features and continue improving Elite Earn Hub over time.";
+
+      document.querySelector("#aboutFeedback")
+        .textContent =
+        "If you face any problem while using Elite Earn Hub, please make sure to give us your feedback. You can go to the Help & Feedback section and submit your problem or suggestion.";
+
+      aboutTranslateBtn.textContent =
+        "🌐 Roman Urdu";
+
+
+    } else {
+
+      // ROMAN URDU
+
+      document.querySelector("#aboutMePage .about-me-header h2")
+        .textContent = "About Me";
+
+      document.querySelector("#aboutMePage .about-me-header p")
+        .textContent = "Founder ke baare mein";
+
+      document.querySelector("#aboutWhoAmI")
+        .textContent =
+        "Main Sanny Jatt hoon, Elite Earn Hub ka Founder & Team Leader. Main Forex Trading ke field mein kaam karta hoon aur apni knowledge ko dusron tak pohanchane ke liye educational content aur digital projects par bhi kaam karta hoon.";
+
+      document.querySelector("#aboutVision")
+        .textContent =
+        "Mera vision ek simple, transparent aur user-friendly digital platform banana hai jahan users ko useful earning opportunities aur services ek behtar experience ke saath mil saken.";
+
+      document.querySelector("#aboutPlatform")
+        .textContent =
+        "Elite Earn Hub ko ek growing digital platform ke taur par develop kiya ja raha hai, jahan hum users ke liye useful earning opportunities aur digital services provide karne par focus karte hain.";
+
+      document.querySelector("#aboutComingSoon")
+        .textContent =
+        "Aane wale waqt mein hum mazeed naye projects aur features lekar aayenge aur Elite Earn Hub ko waqt ke saath mazeed behtar banate rahenge.";
+
+      document.querySelector("#aboutFeedback")
+        .textContent =
+        "Agar aapko Elite Earn Hub use karte waqt koi problem face hoti hai, to please humein feedback zaroor dein. Aap Help & Feedback section mein ja kar apni problem ya suggestion submit kar sakte hain.";
+
+      aboutTranslateBtn.textContent =
+        "🌐 Translate";
+
+    }
+
+  });
+
+      }
+  
   </script>
 
   <div class="menu-card about-premium-card" id="aboutBtn">
