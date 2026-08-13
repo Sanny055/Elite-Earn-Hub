@@ -4964,6 +4964,46 @@ if (historyBackBtn && transactionHistoryPage) {
   });
 
     }
+
+// ===== ADVERTISEMENT CENTER POPUP =====
+
+const advertisementCenterBtn =
+  document.getElementById("advertisementCenterBtn");
+
+const advertisementCenterPopup =
+  document.getElementById("advertisementCenterPopup");
+
+const advertisementPopupClose =
+  document.getElementById("advertisementPopupClose");
+
+if (advertisementCenterBtn && advertisementCenterPopup) {
+
+  advertisementCenterBtn.addEventListener("click", function () {
+    advertisementCenterPopup.style.display = "flex";
+  });
+
+}
+
+if (advertisementPopupClose && advertisementCenterPopup) {
+
+  advertisementPopupClose.addEventListener("click", function () {
+    advertisementCenterPopup.style.display = "none";
+  });
+
+}
+
+// Close popup by clicking outside the box
+if (advertisementCenterPopup) {
+
+  advertisementCenterPopup.addEventListener("click", function (event) {
+
+    if (event.target === advertisementCenterPopup) {
+      advertisementCenterPopup.style.display = "none";
+    }
+
+  });
+
+    }
     
   </script>
 
