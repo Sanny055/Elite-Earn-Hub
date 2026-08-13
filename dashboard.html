@@ -1280,6 +1280,249 @@ footer div:last-child{
   transform: scale(0.97);
 }
 
+ /* ===== HELP & FEEDBACK POPUP ===== */
+
+.help-feedback-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100003;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  background: rgba(2, 10, 16, 0.82);
+  backdrop-filter: blur(10px);
+}
+
+.help-feedback-box {
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  padding: 20px;
+
+  border: 1px solid rgba(56, 189, 248, 0.20);
+  border-radius: 22px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(15, 48, 65, 0.98),
+    rgba(6, 25, 35, 0.98)
+  );
+
+  box-shadow: 0 25px 70px rgba(0,0,0,0.50);
+}
+
+/* HEADER */
+
+.help-feedback-popup-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.help-feedback-popup-header h2 {
+  margin: 0;
+
+  color: #fff;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.help-feedback-popup-header p {
+  margin: 4px 0 0;
+
+  color: #78909c;
+  font-size: 9px;
+}
+
+.feedback-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.feedback-translate-btn {
+  padding: 7px 9px;
+
+  border: 1px solid rgba(56,189,248,0.16);
+  border-radius: 9px;
+
+  background: rgba(56,189,248,0.07);
+  color: #8ddcff;
+
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.help-feedback-close {
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* INFO */
+
+.feedback-info {
+  margin-top: 17px;
+  padding: 13px;
+
+  border: 1px solid rgba(56,189,248,0.10);
+  border-radius: 13px;
+
+  background: rgba(56,189,248,0.045);
+
+  color: #a9c0ca;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+/* FORM */
+
+.feedback-form-group {
+  margin-top: 16px;
+}
+
+.feedback-form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #c9dbe2;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.feedback-form-group label span {
+  color: #718b98;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.feedback-form-group textarea {
+  width: 100%;
+  min-height: 105px;
+
+  box-sizing: border-box;
+
+  padding: 12px;
+
+  resize: vertical;
+
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+
+  outline: none;
+
+  background: rgba(255,255,255,0.045);
+  color: #fff;
+
+  font-size: 10px;
+}
+
+.feedback-form-group textarea:focus {
+  border-color: rgba(56,189,248,0.35);
+}
+
+.feedback-form-group textarea::placeholder {
+  color: #526b77;
+}
+
+/* SCREENSHOT UPLOAD */
+
+.feedback-upload-box {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-height: 85px;
+
+  box-sizing: border-box;
+
+  padding: 14px;
+
+  border: 1px dashed rgba(56,189,248,0.25);
+  border-radius: 13px;
+
+  background: rgba(56,189,248,0.035);
+
+  cursor: pointer;
+}
+
+.feedback-upload-box div {
+  font-size: 22px;
+}
+
+.feedback-upload-box strong {
+  margin: 0 !important;
+
+  color: #fff !important;
+  font-size: 10px !important;
+}
+
+.feedback-upload-box small {
+  color: #657f8b;
+  font-size: 8px;
+}
+
+.feedback-file-name {
+  margin-top: 6px;
+
+  color: #7dd3fc;
+  font-size: 9px;
+
+  word-break: break-all;
+}
+
+/* SUBMIT */
+
+.submit-feedback-btn {
+  width: 100%;
+
+  margin-top: 18px;
+  padding: 13px;
+
+  border: 0;
+  border-radius: 13px;
+
+  background: linear-gradient(
+    135deg,
+    #0ea5e9,
+    #0284c7
+  );
+
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 22px rgba(14,165,233,0.18);
+}
+
+.submit-feedback-btn:active {
+  transform: scale(0.98);
+  }
+  
   /* ===== ABOUT ME PREMIUM ===== */
 
 .menu-card.about-premium-card{
@@ -6270,7 +6513,204 @@ if (createLikeAdvertisementBtn) {
   });
 
     }
-    
+
+// ===== HELP & FEEDBACK SYSTEM =====
+
+const helpFeedbackBtn =
+  document.getElementById("helpFeedbackBtn");
+
+const helpFeedbackPopup =
+  document.getElementById("helpFeedbackPopup");
+
+const helpFeedbackClose =
+  document.getElementById("helpFeedbackClose");
+
+const feedbackScreenshot =
+  document.getElementById("feedbackScreenshot");
+
+const feedbackFileName =
+  document.getElementById("feedbackFileName");
+
+const feedbackTranslateBtn =
+  document.getElementById("feedbackTranslateBtn");
+
+const feedbackInfo =
+  document.getElementById("feedbackInfo");
+
+const feedbackTitle =
+  document.getElementById("feedbackTitle");
+
+const feedbackSubtitle =
+  document.getElementById("feedbackSubtitle");
+
+const feedbackDescriptionLabel =
+  document.getElementById("feedbackDescriptionLabel");
+
+const feedbackDescription =
+  document.getElementById("feedbackDescription");
+
+const submitFeedbackBtn =
+  document.getElementById("submitFeedbackBtn");
+
+
+// ===== OPEN POPUP =====
+
+if (helpFeedbackBtn && helpFeedbackPopup) {
+
+  helpFeedbackBtn.addEventListener("click", function () {
+
+    helpFeedbackPopup.style.display = "flex";
+
+  });
+
+}
+
+
+// ===== CLOSE POPUP =====
+
+if (helpFeedbackClose && helpFeedbackPopup) {
+
+  helpFeedbackClose.addEventListener("click", function () {
+
+    helpFeedbackPopup.style.display = "none";
+
+  });
+
+}
+
+
+// ===== CLOSE BY OUTSIDE CLICK =====
+
+if (helpFeedbackPopup) {
+
+  helpFeedbackPopup.addEventListener("click", function (event) {
+
+    if (event.target === helpFeedbackPopup) {
+
+      helpFeedbackPopup.style.display = "none";
+
+    }
+
+  });
+
+}
+
+
+// ===== SCREENSHOT FILE =====
+
+if (feedbackScreenshot && feedbackFileName) {
+
+  feedbackScreenshot.addEventListener("change", function () {
+
+    if (this.files && this.files.length > 0) {
+
+      feedbackFileName.textContent =
+        "Selected: " + this.files[0].name;
+
+    } else {
+
+      feedbackFileName.textContent = "";
+
+    }
+
+  });
+
+}
+
+
+// ===== TRANSLATE =====
+
+let feedbackEnglish = false;
+
+if (feedbackTranslateBtn) {
+
+  feedbackTranslateBtn.addEventListener("click", function () {
+
+    feedbackEnglish = !feedbackEnglish;
+
+    if (feedbackEnglish) {
+
+      feedbackTitle.textContent = "Help & Feedback";
+
+      feedbackSubtitle.textContent =
+        "We're here to help you.";
+
+      feedbackInfo.innerHTML =
+        "If you are experiencing any problem while using Elite Earn Hub, such as a system error, withdrawal issue, deposit issue, task issue, or any other problem, you can tell us about it here in detail." +
+        "<br><br>" +
+        "If possible, please provide a screenshot of the problem. A screenshot is optional, but it can help us understand and fix the problem faster.";
+
+      feedbackDescriptionLabel.textContent =
+        "Describe Your Problem / Feedback";
+
+      feedbackDescription.placeholder =
+        "Describe your problem or feedback here...";
+
+      feedbackTranslateBtn.textContent =
+        "🌐 Roman Urdu";
+
+    } else {
+
+      feedbackTitle.textContent =
+        "Help & Feedback";
+
+      feedbackSubtitle.textContent =
+        "Hum aapki madad ke liye yahan hain.";
+
+      feedbackInfo.innerHTML =
+        "Agar aapko Elite Earn Hub use karte waqt koi problem aa rahi hai, jaise system mein koi kharabi, withdrawal issue, deposit issue, task ka issue, ya koi bhi doosri problem, to aap humein yahan detail mein bata sakte hain." +
+        "<br><br>" +
+        "Agar possible ho to problem ka screenshot bhi provide karein. Screenshot optional hai, lekin isse humein problem samajhne aur jaldi fix karne mein madad milegi.";
+
+      feedbackDescriptionLabel.textContent =
+        "Apni Problem / Feedback Likhein";
+
+      feedbackDescription.placeholder =
+        "Apni problem ya feedback yahan likhein...";
+
+      feedbackTranslateBtn.textContent =
+        "🌐 Translate";
+
+    }
+
+  });
+
+}
+
+
+// ===== SUBMIT FEEDBACK =====
+// Abhi sirf validation hai.
+// Supabase connection baad mein add hoga.
+
+if (submitFeedbackBtn) {
+
+  submitFeedbackBtn.addEventListener("click", function () {
+
+    const message =
+      feedbackDescription.value.trim();
+
+    if (!message) {
+
+      alert(
+        feedbackEnglish
+          ? "Please describe your problem or feedback."
+          : "Please apni problem ya feedback likhein."
+      );
+
+      return;
+
+    }
+
+    alert(
+      feedbackEnglish
+        ? "Your feedback is ready to be submitted."
+        : "Aapka feedback submit hone ke liye ready hai."
+    );
+
+  });
+
+}
+      
   </script>
 
   <div class="menu-card about-premium-card" id="aboutBtn">
