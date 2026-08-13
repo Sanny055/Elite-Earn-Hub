@@ -4080,6 +4080,132 @@ footer strong{
   </div>
 
 </div>
+
+  <!-- CREATE YOUTUBE LIKE ADVERTISEMENT -->
+
+<div id="youtubeLikePage" class="youtube-like-page">
+
+  <div class="youtube-like-header">
+
+    <button
+      type="button"
+      id="youtubeLikeBackBtn"
+      class="youtube-like-back"
+    >
+      ←
+    </button>
+
+    <div>
+      <h2>Create Advertisement</h2>
+      <p>YouTube Like Advertisement</p>
+    </div>
+
+  </div>
+
+  <div class="youtube-like-form">
+
+    <!-- VIDEO LINK -->
+    <div class="form-group">
+      <label>YouTube Video Link</label>
+      <input
+        type="url"
+        id="likeVideoLink"
+        placeholder="Paste YouTube video link"
+      >
+    </div>
+
+    <!-- VIDEO NAME -->
+    <div class="form-group">
+      <label>YouTube Video Name</label>
+      <input
+        type="text"
+        id="likeVideoName"
+        placeholder="Enter video name"
+      >
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="form-group">
+      <label>Description <span>(Optional)</span></label>
+      <textarea
+        id="likeDescription"
+        placeholder="Add a short description (optional)"
+      ></textarea>
+    </div>
+
+    <!-- FIXED REWARD -->
+    <div class="form-group">
+      <label>Reward per Like</label>
+
+      <div class="fixed-value">
+        <strong>0.030 SNX</strong>
+        <span>🔒 Fixed</span>
+      </div>
+    </div>
+
+    <!-- TOTAL BUDGET -->
+    <div class="form-group">
+      <label>Total Advertisement Budget</label>
+      <input
+        type="number"
+        id="likeBudget"
+        min="0.033"
+        step="0.001"
+        placeholder="Enter budget in SNX"
+      >
+    </div>
+
+    <!-- AUTO CALCULATIONS -->
+    <div class="calculation-box">
+
+      <div class="calculation-row">
+        <span>Reward per Like</span>
+        <strong>0.030 SNX</strong>
+      </div>
+
+      <div class="calculation-row">
+        <span>Platform Fee (10%)</span>
+        <strong>0.003 SNX</strong>
+      </div>
+
+      <div class="calculation-row total">
+        <span>Advertiser Cost per Like</span>
+        <strong>0.033 SNX</strong>
+      </div>
+
+      <div class="calculation-row">
+        <span>Total Likes</span>
+        <strong id="likeTotalUsers">0</strong>
+      </div>
+
+    </div>
+
+    <!-- PROOF -->
+    <div class="form-group">
+
+      <label>Proof Requirement</label>
+
+      <div class="fixed-value">
+        <strong>📸 Screenshot Required</strong>
+        <span>🔒 Fixed</span>
+      </div>
+
+    </div>
+
+    <!-- CREATE BUTTON -->
+    <button
+      type="button"
+      id="createLikeAdvertisementBtn"
+      class="create-like-ad-btn"
+    >
+      Create Advertisement
+    </button>
+
+  </div>
+
+</div>
+
+
   
   <!-- MANDATORY TASKS -->
 <section class="mandatory">
