@@ -5240,6 +5240,56 @@ if (advertisementCenterPopup) {
   });
 
     }
+
+// ===== CREATE ADVERTISEMENT POPUP =====
+
+const createAdvertisementBtn =
+  document.getElementById("createAdvertisementBtn");
+
+const createAdvertisementPopup =
+  document.getElementById("createAdvertisementPopup");
+
+const createAdvertisementClose =
+  document.getElementById("createAdvertisementClose");
+
+if (createAdvertisementBtn && createAdvertisementPopup) {
+
+  createAdvertisementBtn.addEventListener("click", function () {
+
+    // Close Advertisement Center popup
+    if (advertisementCenterPopup) {
+      advertisementCenterPopup.style.display = "none";
+    }
+
+    // Open Create Advertisement popup
+    createAdvertisementPopup.style.display = "flex";
+
+  });
+
+}
+
+if (createAdvertisementClose && createAdvertisementPopup) {
+
+  createAdvertisementClose.addEventListener("click", function () {
+
+    createAdvertisementPopup.style.display = "none";
+
+  });
+
+}
+
+// Close by clicking outside the popup
+if (createAdvertisementPopup) {
+
+  createAdvertisementPopup.addEventListener("click", function (event) {
+
+    if (event.target === createAdvertisementPopup) {
+      createAdvertisementPopup.style.display = "none";
+    }
+
+  });
+
+  }
     
   </script>
 
