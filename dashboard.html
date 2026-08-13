@@ -408,6 +408,108 @@ footer div:last-child{
   transform: scale(0.98);
     }
   
+/* ===== HELP & FEEDBACK CARD ===== */
+
+.help-feedback-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  margin: 14px 0;
+
+  padding: 14px;
+
+  border: 1px solid rgba(56, 189, 248, 0.14);
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(56, 189, 248, 0.055),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.help-feedback-card:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(56, 189, 248, 0.28);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(56, 189, 248, 0.085),
+      rgba(255, 255, 255, 0.035)
+    );
+}
+
+.help-feedback-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+
+  background: rgba(56, 189, 248, 0.09);
+
+  font-size: 20px;
+}
+
+.help-feedback-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.help-feedback-content h3 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.help-feedback-content p {
+  margin: 4px 0 0;
+
+  color: #9db4be;
+
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.help-feedback-content small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #607985;
+
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.help-feedback-arrow {
+  color: #7dd3fc;
+
+  font-size: 24px;
+  line-height: 1;
+
+  padding-right: 2px;
+  }
+  
   /* ===== PREMIUM ADVERTISEMENT POPUP ===== */
 
 .advertisement-center-popup {
