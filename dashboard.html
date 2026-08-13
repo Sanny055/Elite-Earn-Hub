@@ -190,7 +190,64 @@ footer div:last-child{
   opacity: 0.65;
   }
   
-/* ===== PREMIUM ADVERTISEMENT CENTER ===== */
+/* ===== INFORMATION SECTION DIVIDER ===== */
+
+.information-section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    margin: 28px 0 18px;
+}
+
+.information-section-divider > span {
+    flex: 1;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(56,189,248,0.25)
+    );
+}
+
+.information-section-divider > span:last-child {
+    background: linear-gradient(
+        90deg,
+        rgba(56,189,248,0.25),
+        transparent
+    );
+}
+
+.information-section-divider > div {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.information-section-divider strong {
+    display: block;
+
+    color: #d8f3ff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.information-section-divider small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #667b89;
+    font-size: 9px;
+    letter-spacing: 0.3px;
+}
+  
+  /* ===== PREMIUM ADVERTISEMENT CENTER ===== */
 
 .advertisement-center-card {
   width: 100%;
