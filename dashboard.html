@@ -5128,6 +5128,118 @@ footer strong{
   </div>
 
 </div>
+
+<!-- HELP & FEEDBACK POPUP -->
+
+<div id="helpFeedbackPopup" class="help-feedback-popup">
+
+  <div class="help-feedback-box">
+
+    <div class="help-feedback-popup-header">
+
+      <div>
+        <h2 id="feedbackTitle">Help & Feedback</h2>
+        <p id="feedbackSubtitle">We're here to help you.</p>
+      </div>
+
+      <div class="feedback-header-actions">
+
+        <button
+          type="button"
+          id="feedbackTranslateBtn"
+          class="feedback-translate-btn"
+        >
+          🌐 Translate
+        </button>
+
+        <button
+          type="button"
+          id="helpFeedbackClose"
+          class="help-feedback-close"
+        >
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="feedback-info" id="feedbackInfo">
+
+      Agar aapko Elite Earn Hub use karte waqt koi
+      problem aa rahi hai, jaise system mein koi
+      kharabi, withdrawal issue, deposit issue,
+      task ka issue, ya koi bhi doosri problem,
+      to aap humein yahan detail mein bata sakte hain.
+
+      <br><br>
+
+      Agar possible ho to problem ka screenshot bhi
+      provide karein. Screenshot optional hai, lekin
+      isse humein problem samajhne aur jaldi fix
+      karne mein madad milegi.
+
+    </div>
+
+    <!-- DESCRIPTION -->
+
+    <div class="feedback-form-group">
+
+      <label id="feedbackDescriptionLabel">
+        Describe Your Problem / Feedback
+      </label>
+
+      <textarea
+        id="feedbackDescription"
+        placeholder="Apni problem ya feedback yahan likhein..."
+      ></textarea>
+
+    </div>
+
+    <!-- SCREENSHOT -->
+
+    <div class="feedback-form-group">
+
+      <label>
+        Screenshot <span>(Optional)</span>
+      </label>
+
+      <label
+        for="feedbackScreenshot"
+        class="feedback-upload-box"
+      >
+        <div>📷</div>
+        <strong>Upload Screenshot</strong>
+        <small>Optional</small>
+      </label>
+
+      <input
+        type="file"
+        id="feedbackScreenshot"
+        accept="image/*"
+        hidden
+      >
+
+      <div
+        id="feedbackFileName"
+        class="feedback-file-name"
+      ></div>
+
+    </div>
+
+    <!-- SUBMIT -->
+
+    <button
+      type="button"
+      id="submitFeedbackBtn"
+      class="submit-feedback-btn"
+    >
+      Submit Feedback
+    </button>
+
+  </div>
+
+</div>
   
   <script>
 /* =====================================================
