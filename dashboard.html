@@ -332,6 +332,163 @@ footer div:last-child{
   font-size: 24px;
   }
   
+/* ===== CREATE ADVERTISEMENT POPUP ===== */
+
+.create-advertisement-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  background: rgba(2, 10, 16, 0.80);
+  backdrop-filter: blur(10px);
+}
+
+.create-advertisement-box {
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+
+  padding: 22px 16px;
+
+  border: 1px solid rgba(56, 189, 248, 0.20);
+  border-radius: 22px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(15, 48, 65, 0.98),
+    rgba(6, 25, 35, 0.98)
+  );
+
+  box-shadow: 0 25px 70px rgba(0,0,0,0.50);
+}
+
+.create-advertisement-close {
+  float: right;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.create-advertisement-header {
+  text-align: center;
+  padding: 8px 0 20px;
+}
+
+.create-advertisement-icon {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.create-advertisement-header h2 {
+  margin: 0;
+
+  color: #fff;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.create-advertisement-header p {
+  margin: 5px 0 0;
+
+  color: #78909c;
+  font-size: 10px;
+}
+
+.create-advertisement-title {
+  margin: 4px 2px 10px;
+
+  color: #b9d4df;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.platform-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 13px;
+  margin-top: 9px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 15px;
+
+  background: rgba(255,255,255,0.045);
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.platform-option:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(56,189,248,0.30);
+  background: rgba(56,189,248,0.07);
+}
+
+.platform-option-icon {
+  width: 39px;
+  height: 39px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background: rgba(56,189,248,0.10);
+
+  font-size: 18px;
+}
+
+.platform-option-content {
+  flex: 1;
+  text-align: left;
+}
+
+.platform-option-content strong {
+  display: block;
+
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.platform-option-content small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #718b98;
+  font-size: 9px;
+}
+
+.platform-option > span {
+  color: #7dd3fc;
+  font-size: 23px;
+    }
+  
   /* ===== INFORMATION SECTION DIVIDER ===== */
 
 .information-section-divider {
