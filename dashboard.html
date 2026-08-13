@@ -190,7 +190,225 @@ footer div:last-child{
   opacity: 0.65;
   }
   
-/* ===== PREMIUM ADVERTISEMENT POPUP ===== */
+/* ===== YOUTUBE LIKE ADVERTISEMENT PAGE ===== */
+
+.youtube-like-page {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100002;
+  overflow-y: auto;
+
+  padding: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #06141d,
+      #081d29
+    );
+}
+
+.youtube-like-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  max-width: 520px;
+  margin: 0 auto 22px;
+  padding-top: 8px;
+}
+
+.youtube-like-back {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(56,189,248,0.18);
+  border-radius: 12px;
+
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.youtube-like-header h2 {
+  margin: 0;
+
+  color: #fff;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.youtube-like-header p {
+  margin: 4px 0 0;
+
+  color: #78909c;
+  font-size: 10px;
+}
+
+.youtube-like-form {
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+
+  margin: 0 auto;
+  padding: 18px;
+
+  border: 1px solid rgba(56,189,248,0.15);
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.035);
+
+  box-shadow: 0 20px 55px rgba(0,0,0,0.30);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #c8dbe3;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.form-group label span {
+  color: #718b98;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+
+  background: rgba(255,255,255,0.045);
+  color: #fff;
+
+  padding: 12px;
+
+  outline: none;
+
+  font-size: 11px;
+}
+
+.form-group textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: rgba(56,189,248,0.40);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #526b77;
+}
+
+.fixed-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px;
+
+  border: 1px solid rgba(56,189,248,0.14);
+  border-radius: 12px;
+
+  background: rgba(56,189,248,0.055);
+}
+
+.fixed-value strong {
+  color: #fff;
+  font-size: 12px;
+}
+
+.fixed-value span {
+  color: #6e8793;
+  font-size: 9px;
+}
+
+.calculation-box {
+  margin: 4px 0 18px;
+  padding: 13px;
+
+  border: 1px solid rgba(56,189,248,0.14);
+  border-radius: 14px;
+
+  background: rgba(56,189,248,0.045);
+}
+
+.calculation-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 6px 0;
+
+  color: #829ba6;
+  font-size: 10px;
+}
+
+.calculation-row strong {
+  color: #dcecf2;
+  font-size: 10px;
+}
+
+.calculation-row.total {
+  margin-top: 5px;
+  padding-top: 10px;
+
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.calculation-row.total strong {
+  color: #7dd3fc;
+  font-size: 12px;
+}
+
+.create-like-ad-btn {
+  width: 100%;
+
+  padding: 13px;
+
+  border: 0;
+  border-radius: 13px;
+
+  background: linear-gradient(
+    135deg,
+    #0ea5e9,
+    #0284c7
+  );
+
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 22px rgba(14,165,233,0.18);
+}
+
+.create-like-ad-btn:active {
+  transform: scale(0.98);
+    }
+  
+  /* ===== PREMIUM ADVERTISEMENT POPUP ===== */
 
 .advertisement-center-popup {
   display: none;
@@ -5692,6 +5910,129 @@ if (youtubeTaskPopup) {
   });
 
 }
+    // ===== LIKE ADVERTISEMENT PAGE =====
+
+const youtubeLikeBtn =
+  document.getElementById("youtubeLikeBtn");
+
+const youtubeLikePage =
+  document.getElementById("youtubeLikePage");
+
+const youtubeLikeBackBtn =
+  document.getElementById("youtubeLikeBackBtn");
+
+if (youtubeLikeBtn && youtubeLikePage) {
+
+  youtubeLikeBtn.addEventListener("click", function () {
+
+    if (youtubeTaskPopup) {
+      youtubeTaskPopup.style.display = "none";
+    }
+
+    youtubeLikePage.style.display = "block";
+
+    window.scrollTo(0, 0);
+
+  });
+
+}
+
+if (youtubeLikeBackBtn && youtubeLikePage) {
+
+  youtubeLikeBackBtn.addEventListener("click", function () {
+
+    youtubeLikePage.style.display = "none";
+
+    if (youtubeTaskPopup) {
+      youtubeTaskPopup.style.display = "flex";
+    }
+
+  });
+
+    }
+
+    // ===== LIKE ADVERTISEMENT CALCULATION =====
+
+const likeBudget =
+  document.getElementById("likeBudget");
+
+const likeTotalUsers =
+  document.getElementById("likeTotalUsers");
+
+const LIKE_REWARD = 0.030;
+const PLATFORM_FEE_RATE = 0.10;
+const LIKE_TOTAL_COST = 0.033;
+
+if (likeBudget && likeTotalUsers) {
+
+  likeBudget.addEventListener("input", function () {
+
+    const budget = parseFloat(likeBudget.value);
+
+    if (!budget || budget <= 0) {
+      likeTotalUsers.textContent = "0";
+      return;
+    }
+
+    const totalLikes =
+      Math.floor(budget / LIKE_TOTAL_COST);
+
+    likeTotalUsers.textContent =
+      totalLikes.toLocaleString();
+
+  });
+
+    }
+
+// ===== CREATE LIKE ADVERTISEMENT VALIDATION =====
+
+const createLikeAdvertisementBtn =
+  document.getElementById("createLikeAdvertisementBtn");
+
+if (createLikeAdvertisementBtn) {
+
+  createLikeAdvertisementBtn.addEventListener("click", function () {
+
+    const videoLink =
+      document.getElementById("likeVideoLink").value.trim();
+
+    const videoName =
+      document.getElementById("likeVideoName").value.trim();
+
+    const budget =
+      parseFloat(document.getElementById("likeBudget").value);
+
+    if (!videoLink) {
+      alert("Please enter the YouTube video link.");
+      return;
+    }
+
+    if (!videoName) {
+      alert("Please enter the YouTube video name.");
+      return;
+    }
+
+    if (!budget || budget < LIKE_TOTAL_COST) {
+      alert("Please enter a valid advertisement budget.");
+      return;
+    }
+
+    const totalLikes =
+      Math.floor(budget / LIKE_TOTAL_COST);
+
+    if (totalLikes < 1) {
+      alert("Budget is too low for one Like.");
+      return;
+    }
+
+    alert(
+      "Advertisement details are ready. " +
+      "It will be submitted for Admin Approval."
+    );
+
+  });
+
+    }
     
   </script>
 
