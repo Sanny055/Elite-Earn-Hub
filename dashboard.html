@@ -8135,7 +8135,54 @@ if (addServicePopup) {
 
     }
   
-  
+  // ===== CREATE SERVICE PAGE SYSTEM =====
+
+const createServiceBtn = document.getElementById("createServiceBtn");
+const createServicePage = document.getElementById("createServicePage");
+const createServiceBackBtn = document.getElementById("createServiceBackBtn");
+
+
+// ===== OPEN CREATE SERVICE PAGE =====
+
+if (createServiceBtn && createServicePage) {
+
+  createServiceBtn.addEventListener("click", function () {
+
+    // Close Add Service popup
+    if (addServicePopup) {
+      addServicePopup.style.display = "none";
+    }
+
+    // Open Create Service page
+    createServicePage.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+    window.scrollTo(0, 0);
+
+  });
+
+}
+
+
+// ===== BACK TO ADD SERVICE POPUP =====
+
+if (createServiceBackBtn && createServicePage) {
+
+  createServiceBackBtn.addEventListener("click", function () {
+
+    createServicePage.style.display = "none";
+
+    if (addServicePopup) {
+      addServicePopup.style.display = "flex";
+    }
+
+    document.body.style.overflow = "hidden";
+
+  });
+
+  }
+
   </script>
 
   
