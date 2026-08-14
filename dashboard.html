@@ -8539,30 +8539,8 @@ if (!listingFee || listingFee <= 0) {
 
 
 
-// ===== SERVICE SUBMISSION DATA =====
-
-const serviceData = {
-  name: serviceName,
-  category: serviceCategory,
-  description: serviceDescription,
-  price: Number(servicePrice),
-  duration: selectedDuration,
-  listingFee: listingFee
-};
 
 
-// ===== CONTACT VALIDATION =====
-
-if (!serviceContact) {
-  alert("Please enter your contact or order method.");
-  return;
-}
-
-
-// ===== SERVICE SUBMISSION SUCCESS =====
-
-showServiceSuccessPopup();
-  
   // ===== SERVICE DURATION & LISTING FEE =====
 
 const serviceDuration =
