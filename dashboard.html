@@ -6216,7 +6216,83 @@ footer strong{
 
     </div>
 
+<!-- SERVICE DURATION -->
 
+<div class="service-field">
+
+  <label for="serviceDuration">
+    Service Duration
+  </label>
+
+  <select id="serviceDuration">
+
+    <option value="">
+      Select service duration
+    </option>
+
+    <option value="24h" data-fee="10">
+      24 Hours — 10 Senax
+    </option>
+
+    <option value="5d" data-fee="25">
+      5 Days — 25 Senax
+    </option>
+
+    <option value="15d" data-fee="100">
+      15 Days — 100 Senax
+    </option>
+
+    <option value="30d" data-fee="200">
+      30 Days — 200 Senax
+    </option>
+
+  </select>
+
+</div>
+
+
+<!-- LISTING FEE -->
+
+<div
+  id="serviceFeeBox"
+  style="
+    display:none;
+    margin:-5px 0 16px;
+    padding:11px 13px;
+    border:1px solid rgba(56,189,248,0.12);
+    border-radius:12px;
+    background:rgba(56,189,248,0.045);
+  "
+>
+
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  ">
+
+    <span style="
+      color:#78909c;
+      font-size:9px;
+    ">
+      Listing Fee
+    </span>
+
+    <strong
+      id="serviceFeeAmount"
+      style="
+        color:#7dd3fc;
+        font-size:11px;
+      "
+    >
+      0 Senax
+    </strong>
+
+  </div>
+
+</div>
+
+    
     <!-- IMAGE OPTIONAL -->
 
     <div class="service-field">
@@ -8223,7 +8299,51 @@ if (createServiceSubmitBtn) {
 
       }
   
-  
+  // ===== SERVICE DURATION & LISTING FEE =====
+
+const serviceDuration =
+  document.getElementById("serviceDuration");
+
+const serviceFeeBox =
+  document.getElementById("serviceFeeBox");
+
+const serviceFeeAmount =
+  document.getElementById("serviceFeeAmount");
+
+
+if (serviceDuration) {
+
+  serviceDuration.addEventListener("change", function () {
+
+    const selectedOption =
+      serviceDuration.options[
+        serviceDuration.selectedIndex
+      ];
+
+    const fee =
+      selectedOption.getAttribute("data-fee");
+
+
+    if (fee) {
+
+      serviceFeeBox.style.display = "block";
+
+      serviceFeeAmount.textContent =
+        fee + " Senax";
+
+    } else {
+
+      serviceFeeBox.style.display = "none";
+
+      serviceFeeAmount.textContent =
+        "0 Senax";
+
+    }
+
+  });
+
+  }
+
   </script>
 
   
