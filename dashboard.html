@@ -9040,7 +9040,28 @@ if (checkManageServicesBtn && manageServicesPage) {
   });
 
     }
+// ===== FIX: CHECK & MANAGE SERVICES =====
+const checkManageServicesBtn = document.getElementById("checkManageServicesBtn");
+const serviceSuccessPopup = document.getElementById("serviceSuccessPopup");
+const manageServicesPage = document.getElementById("manageServicesPage");
 
+if (checkManageServicesBtn && manageServicesPage) {
+  checkManageServicesBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Close success popup
+    if (serviceSuccessPopup) {
+      serviceSuccessPopup.style.display = "none";
+    }
+
+    // Open Manage Services page
+    manageServicesPage.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+    window.scrollTo(0, 0);
+  });
+    }
     
   </script>
 
