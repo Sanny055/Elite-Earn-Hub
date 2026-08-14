@@ -9018,7 +9018,30 @@ if (createServiceSubmitBtn) {
 
 }
     
-  
+// ===== CHECK & MANAGE SERVICES BUTTON =====
+
+if (checkManageServicesBtn && manageServicesPage) {
+
+  checkManageServicesBtn.addEventListener("click", function () {
+
+    // Close success popup
+    if (serviceSuccessPopup) {
+      serviceSuccessPopup.style.display = "none";
+    }
+
+    // Open Manage Services page
+    manageServicesPage.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+
+  });
+
+    }
+
+    
   </script>
 
   
