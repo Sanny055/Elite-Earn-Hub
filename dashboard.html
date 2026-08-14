@@ -9018,29 +9018,48 @@ if (createServiceSubmitBtn) {
 
 }
     
+
 // ===== CHECK & MANAGE SERVICES BUTTON =====
 
-if (checkManageServicesBtn && manageServicesPage) {
+if (checkManageServicesBtn) {
 
-  checkManageServicesBtn.addEventListener("click", function () {
+    checkManageServicesBtn.addEventListener("click", function () {
 
-    // Close success popup
-    if (serviceSuccessPopup) {
-      serviceSuccessPopup.style.display = "none";
+        // 1. Clear all service form data
+        const serviceFormFields = [
+            "serviceName",
+            "serviceCategory",
+            "serviceDescription",
+            "servicePrice",
+            "serviceDuration",
+            "serviceContact",
+            "serviceImage"
+        ];
+
+        serviceFormFields.forEach(function (id) {
+            const field = document.getElementById(id);
+
+            if (field) {
+                if (field.type === "file") {
+                    field.value = "";
+                } else {
+                    field.value = "";
+                }
+            }
+        });
+
+        // 2. Close success popup
+        if (serviceSuccessPopup) {
+            serviceSuccessPopup.style.display = "none";
+        }
+
+        // 3. Reset page scroll
+        document.body.style.overflow = "";
+        window.scrollTo(0, 0);
+
+    });
+
     }
-
-    // Open Manage Services page
-    manageServicesPage.style.display = "block";
-
-    document.body.style.overflow = "hidden";
-
-    // Scroll to top
-    window.scrollTo(0, 0);
-
-  });
-
-    }
-
     
   </script>
 
