@@ -8807,7 +8807,55 @@ if (serviceSuccessPopup) {
 
 }
   
-  
+// ===== MANAGE SERVICES PAGE =====
+
+const manageServicesBtn =
+  document.getElementById("manageServicesBtn");
+
+const manageServicesPage =
+  document.getElementById("manageServicesPage");
+
+const manageServicesBackBtn =
+  document.getElementById("manageServicesBackBtn");
+
+
+// ===== OPEN MANAGE SERVICES =====
+
+if (manageServicesBtn && manageServicesPage) {
+
+  manageServicesBtn.addEventListener("click", function () {
+
+    // Close Add Service popup
+    if (addServicePopup) {
+      addServicePopup.style.display = "none";
+    }
+
+    // Open Manage Services page
+    manageServicesPage.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+    window.scrollTo(0, 0);
+
+  });
+
+}
+
+
+// ===== BACK FROM MANAGE SERVICES =====
+
+if (manageServicesBackBtn && manageServicesPage) {
+
+  manageServicesBackBtn.addEventListener("click", function () {
+
+    manageServicesPage.style.display = "none";
+
+    document.body.style.overflow = "";
+
+  });
+
+    }
+    
   </script>
 
   
