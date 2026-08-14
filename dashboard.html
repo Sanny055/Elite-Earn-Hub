@@ -408,7 +408,301 @@ footer div:last-child{
   transform: scale(0.98);
     }
   
-/* ===== ADD SERVICE POPUP ===== */
+/* ===== CREATE SERVICE PAGE ===== */
+
+.create-service-page {
+  display: none;
+  position: fixed;
+  inset: 0;
+
+  z-index: 100005;
+
+  width: 100%;
+  height: 100vh;
+
+  box-sizing: border-box;
+  padding: 18px 15px 35px;
+
+  overflow-y: auto;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(56,189,248,0.09),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #07141c 0%,
+      #061019 100%
+    );
+}
+
+
+/* HEADER */
+
+.create-service-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 22px;
+}
+
+.create-service-header > div {
+  flex: 1;
+}
+
+.create-service-header h2 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.create-service-header p {
+  margin: 4px 0 0;
+
+  color: #718b98;
+
+  font-size: 9px;
+}
+
+
+/* BACK BUTTON */
+
+.create-service-back {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+
+  background: rgba(255,255,255,0.045);
+
+  color: #fff;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+
+/* SECTION */
+
+.create-service-section {
+  padding: 17px;
+
+  border: 1px solid rgba(56,189,248,0.10);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.035),
+      rgba(255,255,255,0.018)
+    );
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.18);
+}
+
+.create-service-section h3 {
+  margin: 0 0 18px;
+
+  color: #e8f6fb;
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+
+/* FIELD */
+
+.service-field {
+  margin-bottom: 16px;
+}
+
+.service-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #b9cbd3;
+
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.optional-label {
+  color: #6f8792;
+
+  font-size: 8px;
+  font-weight: 500;
+}
+
+
+/* INPUTS */
+
+.service-field input,
+.service-field select,
+.service-field textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px 13px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+
+  outline: none;
+
+  background: rgba(255,255,255,0.035);
+
+  color: #edf8fc;
+
+  font-family: inherit;
+  font-size: 10px;
+
+  transition: .2s ease;
+}
+
+.service-field input::placeholder,
+.service-field textarea::placeholder {
+  color: #58717d;
+}
+
+.service-field input:focus,
+.service-field select:focus,
+.service-field textarea:focus {
+  border-color: rgba(56,189,248,0.38);
+
+  background: rgba(56,189,248,0.035);
+
+  box-shadow:
+    0 0 0 3px rgba(56,189,248,0.05);
+}
+
+.service-field textarea {
+  resize: vertical;
+
+  min-height: 105px;
+
+  line-height: 1.6;
+}
+
+
+/* SELECT */
+
+.service-field select {
+  appearance: auto;
+}
+
+.service-field select option {
+  background: #07141c;
+  color: #fff;
+}
+
+
+/* FILE INPUT */
+
+.service-field input[type="file"] {
+  padding: 9px;
+
+  color: #7d9aa6;
+
+  cursor: pointer;
+}
+
+.service-field input[type="file"]::file-selector-button {
+  margin-right: 8px;
+
+  padding: 7px 10px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: rgba(56,189,248,0.10);
+
+  color: #7dd3fc;
+
+  font-size: 8px;
+
+  cursor: pointer;
+}
+
+.service-field small {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #58717d;
+
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+
+/* SUBMIT */
+
+.create-service-submit {
+  width: 100%;
+
+  margin-top: 4px;
+
+  padding: 13px;
+
+  border: 0;
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #38bdf8,
+      #0ea5e9
+    );
+
+  color: #031018;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: .2px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 25px rgba(14,165,233,0.18);
+
+  transition: .2s ease;
+}
+
+.create-service-submit:active {
+  transform: scale(.98);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 380px) {
+
+  .create-service-page {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .create-service-section {
+    padding: 14px;
+  }
+
+  }
+  
+  /* ===== ADD SERVICE POPUP ===== */
 
 .add-service-popup {
   display: none;
@@ -5813,6 +6107,186 @@ footer strong{
         →
       </div>
 
+    </button>
+
+  </div>
+
+</div>
+  
+<!-- CREATE NEW SERVICE PAGE -->
+
+<div id="createServicePage" class="create-service-page">
+
+  <!-- HEADER -->
+
+  <div class="create-service-header">
+
+    <button
+      type="button"
+      id="createServiceBackBtn"
+      class="create-service-back"
+    >
+      ←
+    </button>
+
+    <div>
+      <h2>Create a New Service</h2>
+      <p>Add your service to Elite Earn Hub</p>
+    </div>
+
+  </div>
+
+
+  <!-- SERVICE DETAILS -->
+
+  <div class="create-service-section">
+
+    <h3>Service Details</h3>
+
+
+    <!-- SERVICE NAME -->
+
+    <div class="service-field">
+
+      <label for="serviceName">
+        Service Name
+      </label>
+
+      <input
+        type="text"
+        id="serviceName"
+        placeholder="Enter your service name"
+      >
+
+    </div>
+
+
+    <!-- CATEGORY -->
+
+    <div class="service-field">
+
+      <label for="serviceCategory">
+        Service Category
+      </label>
+
+      <select id="serviceCategory">
+
+        <option value="">
+          Select a category
+        </option>
+
+        <option value="website">
+          Website Development
+        </option>
+
+        <option value="app">
+          App Development
+        </option>
+
+        <option value="telegram">
+          Telegram Bot
+        </option>
+
+        <option value="design">
+          Graphic Design
+        </option>
+
+        <option value="video">
+          Video Editing
+        </option>
+
+        <option value="other">
+          Other
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- DESCRIPTION -->
+
+    <div class="service-field">
+
+      <label for="serviceDescription">
+        Service Description
+      </label>
+
+      <textarea
+        id="serviceDescription"
+        rows="5"
+        placeholder="Describe your service..."
+      ></textarea>
+
+    </div>
+
+
+    <!-- PRICE -->
+
+    <div class="service-field">
+
+      <label for="servicePrice">
+        Service Price
+      </label>
+
+      <input
+        type="number"
+        id="servicePrice"
+        min="0"
+        step="0.01"
+        placeholder="Enter service price"
+      >
+
+    </div>
+
+
+    <!-- IMAGE OPTIONAL -->
+
+    <div class="service-field">
+
+      <label for="serviceImage">
+        Service Image
+        <span class="optional-label">(Optional)</span>
+      </label>
+
+      <input
+        type="file"
+        id="serviceImage"
+        accept="image/*"
+      >
+
+      <small>
+        You can add an image to make your service more attractive.
+      </small>
+
+    </div>
+
+
+    <!-- CONTACT / ORDER -->
+
+    <div class="service-field">
+
+      <label for="serviceContact">
+        Contact / Order Method
+      </label>
+
+      <input
+        type="text"
+        id="serviceContact"
+        placeholder="Enter contact or order method"
+      >
+
+    </div>
+
+
+    <!-- CREATE BUTTON -->
+
+    <button
+      type="button"
+      id="createServiceSubmitBtn"
+      class="create-service-submit"
+    >
+      Create Service
     </button>
 
   </div>
