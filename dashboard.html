@@ -8538,6 +8538,7 @@ if (!listingFee || listingFee <= 0) {
 }
 
 
+
 // ===== SERVICE SUBMISSION DATA =====
 
 const serviceData = {
@@ -8550,30 +8551,17 @@ const serviceData = {
 };
 
 
-// Temporary testing
+// ===== CONTACT VALIDATION =====
 
-console.log("Service Data:", serviceData);
-
-alert(
-  "Service details verified successfully.\n\n" +
-  "Listing Fee: " + listingFee + " Senax"
-);
-    
-    if (!serviceContact) {
-      alert("Please enter your contact or order method.");
-      return;
-    }
+if (!serviceContact) {
+  alert("Please enter your contact or order method.");
+  return;
+}
 
 
-    // Image is optional
+// ===== SERVICE SUBMISSION SUCCESS =====
 
-    alert(
-      "Your service has been submitted for admin approval."
-    );
-
-  });
-
-      }
+showServiceSuccessPopup();
   
   // ===== SERVICE DURATION & LISTING FEE =====
 
