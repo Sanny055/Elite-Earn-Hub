@@ -8971,6 +8971,54 @@ if (manageServicesBackBtn && manageServicesPage) {
 
     }
     
+// ===== CREATE SERVICE → SUCCESS POPUP =====
+
+const createServiceSubmitBtn =
+  document.getElementById("createServiceSubmitBtn");
+
+if (createServiceSubmitBtn) {
+
+  createServiceSubmitBtn.addEventListener("click", function () {
+
+    // Basic validation
+    const serviceNameValue =
+      document.getElementById("serviceName")?.value.trim();
+
+    const serviceCategoryValue =
+      document.getElementById("serviceCategory")?.value.trim();
+
+    const serviceDescriptionValue =
+      document.getElementById("serviceDescription")?.value.trim();
+
+    const servicePriceValue =
+      document.getElementById("servicePrice")?.value;
+
+    const serviceDurationValue =
+      document.getElementById("serviceDuration")?.value;
+
+    const serviceContactValue =
+      document.getElementById("serviceContact")?.value.trim();
+
+    if (
+      !serviceNameValue ||
+      !serviceCategoryValue ||
+      !serviceDescriptionValue ||
+      !servicePriceValue ||
+      !serviceDurationValue ||
+      !serviceContactValue
+    ) {
+      alert("Please complete all required service details.");
+      return;
+    }
+
+    // Open success popup
+    showServiceSuccessPopup();
+
+  });
+
+}
+    
+  
   </script>
 
   
