@@ -7606,6 +7606,62 @@ if (aboutTranslateBtn) {
 
       }
   
+// ===== ADD SERVICE POPUP SYSTEM =====
+
+const addServiceCard = document.getElementById("addServiceBtn");
+const addServicePopup = document.getElementById("addServicePopup");
+const addServiceClose = document.getElementById("addServiceClose");
+
+
+// ===== OPEN POPUP =====
+
+if (addServiceCard && addServicePopup) {
+
+  addServiceCard.addEventListener("click", function () {
+
+    addServicePopup.style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+
+  });
+
+}
+
+
+// ===== CLOSE POPUP =====
+
+if (addServiceClose && addServicePopup) {
+
+  addServiceClose.addEventListener("click", function () {
+
+    addServicePopup.style.display = "none";
+
+    document.body.style.overflow = "";
+
+  });
+
+}
+
+
+// ===== CLOSE BY OUTSIDE CLICK =====
+
+if (addServicePopup) {
+
+  addServicePopup.addEventListener("click", function (event) {
+
+    if (event.target === addServicePopup) {
+
+      addServicePopup.style.display = "none";
+
+      document.body.style.overflow = "";
+
+    }
+
+  });
+
+    }
+  
+  
   </script>
 
   
