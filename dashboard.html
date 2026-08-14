@@ -8620,6 +8620,67 @@ if (serviceDuration) {
 
   }
 
+// ===== SERVICE SUCCESS POPUP =====
+
+const serviceSuccessPopup =
+  document.getElementById("serviceSuccessPopup");
+
+const serviceSuccessClose =
+  document.getElementById("serviceSuccessClose");
+
+const checkManageServicesBtn =
+  document.getElementById("checkManageServicesBtn");
+
+
+// ===== OPEN SUCCESS POPUP =====
+
+function showServiceSuccessPopup() {
+
+  if (serviceSuccessPopup) {
+
+    serviceSuccessPopup.style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+
+  }
+
+}
+
+
+// ===== CLOSE SUCCESS POPUP =====
+
+if (serviceSuccessClose) {
+
+  serviceSuccessClose.addEventListener("click", function () {
+
+    serviceSuccessPopup.style.display = "none";
+
+    document.body.style.overflow = "";
+
+  });
+
+}
+
+
+// ===== CLOSE BY OUTSIDE CLICK =====
+
+if (serviceSuccessPopup) {
+
+  serviceSuccessPopup.addEventListener("click", function (event) {
+
+    if (event.target === serviceSuccessPopup) {
+
+      serviceSuccessPopup.style.display = "none";
+
+      document.body.style.overflow = "";
+
+    }
+
+  });
+
+}
+  
+  
   </script>
 
   
