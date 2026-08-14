@@ -190,7 +190,182 @@ footer div:last-child{
   opacity: 0.65;
   }
   
-/* ===== SERVICE SUCCESS POPUP ===== */
+/* ===== MANAGE SERVICES PAGE ===== */
+
+#manageServicesPage {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  overflow-y: auto;
+  background: #07131f;
+  color: #ffffff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.manage-services-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.manage-back-btn {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(0, 174, 255, 0.25);
+  border-radius: 15px;
+  background: rgba(15, 35, 52, 0.9);
+  color: #ffffff;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.manage-services-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.manage-services-header p {
+  margin: 5px 0 0;
+  color: #8fa5b8;
+  font-size: 13px;
+}
+
+.manage-services-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.manage-services-content h3 {
+  margin: 0 0 15px;
+  font-size: 19px;
+  color: #ffffff;
+}
+
+.manage-service-card {
+  background: rgba(14, 31, 45, 0.95);
+  border: 1px solid rgba(0, 174, 255, 0.20);
+  border-radius: 22px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+.service-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.manage-service-name {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.manage-service-category {
+  margin-top: 6px;
+  color: #8fa5b8;
+  font-size: 14px;
+}
+
+.manage-service-status {
+  padding: 7px 11px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.manage-service-status.pending {
+  background: rgba(255, 180, 0, 0.12);
+  color: #ffc44d;
+  border: 1px solid rgba(255, 180, 0, 0.25);
+}
+
+.service-listing-position {
+  margin: 18px 0;
+  padding: 11px 13px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #9edcff;
+  font-size: 14px;
+}
+
+.manage-service-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.manage-service-info div {
+  padding: 12px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.manage-service-info span {
+  display: block;
+  color: #7f96a8;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.manage-service-info strong {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.manage-service-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.manage-service-actions button {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 174, 255, 0.20);
+  background: rgba(15, 42, 60, 0.9);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.service-delete-btn {
+  border-color: rgba(255, 70, 70, 0.30) !important;
+  color: #ff7777 !important;
+}
+
+@media (max-width: 480px) {
+  #manageServicesPage {
+    padding: 16px;
+  }
+
+  .service-card-top {
+    flex-direction: column;
+  }
+
+  .manage-service-status {
+    align-self: flex-start;
+  }
+
+  .manage-service-info {
+    grid-template-columns: 1fr;
+  }
+
+  .manage-service-actions {
+    flex-direction: column;
+  }
+  
+  
+  /* ===== SERVICE SUCCESS POPUP ===== */
 
 .service-success-popup {
   display: none;
