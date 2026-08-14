@@ -8283,6 +8283,16 @@ if (createServiceSubmitBtn) {
       return;
     }
 
+// Service Duration Check
+
+const selectedDuration =
+  document.getElementById("serviceDuration").value;
+
+if (!selectedDuration) {
+  alert("Please select a service duration.");
+  return;
+    }
+    
     if (!serviceContact) {
       alert("Please enter your contact or order method.");
       return;
