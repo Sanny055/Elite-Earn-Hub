@@ -8160,6 +8160,70 @@ if (createServiceBackBtn && createServicePage) {
 
   }
 
+// ===== CREATE SERVICE VALIDATION =====
+
+const createServiceSubmitBtn =
+  document.getElementById("createServiceSubmitBtn");
+
+if (createServiceSubmitBtn) {
+
+  createServiceSubmitBtn.addEventListener("click", function () {
+
+    const serviceName =
+      document.getElementById("serviceName").value.trim();
+
+    const serviceCategory =
+      document.getElementById("serviceCategory").value.trim();
+
+    const serviceDescription =
+      document.getElementById("serviceDescription").value.trim();
+
+    const servicePrice =
+      document.getElementById("servicePrice").value.trim();
+
+    const serviceContact =
+      document.getElementById("serviceContact").value.trim();
+
+
+    // Required fields check
+
+    if (!serviceName) {
+      alert("Please enter your service name.");
+      return;
+    }
+
+    if (!serviceCategory) {
+      alert("Please enter your service category.");
+      return;
+    }
+
+    if (!serviceDescription) {
+      alert("Please enter your service description.");
+      return;
+    }
+
+    if (!servicePrice || Number(servicePrice) <= 0) {
+      alert("Please enter a valid service price.");
+      return;
+    }
+
+    if (!serviceContact) {
+      alert("Please enter your contact or order method.");
+      return;
+    }
+
+
+    // Image is optional
+
+    alert(
+      "Your service has been submitted for admin approval."
+    );
+
+  });
+
+      }
+  
+  
   </script>
 
   
