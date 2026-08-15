@@ -190,7 +190,112 @@ footer div:last-child{
   opacity: 0.65;
   }
   
+/* ===== NOTIFICATION POPUP ===== */
 
+#notificationPopup {
+    display: none;
+    position: fixed;
+    top: 75px;
+    right: 20px;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    max-height: 520px;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid rgba(128, 128, 128, 0.18);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* Header */
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.notification-header h3 {
+    margin: 0;
+    font-size: 19px;
+}
+
+#notificationSubtitle {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.notification-close {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Notification List */
+
+.notification-list {
+    max-height: 370px;
+    overflow-y: auto;
+}
+
+.notification-empty {
+    text-align: center;
+    padding: 45px 20px;
+    opacity: 0.65;
+}
+
+.notification-empty-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.notification-empty strong {
+    display: block;
+    font-size: 15px;
+}
+
+.notification-empty p {
+    margin: 6px 0 0;
+    font-size: 13px;
+}
+
+/* Footer */
+
+.notification-footer {
+    padding: 12px 18px;
+    border-top: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+#markAllNotificationsBtn {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    #notificationPopup {
+        top: 65px;
+        right: 10px;
+        width: calc(100vw - 20px);
+    }
+  
   
   
   /* ===== COMPACT MANAGE SERVICES ===== */
