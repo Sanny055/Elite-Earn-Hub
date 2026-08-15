@@ -9562,6 +9562,68 @@ if (convertSuccessDone) {
 
     }
 
+
+    /* =====================================================
+   DEPOSIT SUCCESS POPUP
+   ===================================================== */
+
+const depositSubmit =
+  document.getElementById("depositSubmit");
+
+const depositSuccessPopup =
+  document.getElementById("depositSuccessPopup");
+
+const closeDepositSuccess =
+  document.getElementById("closeDepositSuccess");
+
+const checkTransactionHistory =
+  document.getElementById("checkTransactionHistory");
+
+
+/* Submit Deposit */
+
+if (depositSubmit && depositSuccessPopup) {
+
+  depositSubmit.addEventListener("click", function () {
+
+    depositSuccessPopup.style.display = "flex";
+
+  });
+
+}
+
+
+/* Close → Dashboard */
+
+if (closeDepositSuccess) {
+
+  closeDepositSuccess.addEventListener(
+    "click",
+    function () {
+
+      window.location.href = "dashboard.html";
+
+    }
+  );
+
+}
+
+
+/* Check Transaction History */
+
+if (checkTransactionHistory) {
+
+  checkTransactionHistory.addEventListener(
+    "click",
+    function () {
+
+      window.location.href =
+        "transaction-history.html";
+
+    }
+  );
+
+    }
     
   </script>
 
