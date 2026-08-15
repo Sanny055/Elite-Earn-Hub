@@ -7833,12 +7833,23 @@ document
 );
 
 
+// ===== PROFILE BUTTON =====
+
 document
 .getElementById("profileBtn")
-.addEventListener(
-"click",
-() => openPage("profile.html")
-);
+.addEventListener("click", () => {
+
+    // Profile page show
+    const profilePage = document.getElementById("profilePage");
+
+    if (profilePage) {
+        profilePage.style.display = "block";
+    }
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+
+});
 
 
 document
@@ -9218,24 +9229,7 @@ if (checkManageServicesBtn) {
 
     }
 
-    // ===== PROFILE BUTTON → PROFILE PAGE =====
-
-const profileBtn = document.getElementById("profileBtn");
-const profilePage = document.getElementById("profilePage");
-
-if (profileBtn && profilePage) {
-
-    profileBtn.addEventListener("click", function () {
-
-        // Profile page show
-        profilePage.style.display = "block";
-
-        // Scroll to top
-        window.scrollTo(0, 0);
-
-    });
-
-}
+    
   
   </script>
 
