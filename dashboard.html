@@ -9068,31 +9068,7 @@ if (checkManageServicesBtn) {
 
     }
     
-// ===== PROFILE BUTTON =====
 
-const profileBtn = document.getElementById("profileBtn");
-const profilePage = document.getElementById("profilePage");
-
-if (profileBtn && profilePage) {
-
-    profileBtn.addEventListener("click", function () {
-
-        // Hide dashboard/menu content
-        const dashboardContent = document.getElementById("dashboardContent");
-
-        if (dashboardContent) {
-            dashboardContent.style.display = "none";
-        }
-
-        // Show Profile Page
-        profilePage.style.display = "block";
-
-        // Go to top
-        window.scrollTo(0, 0);
-
-    });
-
-    }
   
   </script>
 
