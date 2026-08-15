@@ -9217,8 +9217,25 @@ if (checkManageServicesBtn) {
     });
 
     }
-    
 
+    // ===== PROFILE BUTTON → PROFILE PAGE =====
+
+const profileBtn = document.getElementById("profileBtn");
+const profilePage = document.getElementById("profilePage");
+
+if (profileBtn && profilePage) {
+
+    profileBtn.addEventListener("click", function () {
+
+        // Profile page show
+        profilePage.style.display = "block";
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+
+    });
+
+}
   
   </script>
 
