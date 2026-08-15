@@ -7650,34 +7650,60 @@ function openPage(page){
 
 document
 .getElementById("tasksBtn")
-.addEventListener(
-"click",
-() => openPage("tasks.html")
-);
+.addEventListener("click", () => {
 
+    const tasksPage = document.getElementById("tasksPage");
+
+    if (tasksPage) {
+        tasksPage.style.display = "block";
+    }
+
+});
+
+
+// ===== SURFING BUTTON =====
 
 document
 .getElementById("surfingBtn")
-.addEventListener(
-"click",
-() => openPage("surfing.html")
-);
+.addEventListener("click", () => {
 
+    const surfingPage = document.getElementById("surfingPage");
+
+    if (surfingPage) {
+        surfingPage.style.display = "block";
+    }
+
+});
+
+
+// ===== REFERRAL BUTTON =====
 
 document
 .getElementById("referralBtn")
-.addEventListener(
-"click",
-() => openPage("referral.html")
-);
+.addEventListener("click", () => {
 
+    const referralPage = document.getElementById("referralPage");
+
+    if (referralPage) {
+        referralPage.style.display = "block";
+    }
+
+});
+
+
+// ===== PIN TASK BUTTON =====
 
 document
 .getElementById("pinTaskBtn")
-.addEventListener(
-"click",
-() => openPage("pin-task.html")
-);
+.addEventListener("click", () => {
+
+    const pinTaskPage = document.getElementById("pinTaskPage");
+
+    if (pinTaskPage) {
+        pinTaskPage.style.display = "block";
+    }
+
+});
 
 
 // ===== PROFILE BUTTON =====
