@@ -296,7 +296,76 @@ footer div:last-child{
         width: calc(100vw - 20px);
     }
   
-  
+
+  /* ===== CONVERT SUCCESS POPUP ===== */
+
+.convert-success-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 20px;
+}
+
+.convert-success-box {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px 24px;
+  text-align: center;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+}
+
+.convert-success-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.convert-success-icon {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f7ed;
+  color: #20a04b;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.convert-success-box h3 {
+  margin: 0 0 8px;
+  font-size: 21px;
+}
+
+.convert-success-box p {
+  margin: 0 0 22px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.convert-success-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  }
   
   /* ===== COMPACT MANAGE SERVICES ===== */
 
