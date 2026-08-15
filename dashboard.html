@@ -8479,35 +8479,54 @@ function copyDepositAddress(value) {
    DEPOSIT AMOUNT CALCULATION
    ===================================================== */
 
-const depositAmount = document.getElementById("depositAmount");
-const depositBaseAmount = document.getElementById("depositBaseAmount");
-const depositFee = document.getElementById("depositFee");
-const depositTotal = document.getElementById("depositTotal");
-const depositReceive = document.getElementById("depositReceive");
+const depositAmount =
+  document.getElementById("depositAmount");
+
+const depositBaseAmount =
+  document.getElementById("depositBaseAmount");
+
+const depositFee =
+  document.getElementById("depositFee");
+
+const depositTotal =
+  document.getElementById("depositTotal");
+
+const depositReceive =
+  document.getElementById("depositReceive");
 
 const DEPOSIT_FEE_PERCENT = 10;
 
-// 1 Dollar = 67.5 SNX
+// 1 USD = 67.5 SNX
 const SNX_RATE = 67.5;
 
-if (depositAmount) {
+// 1 USD = 270 PKR
+const PKR_RATE = 270;
 
-  depositAmount.addEventListener("input", function () {
+function updateDepositCalculation() {
 
-    let amount = parseFloat(depositAmount.value) || 0;
+  if (!depositAmount) return;
 
-    if (amount < 0) {
-      amount = 0;
-    }
+  let amount =
+    parseFloat(depositAmount.value) || 0;
 
-    const fee = amount * (DEPOSIT_FEE_PERCENT / 100);
+  let usdAmount = 0;
 
-    const total = amount + fee;
+  /*
+   * BINANCE
+   * Amount entered in USD
+   */
+  if (selectedMethod === "binance") {
 
-    const receiveSNX = amount * SNX_RATE;
+    usdAmount = amount;
 
     depositBaseAmount.textContent =
       "$" + amount.toFixed(2);
+
+    const fee =
+      amount * (DEPOSIT_FEE_PERCENT / 100);
+
+    const total =
+      amount + fee;
 
     depositFee.textContent =
       "$" + fee.toFixed(2);
@@ -8516,9 +8535,78 @@ if (depositAmount) {
       "$" + total.toFixed(2);
 
     depositReceive.textContent =
-      receiveSNX.toFixed(2);
+      (usdAmount * SNX_RATE).toFixed(2);
 
-  });
+  }
+
+  /*
+   * JAZZCASH
+   * Amount entered in PKR
+   */
+  else if (selectedMethod === "jazzcash") {
+
+    usdAmount =
+      amount / PKR_RATE;
+
+    const fee =
+      amount * (DEPOSIT_FEE_PERCENT / 100);
+
+    const total =
+      amount + fee;
+
+    depositBaseAmount.textContent =
+      "PKR " + amount.toFixed(2);
+
+    depositFee.textContent =
+      "PKR " + fee.toFixed(2);
+
+    depositTotal.textContent =
+      "PKR " + total.toFixed(2);
+
+    depositReceive.textContent =
+      (usdAmount * SNX_RATE).toFixed(2);
+
+  }
+
+  /*
+   * EASYPAISA
+   * Amount entered in PKR
+   */
+  else if (selectedMethod === "easypaisa") {
+
+    usdAmount =
+      amount / PKR_RATE;
+
+    const fee =
+      amount * (DEPOSIT_FEE_PERCENT / 100);
+
+    const total =
+      amount + fee;
+
+    depositBaseAmount.textContent =
+      "PKR " + amount.toFixed(2);
+
+    depositFee.textContent =
+      "PKR " + fee.toFixed(2);
+
+    depositTotal.textContent =
+      "PKR " + total.toFixed(2);
+
+    depositReceive.textContent =
+      (usdAmount * SNX_RATE).toFixed(2);
+
+  }
+
+}
+
+
+/* Amount change */
+if (depositAmount) {
+
+  depositAmount.addEventListener(
+    "input",
+    updateDepositCalculation
+  );
 
     }
 
