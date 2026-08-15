@@ -5159,6 +5159,48 @@ footer strong{
         <span id="notificationCount">0</span>
       </button>
 
+  <!-- ===== NOTIFICATION POPUP ===== -->
+
+<div id="notificationPopup" class="notification-popup">
+
+    <div class="notification-header">
+        <div>
+            <h3>Notifications</h3>
+            <span id="notificationSubtitle">Your latest notifications</span>
+        </div>
+
+        <button
+            type="button"
+            id="closeNotificationBtn"
+            class="notification-close"
+        >
+            ×
+        </button>
+    </div>
+
+    <div id="notificationList" class="notification-list">
+
+        <!-- Notifications will appear here -->
+
+        <div class="notification-empty" id="notificationEmpty">
+            <div class="notification-empty-icon">🔔</div>
+            <strong>No notifications</strong>
+            <p>You don't have any new notifications.</p>
+        </div>
+
+    </div>
+
+    <div class="notification-footer">
+        <button
+            type="button"
+            id="markAllNotificationsBtn"
+        >
+            Mark all as read
+        </button>
+    </div>
+
+</div>
+      
       <button
         class="logout-btn"
         id="logoutBtn"
