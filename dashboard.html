@@ -9563,67 +9563,43 @@ if (convertSuccessDone) {
     }
 
 
-    /* =====================================================
-   DEPOSIT SUCCESS POPUP
+/* =====================================================
+   DEPOSIT SUCCESS POPUP - FINAL
    ===================================================== */
 
-const depositSubmit =
-  document.getElementById("depositSubmit");
+document.addEventListener("click", function (e) {
 
-const depositSuccessPopup =
-  document.getElementById("depositSuccessPopup");
+  // Submit Deposit button
+  if (e.target.closest("#depositSubmit")) {
 
-const closeDepositSuccess =
-  document.getElementById("closeDepositSuccess");
+    const successPopup =
+      document.getElementById("depositSuccessPopup");
 
-const checkTransactionHistory =
-  document.getElementById("checkTransactionHistory");
-
-
-/* Submit Deposit */
-
-if (depositSubmit && depositSuccessPopup) {
-
-  depositSubmit.addEventListener("click", function () {
-
-    depositSuccessPopup.style.display = "flex";
-
-  });
-
-}
-
-
-/* Close → Dashboard */
-
-if (closeDepositSuccess) {
-
-  closeDepositSuccess.addEventListener(
-    "click",
-    function () {
-
-      window.location.href = "dashboard.html";
-
+    if (successPopup) {
+      successPopup.style.display = "flex";
+    } else {
+      console.error("depositSuccessPopup not found");
     }
-  );
 
-}
+  }
 
 
-/* Check Transaction History */
+  // Close button → Dashboard
+  if (e.target.closest("#closeDepositSuccess")) {
 
-if (checkTransactionHistory) {
+    window.location.href = "dashboard.html";
 
-  checkTransactionHistory.addEventListener(
-    "click",
-    function () {
+  }
 
-      window.location.href =
-        "transaction-history.html";
 
-    }
-  );
+  // Transaction History
+  if (e.target.closest("#checkTransactionHistory")) {
 
-    }
+    window.location.href = "transaction-history.html";
+
+  }
+
+});
     
   </script>
 
