@@ -9416,22 +9416,23 @@ if (convertConfirm && convertSuccessPopup) {
 }
 
 
-/* Close success popup → Dashboard */
-
 function closeConvertSuccessPopup() {
 
   if (convertSuccessPopup) {
     convertSuccessPopup.style.display = "none";
   }
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  // Clear converted amount
+  const convertAmount =
+    document.getElementById("convertAmount");
 
-}
+  if (convertAmount) {
+    convertAmount.value = "";
+  }
 
-
+    
+    }
+    
 if (closeConvertSuccess) {
 
   closeConvertSuccess.addEventListener(
