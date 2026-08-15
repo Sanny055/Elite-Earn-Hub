@@ -5503,8 +5503,31 @@ footer strong{
     </div>
 
     <div class="convert-receive">
- 
- <!-- ===== CONVERT SUCCESS POPUP ===== -->
+    
+      <span>Advertisement Balance</span>
+
+      <strong>
+        <span id="convertReceive">0</span> SNX
+      </strong>
+    </div>
+
+    <button class="convert-confirm" id="convertConfirm">
+      Convert Now
+    </button>
+
+    <div class="convert-note">
+      30 SNX conversion fee will be deducted from your Main Balance.
+    </div>
+
+  </div>
+
+</div>
+    
+<div class="balance-card">
+
+      <div class="balance-title">
+   
+    <!-- ===== CONVERT SUCCESS POPUP ===== -->
 
 <div id="convertSuccessPopup" class="convert-success-overlay">
 
@@ -5539,31 +5562,8 @@ footer strong{
   </div>
 
 </div>
-      
-      
-      <span>Advertisement Balance</span>
-
-      <strong>
-        <span id="convertReceive">0</span> SNX
-      </strong>
-    </div>
-
-    <button class="convert-confirm" id="convertConfirm">
-      Convert Now
-    </button>
-
-    <div class="convert-note">
-      30 SNX conversion fee will be deducted from your Main Balance.
-    </div>
-
-  </div>
-
-</div>
-    
-<div class="balance-card">
-
-      <div class="balance-title">
-   
+        
+        
         Advertisement Balance
       </div>
 
@@ -9383,7 +9383,75 @@ document.addEventListener("click", function (event) {
 
 });
     
-  
+/* =====================================================
+   CONVERT SUCCESS POPUP
+   ===================================================== */
+
+const convertConfirm = document.getElementById("convertConfirm");
+const convertSuccessPopup = document.getElementById("convertSuccessPopup");
+const closeConvertSuccess = document.getElementById("closeConvertSuccess");
+const convertSuccessDone = document.getElementById("convertSuccessDone");
+
+if (convertConfirm && convertSuccessPopup) {
+
+  convertConfirm.addEventListener("click", function () {
+
+    const amount = Number(
+      document.getElementById("convertAmount").value
+    );
+
+    // Minimum 300 SNX
+    if (!amount || amount < 300) {
+
+      alert("Minimum 300 SNX required for conversion.");
+
+      return;
+    }
+
+    // Show success popup
+    convertSuccessPopup.style.display = "flex";
+
+  });
+
+}
+
+
+/* Close success popup → Dashboard */
+
+function closeConvertSuccessPopup() {
+
+  if (convertSuccessPopup) {
+    convertSuccessPopup.style.display = "none";
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+if (closeConvertSuccess) {
+
+  closeConvertSuccess.addEventListener(
+    "click",
+    closeConvertSuccessPopup
+  );
+
+}
+
+
+if (convertSuccessDone) {
+
+  convertSuccessDone.addEventListener(
+    "click",
+    closeConvertSuccessPopup
+  );
+
+    }
+
+    
   </script>
 
   
