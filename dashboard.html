@@ -9247,6 +9247,51 @@ if (checkManageServicesBtn) {
 
     }
 
+    // ===== NOTIFICATION POPUP =====
+
+const notificationBtn = document.getElementById("notificationBtn");
+const notificationPopup = document.getElementById("notificationPopup");
+const closeNotificationBtn = document.getElementById("closeNotificationBtn");
+
+if (notificationBtn && notificationPopup) {
+
+    notificationBtn.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        if (notificationPopup.style.display === "block") {
+            notificationPopup.style.display = "none";
+        } else {
+            notificationPopup.style.display = "block";
+        }
+
+    });
+}
+
+// Close button
+
+if (closeNotificationBtn) {
+
+    closeNotificationBtn.addEventListener("click", function () {
+        notificationPopup.style.display = "none";
+    });
+
+}
+
+// Click outside popup → close
+
+document.addEventListener("click", function (event) {
+
+    if (
+        notificationPopup &&
+        notificationPopup.style.display === "block" &&
+        !notificationPopup.contains(event.target) &&
+        !notificationBtn.contains(event.target)
+    ) {
+        notificationPopup.style.display = "none";
+    }
+
+});
     
   
   </script>
