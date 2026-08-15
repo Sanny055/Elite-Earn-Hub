@@ -9564,38 +9564,137 @@ if (convertSuccessDone) {
 
 
 /* =====================================================
-   DEPOSIT SUCCESS POPUP - FINAL
+   DEPOSIT SUBMIT + SUCCESS POPUP
    ===================================================== */
 
 document.addEventListener("click", function (e) {
 
-  // Submit Deposit button
+
+  /* =====================================================
+     SUBMIT DEPOSIT
+     ===================================================== */
+
   if (e.target.closest("#depositSubmit")) {
 
-    const successPopup =
+    const selectedMethod =
+      document.querySelector(".deposit-method.active");
+
+    const depositAmount =
+      document.getElementById("depositAmount");
+
+    const depositSuccessPopup =
       document.getElementById("depositSuccessPopup");
 
-    if (successPopup) {
-      successPopup.style.display = "flex";
-    } else {
-      console.error("depositSuccessPopup not found");
+
+    /* ===== PAYMENT METHOD CHECK ===== */
+
+    if (!selectedMethod) {
+
+      alert("Please select a payment method.");
+
+      return;
+    }
+
+
+    /* ===== AMOUNT CHECK ===== */
+
+    const amount =
+      Number(depositAmount?.value || 0);
+
+    if (!amount || amount <= 0) {
+
+      alert("Please enter deposit amount.");
+
+      return;
+    }
+
+
+    /* ===== SHOW SUCCESS POPUP ===== */
+
+    if (depositSuccessPopup) {
+
+      depositSuccessPopup.style.display = "flex";
+
     }
 
   }
 
 
-  // Close button → Dashboard
+  /* =====================================================
+     CLOSE SUCCESS POPUP → DASHBOARD
+     ===================================================== */
+
   if (e.target.closest("#closeDepositSuccess")) {
 
-    window.location.href = "dashboard.html";
+    const depositSuccessPopup =
+      document.getElementById("depositSuccessPopup");
+
+    const depositOverlay =
+      document.getElementById("depositOverlay");
+
+
+    if (depositSuccessPopup) {
+
+      depositSuccessPopup.style.display = "none";
+
+    }
+
+
+    if (depositOverlay) {
+
+      depositOverlay.style.display = "none";
+
+    }
 
   }
 
 
-  // Transaction History
+  /* =====================================================
+     CHECK TRANSACTION HISTORY
+     ===================================================== */
+
   if (e.target.closest("#checkTransactionHistory")) {
 
-    window.location.href = "transaction-history.html";
+    const depositSuccessPopup =
+      document.getElementById("depositSuccessPopup");
+
+    const depositOverlay =
+      document.getElementById("depositOverlay");
+
+    const transactionHistoryPage =
+      document.getElementById("transactionHistoryPage");
+
+
+    /* Close success popup */
+
+    if (depositSuccessPopup) {
+
+      depositSuccessPopup.style.display = "none";
+
+    }
+
+
+    /* Close deposit popup */
+
+    if (depositOverlay) {
+
+      depositOverlay.style.display = "none";
+
+    }
+
+
+    /* Open Transaction History */
+
+    if (transactionHistoryPage) {
+
+      transactionHistoryPage.style.display = "block";
+
+      transactionHistoryPage.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    }
 
   }
 
