@@ -8475,9 +8475,15 @@ function copyDepositAddress(value) {
 
     }
 
-    /* =====================================================
-   DEPOSIT AMOUNT CALCULATION
+/* =====================================================
+   DEPOSIT PAYMENT METHOD + CALCULATION
    ===================================================== */
+
+const depositMethods =
+  document.querySelectorAll(".deposit-method");
+
+const depositPaymentDetails =
+  document.getElementById("depositPaymentDetails");
 
 const depositAmount =
   document.getElementById("depositAmount");
@@ -8494,6 +8500,9 @@ const depositTotal =
 const depositReceive =
   document.getElementById("depositReceive");
 
+
+let selectedMethod = "";
+
 const DEPOSIT_FEE_PERCENT = 10;
 
 // 1 USD = 67.5 SNX
@@ -8502,31 +8511,34 @@ const SNX_RATE = 67.5;
 // 1 USD = 270 PKR
 const PKR_RATE = 270;
 
+
+/* =====================================================
+   UPDATE CALCULATION
+   ===================================================== */
+
 function updateDepositCalculation() {
 
   if (!depositAmount) return;
 
-  let amount =
+  const amount =
     parseFloat(depositAmount.value) || 0;
 
-  let usdAmount = 0;
+  const fee =
+    amount * (DEPOSIT_FEE_PERCENT / 100);
 
-  /*
-   * BINANCE
-   * Amount entered in USD
-   */
+  const total =
+    amount + fee;
+
+
+  /* ================= BINANCE ================= */
+
   if (selectedMethod === "binance") {
 
-    usdAmount = amount;
+    const receiveSNX =
+      amount * SNX_RATE;
 
     depositBaseAmount.textContent =
       "$" + amount.toFixed(2);
-
-    const fee =
-      amount * (DEPOSIT_FEE_PERCENT / 100);
-
-    const total =
-      amount + fee;
 
     depositFee.textContent =
       "$" + fee.toFixed(2);
@@ -8535,24 +8547,20 @@ function updateDepositCalculation() {
       "$" + total.toFixed(2);
 
     depositReceive.textContent =
-      (usdAmount * SNX_RATE).toFixed(2);
+      receiveSNX.toFixed(2);
 
   }
 
-  /*
-   * JAZZCASH
-   * Amount entered in PKR
-   */
+
+  /* ================= JAZZCASH ================= */
+
   else if (selectedMethod === "jazzcash") {
 
-    usdAmount =
+    const usdAmount =
       amount / PKR_RATE;
 
-    const fee =
-      amount * (DEPOSIT_FEE_PERCENT / 100);
-
-    const total =
-      amount + fee;
+    const receiveSNX =
+      usdAmount * SNX_RATE;
 
     depositBaseAmount.textContent =
       "PKR " + amount.toFixed(2);
@@ -8564,24 +8572,20 @@ function updateDepositCalculation() {
       "PKR " + total.toFixed(2);
 
     depositReceive.textContent =
-      (usdAmount * SNX_RATE).toFixed(2);
+      receiveSNX.toFixed(2);
 
   }
 
-  /*
-   * EASYPAISA
-   * Amount entered in PKR
-   */
+
+  /* ================= EASYPAISA ================= */
+
   else if (selectedMethod === "easypaisa") {
 
-    usdAmount =
+    const usdAmount =
       amount / PKR_RATE;
 
-    const fee =
-      amount * (DEPOSIT_FEE_PERCENT / 100);
-
-    const total =
-      amount + fee;
+    const receiveSNX =
+      usdAmount * SNX_RATE;
 
     depositBaseAmount.textContent =
       "PKR " + amount.toFixed(2);
@@ -8593,22 +8597,88 @@ function updateDepositCalculation() {
       "PKR " + total.toFixed(2);
 
     depositReceive.textContent =
-      (usdAmount * SNX_RATE).toFixed(2);
+      receiveSNX.toFixed(2);
 
   }
 
 }
 
 
-/* Amount change */
+/* =====================================================
+   PAYMENT METHOD SELECT
+   ===================================================== */
+
+depositMethods.forEach(function(method) {
+
+  method.addEventListener("click", function() {
+
+    depositMethods.forEach(function(btn) {
+      btn.classList.remove("active");
+    });
+
+    method.classList.add("active");
+
+    selectedMethod =
+      method.dataset.method;
+
+
+    /* PAYMENT DETAILS */
+
+    if (selectedMethod === "binance") {
+
+      depositPaymentDetails.innerHTML = `
+        <strong>Binance</strong><br><br>
+        Address: YOUR_BINANCE_BEP20_ADDRESS
+      `;
+
+    }
+
+    else if (selectedMethod === "jazzcash") {
+
+      depositPaymentDetails.innerHTML = `
+        <strong>JazzCash</strong><br><br>
+        Account Title: YOUR_JAZZCASH_ACCOUNT_TITLE<br>
+        Account Number: YOUR_JAZZCASH_NUMBER
+      `;
+
+    }
+
+    else if (selectedMethod === "easypaisa") {
+
+      depositPaymentDetails.innerHTML = `
+        <strong>EasyPaisa</strong><br><br>
+        Account Title: YOUR_EASYPAISA_ACCOUNT_TITLE<br>
+        Account Number: YOUR_EASYPAISA_NUMBER
+      `;
+
+    }
+
+
+    /* UPDATE CALCULATION */
+
+    updateDepositCalculation();
+
+  });
+
+});
+
+
+/* =====================================================
+   AMOUNT INPUT
+   ===================================================== */
+
 if (depositAmount) {
 
   depositAmount.addEventListener(
     "input",
-    updateDepositCalculation
-  );
+    function() {
+
+      updateDepositCalculation();
 
     }
+  );
+
+  }
 
     // ===== TRANSACTION HISTORY PAGE =====
 
