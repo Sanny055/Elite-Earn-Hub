@@ -9709,10 +9709,21 @@ console.log("Deposit Fee:", fee);
 
 console.log("You Pay:", total);
 
-    depositBaseAmount.textContent =
-  "$" + amount.toFixed(2);
 
-    depositFee.textContent =
+
+    if (
+  document.querySelector(".deposit-method.active")?.dataset.method === "binance"
+) {
+  depositBaseAmount.textContent =
+    "$" + amount.toFixed(2);
+} else {
+  depositBaseAmount.textContent =
+    "PKR " + amount.toFixed(2);
+    }
+
+  
+    
+  depositFee.textContent =
   "$" + fee.toFixed(2);
 
 
@@ -9740,7 +9751,10 @@ depositTotal.textContent =
   
   });
   
-  </script>
+
+  
+  
+      </script>
  
   <footer style="
     text-align:center;
