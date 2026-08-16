@@ -9698,7 +9698,12 @@ const amount =
   parseFloat(depositAmount.value) || 0;
 
 console.log("Deposit Amount:", amount);  
-  
+
+const fee =
+  amount * (DEPOSIT_FEE / 100);
+
+console.log("Deposit Fee:", fee);
+    
   
   
   </script>
