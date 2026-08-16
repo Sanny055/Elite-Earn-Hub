@@ -9525,15 +9525,17 @@ document.addEventListener("click", function (e) {
     /* =========================
        SUBMIT DEPOSIT
        ========================= */
-    if (e.target.closest("#depositSubmit")) {
+    const submitButton = e.target.closest("#depositSubmit");
 
-        const selectedMethod =
+    if (submitButton) {
+
+        const activeMethod =
             document.querySelector(".deposit-method.active");
 
-        const depositAmount =
+        const amountInput =
             document.getElementById("depositAmount");
 
-        const depositSuccessPopup =
+        const successPopup =
             document.getElementById("depositSuccessPopup");
 
         const depositOverlay =
@@ -9543,8 +9545,9 @@ document.addEventListener("click", function (e) {
         /* =========================
            PAYMENT METHOD CHECK
            ========================= */
-        if (!selectedMethod) {
-            alert("Please select a payment method.");
+
+        if (!activeMethod) {
+            alert("Please select a payment method first.");
             return;
         }
 
@@ -9552,44 +9555,49 @@ document.addEventListener("click", function (e) {
         /* =========================
            AMOUNT CHECK
            ========================= */
-        if (!depositAmount) {
-            alert("Deposit amount field not found.");
+
+        if (!amountInput || amountInput.value.trim() === "") {
+            alert("Please enter deposit amount.");
+            if (amountInput) amountInput.focus();
             return;
         }
 
-        const amount = parseFloat(depositAmount.value);
+        const amount = parseFloat(amountInput.value);
+
 
         if (isNaN(amount) || amount <= 0) {
-            alert("Please enter deposit amount.");
-            depositAmount.focus();
+            alert("Please enter a valid deposit amount.");
+            amountInput.focus();
             return;
         }
 
 
         /* =========================
-           MINIMUM AMOUNT CHECK
+           METHOD
            ========================= */
 
-        const method = selectedMethod.dataset.method;
+        const method = activeMethod.getAttribute("data-method");
 
-        /* Binance minimum = $1 */
+
+        /* =========================
+           MINIMUM AMOUNT
+           ========================= */
+
         if (method === "binance" && amount < 1) {
+
             alert("Minimum Binance deposit is $1.");
-            depositAmount.focus();
+            amountInput.focus();
             return;
         }
 
-        /* JazzCash minimum = 270 PKR */
-        if (method === "jazzcash" && amount < 270) {
-            alert("Minimum JazzCash deposit is PKR 270.");
-            depositAmount.focus();
-            return;
-        }
 
-        /* EasyPaisa minimum = 270 PKR */
-        if (method === "easypaisa" && amount < 270) {
-            alert("Minimum EasyPaisa deposit is PKR 270.");
-            depositAmount.focus();
+        if (
+            (method === "jazzcash" || method === "easypaisa") &&
+            amount < 270
+        ) {
+
+            alert("Minimum deposit for JazzCash/EasyPaisa is PKR 270.");
+            amountInput.focus();
             return;
         }
 
@@ -9598,30 +9606,34 @@ document.addEventListener("click", function (e) {
            SUCCESS POPUP
            ========================= */
 
-        if (depositSuccessPopup) {
-            depositSuccessPopup.style.display = "flex";
-        }
-
         if (depositOverlay) {
             depositOverlay.style.display = "flex";
         }
+
+        if (successPopup) {
+            successPopup.style.display = "flex";
+        }
+
     }
 
 
     /* =====================================================
-       CLOSE SUCCESS POPUP → DASHBOARD
+       CLOSE SUCCESS POPUP
        ===================================================== */
 
-    if (e.target.closest("#closeDepositSuccess")) {
+    const closeSuccess =
+        e.target.closest("#closeDepositSuccess");
 
-        const depositSuccessPopup =
+    if (closeSuccess) {
+
+        const successPopup =
             document.getElementById("depositSuccessPopup");
 
         const depositOverlay =
             document.getElementById("depositOverlay");
 
-        if (depositSuccessPopup) {
-            depositSuccessPopup.style.display = "none";
+        if (successPopup) {
+            successPopup.style.display = "none";
         }
 
         if (depositOverlay) {
@@ -9634,30 +9646,34 @@ document.addEventListener("click", function (e) {
        CHECK TRANSACTION HISTORY
        ===================================================== */
 
-    if (e.target.closest("#checkTransactionHistory")) {
+    const historyButton =
+        e.target.closest("#checkTransactionHistory");
 
-        const depositSuccessPopup =
+    if (historyButton) {
+
+        const successPopup =
             document.getElementById("depositSuccessPopup");
 
         const depositOverlay =
             document.getElementById("depositOverlay");
 
-        const transactionHistoryPage =
+        const historyPage =
             document.getElementById("transactionHistoryPage");
 
 
-        if (depositSuccessPopup) {
-            depositSuccessPopup.style.display = "none";
+        if (successPopup) {
+            successPopup.style.display = "none";
         }
 
         if (depositOverlay) {
             depositOverlay.style.display = "none";
         }
 
-        if (transactionHistoryPage) {
-            transactionHistoryPage.style.display = "block";
+        if (historyPage) {
 
-            transactionHistoryPage.scrollIntoView({
+            historyPage.style.display = "block";
+
+            historyPage.scrollIntoView({
                 behavior: "smooth",
                 block: "start"
             });
@@ -9666,8 +9682,7 @@ document.addEventListener("click", function (e) {
 
 });
 
-    
-
+      
   
   
   </script>
