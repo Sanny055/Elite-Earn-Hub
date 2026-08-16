@@ -9516,142 +9516,156 @@ if (convertSuccessDone) {
     }
 
 
-/* =====================================================
+/* =========================================================
    DEPOSIT SUBMIT + SUCCESS POPUP
-   ===================================================== */
+   ========================================================= */
 
 document.addEventListener("click", function (e) {
 
+    /* =========================
+       SUBMIT DEPOSIT
+       ========================= */
+    if (e.target.closest("#depositSubmit")) {
 
-  /* =====================================================
-     SUBMIT DEPOSIT
-     ===================================================== */
+        const selectedMethod =
+            document.querySelector(".deposit-method.active");
 
-  if (e.target.closest("#depositSubmit")) {
+        const depositAmount =
+            document.getElementById("depositAmount");
 
-    const selectedMethod =
-      document.querySelector(".deposit-method.active");
+        const depositSuccessPopup =
+            document.getElementById("depositSuccessPopup");
 
-    const depositAmount =
-      document.getElementById("depositAmount");
-
-    const depositSuccessPopup =
-      document.getElementById("depositSuccessPopup");
+        const depositOverlay =
+            document.getElementById("depositOverlay");
 
 
-    /* ===== PAYMENT METHOD CHECK ===== */
+        /* =========================
+           PAYMENT METHOD CHECK
+           ========================= */
+        if (!selectedMethod) {
+            alert("Please select a payment method.");
+            return;
+        }
 
-    if (!selectedMethod) {
 
-      alert("Please select a payment method.");
+        /* =========================
+           AMOUNT CHECK
+           ========================= */
+        if (!depositAmount) {
+            alert("Deposit amount field not found.");
+            return;
+        }
 
-      return;
+        const amount = parseFloat(depositAmount.value);
+
+        if (isNaN(amount) || amount <= 0) {
+            alert("Please enter deposit amount.");
+            depositAmount.focus();
+            return;
+        }
+
+
+        /* =========================
+           MINIMUM AMOUNT CHECK
+           ========================= */
+
+        const method = selectedMethod.dataset.method;
+
+        /* Binance minimum = $1 */
+        if (method === "binance" && amount < 1) {
+            alert("Minimum Binance deposit is $1.");
+            depositAmount.focus();
+            return;
+        }
+
+        /* JazzCash minimum = 270 PKR */
+        if (method === "jazzcash" && amount < 270) {
+            alert("Minimum JazzCash deposit is PKR 270.");
+            depositAmount.focus();
+            return;
+        }
+
+        /* EasyPaisa minimum = 270 PKR */
+        if (method === "easypaisa" && amount < 270) {
+            alert("Minimum EasyPaisa deposit is PKR 270.");
+            depositAmount.focus();
+            return;
+        }
+
+
+        /* =========================
+           SUCCESS POPUP
+           ========================= */
+
+        if (depositSuccessPopup) {
+            depositSuccessPopup.style.display = "flex";
+        }
+
+        if (depositOverlay) {
+            depositOverlay.style.display = "flex";
+        }
     }
 
 
-    /* ===== AMOUNT CHECK ===== */
+    /* =====================================================
+       CLOSE SUCCESS POPUP → DASHBOARD
+       ===================================================== */
 
-    const amount =
-      Number(depositAmount?.value || 0);
+    if (e.target.closest("#closeDepositSuccess")) {
 
-    if (!amount || amount <= 0) {
+        const depositSuccessPopup =
+            document.getElementById("depositSuccessPopup");
 
-      alert("Please enter deposit amount.");
+        const depositOverlay =
+            document.getElementById("depositOverlay");
 
-      return;
+        if (depositSuccessPopup) {
+            depositSuccessPopup.style.display = "none";
+        }
+
+        if (depositOverlay) {
+            depositOverlay.style.display = "none";
+        }
     }
 
 
-    /* ===== SHOW SUCCESS POPUP ===== */
+    /* =====================================================
+       CHECK TRANSACTION HISTORY
+       ===================================================== */
 
-    if (depositSuccessPopup) {
+    if (e.target.closest("#checkTransactionHistory")) {
 
-      depositSuccessPopup.style.display = "flex";
+        const depositSuccessPopup =
+            document.getElementById("depositSuccessPopup");
 
+        const depositOverlay =
+            document.getElementById("depositOverlay");
+
+        const transactionHistoryPage =
+            document.getElementById("transactionHistoryPage");
+
+
+        if (depositSuccessPopup) {
+            depositSuccessPopup.style.display = "none";
+        }
+
+        if (depositOverlay) {
+            depositOverlay.style.display = "none";
+        }
+
+        if (transactionHistoryPage) {
+            transactionHistoryPage.style.display = "block";
+
+            transactionHistoryPage.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
     }
-
-  }
-
-
-  /* =====================================================
-     CLOSE SUCCESS POPUP → DASHBOARD
-     ===================================================== */
-
-  if (e.target.closest("#closeDepositSuccess")) {
-
-    const depositSuccessPopup =
-      document.getElementById("depositSuccessPopup");
-
-    const depositOverlay =
-      document.getElementById("depositOverlay");
-
-
-    if (depositSuccessPopup) {
-
-      depositSuccessPopup.style.display = "none";
-
-    }
-
-
-    if (depositOverlay) {
-
-      depositOverlay.style.display = "none";
-
-    }
-
-  }
-
-
-  /* =====================================================
-     CHECK TRANSACTION HISTORY
-     ===================================================== */
-
-  if (e.target.closest("#checkTransactionHistory")) {
-
-    const depositSuccessPopup =
-      document.getElementById("depositSuccessPopup");
-
-    const depositOverlay =
-      document.getElementById("depositOverlay");
-
-    const transactionHistoryPage =
-      document.getElementById("transactionHistoryPage");
-
-
-    /* Close success popup */
-
-    if (depositSuccessPopup) {
-
-      depositSuccessPopup.style.display = "none";
-
-    }
-
-
-    /* Close deposit popup */
-
-    if (depositOverlay) {
-
-      depositOverlay.style.display = "none";
-
-    }
-
-
-    /* Open Transaction History */
-
-    if (transactionHistoryPage) {
-
-      transactionHistoryPage.style.display = "block";
-
-      transactionHistoryPage.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-    }
-
-  }
 
 });
+
     
 /* =========================================================
    DEPOSIT AMOUNT CALCULATION
