@@ -9711,19 +9711,29 @@ console.log("You Pay:", total);
 
 
 
-    if (
-  document.querySelector(".deposit-method.active")?.dataset.method === "binance"
-) {
+
+    const activeMethod =
+  document.querySelector(".deposit-method.active");
+
+const method =
+  activeMethod ? activeMethod.dataset.method : "";
+
+if (method === "binance") {
+
   depositBaseAmount.textContent =
     "$" + amount.toFixed(2);
+
 } else {
+
   depositBaseAmount.textContent =
     "PKR " + amount.toFixed(2);
+
     }
 
   
     
-  depositFee.textContent =
+
+    depositFee.textContent =
   "$" + fee.toFixed(2);
 
 
