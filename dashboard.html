@@ -9716,6 +9716,7 @@ console.log("You Pay:", total);
   "$" + fee.toFixed(2);
 
 
+  
     depositAmount.addEventListener("input", function () {
 
   const amount =
@@ -9730,17 +9731,14 @@ console.log("You Pay:", total);
   depositFee.textContent =
     "$" + fee.toFixed(2);
 
-});
   
- depositTotal.textContent =
-  "$" + total.toFixed(2); 
+ const total =
+  amount + fee;
 
-depositReceive.textContent =
-  (amount * SNX_PER_USD).toFixed(2);
-
-
+depositTotal.textContent =
+  "$" + total.toFixed(2);
   
-  
+  });
   
   </script>
  
