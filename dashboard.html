@@ -9715,6 +9715,25 @@ console.log("You Pay:", total);
     depositFee.textContent =
   "$" + fee.toFixed(2);
 
+
+    depositAmount.addEventListener("input", function () {
+
+  const amount =
+    parseFloat(depositAmount.value) || 0;
+
+  const fee =
+    amount * (DEPOSIT_FEE / 100);
+
+  depositBaseAmount.textContent =
+    "$" + amount.toFixed(2);
+
+  depositFee.textContent =
+    "$" + fee.toFixed(2);
+
+});
+  
+  
+
   
   
   
