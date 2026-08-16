@@ -9712,9 +9712,19 @@ console.log("You Pay:", total);
 
 
 
-    depositBaseAmount.textContent =
-  "$" + amount.toFixed(2);
+    const activeMethod =
+  document.querySelector(".deposit-method.active");
 
+if (
+  activeMethod &&
+  (
+    activeMethod.dataset.method === "jazzcash" ||
+    activeMethod.dataset.method === "easypaisa"
+  )
+) {
+  depositBaseAmount.textContent =
+    "PKR " + amount.toFixed(2);
+    }
   
     
 
