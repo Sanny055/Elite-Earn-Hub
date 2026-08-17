@@ -9746,6 +9746,21 @@ depositTotal.textContent =
   });
   
 
+if (
+  document.querySelector(".deposit-method.active")?.dataset.method === "binance"
+) {
+
+  depositReceive.textContent =
+    (amount * 67.5).toFixed(2);
+
+} else {
+
+  depositReceive.textContent =
+    (amount * 0.25).toFixed(2);
+
+}
+
+  
   
   
       </script>
