@@ -252,6 +252,109 @@ footer div:last-child{
   border: 1px solid rgba(255,255,255,0.15);
   }
 
+
+
+  /* NEW DEPOSIT POPUP */
+
+.new-deposit-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.75);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.new-deposit-overlay.show {
+  display: flex;
+}
+
+.new-deposit-popup {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px 20px;
+  box-sizing: border-box;
+  border-radius: 22px;
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.new-deposit-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.new-deposit-icon {
+  font-size: 42px;
+  margin-bottom: 8px;
+}
+
+.new-deposit-popup h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #fff;
+}
+
+.new-deposit-subtitle {
+  margin: 8px 0 22px;
+  color: #aeb6c4;
+  font-size: 14px;
+}
+
+.new-deposit-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.new-deposit-method {
+  width: 100%;
+  padding: 16px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.new-deposit-method:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.09);
+}
+
+.new-deposit-method span {
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.new-deposit-method strong {
+  font-size: 16px;
+}
+
+.new-deposit-method small {
+  display: block;
+  margin-top: 5px;
+  margin-left: 39px;
+  color: #9ca3af;
+  font-size: 12px;
+  }
+
   
   /* ===== NOTIFICATION POPUP ===== */
 
