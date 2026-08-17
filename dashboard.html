@@ -8742,7 +8742,28 @@ if (convertSuccessDone) {
 
 
 
-  
+  const newDepositOverlay =
+  document.getElementById("newDepositOverlay");
+
+const depositAdBtn =
+  document.getElementById("depositAdBtn");
+
+const newDepositClose =
+  document.getElementById("newDepositClose");
+
+depositAdBtn.addEventListener("click", function () {
+  newDepositOverlay.classList.add("show");
+});
+
+newDepositClose.addEventListener("click", function () {
+  newDepositOverlay.classList.remove("show");
+});
+
+newDepositOverlay.addEventListener("click", function (event) {
+  if (event.target === newDepositOverlay) {
+    newDepositOverlay.classList.remove("show");
+  }
+});
 
 
   
