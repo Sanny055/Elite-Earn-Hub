@@ -9219,7 +9219,77 @@ submitBinanceDeposit.addEventListener("click", function () {
 });
   
   
-  </script>
+
+
+
+
+const depositSuccessOverlay =
+  document.getElementById("depositSuccessOverlay");
+
+const checkTransactionHistory =
+  document.getElementById("checkTransactionHistory");
+
+submitBinanceDeposit.addEventListener("click", function () {
+
+  const amount =
+    parseFloat(binanceAmount.value) || 0;
+
+  // Amount empty
+  if (!binanceAmount.value || amount <= 0) {
+    alert("Please enter your deposit amount.");
+    binanceAmount.focus();
+    return;
+  }
+
+  // Minimum $1
+  if (amount < 1) {
+    alert("Minimum deposit is $1.");
+    binanceAmount.focus();
+    return;
+  }
+
+  // Screenshot required
+  if (!binanceScreenshot.files.length) {
+    alert("Please upload your payment screenshot.");
+    return;
+  }
+
+  // Reset form after successful submission
+  binanceAmount.value = "";
+  binanceScreenshot.value = "";
+
+  binanceFee.textContent = "$0.00";
+  binanceYouPay.textContent = "$0.00";
+  binanceYouReceive.textContent = "0.00";
+
+  // Close Binance popup
+  binanceDepositOverlay.classList.remove("show");
+
+  // Open confirmation popup
+  depositSuccessOverlay.classList.add("show");
+});
+
+
+// Transaction History button
+checkTransactionHistory.addEventListener("click", function () {
+
+  depositSuccessOverlay.classList.remove("show");
+
+  const transactionHistory =
+    document.getElementById("transactionHistory");
+
+  if (transactionHistory) {
+    transactionHistory.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+});
+  
+  
+
+  
+      </script>
  
   <footer style="
     text-align:center;
