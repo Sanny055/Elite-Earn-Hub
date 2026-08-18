@@ -5150,7 +5150,122 @@ footer strong{
 
 </div>
 
+<!-- BINANCE DEPOSIT POPUP -->
+<div class="binance-deposit-overlay" id="binanceDepositOverlay">
 
+  <div class="binance-deposit-popup">
+
+    <button
+      type="button"
+      class="binance-deposit-close"
+      id="binanceDepositClose">
+      ×
+    </button>
+
+    <div class="binance-deposit-icon">
+      🟡
+    </div>
+
+    <h2>Binance Deposit</h2>
+
+    <p class="binance-deposit-subtitle">
+      Deposit USDT via BEP-20
+    </p>
+
+    <!-- PAYMENT DETAILS -->
+    <div class="binance-payment-details">
+
+      <div class="payment-label">
+        Binance USDT (BEP-20) Address
+      </div>
+
+      <div class="payment-address-row">
+
+        <span id="binanceWalletAddress">
+          YOUR_BINANCE_BEP20_ADDRESS
+        </span>
+
+        <button
+          type="button"
+          id="copyBinanceAddress">
+          Copy
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- AMOUNT -->
+    <div class="deposit-field">
+
+      <label for="binanceAmount">
+        Amount (USD)
+      </label>
+
+      <input
+        type="number"
+        id="binanceAmount"
+        min="1"
+        step="0.01"
+        placeholder="Minimum $1"
+      >
+
+    </div>
+
+    <!-- CALCULATION -->
+    <div class="binance-calculation">
+
+      <div>
+        <span>Transaction Fee (10%)</span>
+        <strong id="binanceFee">$0.00</strong>
+      </div>
+
+      <div>
+        <span>You Pay</span>
+        <strong id="binanceYouPay">$0.00</strong>
+      </div>
+
+      <div>
+        <span>You Receive</span>
+        <strong>
+          <span id="binanceYouReceive">0.00</span> SNX
+        </strong>
+      </div>
+
+    </div>
+
+    <!-- SCREENSHOT -->
+    <div class="deposit-field">
+
+      <label for="binanceScreenshot">
+        Payment Screenshot
+      </label>
+
+      <input
+        type="file"
+        id="binanceScreenshot"
+        accept="image/*"
+      >
+
+    </div>
+
+    <!-- SUBMIT -->
+    <button
+      type="button"
+      class="binance-submit-btn"
+      id="submitBinanceDeposit">
+      Submit Deposit
+    </button>
+
+  </div>
+
+</div>
+
+
+
+
+
+    
     
   
   <div class="balance-card rating-card">
