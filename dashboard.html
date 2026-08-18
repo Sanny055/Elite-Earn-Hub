@@ -9056,7 +9056,46 @@ binanceDepositClose.addEventListener("click", function () {
   binanceDepositOverlay.classList.remove("show");
 });
   
-  
+
+    
+    const binanceAmount =
+  document.getElementById("binanceAmount");
+
+const binanceFee =
+  document.getElementById("binanceFee");
+
+const binanceYouPay =
+  document.getElementById("binanceYouPay");
+
+const binanceYouReceive =
+  document.getElementById("binanceYouReceive");
+
+
+binanceAmount.addEventListener("input", function () {
+
+  const amount =
+    parseFloat(binanceAmount.value) || 0;
+
+  const fee =
+    amount * 0.10;
+
+  const youPay =
+    amount + fee;
+
+  const youReceive =
+    amount * 67.5;
+
+
+  binanceFee.textContent =
+    "$" + fee.toFixed(2);
+
+  binanceYouPay.textContent =
+    "$" + youPay.toFixed(2);
+
+  binanceYouReceive.textContent =
+    youReceive.toFixed(2);
+
+}); 
   
     
   
