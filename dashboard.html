@@ -9035,10 +9035,33 @@ newDepositOverlay.addEventListener("click", function (event) {
 });
 
 
+    
+    
+  
+    const binanceDepositOverlay =
+  document.getElementById("binanceDepositOverlay");
+
+const binanceDepositClose =
+  document.getElementById("binanceDepositClose");
+
+const binanceDepositButton =
+  document.querySelector('.new-deposit-method[data-method="binance"]');
+
+binanceDepositButton.addEventListener("click", function () {
+  newDepositOverlay.classList.remove("show");
+  binanceDepositOverlay.classList.add("show");
+});
+
+binanceDepositClose.addEventListener("click", function () {
+  binanceDepositOverlay.classList.remove("show");
+});
   
   
   
-      </script>
+    
+  
+  
+  </script>
  
   <footer style="
     text-align:center;
