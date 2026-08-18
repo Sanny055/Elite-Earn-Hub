@@ -9097,7 +9097,43 @@ binanceAmount.addEventListener("input", function () {
 
 }); 
   
-    
+
+
+  const submitBinanceDeposit =
+  document.getElementById("submitBinanceDeposit");
+
+const binanceScreenshot =
+  document.getElementById("binanceScreenshot");
+
+
+submitBinanceDeposit.addEventListener("click", function () {
+
+  const amount =
+    parseFloat(binanceAmount.value) || 0;
+
+
+  if (!binanceAmount.value || amount <= 0) {
+    alert("Please enter your deposit amount.");
+    binanceAmount.focus();
+    return;
+  }
+
+
+  if (amount < 1) {
+    alert("Minimum deposit is $1.");
+    binanceAmount.focus();
+    return;
+  }
+
+
+  if (!binanceScreenshot.files.length) {
+    alert("Please upload your payment screenshot.");
+    return;
+  }
+
+
+  alert("All information is valid.");
+});
   
   
   </script>
