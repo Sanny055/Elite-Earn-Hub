@@ -9232,12 +9232,15 @@ submitBinanceDeposit.addEventListener("click", function () {
 
   depositSuccessOverlay.classList.remove("show");
 
-  const transactionHistory =
-    document.getElementById("transactionHistory");
+  const transactionHistoryPage =
+    document.getElementById("transactionHistoryPage");
 
-  if (transactionHistory) {
-    transactionHistory.scrollIntoView({
-      behavior: "smooth"
+  if (transactionHistoryPage) {
+    transactionHistoryPage.style.display = "block";
+
+    transactionHistoryPage.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
     });
   }
 
