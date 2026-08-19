@@ -311,6 +311,144 @@ footer div:last-child{
   }
 
 
+  /* EASYPAISA DEPOSIT POPUP */
+
+.easypaisa-deposit-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.78);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.easypaisa-deposit-overlay.show {
+  display: flex;
+}
+
+.easypaisa-deposit-popup {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 26px 20px;
+  box-sizing: border-box;
+  border-radius: 22px;
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  color: #fff;
+}
+
+.easypaisa-deposit-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.easypaisa-deposit-icon {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 6px;
+}
+
+.easypaisa-deposit-popup h2 {
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+}
+
+.easypaisa-deposit-subtitle {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+  margin: 7px 0 20px;
+}
+
+.easypaisa-payment-details {
+  padding: 14px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.easypaisa-payment-label {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.easypaisa-payment-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 13px;
+}
+
+.easypaisa-payment-row span {
+  color: #b9c0cc;
+}
+
+.easypaisa-payment-row strong {
+  color: #fff;
+  text-align: right;
+}
+
+#copyEasyPaisaNumber {
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.easypaisa-calculation {
+  margin-bottom: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+}
+
+.easypaisa-calculation div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 13px;
+}
+
+.easypaisa-calculation span {
+  color: #b9c0cc;
+}
+
+.easypaisa-calculation strong {
+  color: #fff;
+}
+
+.easypaisa-submit-btn {
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  }
+
+  
   /* JAZZCASH DEPOSIT POPUP */
 
 .jazzcash-deposit-overlay {
@@ -9745,8 +9883,290 @@ submitJazzCashDeposit.addEventListener("click", function () {
 });
   
 
+
+
+  // ==========================================
+// EASYPAISA DEPOSIT - COMPLETE JAVASCRIPT
+// ==========================================
+
+// ---------- ELEMENTS ----------
+
+const easypaisaDepositOverlay =
+  document.getElementById("easypaisaDepositOverlay");
+
+const easypaisaDepositClose =
+  document.getElementById("easypaisaDepositClose");
+
+const easypaisaAmount =
+  document.getElementById("easypaisaAmount");
+
+const easypaisaFee =
+  document.getElementById("easypaisaFee");
+
+const easypaisaYouPay =
+  document.getElementById("easypaisaYouPay");
+
+const easypaisaYouReceive =
+  document.getElementById("easypaisaYouReceive");
+
+const easypaisaScreenshot =
+  document.getElementById("easypaisaScreenshot");
+
+const submitEasyPaisaDeposit =
+  document.getElementById("submitEasyPaisaDeposit");
+
+const copyEasyPaisaNumber =
+  document.getElementById("copyEasyPaisaNumber");
+
+const easypaisaNumber =
+  document.getElementById("easypaisaNumber");
+
+
+// ---------- OPEN EASYPAISA POPUP ----------
+
+const easypaisaDepositButton =
+  document.querySelector(
+    '.new-deposit-method[data-method="easypaisa"]'
+  );
+
+if (easypaisaDepositButton) {
+
+  easypaisaDepositButton.addEventListener(
+    "click",
+    function () {
+
+      newDepositOverlay.classList.remove("show");
+
+      easypaisaDepositOverlay.classList.add("show");
+
+    }
+  );
+
+}
+
+
+// ---------- CLOSE EASYPAISA POPUP ----------
+
+if (easypaisaDepositClose) {
+
+  easypaisaDepositClose.addEventListener(
+    "click",
+    function () {
+
+      easypaisaDepositOverlay.classList.remove("show");
+
+    }
+  );
+
+}
+
+
+// ---------- CALCULATION ----------
+
+if (easypaisaAmount) {
+
+  easypaisaAmount.addEventListener(
+    "input",
+    function () {
+
+      const amount =
+        parseFloat(easypaisaAmount.value) || 0;
+
+      // 10% transaction fee
+      const fee =
+        amount * 0.10;
+
+      const youPay =
+        amount + fee;
+
+      // 280 PKR = 67.5 SNX
+      const youReceive =
+        amount * (67.5 / 280);
+
+
+      easypaisaFee.textContent =
+        "PKR " + fee.toFixed(2);
+
+      easypaisaYouPay.textContent =
+        "PKR " + youPay.toFixed(2);
+
+      easypaisaYouReceive.textContent =
+        youReceive.toFixed(2);
+
+    }
+  );
+
+}
+
+
+// ---------- COPY EASYPAISA NUMBER ----------
+
+if (copyEasyPaisaNumber) {
+
+  copyEasyPaisaNumber.addEventListener(
+    "click",
+    function () {
+
+      const number =
+        easypaisaNumber.textContent.trim();
+
+      navigator.clipboard.writeText(number)
+        .then(function () {
+
+          copyEasyPaisaNumber.textContent =
+            "✅ Copied";
+
+          setTimeout(function () {
+
+            copyEasyPaisaNumber.textContent =
+              "📋 Copy Number";
+
+          }, 1500);
+
+        })
+        .catch(function () {
+
+          alert("Unable to copy number.");
+
+        });
+
+    }
+  );
+
+}
+
+
+// ---------- SUBMIT EASYPAISA DEPOSIT ----------
+
+if (submitEasyPaisaDeposit) {
+
+  submitEasyPaisaDeposit.addEventListener(
+    "click",
+    function () {
+
+      const amount =
+        parseFloat(easypaisaAmount.value) || 0;
+
+
+      // Amount empty
+      if (
+        !easypaisaAmount.value ||
+        amount <= 0
+      ) {
+
+        alert(
+          "Please enter your deposit amount."
+        );
+
+        easypaisaAmount.focus();
+
+        return;
+      }
+
+
+      // Minimum 280 PKR
+      if (amount < 280) {
+
+        alert(
+          "Minimum deposit is 280 PKR."
+        );
+
+        easypaisaAmount.focus();
+
+        return;
+      }
+
+
+      // Screenshot required
+      if (
+        !easypaisaScreenshot.files.length
+      ) {
+
+        alert(
+          "Please upload your payment screenshot."
+        );
+
+        return;
+      }
+
+
+      // ---------- RESET FORM ----------
+
+      easypaisaAmount.value = "";
+
+      easypaisaScreenshot.value = "";
+
+      easypaisaFee.textContent =
+        "PKR 0.00";
+
+      easypaisaYouPay.textContent =
+        "PKR 0.00";
+
+      easypaisaYouReceive.textContent =
+        "0.00";
+
+
+      // ---------- CLOSE EASYPAISA POPUP ----------
+
+      easypaisaDepositOverlay.classList.remove(
+        "show"
+      );
+
+
+      // ---------- OPEN SUCCESS POPUP ----------
+
+      if (depositSuccessOverlay) {
+
+        depositSuccessOverlay.classList.add(
+          "show"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+// ---------- TRANSACTION HISTORY ----------
+
+if (checkTransactionHistory) {
+
+  checkTransactionHistory.addEventListener(
+    "click",
+    function () {
+
+      depositSuccessOverlay.classList.remove(
+        "show"
+      );
+
+      const transactionHistoryPage =
+        document.getElementById(
+          "transactionHistoryPage"
+        );
+
+      if (transactionHistoryPage) {
+
+        transactionHistoryPage.style.display =
+          "block";
+
+        transactionHistoryPage.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    }
+  );
+
+}
   
-      </script>
+    
+  
+  
+  </script>
  
   <footer style="
     text-align:center;
