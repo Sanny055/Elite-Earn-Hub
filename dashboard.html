@@ -9534,6 +9534,47 @@ jazzcashDepositClose.addEventListener("click", function () {
 
 
 
+  const jazzcashAmount =
+  document.getElementById("jazzcashAmount");
+
+const jazzcashFee =
+  document.getElementById("jazzcashFee");
+
+const jazzcashYouPay =
+  document.getElementById("jazzcashYouPay");
+
+const jazzcashYouReceive =
+  document.getElementById("jazzcashYouReceive");
+
+
+jazzcashAmount.addEventListener("input", function () {
+
+  const amount =
+    parseFloat(jazzcashAmount.value) || 0;
+
+  // 10% transaction fee
+  const fee =
+    amount * 0.10;
+
+  const youPay =
+    amount + fee;
+
+  // 280 PKR = 67.5 SNX
+  const youReceive =
+    amount * (67.5 / 280);
+
+
+  jazzcashFee.textContent =
+    "PKR " + fee.toFixed(2);
+
+  jazzcashYouPay.textContent =
+    "PKR " + youPay.toFixed(2);
+
+  jazzcashYouReceive.textContent =
+    youReceive.toFixed(2);
+
+});
+
   
   
 
