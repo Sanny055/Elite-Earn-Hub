@@ -9575,7 +9575,56 @@ jazzcashAmount.addEventListener("input", function () {
 
 });
 
+
   
+    
+    const submitJazzCashDeposit =
+  document.getElementById("submitJazzCashDeposit");
+
+const jazzcashScreenshot =
+  document.getElementById("jazzcashScreenshot");
+
+
+submitJazzCashDeposit.addEventListener("click", function () {
+
+  const amount =
+    parseFloat(jazzcashAmount.value) || 0;
+
+  // Amount empty
+  if (!jazzcashAmount.value || amount <= 0) {
+    alert("Please enter your deposit amount.");
+    jazzcashAmount.focus();
+    return;
+  }
+
+  // Minimum 280 PKR
+  if (amount < 280) {
+    alert("Minimum deposit is 280 PKR.");
+    jazzcashAmount.focus();
+    return;
+  }
+
+  // Screenshot required
+  if (!jazzcashScreenshot.files.length) {
+    alert("Please upload your payment screenshot.");
+    return;
+  }
+
+  // Reset form
+  jazzcashAmount.value = "";
+  jazzcashScreenshot.value = "";
+
+  jazzcashFee.textContent = "PKR 0.00";
+  jazzcashYouPay.textContent = "PKR 0.00";
+  jazzcashYouReceive.textContent = "0.00";
+
+  // Close JazzCash popup
+  jazzcashDepositOverlay.classList.remove("show");
+
+  // Open existing success popup
+  depositSuccessOverlay.classList.add("show");
+
+});
   
 
   
