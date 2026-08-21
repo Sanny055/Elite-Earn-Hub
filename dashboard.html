@@ -8584,22 +8584,29 @@ document
 
 // ===== PROFILE BUTTON =====
 
-document
-.getElementById("profileBtn")
-.addEventListener("click", () => {
 
-    // Profile page show
-    const profilePage = document.getElementById("profilePage");
+document
+  .getElementById("profileBtn")
+  .addEventListener("click", () => {
+
+    const profilePage =
+      document.getElementById("profilePage");
 
     if (profilePage) {
-        profilePage.style.display = "block";
+      profilePage.style.display = "block";
     }
 
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
 
-});
+  });
 
 
-document
+
+    
+    document
 .getElementById("withdrawalBtn")
 .addEventListener("click", () => {
   document.getElementById("withdrawalSection").scrollIntoView({
