@@ -587,7 +587,169 @@ footer div:last-child{
 }
  
   
-    
+   /* ============================= */
+/* PREMIUM ACTIVITY STATS */
+/* ============================= */
+
+.premium-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: 100%;
+  margin: 22px 0 32px;
+}
+
+.premium-stat-card {
+  position: relative;
+  min-width: 0;
+  padding: 18px 10px 16px;
+  text-align: center;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17, 42, 63, 0.96),
+      rgba(7, 22, 36, 0.98)
+    );
+  border: 1px solid rgba(67, 170, 230, 0.22);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.premium-stat-card::before {
+  content: "";
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  top: -42px;
+  right: -32px;
+  border-radius: 50%;
+  background: rgba(50, 180, 255, 0.08);
+  pointer-events: none;
+}
+
+.premium-stat-icon {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 21px;
+}
+
+.premium-stat-number {
+  position: relative;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #38bdf8;
+  margin-bottom: 7px;
+}
+
+.premium-stat-title {
+  position: relative;
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.premium-stat-status {
+  position: relative;
+  margin-top: 7px;
+  font-size: 10px;
+  line-height: 1.25;
+  color: #8fa6b8;
+}
+
+
+/* COMPLETED */
+
+.completed-card {
+  border-color: rgba(34, 197, 94, 0.24);
+}
+
+.completed-card .premium-stat-icon {
+  background: rgba(34, 197, 94, 0.10);
+}
+
+.completed-card .premium-stat-number {
+  color: #4ade80;
+}
+
+
+/* REJECTED */
+
+.rejected-card {
+  border-color: rgba(244, 63, 94, 0.24);
+}
+
+.rejected-card .premium-stat-icon {
+  background: rgba(244, 63, 94, 0.10);
+}
+
+.rejected-card .premium-stat-number {
+  color: #fb7185;
+}
+
+
+/* WITHDRAWALS */
+
+.withdrawal-card {
+  border-color: rgba(251, 191, 36, 0.24);
+}
+
+.withdrawal-card .premium-stat-icon {
+  background: rgba(251, 191, 36, 0.10);
+}
+
+.withdrawal-card .premium-stat-number {
+  color: #fbbf24;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+  .premium-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .premium-stat-card {
+    padding: 15px 6px 13px;
+    border-radius: 17px;
+  }
+
+  .premium-stat-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 7px;
+    border-radius: 11px;
+    font-size: 18px;
+  }
+
+  .premium-stat-number {
+    font-size: 25px;
+  }
+
+  .premium-stat-title {
+    font-size: 11px;
+  }
+
+  .premium-stat-status {
+    font-size: 8px;
+  }
+  
+
+  
   /* NEW DEPOSIT POPUP */
 
 .new-deposit-overlay {
