@@ -10950,7 +10950,268 @@ if (checkTransactionHistory) {
 
 }
   
-    
+
+
+
+  // ==========================================
+// PROFILE PAGE + EDIT PROFILE JAVASCRIPT
+// ==========================================
+
+// ---------- ELEMENTS ----------
+
+const profilePage =
+  document.getElementById("profilePage");
+
+const editProfileOverlay =
+  document.getElementById("editProfileOverlay");
+
+const editProfileBtn =
+  document.getElementById("editProfileBtn");
+
+const editProfileClose =
+  document.getElementById("editProfileClose");
+
+const profileBackBtn =
+  document.getElementById("profileBackBtn");
+
+const saveProfileChanges =
+  document.getElementById("saveProfileChanges");
+
+
+// ---------- PROFILE BUTTON ----------
+// Agar tumhare Profile button ka ID different hai,
+// yahan "profileBtn" ko apne actual ID se replace karna.
+
+const profileBtn =
+  document.getElementById("profileBtn");
+
+
+if (profileBtn) {
+
+  profileBtn.addEventListener("click", function () {
+
+    // Dashboard hide
+    if (typeof dashboardPage !== "undefined" &&
+        dashboardPage) {
+
+      dashboardPage.style.display = "none";
+
+    }
+
+    // Profile page show
+    if (profilePage) {
+
+      profilePage.style.display = "block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+  });
+
+}
+
+
+// ---------- BACK TO DASHBOARD ----------
+
+if (profileBackBtn) {
+
+  profileBackBtn.addEventListener(
+    "click",
+    function () {
+
+      if (profilePage) {
+
+        profilePage.style.display = "none";
+
+      }
+
+      if (typeof dashboardPage !== "undefined" &&
+          dashboardPage) {
+
+        dashboardPage.style.display = "block";
+
+      }
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  );
+
+}
+
+
+// ---------- OPEN EDIT PROFILE ----------
+
+if (editProfileBtn) {
+
+  editProfileBtn.addEventListener(
+    "click",
+    function () {
+
+      editProfileOverlay.classList.add("show");
+
+    }
+  );
+
+}
+
+
+// ---------- CLOSE EDIT PROFILE ----------
+
+if (editProfileClose) {
+
+  editProfileClose.addEventListener(
+    "click",
+    function () {
+
+      editProfileOverlay.classList.remove("show");
+
+    }
+  );
+
+}
+
+
+// ---------- SAVE PROFILE CHANGES ----------
+
+if (saveProfileChanges) {
+
+  saveProfileChanges.addEventListener(
+    "click",
+    function () {
+
+      const fullName =
+        document.getElementById("editFullName").value.trim();
+
+      const username =
+        document.getElementById("editUsername").value.trim();
+
+      const email =
+        document.getElementById("editEmail").value.trim();
+
+      const mobile =
+        document.getElementById("editMobile").value.trim();
+
+
+      // Basic validation
+      if (!fullName) {
+
+        alert("Please enter your full name.");
+
+        return;
+
+      }
+
+
+      if (!username) {
+
+        alert("Please enter your username.");
+
+        return;
+
+      }
+
+
+      if (!email) {
+
+        alert("Please enter your email.");
+
+        return;
+
+      }
+
+
+      // Mobile optional
+      // Isliye mobile empty ho to koi error nahi.
+
+
+      // ---------- UPDATE PROFILE PREVIEW ----------
+
+      const profileName =
+        document.getElementById("profileName");
+
+      const profileUsername =
+        document.getElementById("profileUsername");
+
+      const profileFullName =
+        document.getElementById("profileFullName");
+
+      const profileEmail =
+        document.getElementById("profileEmail");
+
+
+      if (profileName) {
+
+        profileName.textContent =
+          fullName;
+
+      }
+
+
+      if (profileUsername) {
+
+        profileUsername.textContent =
+          "@" + username;
+
+      }
+
+
+      if (profileFullName) {
+
+        profileFullName.textContent =
+          fullName;
+
+      }
+
+
+      if (profileEmail) {
+
+        profileEmail.textContent =
+          email;
+
+      }
+
+
+      // ---------- CLOSE POPUP ----------
+
+      editProfileOverlay.classList.remove("show");
+
+
+      // ---------- SUCCESS MESSAGE ----------
+
+      alert("Save successful.");
+
+    }
+  );
+
+}
+
+
+// ---------- CLOSE POPUP BY CLICKING OUTSIDE ----------
+
+if (editProfileOverlay) {
+
+  editProfileOverlay.addEventListener(
+    "click",
+    function (event) {
+
+      if (event.target === editProfileOverlay) {
+
+        editProfileOverlay.classList.remove("show");
+
+      }
+
+    }
+  );
+
+}
   
   
   </script>
