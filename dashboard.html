@@ -6319,6 +6319,12 @@ footer strong{
     </div>
 
 
+
+
+
+
+        
+
     <div class="menu-card" id="pinTaskBtn">
       <div class="menu-icon">📌</div>
       <div class="menu-name">Pin Task</div>
@@ -6345,7 +6351,245 @@ footer strong{
       </div>
     </div>
 
-    
+
+<!-- ================= PROFILE PAGE ================= -->
+
+<section id="profilePage" class="profile-page">
+
+  <!-- PROFILE PAGE HEADER -->
+  <div class="profile-page-header">
+
+    <button
+      type="button"
+      id="profileBackBtn"
+      class="profile-back-btn">
+      ← Back
+    </button>
+
+    <div>
+      <h1>My Profile</h1>
+      <p>Manage your profile information</p>
+    </div>
+
+  </div>
+
+
+  <!-- PROFILE HEADER CARD -->
+  <div class="profile-header-card">
+
+    <div class="profile-avatar" id="profileAvatar">
+      👤
+    </div>
+
+    <div class="profile-header-info">
+
+      <h2 id="profileName">
+        Username
+      </h2>
+
+      <p id="profileUsername">
+        @username
+      </p>
+
+      <span class="profile-status">
+        🟢 Active
+      </span>
+
+    </div>
+
+    <!-- EDIT BUTTON -->
+    <button
+      type="button"
+      id="editProfileBtn"
+      class="edit-profile-btn">
+      ✏️ Edit Profile
+    </button>
+
+  </div>
+
+
+  <!-- ACCOUNT INFORMATION -->
+  <div class="profile-section-card">
+
+    <div class="profile-section-title">
+      👤 Account Information
+    </div>
+
+    <div class="profile-info-row">
+
+      <span>Full Name</span>
+
+      <strong id="profileFullName">
+        Not Set
+      </strong>
+
+    </div>
+
+
+    <div class="profile-info-row">
+
+      <span>Email</span>
+
+      <strong id="profileEmail">
+        Not Set
+      </strong>
+
+    </div>
+
+
+    <div class="profile-info-row">
+
+      <span>User ID</span>
+
+      <strong id="profileUserId">
+        #000000
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- SECURITY -->
+  <div class="profile-section-card">
+
+    <div class="profile-section-title">
+      🔐 Security
+    </div>
+
+
+    <button
+      type="button"
+      id="changePasswordBtn"
+      class="security-btn">
+      🔑 Change Password
+    </button>
+
+
+    <button
+      type="button"
+      id="securitySettingsBtn"
+      class="security-btn">
+      🛡️ Security Settings
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= EDIT PROFILE POPUP ================= -->
+
+<div
+  id="editProfileOverlay"
+  class="edit-profile-overlay">
+
+  <div class="edit-profile-popup">
+
+    <!-- CLOSE -->
+    <button
+      type="button"
+      id="editProfileClose"
+      class="edit-profile-close">
+      ×
+    </button>
+
+
+    <div class="edit-profile-icon">
+      ✏️
+    </div>
+
+
+    <h2>
+      Edit Profile
+    </h2>
+
+
+    <p class="edit-profile-subtitle">
+      Update your account information
+    </p>
+
+
+    <!-- FULL NAME -->
+    <div class="edit-profile-field">
+
+      <label for="editFullName">
+        Full Name
+      </label>
+
+      <input
+        type="text"
+        id="editFullName"
+        placeholder="Enter your full name"
+      >
+
+    </div>
+
+
+    <!-- USERNAME -->
+    <div class="edit-profile-field">
+
+      <label for="editUsername">
+        Username
+      </label>
+
+      <input
+        type="text"
+        id="editUsername"
+        placeholder="Enter username"
+      >
+
+    </div>
+
+
+    <!-- EMAIL -->
+    <div class="edit-profile-field">
+
+      <label for="editEmail">
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="editEmail"
+        placeholder="Enter your email"
+      >
+
+    </div>
+
+
+    <!-- MOBILE -->
+    <div class="edit-profile-field">
+
+      <label for="editMobile">
+        Mobile Number
+        <span>(Optional)</span>
+      </label>
+
+      <input
+        type="tel"
+        id="editMobile"
+        placeholder="Enter mobile number"
+      >
+
+    </div>
+
+
+    <!-- SAVE -->
+    <button
+      type="button"
+      id="saveProfileChanges"
+      class="save-profile-btn">
+      💾 Save Changes
+    </button>
+
+  </div>
+
+      </div>
+
+
+        
  
     <div class="menu-card" id="leaderboardMenuBtn">
       <div class="menu-icon">🏆</div>
