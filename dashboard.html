@@ -311,7 +311,69 @@ footer div:last-child{
   }
 
 
+/* ============================= */
+/* BLANK PROFILE PAGE */
+/* ============================= */
 
+.profile-page {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 20px 16px 40px;
+  background: transparent;
+}
+
+.profile-page-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 20px;
+}
+
+.profile-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.profile-page-header h1 {
+  margin: 0;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.profile-page-header p {
+  margin: 4px 0 0;
+  color: #8fa6b8;
+  font-size: 12px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+  .profile-page {
+    padding: 16px 12px 30px;
+  }
+
+  .profile-page-header h1 {
+    font-size: 21px;
+  }
+
+  }
 
   
   
