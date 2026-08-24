@@ -11137,6 +11137,35 @@ if (youtubeSubscribeBtn) {
 }
 
 
+
+    // =========================================
+// SUBSCRIBE BUTTON CONNECTION
+// =========================================
+
+const youtubeSubscribeBtn =
+  document.getElementById("youtubeSubscribeBtn");
+
+if (youtubeSubscribeBtn) {
+
+  youtubeSubscribeBtn.addEventListener(
+    "click",
+    function () {
+
+      // Close YouTube Tasks popup
+      const youtubeTaskPopup =
+        document.getElementById("youtubeTaskPopup");
+
+      if (youtubeTaskPopup) {
+        youtubeTaskPopup.style.display = "none";
+      }
+
+      // Open Subscribe popup
+      openSubscribeTaskPopup();
+
+    }
+  );
+
+}
   
   
   
