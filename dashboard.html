@@ -10822,6 +10822,342 @@ if (checkTransactionHistory) {
 }
 
 
+
+
+
+      // =========================================
+// YOUTUBE SUBSCRIBE TASK - COMPLETE JAVASCRIPT
+// =========================================
+
+// ---------- MAIN ELEMENTS ----------
+
+const youtubeSubscribeBtn =
+  document.getElementById("youtubeSubscribeBtn");
+
+const youtubeTaskPopup =
+  document.getElementById("youtubeTaskPopup");
+
+const subscribeTaskOverlay =
+  document.getElementById("subscribeTaskOverlay");
+
+const closeSubscribeTask =
+  document.getElementById("closeSubscribeTask");
+
+const subscribeTaskSuccessOverlay =
+  document.getElementById("subscribeTaskSuccessOverlay");
+
+const closeSubscribeSuccess =
+  document.getElementById("closeSubscribeSuccess");
+
+
+// ---------- FORM ELEMENTS ----------
+
+const subscribeChannelName =
+  document.getElementById("subscribeChannelName");
+
+const subscribeChannelLink =
+  document.getElementById("subscribeChannelLink");
+
+const subscribeSenaxAmount =
+  document.getElementById("subscribeSenaxAmount");
+
+const subscribeEstimatedSubscribers =
+  document.getElementById("subscribeEstimatedSubscribers");
+
+const subscribeRewardCost =
+  document.getElementById("subscribeRewardCost");
+
+const subscribePlatformFee =
+  document.getElementById("subscribePlatformFee");
+
+const subscribeTotalCost =
+  document.getElementById("subscribeTotalCost");
+
+const submitSubscribeTask =
+  document.getElementById("submitSubscribeTask");
+
+
+// =========================================
+// OPEN SUBSCRIBE POPUP
+// =========================================
+
+if (youtubeSubscribeBtn && subscribeTaskOverlay) {
+
+  youtubeSubscribeBtn.addEventListener("click", function () {
+
+    // Close main YouTube Tasks popup
+    if (youtubeTaskPopup) {
+      youtubeTaskPopup.style.display = "none";
+    }
+
+    // Open Subscribe popup
+    subscribeTaskOverlay.style.display = "flex";
+
+  });
+
+}
+
+
+// =========================================
+// CLOSE SUBSCRIBE POPUP
+// =========================================
+
+if (closeSubscribeTask && subscribeTaskOverlay) {
+
+  closeSubscribeTask.addEventListener("click", function () {
+
+    subscribeTaskOverlay.style.display = "none";
+
+  });
+
+}
+
+
+// =========================================
+// CLOSE SUBSCRIBE POPUP
+// CLICK OUTSIDE
+// =========================================
+
+if (subscribeTaskOverlay) {
+
+  subscribeTaskOverlay.addEventListener("click", function (event) {
+
+    if (event.target === subscribeTaskOverlay) {
+
+      subscribeTaskOverlay.style.display = "none";
+
+    }
+
+  });
+
+}
+
+
+// =========================================
+// AUTOMATIC SENAX CALCULATION
+// =========================================
+
+if (subscribeSenaxAmount) {
+
+  subscribeSenaxAmount.addEventListener("input", function () {
+
+    const amount =
+      parseFloat(this.value) || 0;
+
+    // 1 Senax = 1 Subscriber
+    const subscribers =
+      Math.floor(amount);
+
+    // Reward = 0.3 Senax per subscriber
+    const reward =
+      subscribers * 0.3;
+
+    // Platform Fee = 0.7 Senax per subscriber
+    const fee =
+      subscribers * 0.7;
+
+    // Total = 1 Senax per subscriber
+    const total =
+      subscribers * 1;
+
+
+    // Subscribers
+    if (subscribeEstimatedSubscribers) {
+
+      subscribeEstimatedSubscribers.textContent =
+        subscribers;
+
+    }
+
+
+    // Reward Cost
+    if (subscribeRewardCost) {
+
+      subscribeRewardCost.textContent =
+        reward.toFixed(2) + " Senax";
+
+    }
+
+
+    // Platform Fee
+    if (subscribePlatformFee) {
+
+      subscribePlatformFee.textContent =
+        fee.toFixed(2) + " Senax";
+
+    }
+
+
+    // Total Cost
+    if (subscribeTotalCost) {
+
+      subscribeTotalCost.textContent =
+        total.toFixed(2) + " Senax";
+
+    }
+
+  });
+
+}
+
+
+// =========================================
+// SUBMIT SUBSCRIBE TASK
+// =========================================
+
+if (submitSubscribeTask) {
+
+  submitSubscribeTask.addEventListener("click", function () {
+
+    // Get values
+    const channelName =
+      subscribeChannelName
+        ? subscribeChannelName.value.trim()
+        : "";
+
+    const channelLink =
+      subscribeChannelLink
+        ? subscribeChannelLink.value.trim()
+        : "";
+
+    const amount =
+      subscribeSenaxAmount
+        ? parseFloat(subscribeSenaxAmount.value) || 0
+        : 0;
+
+
+    // ---------- VALIDATION ----------
+
+    if (!channelName) {
+
+      alert("Please enter the YouTube channel name.");
+
+      return;
+
+    }
+
+
+    if (!channelLink) {
+
+      alert("Please enter the YouTube channel link.");
+
+      return;
+
+    }
+
+
+    if (amount < 1) {
+
+      alert("Minimum task amount is 1 Senax.");
+
+      return;
+
+    }
+
+
+    // ---------- CLOSE FORM POPUP ----------
+
+    if (subscribeTaskOverlay) {
+
+      subscribeTaskOverlay.style.display = "none";
+
+    }
+
+
+    // ---------- OPEN SUCCESS POPUP ----------
+
+    if (subscribeTaskSuccessOverlay) {
+
+      subscribeTaskSuccessOverlay.style.display = "flex";
+
+    }
+
+
+    // ---------- RESET FORM ----------
+
+    if (subscribeChannelName) {
+
+      subscribeChannelName.value = "";
+
+    }
+
+    if (subscribeChannelLink) {
+
+      subscribeChannelLink.value = "";
+
+    }
+
+    if (subscribeSenaxAmount) {
+
+      subscribeSenaxAmount.value = "";
+
+    }
+
+    if (subscribeEstimatedSubscribers) {
+
+      subscribeEstimatedSubscribers.textContent = "0";
+
+    }
+
+    if (subscribeRewardCost) {
+
+      subscribeRewardCost.textContent = "0.00 Senax";
+
+    }
+
+    if (subscribePlatformFee) {
+
+      subscribePlatformFee.textContent = "0.00 Senax";
+
+    }
+
+    if (subscribeTotalCost) {
+
+      subscribeTotalCost.textContent = "0.00 Senax";
+
+    }
+
+  });
+
+}
+
+
+// =========================================
+// SUCCESS POPUP - DONE BUTTON
+// =========================================
+
+if (closeSubscribeSuccess && subscribeTaskSuccessOverlay) {
+
+  closeSubscribeSuccess.addEventListener("click", function () {
+
+    subscribeTaskSuccessOverlay.style.display = "none";
+
+  });
+
+}
+
+
+// =========================================
+// SUCCESS POPUP - CLICK OUTSIDE
+// =========================================
+
+if (subscribeTaskSuccessOverlay) {
+
+  subscribeTaskSuccessOverlay.addEventListener(
+    "click",
+    function (event) {
+
+      if (event.target === subscribeTaskSuccessOverlay) {
+
+        subscribeTaskSuccessOverlay.style.display = "none";
+
+      }
+
+    }
+  );
+
+}
+
     
   
   
