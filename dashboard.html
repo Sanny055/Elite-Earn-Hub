@@ -6729,6 +6729,189 @@ footer strong{
 </div>
 
 
+<!-- ========================================= -->
+<!-- YOUTUBE SUBSCRIBE TASK POPUP -->
+<!-- ========================================= -->
+
+<div id="subscribeTaskOverlay" class="subscribe-task-overlay">
+
+  <div class="subscribe-task-popup">
+
+    <!-- CLOSE -->
+    <button
+      type="button"
+      id="closeSubscribeTask"
+      class="subscribe-task-close">
+      ×
+    </button>
+
+
+    <!-- HEADER -->
+    <div class="subscribe-task-header">
+
+      <div class="subscribe-task-icon">
+        ▶
+      </div>
+
+      <div>
+        <h2>YouTube Subscribe Task</h2>
+        <p>Create a subscriber task</p>
+      </div>
+
+    </div>
+
+
+    <!-- CHANNEL NAME -->
+    <div class="subscribe-task-field">
+
+      <label for="subscribeChannelName">
+        YouTube Channel Name
+      </label>
+
+      <input
+        type="text"
+        id="subscribeChannelName"
+        placeholder="Enter channel name"
+      >
+
+    </div>
+
+
+    <!-- CHANNEL LINK -->
+    <div class="subscribe-task-field">
+
+      <label for="subscribeChannelLink">
+        Channel Link
+      </label>
+
+      <input
+        type="url"
+        id="subscribeChannelLink"
+        placeholder="https://youtube.com/..."
+      >
+
+    </div>
+
+
+    <!-- REWARD INFO -->
+    <div class="subscribe-task-pricing">
+
+      <div class="subscribe-price-row">
+        <span>Reward per Subscriber</span>
+        <strong>0.3 Senax</strong>
+      </div>
+
+      <div class="subscribe-price-row">
+        <span>Platform Fee</span>
+        <strong>0.7 Senax</strong>
+      </div>
+
+      <div class="subscribe-price-row total">
+        <span>Total Cost / Subscriber</span>
+        <strong>1.0 Senax</strong>
+      </div>
+
+    </div>
+
+
+    <!-- SENAX AMOUNT -->
+    <div class="subscribe-task-field">
+
+      <label for="subscribeSenaxAmount">
+        Senax to Add
+      </label>
+
+      <input
+        type="number"
+        id="subscribeSenaxAmount"
+        min="1"
+        step="0.01"
+        placeholder="Enter Senax amount"
+      >
+
+    </div>
+
+
+    <!-- AUTOMATIC CALCULATION -->
+    <div class="subscribe-calculation-box">
+
+      <div class="subscribe-calc-row">
+        <span>Subscribers You'll Get</span>
+        <strong id="subscribeEstimatedSubscribers">
+          0
+        </strong>
+      </div>
+
+      <div class="subscribe-calc-row">
+        <span>Reward Cost</span>
+        <strong id="subscribeRewardCost">
+          0.00 Senax
+        </strong>
+      </div>
+
+      <div class="subscribe-calc-row">
+        <span>Platform Fee</span>
+        <strong id="subscribePlatformFee">
+          0.00 Senax
+        </strong>
+      </div>
+
+      <div class="subscribe-calc-row final">
+        <span>Total Task Cost</span>
+        <strong id="subscribeTotalCost">
+          0.00 Senax
+        </strong>
+      </div>
+
+    </div>
+
+
+    <!-- SUBMIT -->
+    <button
+      type="button"
+      id="submitSubscribeTask"
+      class="submit-subscribe-task-btn">
+      Submit Subscribe Task
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- TASK SUBMITTED SUCCESS POPUP -->
+<!-- ========================================= -->
+
+<div
+  id="subscribeTaskSuccessOverlay"
+  class="subscribe-task-success-overlay">
+
+  <div class="subscribe-task-success-popup">
+
+    <div class="subscribe-success-icon">
+      ✓
+    </div>
+
+    <h2>Task Submitted Successfully</h2>
+
+    <p>
+      Your YouTube Subscribe task has been
+      submitted for admin approval.
+    </p>
+
+    <button
+      type="button"
+      id="closeSubscribeSuccess"
+      class="subscribe-success-btn">
+      Done
+    </button>
+
+  </div>
+
+</div>
+
+  
 
   
   <!-- SNX STAKING — COMING SOON -->
