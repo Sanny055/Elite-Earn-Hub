@@ -11126,6 +11126,31 @@ if (subscribeBtn) {
 
 }
 
+
+    // =========================================
+// OPEN YOUTUBE SUBSCRIBE TASK POPUP
+// =========================================
+
+const youtubeSubscribeBtn =
+  document.getElementById("youtubeSubscribeBtn");
+
+if (youtubeSubscribeBtn) {
+
+  youtubeSubscribeBtn.addEventListener("click", function () {
+
+    const subscribeTaskOverlay =
+      document.getElementById("subscribeTaskOverlay");
+
+    if (subscribeTaskOverlay) {
+      subscribeTaskOverlay.style.display = "flex";
+    }
+
+  });
+
+}
+
+
+  
   
   
   </script>
