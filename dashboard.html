@@ -11106,6 +11106,26 @@ if (subscribeSuccessOverlay) {
 }
 
 
+    // ===== OPEN SUBSCRIBE TASK POPUP =====
+
+const subscribeBtn =
+  document.getElementById("subscribeBtn");
+
+if (subscribeBtn) {
+
+  subscribeBtn.addEventListener("click", function () {
+
+    const popup =
+      document.getElementById("subscribeTaskOverlay");
+
+    if (popup) {
+      popup.style.display = "flex";
+    }
+
+  });
+
+}
+
   
   
   </script>
