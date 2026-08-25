@@ -10823,7 +10823,35 @@ if (checkTransactionHistory) {
 
 
 
+// =========================================
+// STEP 1 — SUBSCRIBE POPUP OPEN
+// =========================================
 
+const youtubeSubscribeBtn =
+  document.getElementById("youtubeSubscribeBtn");
+
+const subscribeTaskOverlay =
+  document.getElementById("subscribeTaskOverlay");
+
+const youtubeTaskPopup =
+  document.getElementById("youtubeTaskPopup");
+
+
+if (youtubeSubscribeBtn && subscribeTaskOverlay) {
+
+  youtubeSubscribeBtn.addEventListener("click", function () {
+
+    // Close YouTube Tasks popup
+    if (youtubeTaskPopup) {
+      youtubeTaskPopup.style.display = "none";
+    }
+
+    // Open Subscribe popup
+    subscribeTaskOverlay.style.display = "flex";
+
+  });
+
+    }
 
       
     
