@@ -11030,6 +11030,64 @@ if (youtubeSubscribeBtn && subscribeTaskOverlay) {
 
 
 
+    // ================= EDIT PROFILE POPUP =================
+
+document
+  .getElementById("editProfileBtn")
+  .addEventListener("click", () => {
+
+    const modal =
+      document.getElementById("editProfileModal");
+
+    if (modal) {
+      modal.style.display = "flex";
+    }
+
+  });
+
+
+// CLOSE WITH X BUTTON
+
+document
+  .getElementById("closeEditProfileBtn")
+  .addEventListener("click", () => {
+
+    const modal =
+      document.getElementById("editProfileModal");
+
+    if (modal) {
+      modal.style.display = "none";
+    }
+
+  });
+
+
+// CLOSE WITH CANCEL BUTTON
+
+document
+  .getElementById("cancelEditProfileBtn")
+  .addEventListener("click", () => {
+
+    const modal =
+      document.getElementById("editProfileModal");
+
+    if (modal) {
+      modal.style.display = "none";
+    }
+
+  });
+
+// ================= END EDIT PROFILE POPUP =================
+
+
+
+
+
+
+
+
+    
+
     
   
   </script>
