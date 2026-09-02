@@ -11080,7 +11080,45 @@ document
 // ================= END EDIT PROFILE POPUP =================
 
 
+// ================= SAVE PROFILE CHANGES =================
 
+document
+  .getElementById("saveProfileBtn")
+  .addEventListener("click", () => {
+
+    // Browser message
+    alert("Profile changes saved successfully!");
+
+    // Clear all fields
+    document.getElementById("editFullName").value = "";
+    document.getElementById("editUsername").value = "";
+    document.getElementById("editEmail").value = "";
+    document.getElementById("editPhone").value = "";
+
+    // Close Edit Profile popup
+    const modal =
+      document.getElementById("editProfileModal");
+
+    if (modal) {
+      modal.style.display = "none";
+    }
+
+    // Stay / return to Profile page
+    const profilePage =
+      document.getElementById("profilePage");
+
+    if (profilePage) {
+      profilePage.style.display = "block";
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  });
+
+// ================= END SAVE PROFILE CHANGES =================
 
 
 
