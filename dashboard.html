@@ -6696,7 +6696,238 @@ footer strong{
 
 <!-- ================= END PROFILE PAGE ================= -->
 
+<!-- ================= EDIT PROFILE POPUP ================= -->
 
+<div id="editProfileModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  z-index:100000;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+">
+
+  <div style="
+    width:100%;
+    max-width:480px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#0b1b2a;
+    border:1px solid rgba(56,189,248,0.20);
+    border-radius:20px;
+    padding:22px 18px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  ">
+
+    <!-- POPUP HEADER -->
+    <div style="
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:22px;
+    ">
+
+      <div>
+        <h2 style="
+          margin:0;
+          color:#fff;
+          font-size:21px;
+        ">
+          Edit Profile
+        </h2>
+
+        <p style="
+          margin:5px 0 0;
+          color:#7f93a6;
+          font-size:12px;
+        ">
+          Update your personal information
+        </p>
+      </div>
+
+      <button
+        type="button"
+        id="closeEditProfileBtn"
+        style="
+          width:36px;
+          height:36px;
+          border:none;
+          border-radius:50%;
+          background:#132536;
+          color:#fff;
+          font-size:20px;
+          cursor:pointer;
+        "
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- FULL NAME -->
+    <label style="
+      display:block;
+      color:#9ca3af;
+      font-size:12px;
+      margin-bottom:7px;
+    ">
+      Full Name
+    </label>
+
+    <input
+      type="text"
+      id="editFullName"
+      placeholder="Enter your full name"
+      style="
+        width:100%;
+        box-sizing:border-box;
+        padding:13px 14px;
+        margin-bottom:16px;
+        border:1px solid rgba(255,255,255,0.10);
+        border-radius:12px;
+        background:#071521;
+        color:#fff;
+        outline:none;
+        font-size:14px;
+      "
+    >
+
+
+    <!-- USERNAME -->
+    <label style="
+      display:block;
+      color:#9ca3af;
+      font-size:12px;
+      margin-bottom:7px;
+    ">
+      Username
+    </label>
+
+    <input
+      type="text"
+      id="editUsername"
+      placeholder="Enter username"
+      style="
+        width:100%;
+        box-sizing:border-box;
+        padding:13px 14px;
+        margin-bottom:16px;
+        border:1px solid rgba(255,255,255,0.10);
+        border-radius:12px;
+        background:#071521;
+        color:#fff;
+        outline:none;
+        font-size:14px;
+      "
+    >
+
+
+    <!-- EMAIL -->
+    <label style="
+      display:block;
+      color:#9ca3af;
+      font-size:12px;
+      margin-bottom:7px;
+    ">
+      Email Address
+    </label>
+
+    <input
+      type="email"
+      id="editEmail"
+      placeholder="Enter email address"
+      style="
+        width:100%;
+        box-sizing:border-box;
+        padding:13px 14px;
+        margin-bottom:16px;
+        border:1px solid rgba(255,255,255,0.10);
+        border-radius:12px;
+        background:#071521;
+        color:#fff;
+        outline:none;
+        font-size:14px;
+      "
+    >
+
+
+    <!-- PHONE -->
+    <label style="
+      display:block;
+      color:#9ca3af;
+      font-size:12px;
+      margin-bottom:7px;
+    ">
+      Phone Number
+    </label>
+
+    <input
+      type="tel"
+      id="editPhone"
+      placeholder="Enter phone number"
+      style="
+        width:100%;
+        box-sizing:border-box;
+        padding:13px 14px;
+        margin-bottom:22px;
+        border:1px solid rgba(255,255,255,0.10);
+        border-radius:12px;
+        background:#071521;
+        color:#fff;
+        outline:none;
+        font-size:14px;
+      "
+    >
+
+
+    <!-- SAVE BUTTON -->
+    <button
+      type="button"
+      id="saveProfileBtn"
+      style="
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:13px;
+        background:linear-gradient(135deg,#0ea5e9,#2563eb);
+        color:#fff;
+        font-size:14px;
+        font-weight:700;
+        cursor:pointer;
+      "
+    >
+      Save Changes
+    </button>
+
+
+    <!-- CANCEL BUTTON -->
+    <button
+      type="button"
+      id="cancelEditProfileBtn"
+      style="
+        width:100%;
+        padding:13px;
+        margin-top:10px;
+        border:1px solid rgba(255,255,255,0.10);
+        border-radius:13px;
+        background:#132536;
+        color:#fff;
+        font-size:13px;
+        font-weight:600;
+        cursor:pointer;
+      "
+    >
+      Cancel
+    </button>
+
+  </div>
+
+</div>
+
+<!-- ================= END EDIT PROFILE POPUP ================= -->
 
 
         
