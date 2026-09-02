@@ -10459,7 +10459,25 @@ if (youtubeSubscribeBtn && subscribeTaskOverlay) {
 
 }
 
-  
+
+
+          document
+  .getElementById("profileBackBtn")
+  .addEventListener("click", () => {
+
+    const profilePage =
+      document.getElementById("profilePage");
+
+    if (profilePage) {
+      profilePage.style.display = "none";
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  });
 
 
 
