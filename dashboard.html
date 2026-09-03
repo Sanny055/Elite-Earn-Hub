@@ -9469,13 +9469,21 @@ document
 .getElementById("referralBtn")
 .addEventListener("click", () => {
 
-    const referralPage = document.getElementById("referralPage");
+    const referralPage =
+        document.getElementById("referralPage");
 
     if (referralPage) {
-        referralPage.style.display = "block";
-    }
 
-  
+        referralPage.style.display = "block";
+        referralPage.style.position = "fixed";
+        referralPage.style.inset = "0";
+        referralPage.style.zIndex = "100002";
+        referralPage.style.overflowY = "auto";
+
+        document.body.style.overflow = "hidden";
+
+        window.scrollTo(0, 0);
+    }
 
 });
 
