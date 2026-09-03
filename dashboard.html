@@ -11547,7 +11547,117 @@ document
 
 
 
+/* =========================
+   REFERRAL SYSTEM
+========================= */
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const referralBtn = document.getElementById("referralBtn");
+    const referralPage = document.getElementById("referralPage");
+    const referralBackBtn = document.getElementById("referralBackBtn");
+    const copyReferralBtn = document.getElementById("copyReferralBtn");
+
+    /* OPEN REFERRAL PAGE */
+    if (referralBtn && referralPage) {
+
+        referralBtn.addEventListener("click", function () {
+
+            referralPage.style.display = "block";
+
+            referralPage.style.position = "fixed";
+            referralPage.style.top = "0";
+            referralPage.style.left = "0";
+            referralPage.style.width = "100%";
+            referralPage.style.height = "100vh";
+            referralPage.style.zIndex = "100000";
+            referralPage.style.overflowY = "auto";
+
+            document.body.style.overflow = "hidden";
+
+            window.scrollTo(0, 0);
+
+        });
+
+    }
+
+
+    /* BACK TO DASHBOARD */
+    if (referralBackBtn && referralPage) {
+
+        referralBackBtn.addEventListener("click", function () {
+
+            referralPage.style.display = "none";
+
+            referralPage.style.position = "";
+            referralPage.style.top = "";
+            referralPage.style.left = "";
+            referralPage.style.width = "";
+            referralPage.style.height = "";
+            referralPage.style.zIndex = "";
+            referralPage.style.overflowY = "";
+
+            document.body.style.overflow = "";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+    }
+
+
+    /* COPY REFERRAL LINK */
+    if (copyReferralBtn) {
+
+        copyReferralBtn.addEventListener("click", async function () {
+
+            const referralLinkElement =
+                document.getElementById("referralLinkText");
+
+            if (!referralLinkElement) {
+                alert("Referral link not found.");
+                return;
+            }
+
+            const referralLink =
+                referralLinkElement.textContent.trim();
+
+            try {
+
+                await navigator.clipboard.writeText(referralLink);
+
+                alert("Referral Link Copied Successfully!");
+
+            } catch (error) {
+
+                /* Fallback copy method */
+
+                const tempInput =
+                    document.createElement("input");
+
+                tempInput.value = referralLink;
+
+                document.body.appendChild(tempInput);
+
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999);
+
+                document.execCommand("copy");
+
+                document.body.removeChild(tempInput);
+
+                alert("Referral Link Copied Successfully!");
+
+            }
+
+        });
+
+    }
+
+});
 
 
 
