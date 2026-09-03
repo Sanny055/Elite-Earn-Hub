@@ -11548,55 +11548,10 @@ document
 
 
 
-// ===== REFERRAL BACK BUTTON =====
-
-document
-  .getElementById("referralBackBtn")
-  .addEventListener("click", () => {
-
-    const referralPage =
-      document.getElementById("referralPage");
-
-    if (referralPage) {
-  referralPage.style.display = "none";
-  referralPage.style.position = "";
-  referralPage.style.inset = "";
-  referralPage.style.zIndex = "";
-  referralPage.style.overflowY = "";
-}
-
-document.body.style.overflow = "";
-
-window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  });
 
 
-// ===== COPY REFERRAL LINK =====
 
-document
-  .getElementById("copyReferralBtn")
-  .addEventListener("click", async () => {
 
-    const referralLink =
-      document.getElementById("referralLinkText").textContent.trim();
-
-    try {
-
-      await navigator.clipboard.writeText(referralLink);
-
-      alert("Referral link copied successfully!");
-
-    } catch (error) {
-
-      alert("Unable to copy referral link.");
-
-    }
-
-  });
     
 
 
