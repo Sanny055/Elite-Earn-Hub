@@ -1032,6 +1032,260 @@ footer div:last-child{
   font-weight: 600;
   }
   
+
+  /* ================= REFERRAL PAGE ================= */
+
+#referralPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+.referral-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.referral-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.referral-header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.referral-back-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+
+/* REFERRAL LINK CARD */
+.referral-link-card {
+  padding: 22px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.referral-card-icon {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.referral-link-card h3 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.referral-card-subtitle {
+  margin: 7px 0 16px;
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+.referral-link-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.referral-link-box span {
+  display: block;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy-referral-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+/* INVITEE */
+.referral-invitee-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px;
+  border-radius: 17px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.referral-info-icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: rgba(255,255,255,0.08);
+  font-size: 22px;
+}
+
+.referral-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.referral-info-content span {
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+.referral-info-content strong {
+  font-size: 16px;
+}
+
+.referral-info-content small {
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+
+/* STATS */
+.referral-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.referral-stat-card {
+  padding: 18px 12px;
+  text-align: center;
+  border-radius: 17px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.referral-stat-icon {
+  font-size: 25px;
+  margin-bottom: 7px;
+}
+
+.referral-stat-card strong {
+  display: block;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.referral-stat-card span {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+
+/* COMMISSION */
+.referral-commission-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 19px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.commission-icon {
+  font-size: 34px;
+}
+
+.commission-content h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.commission-content strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.commission-content p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+
+/* INFO */
+.referral-info-box {
+  padding: 18px;
+  border-radius: 17px;
+  margin-bottom: 30px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.referral-info-box strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.referral-info-box p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: 0.65;
+}
+
+
+/* MOBILE */
+@media (max-width: 480px) {
+
+  #referralPage {
+    padding: 15px;
+  }
+
+  .referral-stats-grid {
+    gap: 9px;
+  }
+
+  .referral-stat-card strong {
+    font-size: 18px;
+  }
+
+  
+  
+  
   /* ===== COMPACT MANAGE SERVICES ===== */
 
 #manageServicesPage {
