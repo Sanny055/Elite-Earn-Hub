@@ -9475,8 +9475,20 @@ document
         referralPage.style.display = "block";
     }
 
-});
+    // Dashboard ke tamam direct sections hide karo
+    document.querySelectorAll("body > *").forEach(el => {
 
+        if (
+            el.id !== "referralPage" &&
+            el.tagName !== "SCRIPT" &&
+            el.tagName !== "STYLE"
+        ) {
+            el.style.display = "none";
+        }
+
+    });
+
+});
 
 // ===== PIN TASK BUTTON =====
 
