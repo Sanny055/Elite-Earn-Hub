@@ -11558,10 +11558,16 @@ document
       document.getElementById("referralPage");
 
     if (referralPage) {
-      referralPage.style.display = "none";
-    }
+  referralPage.style.display = "none";
+  referralPage.style.position = "";
+  referralPage.style.inset = "";
+  referralPage.style.zIndex = "";
+  referralPage.style.overflowY = "";
+}
 
-    window.scrollTo({
+document.body.style.overflow = "";
+
+window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
