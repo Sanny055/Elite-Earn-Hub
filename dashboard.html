@@ -11594,26 +11594,7 @@ document
     
 
 
-document
-  .getElementById("copyReferralBtn")
-  .addEventListener("click", async () => {
 
-    const referralLink =
-      document.getElementById("referralLinkText").textContent.trim();
-
-    try {
-
-      await navigator.clipboard.writeText(referralLink);
-
-      alert("Referral Link Copied Successfully!");
-
-    } catch (error) {
-
-      alert("Unable to copy referral link.");
-
-    }
-
-  });
 
 
   
