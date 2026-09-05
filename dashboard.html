@@ -11546,10 +11546,9 @@ document
 // ================= END SAVE PROFILE CHANGES =================
 
 
-
-/* =========================
-   REFERRAL SYSTEM
-========================= */
+// ========================================
+// REFERRAL PAGE - COMPLETE JAVASCRIPT
+// ========================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -11557,23 +11556,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const referralPage = document.getElementById("referralPage");
     const referralBackBtn = document.getElementById("referralBackBtn");
     const copyReferralBtn = document.getElementById("copyReferralBtn");
+    const referralLinkText = document.getElementById("referralLinkText");
 
-    /* OPEN REFERRAL PAGE */
+
+    // ========================================
+    // OPEN REFERRAL PAGE
+    // ========================================
+
     if (referralBtn && referralPage) {
 
         referralBtn.addEventListener("click", function () {
 
             referralPage.style.display = "block";
-
-            referralPage.style.position = "fixed";
-            referralPage.style.top = "0";
-            referralPage.style.left = "0";
-            referralPage.style.width = "100%";
-            referralPage.style.height = "100vh";
-            referralPage.style.zIndex = "100000";
-            referralPage.style.overflowY = "auto";
-
-            document.body.style.overflow = "hidden";
 
             window.scrollTo(0, 0);
 
@@ -11582,68 +11576,55 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* BACK TO DASHBOARD */
+    // ========================================
+    // BACK FROM REFERRAL PAGE
+    // ========================================
+
     if (referralBackBtn && referralPage) {
 
         referralBackBtn.addEventListener("click", function () {
 
             referralPage.style.display = "none";
 
-            referralPage.style.position = "";
-            referralPage.style.top = "";
-            referralPage.style.left = "";
-            referralPage.style.width = "";
-            referralPage.style.height = "";
-            referralPage.style.zIndex = "";
-            referralPage.style.overflowY = "";
-
-            document.body.style.overflow = "";
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo(0, 0);
 
         });
 
     }
 
 
-    /* COPY REFERRAL LINK */
-    if (copyReferralBtn) {
+    // ========================================
+    // COPY REFERRAL LINK
+    // ========================================
+
+    if (copyReferralBtn && referralLinkText) {
 
         copyReferralBtn.addEventListener("click", async function () {
 
-            const referralLinkElement =
-                document.getElementById("referralLinkText");
+            const link =
+                referralLinkText.textContent.trim();
 
-            if (!referralLinkElement) {
-                alert("Referral link not found.");
+            if (!link) {
+                alert("Referral link not available.");
                 return;
             }
 
-            const referralLink =
-                referralLinkElement.textContent.trim();
-
             try {
 
-                await navigator.clipboard.writeText(referralLink);
+                await navigator.clipboard.writeText(link);
 
                 alert("Referral Link Copied Successfully!");
 
             } catch (error) {
 
-                /* Fallback copy method */
-
                 const tempInput =
                     document.createElement("input");
 
-                tempInput.value = referralLink;
+                tempInput.value = link;
 
                 document.body.appendChild(tempInput);
 
                 tempInput.select();
-                tempInput.setSelectionRange(0, 99999);
 
                 document.execCommand("copy");
 
