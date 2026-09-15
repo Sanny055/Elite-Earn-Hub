@@ -11797,7 +11797,24 @@ if (referralBackBtn && referralPage) {
 
 
 
+const jazzcashAmount = document.getElementById("jazzcashAmount");
 
+if (jazzcashAmount) {
+  jazzcashAmount.addEventListener("input", function () {
+    const amount = parseFloat(this.value) || 0;
+
+    const fee = amount * 0.05;
+    const receive = amount - fee;
+
+    const receiveBox = document.querySelector(
+      "#jazzcashPopup .withdrawal-receive strong"
+    );
+
+    if (receiveBox) {
+      receiveBox.textContent = receive.toFixed(2) + " SNX";
+    }
+  });
+    }
 
   
     
