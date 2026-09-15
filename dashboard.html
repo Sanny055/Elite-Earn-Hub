@@ -855,6 +855,112 @@ footer div:last-child{
   }
 
   
+/* ===== JAZZCASH WITHDRAWAL POPUP ===== */
+
+.jazzcash-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.jazzcash-popup-box {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+}
+
+.jazzcash-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.jazzcash-popup-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.jazzcash-popup-header button {
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.jazzcash-popup-content {
+  padding: 20px;
+}
+
+.withdrawal-info,
+.withdrawal-fee,
+.withdrawal-receive {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.withdrawal-info {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.withdrawal-field {
+  margin-bottom: 16px;
+}
+
+.withdrawal-field label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 600;
+}
+
+.withdrawal-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+.withdrawal-fee {
+  color: #d97706;
+}
+
+.withdrawal-receive {
+  margin-top: 5px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f5f5f5;
+}
+
+.withdrawal-submit-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  }
+  
+                   
+  
+  
   /* ===== NOTIFICATION POPUP ===== */
 
 #notificationPopup {
