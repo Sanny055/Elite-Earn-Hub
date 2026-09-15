@@ -9821,15 +9821,23 @@ function(){
    WITHDRAWAL
    ===================================================== */
 
-document
-.getElementById("jazzcashBtn")
-.addEventListener(
-"click",
-function(){
+const jazzcashBtn = document.getElementById("jazzcashBtn");
+const jazzcashPopup = document.getElementById("jazzcashPopup");
+const jazzcashPopupClose = document.getElementById("jazzcashPopupClose");
 
-  openPage("withdrawal.html");
+if (jazzcashBtn && jazzcashPopup) {
+  jazzcashBtn.addEventListener("click", function () {
+    jazzcashPopup.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  });
+}
 
-});
+if (jazzcashPopupClose && jazzcashPopup) {
+  jazzcashPopupClose.addEventListener("click", function () {
+    jazzcashPopup.style.display = "none";
+    document.body.style.overflow = "";
+  });
+    }
 
 
 document
