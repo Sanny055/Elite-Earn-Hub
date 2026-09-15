@@ -11565,7 +11565,55 @@ document
 
 
 
-    
+    // ===== REFERRAL COPY LINK =====
+
+const copyReferralBtn = document.getElementById("copyReferralBtn");
+const referralBackBtn = document.getElementById("referralBackBtn");
+const referralPage = document.getElementById("referralPage");
+
+if (copyReferralBtn) {
+    copyReferralBtn.addEventListener("click", async function () {
+
+        const referralLink =
+            window.location.origin +
+            window.location.pathname +
+            "?ref=YOUR_REFERRAL_CODE";
+
+        try {
+            await navigator.clipboard.writeText(referralLink);
+
+            alert("Referral link copied!");
+
+        } catch (error) {
+
+            const tempInput = document.createElement("input");
+            tempInput.value = referralLink;
+            document.body.appendChild(tempInput);
+
+            tempInput.select();
+            document.execCommand("copy");
+
+            document.body.removeChild(tempInput);
+
+            alert("Referral link copied!");
+        }
+    });
+}
+
+
+// ===== REFERRAL BACK TO DASHBOARD =====
+
+if (referralBackBtn && referralPage) {
+
+    referralBackBtn.addEventListener("click", function () {
+
+        referralPage.style.display = "none";
+
+        document.body.style.overflow = "";
+
+        window.scrollTo(0, 0);
+    });
+}
 
 
 
