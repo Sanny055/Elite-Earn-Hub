@@ -1033,7 +1033,267 @@ footer div:last-child{
   }
   
 
+  /* ================= REFERRAL PAGE NEW CSS ================= */
+
+#referralPage {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #06101c;
+    color: #ffffff;
+}
+
+/* HEADER */
+.referral-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.referral-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.referral-header p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.referral-back-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* REFERRAL LINK CARD */
+.referral-link-card {
+    padding: 22px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 16px;
+    background: #0b1b2b;
+    border: 1px solid #213f57;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.20);
+}
+
+.referral-card-icon {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.referral-link-card h3 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.referral-card-subtitle {
+    margin: 7px 0 16px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.referral-link-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border-radius: 12px;
+    background: #06101c;
+    border: 1px solid #213f57;
+    overflow: hidden;
+}
+
+.referral-link-box span {
+    display: block;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #38bdf8;
+}
+
+.copy-referral-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: #2196e3;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* INVITEE */
+.referral-invitee-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    border-radius: 17px;
+    margin-bottom: 16px;
+    background: #0b1b2b;
+    border: 1px solid #213f57;
+}
+
+.referral-info-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: rgba(255,255,255,0.08);
+    font-size: 22px;
+}
+
+.referral-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.referral-info-content span {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.referral-info-content strong {
+    font-size: 16px;
+}
+
+.referral-info-content small {
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* STATS */
+.referral-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.referral-stat-card {
+    padding: 18px 12px;
+    text-align: center;
+    border-radius: 17px;
+    background: #0b1b2b;
+    border: 1px solid #213f57;
+}
+
+.referral-stat-icon {
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.referral-stat-card strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.referral-stat-card span {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+/* COMMISSION */
+.referral-commission-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+    border-radius: 17px;
+    background: #0b1b2b;
+    border: 1px solid #213f57;
+}
+
+.commission-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(56,189,248,0.10);
+    font-size: 23px;
+}
+
+.commission-content h3 {
+    margin: 0 0 5px;
+    font-size: 15px;
+}
+
+.commission-content strong {
+    font-size: 22px;
+    color: #38bdf8;
+}
+
+.commission-content p {
+    margin: 5px 0 0;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+/* INFO */
+.referral-info-box {
+    padding: 17px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    background: #0b1b2b;
+    border: 1px solid #213f57;
+}
+
+.referral-info-box strong {
+    font-size: 14px;
+}
+
+.referral-info-box p {
+    margin: 8px 0 0;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #94a3b8;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+
+    #referralPage {
+        padding: 15px;
+    }
+
+    .referral-header h2 {
+        font-size: 21px;
+    }
+
+    .referral-stats-grid {
+        gap: 9px;
+    }
+
+    .referral-stat-card {
+        padding: 16px 8px;
+    }
+
+    .referral-commission-card {
+        padding: 15px;
+    }
+  }
   
+  
+
   
   
   /* ===== COMPACT MANAGE SERVICES ===== */
