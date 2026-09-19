@@ -11959,6 +11959,36 @@ if (referralBackBtn && referralPage) {
 
 
 
+    
+    const jazzcashWithdrawInput =
+  document.getElementById("jazzcashWithdrawAmount");
+
+const jazzcashWithdrawReceive =
+  document.querySelector(
+    "#jazzcashPopup .withdrawal-receive strong"
+  );
+
+if (jazzcashWithdrawInput) {
+
+  jazzcashWithdrawInput.addEventListener("input", function () {
+
+    const amount =
+      parseFloat(this.value) || 0;
+
+    const fee =
+      amount * 0.05;
+
+    const receive =
+      amount - fee;
+
+    if (jazzcashWithdrawReceive) {
+      jazzcashWithdrawReceive.textContent =
+        receive.toFixed(2) + " SNX";
+    }
+
+  });
+
+    }
 
 
   
