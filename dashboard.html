@@ -12114,7 +12114,86 @@ if (jazzcashWithdrawInput) {
     }
 
 
-  
+
+/* ===== JAZZCASH WITHDRAWAL SUBMIT ===== */
+
+const jazzcashWithdrawSubmit =
+  document.getElementById("jazzcashWithdrawSubmit");
+
+const jazzcashWithdrawAmount =
+  document.getElementById("jazzcashWithdrawAmount");
+
+const jazzcashWithdrawNumber =
+  document.getElementById("jazzcashWithdrawNumber");
+
+const jazzcashHolderName =
+  document.getElementById("jazzcashHolderName");
+
+const withdrawalSuccessPopup =
+  document.getElementById("withdrawalSuccessPopup");
+
+const closeWithdrawalSuccessBtn =
+  document.getElementById("closeWithdrawalSuccessBtn");
+
+
+if (jazzcashWithdrawSubmit) {
+
+  jazzcashWithdrawSubmit.addEventListener("click", function () {
+
+    const amount = jazzcashWithdrawAmount
+      ? jazzcashWithdrawAmount.value.trim()
+      : "";
+
+    const number = jazzcashWithdrawNumber
+      ? jazzcashWithdrawNumber.value.trim()
+      : "";
+
+    const holderName = jazzcashHolderName
+      ? jazzcashHolderName.value.trim()
+      : "";
+
+
+    /* VALIDATION */
+
+    if (!amount || !number || !holderName) {
+      alert("Please fill all withdrawal details.");
+      return;
+    }
+
+
+    if (parseFloat(amount) <= 0) {
+      alert("Please enter a valid withdrawal amount.");
+      return;
+    }
+
+
+    /* OPEN SUCCESS POPUP */
+
+    if (withdrawalSuccessPopup) {
+      withdrawalSuccessPopup.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+  });
+
+}
+
+
+/* CLOSE SUCCESS POPUP */
+
+if (closeWithdrawalSuccessBtn && withdrawalSuccessPopup) {
+
+  closeWithdrawalSuccessBtn.addEventListener("click", function () {
+
+    withdrawalSuccessPopup.style.display = "none";
+    document.body.style.overflow = "";
+
+  });
+
+}
+
+
+        
     
   
   </script>
