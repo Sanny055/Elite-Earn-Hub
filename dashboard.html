@@ -12193,6 +12193,48 @@ if (closeWithdrawalSuccessBtn && withdrawalSuccessPopup) {
 }
 
 
+
+/* ===== CHECK WITHDRAWAL HISTORY ===== */
+
+const checkWithdrawalHistoryBtn =
+  document.getElementById("checkWithdrawalHistoryBtn");
+
+const transactionHistoryPage =
+  document.getElementById("transactionHistoryPage");
+
+const historyTabs =
+  document.querySelectorAll(".history-tab");
+
+if (checkWithdrawalHistoryBtn) {
+
+  checkWithdrawalHistoryBtn.addEventListener("click", function () {
+
+    /* Close success popup */
+    if (withdrawalSuccessPopup) {
+      withdrawalSuccessPopup.style.display = "none";
+    }
+
+    document.body.style.overflow = "";
+
+    /* Open Transaction History */
+    if (transactionHistoryPage) {
+      transactionHistoryPage.style.display = "block";
+    }
+
+    /* Select Withdrawal History tab */
+    if (historyTabs.length >= 2) {
+
+      historyTabs[0].classList.remove("active");
+      historyTabs[1].classList.add("active");
+
+    }
+
+  });
+
+  }
+
+
+  
         
     
   
