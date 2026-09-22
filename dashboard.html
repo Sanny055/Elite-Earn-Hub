@@ -12385,7 +12385,47 @@ if (checkWithdrawalHistoryBtn) {
     }
 
   
-        
+
+
+
+    /* ===== EASYPAISA WITHDRAWAL POPUP ===== */
+
+const easypaisaBtn =
+  document.getElementById("easypaisaBtn");
+
+const easypaisaPopup =
+  document.getElementById("easypaisaPopup");
+
+const easypaisaPopupClose =
+  document.getElementById("easypaisaPopupClose");
+
+
+if (easypaisaBtn && easypaisaPopup) {
+
+  easypaisaBtn.addEventListener("click", function () {
+
+    easypaisaPopup.style.display = "flex";
+    document.body.style.overflow = "hidden";
+
+  });
+
+}
+
+
+if (easypaisaPopupClose && easypaisaPopup) {
+
+  easypaisaPopupClose.addEventListener("click", function () {
+
+    easypaisaPopup.style.display = "none";
+    document.body.style.overflow = "";
+
+  });
+
+}
+
+
+
+  
     
   
   </script>
