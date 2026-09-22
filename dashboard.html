@@ -1379,6 +1379,86 @@ footer div:last-child{
   }
   
 
+/* ===== PREMIUM EASYPAISA WITHDRAWAL POPUP ===== */
+
+.easypaisa-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(2, 8, 15, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.easypaisa-popup-box {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: linear-gradient(145deg, #10283b, #081722);
+  border: 1px solid rgba(72, 196, 232, 0.28);
+  border-radius: 22px;
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.55),
+    0 0 30px rgba(40, 180, 220, 0.08);
+  color: #ffffff;
+  animation: easypaisaPopupIn 0.22s ease;
+}
+
+@keyframes easypaisaPopupIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.easypaisa-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.easypaisa-popup-header h2 {
+  margin: 0;
+  color: #f5fbff;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.easypaisa-popup-header button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  color: #b9d0dc;
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.easypaisa-popup-content {
+  padding: 20px;
+  }
+  
+  
+  
+  
+                     
   /* ================= REFERRAL PAGE NEW CSS ================= */
 
 #referralPage {
