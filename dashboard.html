@@ -12451,7 +12451,76 @@ if (easypaisaWithdrawAmount) {
 
 }
   
-    
+
+
+/* ===== EASYPAISA WITHDRAWAL SUBMIT ===== */
+
+const easypaisaWithdrawSubmit =
+  document.getElementById("easypaisaWithdrawSubmit");
+
+const easypaisaWithdrawNumber =
+  document.getElementById("easypaisaWithdrawNumber");
+
+const easypaisaHolderName =
+  document.getElementById("easypaisaHolderName");
+
+
+if (easypaisaWithdrawSubmit) {
+
+  easypaisaWithdrawSubmit.addEventListener("click", function () {
+
+    const amount =
+      easypaisaWithdrawAmount
+        ? easypaisaWithdrawAmount.value.trim()
+        : "";
+
+    const number =
+      easypaisaWithdrawNumber
+        ? easypaisaWithdrawNumber.value.trim()
+        : "";
+
+    const holderName =
+      easypaisaHolderName
+        ? easypaisaHolderName.value.trim()
+        : "";
+
+
+    /* VALIDATION */
+
+    if (!amount || !number || !holderName) {
+      alert("Please fill all withdrawal details.");
+      return;
+    }
+
+
+    /* MINIMUM WITHDRAWAL */
+
+    if (parseFloat(amount) < 20) {
+      alert("Minimum withdrawal is 20 SNX.");
+      return;
+    }
+
+
+    /* OPEN EXISTING SUCCESS POPUP */
+
+    if (withdrawalSuccessPopup) {
+
+      easypaisaPopup.style.display = "none";
+
+      withdrawalSuccessPopup.style.display = "flex";
+
+      document.body.style.overflow = "hidden";
+
+    }
+
+  });
+
+}
+
+
+
+
+        
   
   </script>
  
