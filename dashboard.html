@@ -12199,12 +12199,6 @@ if (closeWithdrawalSuccessBtn && withdrawalSuccessPopup) {
 const checkWithdrawalHistoryBtn =
   document.getElementById("checkWithdrawalHistoryBtn");
 
-const transactionHistoryPage =
-  document.getElementById("transactionHistoryPage");
-
-const historyTabs =
-  document.querySelectorAll(".history-tab");
-
 if (checkWithdrawalHistoryBtn) {
 
   checkWithdrawalHistoryBtn.addEventListener("click", function () {
@@ -12219,20 +12213,25 @@ if (checkWithdrawalHistoryBtn) {
     /* Open Transaction History */
     if (transactionHistoryPage) {
       transactionHistoryPage.style.display = "block";
+
+      transactionHistoryPage.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     }
 
-    /* Select Withdrawal History tab */
-    if (historyTabs.length >= 2) {
+    /* Activate Withdrawal History */
+    const tabs =
+      document.querySelectorAll(".history-tab");
 
-      historyTabs[0].classList.remove("active");
-      historyTabs[1].classList.add("active");
-
+    if (tabs.length >= 2) {
+      tabs[0].classList.remove("active");
+      tabs[1].classList.add("active");
     }
 
   });
 
-  }
-
+    }
 
   
         
