@@ -8635,6 +8635,78 @@ footer strong{
 <!-- ===== END EASYPAISA WITHDRAWAL POPUP ===== -->
 
     
+
+<!-- ===== BINANCE UID WITHDRAWAL POPUP ===== -->
+<div id="binancePopup" class="binance-popup">
+
+  <div class="binance-popup-box">
+
+    <div class="binance-popup-header">
+      <h2>💸 Binance UID Withdrawal</h2>
+      <button type="button" id="binancePopupClose">×</button>
+    </div>
+
+    <div class="binance-popup-content">
+
+      <div class="withdrawal-info">
+        <span>Available Balance</span>
+        <strong>0 SNX</strong>
+      </div>
+
+      <div class="withdrawal-field">
+        <label>Withdrawal Amount</label>
+        <input
+          type="number"
+          id="binanceWithdrawAmount"
+          placeholder="Enter amount in SNX"
+        >
+      </div>
+
+      <div class="withdrawal-field">
+        <label>Binance UID</label>
+        <input
+          type="text"
+          id="binanceWithdrawUID"
+          placeholder="Enter Binance UID"
+        >
+      </div>
+
+      <div class="withdrawal-field">
+        <label>Account Holder Name</label>
+        <input
+          type="text"
+          id="binanceHolderName"
+          placeholder="Enter account holder name"
+        >
+      </div>
+
+      <div class="withdrawal-fee">
+        <span>Withdrawal Fee</span>
+        <strong>5%</strong>
+      </div>
+
+      <div class="withdrawal-receive">
+        <span>You Will Receive</span>
+        <strong>0 SNX</strong>
+      </div>
+
+      <button
+        type="button"
+        id="binanceWithdrawSubmit"
+        class="withdrawal-submit-btn"
+      >
+        Submit Withdrawal
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- ===== END BINANCE UID WITHDRAWAL POPUP ===== -->
+
+
+
     
   
   </section>
@@ -10273,21 +10345,7 @@ if (jazzcashPopupClose && jazzcashPopup) {
 
     
 
-    
-                  
-    
 
-
-
-document
-.getElementById("binanceBtn")
-.addEventListener(
-"click",
-function(){
-
-  openPage("withdrawal.html");
-
-});
 
 
 /* =====================================================
