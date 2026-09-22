@@ -12417,6 +12417,39 @@ if (easypaisaPopupClose && easypaisaPopup) {
 
 
 
+
+
+    /* ===== EASYPAISA WITHDRAWAL CALCULATION ===== */
+
+const easypaisaWithdrawAmount =
+  document.getElementById("easypaisaWithdrawAmount");
+
+const easypaisaWithdrawReceive =
+  document.querySelector(
+    "#easypaisaPopup .withdrawal-receive strong"
+  );
+
+if (easypaisaWithdrawAmount) {
+
+  easypaisaWithdrawAmount.addEventListener("input", function () {
+
+    const amount =
+      parseFloat(this.value) || 0;
+
+    const fee =
+      amount * 0.05;
+
+    const receive =
+      amount - fee;
+
+    if (easypaisaWithdrawReceive) {
+      easypaisaWithdrawReceive.textContent =
+        receive.toFixed(2) + " SNX";
+    }
+
+  });
+
+}
   
     
   
