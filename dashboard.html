@@ -12659,6 +12659,151 @@ if (easypaisaWithdrawSubmit) {
 
 
 
+
+    /* ===== BINANCE UID WITHDRAWAL - COMPLETE JS ===== */
+
+
+/* ---------- OPEN / CLOSE POPUP ---------- */
+
+const binanceWithdrawBtn =
+  document.getElementById("binanceBtn");
+
+const binanceWithdrawPopup =
+  document.getElementById("binancePopup");
+
+const binanceWithdrawPopupClose =
+  document.getElementById("binancePopupClose");
+
+
+if (binanceWithdrawBtn && binanceWithdrawPopup) {
+
+  binanceWithdrawBtn.addEventListener("click", function () {
+
+    binanceWithdrawPopup.style.display = "flex";
+    document.body.style.overflow = "hidden";
+
+  });
+
+}
+
+
+if (binanceWithdrawPopupClose && binanceWithdrawPopup) {
+
+  binanceWithdrawPopupClose.addEventListener("click", function () {
+
+    binanceWithdrawPopup.style.display = "none";
+    document.body.style.overflow = "";
+
+  });
+
+}
+
+
+/* ---------- AMOUNT + CALCULATION ---------- */
+
+const binanceWithdrawAmount =
+  document.getElementById("binanceWithdrawAmount");
+
+const binanceWithdrawReceive =
+  document.querySelector(
+    "#binancePopup .withdrawal-receive strong"
+  );
+
+
+if (binanceWithdrawAmount) {
+
+  binanceWithdrawAmount.addEventListener("input", function () {
+
+    const amount =
+      parseFloat(this.value) || 0;
+
+    const fee =
+      amount * 0.05;
+
+    const receive =
+      amount - fee;
+
+
+    if (binanceWithdrawReceive) {
+
+      binanceWithdrawReceive.textContent =
+        receive.toFixed(2) + " SNX";
+
+    }
+
+  });
+
+}
+
+
+/* ---------- SUBMIT WITHDRAWAL ---------- */
+
+const binanceWithdrawSubmit =
+  document.getElementById("binanceWithdrawSubmit");
+
+const binanceWithdrawUID =
+  document.getElementById("binanceWithdrawUID");
+
+const binanceHolderName =
+  document.getElementById("binanceHolderName");
+
+
+if (binanceWithdrawSubmit) {
+
+  binanceWithdrawSubmit.addEventListener("click", function () {
+
+    const amount =
+      binanceWithdrawAmount
+        ? binanceWithdrawAmount.value.trim()
+        : "";
+
+    const uid =
+      binanceWithdrawUID
+        ? binanceWithdrawUID.value.trim()
+        : "";
+
+    const holderName =
+      binanceHolderName
+        ? binanceHolderName.value.trim()
+        : "";
+
+
+    /* VALIDATION */
+
+    if (!amount || !uid || !holderName) {
+
+      alert("Please fill all withdrawal details.");
+      return;
+
+    }
+
+
+    /* MINIMUM WITHDRAWAL */
+
+    if (parseFloat(amount) < 50) {
+
+      alert("Minimum withdrawal is 50 SNX.");
+      return;
+
+    }
+
+
+    /* OPEN EXISTING SUCCESS POPUP */
+
+    if (withdrawalSuccessPopup) {
+
+      binanceWithdrawPopup.style.display = "none";
+
+      withdrawalSuccessPopup.style.display = "flex";
+
+      document.body.style.overflow = "hidden";
+
+    }
+
+  });
+
+  }
+
         
   
   </script>
