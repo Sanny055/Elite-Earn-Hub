@@ -8239,6 +8239,264 @@ footer strong{
 </div>
 
 
+<!-- ========================================= -->
+<!-- CREATE YOUTUBE VIEW / WATCH ADVERTISEMENT -->
+<!-- ========================================= -->
+
+<div id="youtubeViewPage" class="youtube-view-page">
+
+  <div class="youtube-view-header">
+
+    <button
+      type="button"
+      id="youtubeViewBackBtn"
+      class="youtube-view-back"
+    >
+      ←
+    </button>
+
+    <div>
+      <h2>Create Advertisement</h2>
+      <p>YouTube View / Watch Advertisement</p>
+    </div>
+
+  </div>
+
+
+  <div class="youtube-view-form">
+
+
+    <!-- VIDEO LINK -->
+
+    <div class="form-group">
+
+      <label>
+        YouTube Video Link
+      </label>
+
+      <input
+        type="url"
+        id="viewVideoLink"
+        placeholder="Paste YouTube video link"
+      >
+
+    </div>
+
+
+    <!-- DESCRIPTION -->
+
+    <div class="form-group">
+
+      <label>
+        Description <span>(Optional)</span>
+      </label>
+
+      <textarea
+        id="viewDescription"
+        placeholder="Add a short description (optional)"
+      ></textarea>
+
+    </div>
+
+
+    <!-- WATCH DURATION -->
+
+    <div class="form-group">
+
+      <label>
+        Watch Duration
+      </label>
+
+      <select id="viewWatchDuration">
+
+        <option value="">
+          Select watch duration
+        </option>
+
+        <option
+          value="10"
+          data-reward="0.010"
+        >
+          10 Seconds — 0.010 SNX
+        </option>
+
+        <option
+          value="30"
+          data-reward="0.030"
+        >
+          30 Seconds — 0.030 SNX
+        </option>
+
+        <option
+          value="90"
+          data-reward="0.090"
+        >
+          90 Seconds — 0.090 SNX
+        </option>
+
+        <option
+          value="180"
+          data-reward="0.200"
+        >
+          3 Minutes — 0.200 SNX
+        </option>
+
+        <option
+          value="300"
+          data-reward="0.300"
+        >
+          5 Minutes — 0.300 SNX
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- REWARD -->
+
+    <div class="form-group">
+
+      <label>
+        Reward per Watch
+      </label>
+
+      <div class="fixed-value">
+
+        <strong id="viewRewardPerWatch">
+          Select Duration
+        </strong>
+
+        <span>🔒 Fixed</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- TOTAL BUDGET -->
+
+    <div class="form-group">
+
+      <label>
+        Total Advertisement Budget
+      </label>
+
+      <input
+        type="number"
+        id="viewBudget"
+        min="0"
+        step="0.001"
+        placeholder="Enter budget in SNX"
+      >
+
+    </div>
+
+
+    <!-- AUTO CALCULATIONS -->
+
+    <div class="calculation-box">
+
+
+      <div class="calculation-row">
+
+        <span>
+          Reward per Watch
+        </span>
+
+        <strong id="viewCalculationReward">
+          0.000 SNX
+        </strong>
+
+      </div>
+
+
+      <div class="calculation-row">
+
+        <span>
+          Platform Fee (10%)
+        </span>
+
+        <strong id="viewCalculationFee">
+          0.000 SNX
+        </strong>
+
+      </div>
+
+
+      <div class="calculation-row total">
+
+        <span>
+          Advertiser Cost per Watch
+        </span>
+
+        <strong id="viewCalculationCost">
+          0.000 SNX
+        </strong>
+
+      </div>
+
+
+      <div class="calculation-row">
+
+        <span>
+          Total Views / Watches
+        </span>
+
+        <strong id="viewTotalUsers">
+          0
+        </strong>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- PROOF -->
+
+    <div class="form-group">
+
+      <label>
+        Proof Requirement
+      </label>
+
+      <div class="fixed-value">
+
+        <strong>
+          📸 Screenshot Required
+        </strong>
+
+        <span>
+          🔒 Fixed
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- CREATE BUTTON -->
+
+    <button
+      type="button"
+      id="createViewAdvertisementBtn"
+      class="create-like-ad-btn"
+    >
+      Create Advertisement
+    </button>
+
+
+  </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- END YOUTUBE VIEW / WATCH ADVERTISEMENT -->
+<!-- ========================================= -->
+
+
+  
   
 
   
