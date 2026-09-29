@@ -15502,6 +15502,75 @@ if (watchViewForm) {
   
         
 
+
+
+    
+// ===== MANAGE ADVERTISEMENTS PAGE =====
+
+const manageAdvertisementBtn =
+  document.getElementById("manageAdvertisementBtn");
+
+const manageAdvertisementsPage =
+  document.getElementById("manageAdvertisementsPage");
+
+const manageAdvertisementsBackButton =
+  document.getElementById("manageAdvertisementsBackButton");
+
+
+/* ===== OPEN MANAGE ADVERTISEMENTS PAGE ===== */
+
+if (manageAdvertisementBtn && manageAdvertisementsPage) {
+
+  manageAdvertisementBtn.addEventListener("click", function () {
+
+    // Close Advertisement Center popup
+    if (advertisementCenterPopup) {
+      advertisementCenterPopup.style.display = "none";
+    }
+
+    // Open Manage Advertisements page
+    manageAdvertisementsPage.style.display = "block";
+
+    // Start page from top
+    window.scrollTo(0, 0);
+
+  });
+
+}
+
+
+/* ===== CLOSE MANAGE ADVERTISEMENTS PAGE ===== */
+
+function closeManageAdvertisementsPage() {
+
+  if (manageAdvertisementsPage) {
+    manageAdvertisementsPage.style.display = "none";
+  }
+
+  // Open Advertisement Center popup again
+  if (advertisementCenterPopup) {
+    advertisementCenterPopup.style.display = "flex";
+  }
+
+}
+
+
+/* ===== BACK BUTTON ===== */
+
+if (manageAdvertisementsBackButton) {
+
+  manageAdvertisementsBackButton.addEventListener(
+    "click",
+    closeManageAdvertisementsPage
+  );
+
+    }
+
+
+
+
+
+  
   
   
   </script>
