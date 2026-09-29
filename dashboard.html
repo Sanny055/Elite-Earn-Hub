@@ -13992,95 +13992,84 @@ if (binanceWithdrawSubmit) {
 
 
 
-   /* =========================================================
-   WATCH & VIEW PAGE
-   OPEN / CLOSE ONLY
-   CALCULATION WILL BE ADDED LATER
-========================================================= */
 
-const watchViewAdvertisementPage =
-    document.getElementById("watchViewAdvertisementPage");
-
-const watchViewBackButton =
-    document.getElementById("watchViewBackButton");
-
-const watchViewCancelButton =
-    document.getElementById("watchViewCancelButton");
+    
+    
+    // ===== WATCH & VIEW ADVERTISEMENT PAGE =====
 
 const youtubeViewBtn =
-    document.getElementById("youtubeViewBtn");
+  document.getElementById("youtubeViewBtn");
 
-const youtubeTaskPopup =
-    document.getElementById("youtubeTaskPopup");
+const watchViewAdvertisementPage =
+  document.getElementById("watchViewAdvertisementPage");
 
+const watchViewBackButton =
+  document.getElementById("watchViewBackButton");
 
-/* =========================
-   OPEN WATCH & VIEW PAGE
-========================= */
-
-if (youtubeViewBtn) {
-
-    youtubeViewBtn.addEventListener("click", function () {
-
-        if (youtubeTaskPopup) {
-            youtubeTaskPopup.style.display = "none";
-        }
-
-        if (watchViewAdvertisementPage) {
-            watchViewAdvertisementPage.style.display = "block";
-        }
-
-        window.scrollTo(0, 0);
-
-    });
-
-}
+const watchViewCancelButton =
+  document.getElementById("watchViewCancelButton");
 
 
-/* =========================
-   CLOSE / BACK
-========================= */
+/* ===== OPEN WATCH & VIEW PAGE ===== */
 
-function closeWatchViewPage() {
+if (youtubeViewBtn && watchViewAdvertisementPage) {
 
-    if (watchViewAdvertisementPage) {
-        watchViewAdvertisementPage.style.display = "none";
-    }
+  youtubeViewBtn.addEventListener("click", function () {
 
+    // Close YouTube Tasks popup
     if (youtubeTaskPopup) {
-        youtubeTaskPopup.style.display = "block";
+      youtubeTaskPopup.style.display = "none";
     }
+
+    // Open Watch & View separate page
+    watchViewAdvertisementPage.style.display = "block";
+
+    // Start page from top
+    window.scrollTo(0, 0);
+
+  });
 
 }
 
 
-/* =========================
-   BACK BUTTON
-========================= */
+/* ===== CLOSE WATCH & VIEW PAGE ===== */
+
+function closeWatchViewAdvertisementPage() {
+
+  if (watchViewAdvertisementPage) {
+    watchViewAdvertisementPage.style.display = "none";
+  }
+
+  // Open YouTube Tasks again
+  if (youtubeTaskPopup) {
+    youtubeTaskPopup.style.display = "flex";
+  }
+
+}
+
+
+/* ===== BACK BUTTON ===== */
 
 if (watchViewBackButton) {
 
-    watchViewBackButton.addEventListener(
-        "click",
-        closeWatchViewPage
-    );
+  watchViewBackButton.addEventListener(
+    "click",
+    closeWatchViewAdvertisementPage
+  );
 
 }
 
 
-/* =========================
-   CANCEL BUTTON
-========================= */
+/* ===== CANCEL BUTTON ===== */
 
 if (watchViewCancelButton) {
 
-    watchViewCancelButton.addEventListener(
-        "click",
-        closeWatchViewPage
-    );
+  watchViewCancelButton.addEventListener(
+    "click",
+    closeWatchViewAdvertisementPage
+  );
 
-} 
-
+}
 
 
 
