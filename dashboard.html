@@ -8251,7 +8251,416 @@ footer strong{
 
 
 
+<!-- =========================================================
+     ELITE EARN HUB
+     YOUTUBE WATCH & VIEW ADVERTISEMENT PAGE
+     SEPARATE FULL-SCREEN PAGE
+========================================================= -->
 
+<div id="watchViewAdvertisementPage" class="watch-view-page">
+
+    <div class="watch-view-page-inner">
+
+        <!-- HEADER -->
+        <div class="watch-view-header">
+
+            <button
+                type="button"
+                id="watchViewBackButton"
+                class="watch-view-back-button"
+            >
+                ← Back
+            </button>
+
+            <div class="watch-view-header-text">
+                <h1>Watch & View Advertisement</h1>
+                <p>Create a YouTube Watch & View advertisement</p>
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+        <form id="watchViewAdvertisementForm">
+
+
+            <!-- VIDEO INFORMATION -->
+            <section class="watch-view-section">
+
+                <div class="watch-view-section-title">
+                    <h2>Video Information</h2>
+                    <p>Enter your YouTube video details.</p>
+                </div>
+
+                <div class="watch-view-form-group">
+
+                    <label for="watchViewVideoLink">
+                        YouTube Video Link
+                    </label>
+
+                    <input
+                        type="url"
+                        id="watchViewVideoLink"
+                        name="watchViewVideoLink"
+                        placeholder="https://www.youtube.com/watch?v=..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div class="watch-view-form-group">
+
+                    <label for="watchViewVideoName">
+                        Video Name / Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="watchViewVideoName"
+                        name="watchViewVideoName"
+                        placeholder="Enter your YouTube video name"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- WATCH DURATION -->
+            <section class="watch-view-section">
+
+                <div class="watch-view-section-title">
+                    <h2>Watch Duration</h2>
+                    <p>Select how long the user must watch the video.</p>
+                </div>
+
+
+                <div class="watch-view-duration-options">
+
+
+                    <label class="watch-view-duration-option">
+
+                        <input
+                            type="radio"
+                            name="watchDuration"
+                            value="10"
+                        >
+
+                        <span>
+                            <strong>10 Seconds</strong>
+                            <small>0.020 SNX Reward / View</small>
+                        </span>
+
+                    </label>
+
+
+                    <label class="watch-view-duration-option">
+
+                        <input
+                            type="radio"
+                            name="watchDuration"
+                            value="30"
+                        >
+
+                        <span>
+                            <strong>30 Seconds</strong>
+                            <small>0.060 SNX Reward / View</small>
+                        </span>
+
+                    </label>
+
+
+                    <label class="watch-view-duration-option">
+
+                        <input
+                            type="radio"
+                            name="watchDuration"
+                            value="60"
+                        >
+
+                        <span>
+                            <strong>60 Seconds</strong>
+                            <small>0.120 SNX Reward / View</small>
+                        </span>
+
+                    </label>
+
+
+                    <label class="watch-view-duration-option">
+
+                        <input
+                            type="radio"
+                            name="watchDuration"
+                            value="90"
+                        >
+
+                        <span>
+                            <strong>90 Seconds</strong>
+                            <small>0.180 SNX Reward / View</small>
+                        </span>
+
+                    </label>
+
+
+                    <label class="watch-view-duration-option">
+
+                        <input
+                            type="radio"
+                            name="watchDuration"
+                            value="120"
+                        >
+
+                        <span>
+                            <strong>120 Seconds</strong>
+                            <small>0.240 SNX Reward / View</small>
+                        </span>
+
+                    </label>
+
+
+                    <label class="watch-view-duration-option">
+
+                        <input
+                            type="radio"
+                            name="watchDuration"
+                            value="180"
+                        >
+
+                        <span>
+                            <strong>3 Minutes</strong>
+                            <small>0.360 SNX Reward / View</small>
+                        </span>
+
+                    </label>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- BUDGET -->
+            <section class="watch-view-section">
+
+                <div class="watch-view-section-title">
+                    <h2>Advertisement Budget</h2>
+                    <p>Enter the total amount you want to spend.</p>
+                </div>
+
+
+                <div class="watch-view-form-group">
+
+                    <label for="watchViewBudget">
+                        Advertisement Budget
+                    </label>
+
+                    <div class="watch-view-budget-input">
+
+                        <input
+                            type="number"
+                            id="watchViewBudget"
+                            name="watchViewBudget"
+                            min="0"
+                            step="0.001"
+                            placeholder="Enter budget"
+                        >
+
+                        <span>SNX</span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CALCULATION -->
+            <section class="watch-view-calculation">
+
+                <div class="watch-view-section-title">
+                    <h2>Advertisement Calculation</h2>
+                    <p>Cost will be calculated automatically.</p>
+                </div>
+
+
+                <div class="watch-view-calculation-row">
+                    <span>Watch Duration</span>
+                    <strong id="selectedWatchDuration">
+                        Not Selected
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-calculation-row">
+                    <span>Reward Per View</span>
+                    <strong id="watchViewRewardPerView">
+                        0.000 SNX
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-calculation-row">
+                    <span>Platform Fee (10%)</span>
+                    <strong id="watchViewPlatformFee">
+                        0.000 SNX
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-calculation-row">
+                    <span>Total Cost Per View</span>
+                    <strong id="watchViewTotalCostPerView">
+                        0.000 SNX
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-calculation-row">
+                    <span>Total Available Views</span>
+                    <strong id="watchViewTotalViews">
+                        0
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-calculation-row">
+                    <span>Total User Rewards</span>
+                    <strong id="watchViewTotalUserRewards">
+                        0.000 SNX
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-calculation-row">
+                    <span>Total Platform Fee</span>
+                    <strong id="watchViewTotalPlatformFee">
+                        0.000 SNX
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-calculation-row watch-view-total-row">
+                    <span>Total Advertisement Cost</span>
+                    <strong id="watchViewFinalAdvertisementCost">
+                        0.000 SNX
+                    </strong>
+                </div>
+
+            </section>
+
+
+            <!-- SUMMARY -->
+            <section class="watch-view-section">
+
+                <div class="watch-view-section-title">
+                    <h2>Advertisement Summary</h2>
+                    <p>Review your advertisement before submitting.</p>
+                </div>
+
+
+                <div class="watch-view-summary-row">
+                    <span>Platform</span>
+                    <strong>YouTube</strong>
+                </div>
+
+
+                <div class="watch-view-summary-row">
+                    <span>Task Type</span>
+                    <strong>Watch & View</strong>
+                </div>
+
+
+                <div class="watch-view-summary-row">
+                    <span>Video Name</span>
+                    <strong id="summaryVideoName">
+                        Not Entered
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-summary-row">
+                    <span>Watch Duration</span>
+                    <strong id="summaryWatchDuration">
+                        Not Selected
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-summary-row">
+                    <span>Reward Per View</span>
+                    <strong id="summaryRewardPerView">
+                        0.000 SNX
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-summary-row">
+                    <span>Platform Fee</span>
+                    <strong>10%</strong>
+                </div>
+
+
+                <div class="watch-view-summary-row">
+                    <span>Total Views</span>
+                    <strong id="summaryTotalViews">
+                        0
+                    </strong>
+                </div>
+
+
+                <div class="watch-view-summary-row watch-view-summary-total">
+                    <span>Total Advertisement Cost</span>
+                    <strong id="summaryAdvertisementCost">
+                        0.000 SNX
+                    </strong>
+                </div>
+
+            </section>
+
+
+            <!-- ADMIN NOTICE -->
+            <section class="watch-view-approval-notice">
+
+                <h3>Admin Approval Required</h3>
+
+                <p>
+                    Your Watch & View advertisement will be submitted
+                    for Admin Approval before it becomes available to users.
+                </p>
+
+            </section>
+
+
+            <!-- ACTIONS -->
+            <div class="watch-view-actions">
+
+                <button
+                    type="button"
+                    id="watchViewCancelButton"
+                    class="watch-view-cancel-button"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    id="watchViewSubmitButton"
+                    class="watch-view-submit-button"
+                >
+                    Submit Advertisement
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
 
 
   
