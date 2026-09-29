@@ -13992,6 +13992,96 @@ if (binanceWithdrawSubmit) {
 
 
 
+   /* =========================================================
+   WATCH & VIEW PAGE
+   OPEN / CLOSE ONLY
+   CALCULATION WILL BE ADDED LATER
+========================================================= */
+
+const watchViewAdvertisementPage =
+    document.getElementById("watchViewAdvertisementPage");
+
+const watchViewBackButton =
+    document.getElementById("watchViewBackButton");
+
+const watchViewCancelButton =
+    document.getElementById("watchViewCancelButton");
+
+const youtubeViewBtn =
+    document.getElementById("youtubeViewBtn");
+
+const youtubeTaskPopup =
+    document.getElementById("youtubeTaskPopup");
+
+
+/* =========================
+   OPEN WATCH & VIEW PAGE
+========================= */
+
+if (youtubeViewBtn) {
+
+    youtubeViewBtn.addEventListener("click", function () {
+
+        if (youtubeTaskPopup) {
+            youtubeTaskPopup.style.display = "none";
+        }
+
+        if (watchViewAdvertisementPage) {
+            watchViewAdvertisementPage.style.display = "block";
+        }
+
+        window.scrollTo(0, 0);
+
+    });
+
+}
+
+
+/* =========================
+   CLOSE / BACK
+========================= */
+
+function closeWatchViewPage() {
+
+    if (watchViewAdvertisementPage) {
+        watchViewAdvertisementPage.style.display = "none";
+    }
+
+    if (youtubeTaskPopup) {
+        youtubeTaskPopup.style.display = "block";
+    }
+
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+if (watchViewBackButton) {
+
+    watchViewBackButton.addEventListener(
+        "click",
+        closeWatchViewPage
+    );
+
+}
+
+
+/* =========================
+   CANCEL BUTTON
+========================= */
+
+if (watchViewCancelButton) {
+
+    watchViewCancelButton.addEventListener(
+        "click",
+        closeWatchViewPage
+    );
+
+} 
+
+
 
 
   
