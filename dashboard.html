@@ -13798,6 +13798,646 @@ if (binanceWithdrawSubmit) {
 
 
 
+    /* =========================================================
+   ELITE EARN HUB
+   WATCH & VIEW ADVERTISEMENT
+   JAVASCRIPT
+========================================================= */
+
+
+/* =========================================================
+   WATCH & VIEW PAGE CONNECTION
+========================================================= */
+
+const youtubeViewBtn =
+  document.getElementById("youtubeViewBtn");
+
+const watchViewAdvertisementPage =
+  document.getElementById("watchViewAdvertisementPage");
+
+const watchViewBackButton =
+  document.getElementById("watchViewBackButton");
+
+const watchViewCancelButton =
+  document.getElementById("watchViewCancelButton");
+
+
+/* =========================================================
+   OPEN WATCH & VIEW PAGE
+   Advertisement Center
+   → Create Advertisement
+   → YouTube Tasks
+   → View / Watch
+========================================================= */
+
+if (youtubeViewBtn && watchViewAdvertisementPage) {
+
+  youtubeViewBtn.addEventListener("click", function () {
+
+    /* Close YouTube Tasks popup */
+    if (youtubeTaskPopup) {
+      youtubeTaskPopup.style.display = "none";
+    }
+
+    /* Open Watch & View Page */
+    watchViewAdvertisementPage.style.display = "block";
+
+    /* Start page from top */
+    window.scrollTo(0, 0);
+
+  });
+
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   Watch & View Page → YouTube Tasks Popup
+========================================================= */
+
+if (watchViewBackButton && watchViewAdvertisementPage) {
+
+  watchViewBackButton.addEventListener("click", function () {
+
+    /* Hide Watch & View Page */
+    watchViewAdvertisementPage.style.display = "none";
+
+    /* Open YouTube Tasks Popup */
+    if (youtubeTaskPopup) {
+      youtubeTaskPopup.style.display = "flex";
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+   Watch & View Page → YouTube Tasks Popup
+========================================================= */
+
+if (watchViewCancelButton && watchViewAdvertisementPage) {
+
+  watchViewCancelButton.addEventListener("click", function () {
+
+    /* Hide Watch & View Page */
+    watchViewAdvertisementPage.style.display = "none";
+
+    /* Open YouTube Tasks Popup */
+    if (youtubeTaskPopup) {
+      youtubeTaskPopup.style.display = "flex";
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   WATCH & VIEW PRICING
+========================================================= */
+
+const watchViewPricing = {
+
+  10: {
+    duration: "10 Seconds",
+    reward: 0.020
+  },
+
+  30: {
+    duration: "30 Seconds",
+    reward: 0.060
+  },
+
+  60: {
+    duration: "60 Seconds",
+    reward: 0.120
+  },
+
+  90: {
+    duration: "90 Seconds",
+    reward: 0.180
+  },
+
+  120: {
+    duration: "120 Seconds",
+    reward: 0.240
+  },
+
+  180: {
+    duration: "3 Minutes",
+    reward: 0.360
+  }
+
+};
+
+
+/* =========================================================
+   PLATFORM FEE
+========================================================= */
+
+const WATCH_VIEW_PLATFORM_FEE_RATE = 0.10;
+
+
+/* =========================================================
+   GET FORM ELEMENTS
+========================================================= */
+
+const watchViewForm =
+  document.getElementById("watchViewAdvertisementForm");
+
+const watchViewVideoLink =
+  document.getElementById("watchViewVideoLink");
+
+const watchViewVideoName =
+  document.getElementById("watchViewVideoName");
+
+const watchViewBudget =
+  document.getElementById("watchViewBudget");
+
+
+/* =========================================================
+   GET CALCULATION ELEMENTS
+========================================================= */
+
+const selectedWatchDuration =
+  document.getElementById("selectedWatchDuration");
+
+const watchViewRewardPerView =
+  document.getElementById("watchViewRewardPerView");
+
+const watchViewPlatformFee =
+  document.getElementById("watchViewPlatformFee");
+
+const watchViewTotalCostPerView =
+  document.getElementById("watchViewTotalCostPerView");
+
+const watchViewTotalViews =
+  document.getElementById("watchViewTotalViews");
+
+const watchViewTotalUserRewards =
+  document.getElementById("watchViewTotalUserRewards");
+
+const watchViewTotalPlatformFee =
+  document.getElementById("watchViewTotalPlatformFee");
+
+const watchViewFinalAdvertisementCost =
+  document.getElementById("watchViewFinalAdvertisementCost");
+
+
+/* =========================================================
+   GET SUMMARY ELEMENTS
+========================================================= */
+
+const summaryVideoName =
+  document.getElementById("summaryVideoName");
+
+const summaryWatchDuration =
+  document.getElementById("summaryWatchDuration");
+
+const summaryRewardPerView =
+  document.getElementById("summaryRewardPerView");
+
+const summaryTotalViews =
+  document.getElementById("summaryTotalViews");
+
+const summaryAdvertisementCost =
+  document.getElementById("summaryAdvertisementCost");
+
+
+/* =========================================================
+   CURRENT SELECTED DURATION
+========================================================= */
+
+let selectedWatchViewDuration = null;
+
+
+/* =========================================================
+   FORMAT SNX
+========================================================= */
+
+function formatSNX(value) {
+
+  return Number(value).toFixed(3) + " SNX";
+
+}
+
+
+/* =========================================================
+   WATCH DURATION SELECTION
+========================================================= */
+
+const watchDurationOptions =
+  document.querySelectorAll(
+    'input[name="watchDuration"]'
+  );
+
+
+watchDurationOptions.forEach(function (option) {
+
+  option.addEventListener("change", function () {
+
+    selectedWatchViewDuration = this.value;
+
+    calculateWatchViewAdvertisement();
+
+  });
+
+});
+
+
+/* =========================================================
+   BUDGET INPUT
+========================================================= */
+
+if (watchViewBudget) {
+
+  watchViewBudget.addEventListener(
+    "input",
+    calculateWatchViewAdvertisement
+  );
+
+}
+
+
+/* =========================================================
+   VIDEO NAME
+========================================================= */
+
+if (watchViewVideoName) {
+
+  watchViewVideoName.addEventListener(
+    "input",
+    function () {
+
+      const name =
+        watchViewVideoName.value.trim();
+
+      if (summaryVideoName) {
+
+        summaryVideoName.textContent =
+          name || "Not Entered";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MAIN CALCULATION
+========================================================= */
+
+function calculateWatchViewAdvertisement() {
+
+  /* No duration selected */
+
+  if (!selectedWatchViewDuration) {
+
+    if (selectedWatchDuration) {
+      selectedWatchDuration.textContent =
+        "Not Selected";
+    }
+
+    if (watchViewRewardPerView) {
+      watchViewRewardPerView.textContent =
+        "0.000 SNX";
+    }
+
+    if (watchViewPlatformFee) {
+      watchViewPlatformFee.textContent =
+        "0.000 SNX";
+    }
+
+    if (watchViewTotalCostPerView) {
+      watchViewTotalCostPerView.textContent =
+        "0.000 SNX";
+    }
+
+    return;
+
+  }
+
+
+  /* Get pricing */
+
+  const pricing =
+    watchViewPricing[selectedWatchViewDuration];
+
+
+  if (!pricing) {
+    return;
+  }
+
+
+  /* Reward */
+
+  const rewardPerView =
+    pricing.reward;
+
+
+  /* Platform fee */
+
+  const platformFeePerView =
+    rewardPerView *
+    WATCH_VIEW_PLATFORM_FEE_RATE;
+
+
+  /* Total advertiser cost per view */
+
+  const totalCostPerView =
+    rewardPerView +
+    platformFeePerView;
+
+
+  /* Budget */
+
+  const budget =
+    parseFloat(
+      watchViewBudget?.value || 0
+    );
+
+
+  /* Total views */
+
+  let totalViews = 0;
+
+  if (budget > 0) {
+
+    totalViews =
+      Math.floor(
+        budget / totalCostPerView
+      );
+
+  }
+
+
+  /* Actual user rewards */
+
+  const totalUserRewards =
+    totalViews *
+    rewardPerView;
+
+
+  /* Actual platform fee */
+
+  const totalPlatformFee =
+    totalViews *
+    platformFeePerView;
+
+
+  /* Actual advertisement cost */
+
+  const totalAdvertisementCost =
+    totalUserRewards +
+    totalPlatformFee;
+
+
+  /* =====================================================
+     UPDATE CALCULATION UI
+  ===================================================== */
+
+  if (selectedWatchDuration) {
+
+    selectedWatchDuration.textContent =
+      pricing.duration;
+
+  }
+
+
+  if (watchViewRewardPerView) {
+
+    watchViewRewardPerView.textContent =
+      formatSNX(rewardPerView);
+
+  }
+
+
+  if (watchViewPlatformFee) {
+
+    watchViewPlatformFee.textContent =
+      formatSNX(platformFeePerView);
+
+  }
+
+
+  if (watchViewTotalCostPerView) {
+
+    watchViewTotalCostPerView.textContent =
+      formatSNX(totalCostPerView);
+
+  }
+
+
+  if (watchViewTotalViews) {
+
+    watchViewTotalViews.textContent =
+      totalViews.toLocaleString();
+
+  }
+
+
+  if (watchViewTotalUserRewards) {
+
+    watchViewTotalUserRewards.textContent =
+      formatSNX(totalUserRewards);
+
+  }
+
+
+  if (watchViewTotalPlatformFee) {
+
+    watchViewTotalPlatformFee.textContent =
+      formatSNX(totalPlatformFee);
+
+  }
+
+
+  if (watchViewFinalAdvertisementCost) {
+
+    watchViewFinalAdvertisementCost.textContent =
+      formatSNX(totalAdvertisementCost);
+
+  }
+
+
+  /* =====================================================
+     UPDATE SUMMARY
+  ===================================================== */
+
+  if (summaryWatchDuration) {
+
+    summaryWatchDuration.textContent =
+      pricing.duration;
+
+  }
+
+
+  if (summaryRewardPerView) {
+
+    summaryRewardPerView.textContent =
+      formatSNX(rewardPerView);
+
+  }
+
+
+  if (summaryTotalViews) {
+
+    summaryTotalViews.textContent =
+      totalViews.toLocaleString();
+
+  }
+
+
+  if (summaryAdvertisementCost) {
+
+    summaryAdvertisementCost.textContent =
+      formatSNX(totalAdvertisementCost);
+
+  }
+
+}
+
+
+/* =========================================================
+   FORM SUBMISSION
+========================================================= */
+
+if (watchViewForm) {
+
+  watchViewForm.addEventListener(
+    "submit",
+    function (event) {
+
+      event.preventDefault();
+
+
+      /* Video link */
+
+      const videoLink =
+        watchViewVideoLink?.value.trim();
+
+
+      /* Video name */
+
+      const videoName =
+        watchViewVideoName?.value.trim();
+
+
+      /* Budget */
+
+      const budget =
+        parseFloat(
+          watchViewBudget?.value || 0
+        );
+
+
+      /* Duration */
+
+      if (!selectedWatchViewDuration) {
+
+        alert(
+          "Please select a Watch Duration."
+        );
+
+        return;
+
+      }
+
+
+      /* Video link */
+
+      if (!videoLink) {
+
+        alert(
+          "Please enter the YouTube video link."
+        );
+
+        return;
+
+      }
+
+
+      /* Video name */
+
+      if (!videoName) {
+
+        alert(
+          "Please enter the YouTube video name."
+        );
+
+        return;
+
+      }
+
+
+      /* Budget */
+
+      if (!budget || budget <= 0) {
+
+        alert(
+          "Please enter a valid advertisement budget."
+        );
+
+        return;
+
+      }
+
+
+      /* Pricing */
+
+      const pricing =
+        watchViewPricing[selectedWatchViewDuration];
+
+
+      const platformFeePerView =
+        pricing.reward *
+        WATCH_VIEW_PLATFORM_FEE_RATE;
+
+
+      const totalCostPerView =
+        pricing.reward +
+        platformFeePerView;
+
+
+      const totalViews =
+        Math.floor(
+          budget / totalCostPerView
+        );
+
+
+      /* Minimum one view */
+
+      if (totalViews < 1) {
+
+        alert(
+          "Advertisement budget is too low for one View."
+        );
+
+        return;
+
+      }
+
+
+      /* =================================================
+         CURRENT STAGE:
+         FRONTEND ONLY
+      ================================================= */
+
+      alert(
+        "Watch & View advertisement details are ready. " +
+        "It will be submitted for Admin Approval."
+      );
+
+    }
+  );
+
+  }
+
+
 
   
   
