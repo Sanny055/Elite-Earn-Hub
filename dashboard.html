@@ -315,6 +315,412 @@ footer div:last-child{
 
 /* =========================================================
    ELITE EARN HUB
+   MANAGE ADVERTISEMENTS PAGE
+========================================================= */
+
+#manageAdvertisementsPage {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 99999;
+    overflow-y: auto;
+    background: #f5f7fb;
+    color: #1f2937;
+    box-sizing: border-box;
+}
+
+#manageAdvertisementsPage *,
+#manageAdvertisementsPage *::before,
+#manageAdvertisementsPage *::after {
+    box-sizing: border-box;
+}
+
+.manage-advertisements-page-inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 25px 20px 50px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.manage-advertisements-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.manage-advertisements-back-button {
+    border: none;
+    background: #ffffff;
+    color: #1f2937;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
+}
+
+.manage-advertisements-back-button:hover {
+    transform: translateY(-1px);
+}
+
+.manage-advertisements-header-text h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.manage-advertisements-header-text p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.manage-advertisements-intro {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+.manage-advertisements-intro h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    color: #111827;
+}
+
+.manage-advertisements-intro p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* =========================
+   ADVERTISEMENT LIST
+========================= */
+
+.manage-advertisements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* =========================
+   ADVERTISEMENT CARD
+========================= */
+
+.manage-advertisement-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    transition: 0.2s ease;
+}
+
+.manage-advertisement-card:hover {
+    box-shadow: 0 7px 24px rgba(0, 0, 0, 0.09);
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.manage-advertisement-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 16px 18px;
+    border-bottom: 1px solid #edf0f4;
+    background: #fafbfc;
+}
+
+.manage-advertisement-type {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.manage-advertisement-platform,
+.manage-advertisement-task-type {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.manage-advertisement-platform {
+    background: #eef2ff;
+    color: #4338ca;
+}
+
+.manage-advertisement-task-type {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.manage-advertisement-status {
+    padding: 7px 11px;
+    border-radius: 8px;
+    background: #fff7ed;
+    color: #c2410c;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* =========================
+   CARD BODY
+========================= */
+
+.manage-advertisement-card-body {
+    padding: 20px 18px;
+}
+
+.manage-advertisement-title {
+    margin: 0 0 18px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.manage-advertisement-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.manage-advertisement-info-item {
+    min-width: 0;
+    padding: 13px;
+    background: #f8fafc;
+    border: 1px solid #eef0f3;
+    border-radius: 10px;
+}
+
+.manage-advertisement-info-item span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.manage-advertisement-info-item strong {
+    display: block;
+    font-size: 14px;
+    color: #111827;
+    word-break: break-word;
+}
+
+
+/* =========================
+   CARD ACTIONS
+========================= */
+
+.manage-advertisement-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 9px;
+    padding: 15px 18px;
+    border-top: 1px solid #edf0f4;
+    background: #fafbfc;
+}
+
+.manage-advertisement-card-actions button {
+    border: none;
+    padding: 9px 15px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.manage-advertisement-card-actions button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   DETAILS BUTTON
+========================= */
+
+.manage-advertisement-details-button {
+    background: #eef2ff;
+    color: #4338ca;
+}
+
+.manage-advertisement-details-button:hover {
+    background: #e0e7ff;
+}
+
+
+/* =========================
+   EDIT BUTTON
+========================= */
+
+.manage-advertisement-edit-button {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.manage-advertisement-edit-button:hover {
+    background: #d1fae5;
+}
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.manage-advertisement-delete-button {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.manage-advertisement-delete-button:hover {
+    background: #fee2e2;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.manage-advertisements-empty-state {
+    text-align: center;
+    background: #ffffff;
+    border: 1px dashed #d1d5db;
+    border-radius: 16px;
+    padding: 50px 20px;
+    margin-top: 20px;
+}
+
+.manage-advertisements-empty-icon {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.manage-advertisements-empty-state h3 {
+    margin: 0 0 7px;
+    font-size: 18px;
+    color: #111827;
+}
+
+.manage-advertisements-empty-state p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 850px) {
+
+    .manage-advertisement-info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .manage-advertisements-page-inner {
+        padding: 18px 12px 35px;
+    }
+
+    .manage-advertisements-header {
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .manage-advertisements-header-text h1 {
+        font-size: 22px;
+    }
+
+    .manage-advertisements-header-text p {
+        font-size: 12px;
+    }
+
+    .manage-advertisements-back-button {
+        padding: 9px 13px;
+        font-size: 13px;
+    }
+
+    .manage-advertisements-intro {
+        padding: 16px;
+    }
+
+    .manage-advertisement-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px;
+    }
+
+    .manage-advertisement-card-body {
+        padding: 17px 14px;
+    }
+
+    .manage-advertisement-info-grid {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .manage-advertisement-card-actions {
+        justify-content: stretch;
+        padding: 13px 14px;
+    }
+
+    .manage-advertisement-card-actions button {
+        flex: 1;
+        padding: 9px 8px;
+        font-size: 12px;
+    }
+
+  }
+
+
+
+
+
+  
+
+/* =========================================================
+   ELITE EARN HUB
    YOUTUBE WATCH & VIEW ADVERTISEMENT PAGE
    FULL-SCREEN SEPARATE PAGE
 ========================================================= */
