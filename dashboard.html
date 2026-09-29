@@ -311,6 +311,549 @@ footer div:last-child{
   }
 
 
+
+
+/* =========================================================
+   ELITE EARN HUB
+   WATCH & VIEW ADVERTISEMENT PAGE
+   CSS ONLY
+========================================================= */
+
+#watchViewAdvertisementPage {
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+#watchViewAdvertisementPage .page-header {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#watchViewAdvertisementPage .header-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#watchViewAdvertisementPage #watchViewBackButton {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+#watchViewAdvertisementPage #watchViewBackButton:hover {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+#watchViewAdvertisementPage .header-title h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+#watchViewAdvertisementPage .header-title p {
+    margin: 5px 0 0;
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+#watchViewAdvertisementPage .watch-view-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+#watchViewAdvertisementPage
+#watchViewAdvertisementForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+#watchViewAdvertisementPage .form-section,
+#watchViewAdvertisementPage .calculation-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 22px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#watchViewAdvertisementPage .section-heading {
+    margin-bottom: 20px;
+}
+
+#watchViewAdvertisementPage .section-heading h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#watchViewAdvertisementPage .section-heading p {
+    margin: 6px 0 0;
+    color: #9ca3af;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+#watchViewAdvertisementPage .form-group {
+    margin-bottom: 18px;
+}
+
+#watchViewAdvertisementPage .form-group:last-child {
+    margin-bottom: 0;
+}
+
+#watchViewAdvertisementPage .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+#watchViewAdvertisementPage .form-group input[type="url"],
+#watchViewAdvertisementPage .form-group input[type="text"],
+#watchViewAdvertisementPage .form-group input[type="number"] {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    outline: none;
+    background: rgba(0, 0, 0, 0.18);
+    color: #ffffff;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+#watchViewAdvertisementPage
+.form-group input::placeholder {
+    color: #6b7280;
+}
+
+#watchViewAdvertisementPage
+.form-group input:focus {
+    border-color: rgba(255, 255, 255, 0.30);
+    background: rgba(0, 0, 0, 0.25);
+}
+
+#watchViewAdvertisementPage .form-group small {
+    display: block;
+    margin-top: 7px;
+    color: #737b8c;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   BUDGET INPUT WITH SNX
+========================================================= */
+
+#watchViewAdvertisementPage .input-with-unit {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(0, 0, 0, 0.18);
+}
+
+#watchViewAdvertisementPage
+.input-with-unit input {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    padding: 0 14px;
+    font-size: 14px;
+}
+
+#watchViewAdvertisementPage
+.input-with-unit span {
+    padding: 0 15px;
+    color: #bfc5d2;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DURATION OPTIONS
+========================================================= */
+
+#watchViewAdvertisementPage .duration-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+#watchViewAdvertisementPage .duration-option {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+#watchViewAdvertisementPage
+.duration-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#watchViewAdvertisementPage .duration-content {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-height: 72px;
+    box-sizing: border-box;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.025);
+    transition: 0.2s ease;
+}
+
+#watchViewAdvertisementPage
+.duration-content strong {
+    color: #ffffff;
+    font-size: 15px;
+}
+
+#watchViewAdvertisementPage
+.duration-content span {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+#watchViewAdvertisementPage
+.duration-option:hover .duration-content {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+#watchViewAdvertisementPage
+.duration-option input[type="radio"]:checked
++ .duration-content {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   CALCULATION SECTION
+========================================================= */
+
+#watchViewAdvertisementPage .calculation-section {
+    background: rgba(255, 255, 255, 0.045);
+}
+
+#watchViewAdvertisementPage .calculation-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+#watchViewAdvertisementPage .calculation-row:last-child {
+    border-bottom: 0;
+}
+
+#watchViewAdvertisementPage .calculation-row span {
+    color: #a1a8b5;
+    font-size: 13px;
+}
+
+#watchViewAdvertisementPage .calculation-row strong {
+    color: #ffffff;
+    font-size: 14px;
+    text-align: right;
+}
+
+
+/* TOTAL COST */
+
+#watchViewAdvertisementPage
+.calculation-row.total-row {
+    margin-top: 7px;
+    padding: 17px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 0;
+}
+
+#watchViewAdvertisementPage
+.calculation-row.total-row span {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#watchViewAdvertisementPage
+.calculation-row.total-row strong {
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   ADVERTISEMENT SUMMARY
+========================================================= */
+
+#watchViewAdvertisementPage .summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+#watchViewAdvertisementPage .summary-row span {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+#watchViewAdvertisementPage .summary-row strong {
+    color: #ffffff;
+    font-size: 13px;
+    text-align: right;
+    word-break: break-word;
+}
+
+#watchViewAdvertisementPage .summary-row.summary-total {
+    margin-top: 8px;
+    padding-top: 17px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 0;
+}
+
+#watchViewAdvertisementPage
+.summary-row.summary-total span {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+#watchViewAdvertisementPage
+.summary-row.summary-total strong {
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   ADMIN APPROVAL NOTICE
+========================================================= */
+
+#watchViewAdvertisementPage .approval-notice {
+    padding: 18px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.035);
+}
+
+#watchViewAdvertisementPage .notice-content h3 {
+    margin: 0 0 7px;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+#watchViewAdvertisementPage .notice-content p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+#watchViewAdvertisementPage .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding-top: 2px;
+}
+
+#watchViewAdvertisementPage
+#watchViewCancelButton,
+#watchViewAdvertisementPage
+#watchViewSubmitButton {
+    min-height: 45px;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#watchViewAdvertisementPage
+#watchViewCancelButton {
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.04);
+    color: #d1d5db;
+}
+
+#watchViewAdvertisementPage
+#watchViewCancelButton:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#watchViewAdvertisementPage
+#watchViewSubmitButton {
+    border: 0;
+    background: #ffffff;
+    color: #111111;
+}
+
+#watchViewAdvertisementPage
+#watchViewSubmitButton:hover {
+    opacity: 0.88;
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    #watchViewAdvertisementPage {
+        padding: 14px;
+    }
+
+    #watchViewAdvertisementPage .header-content {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #watchViewAdvertisementPage .header-title h1 {
+        font-size: 21px;
+    }
+
+    #watchViewAdvertisementPage .header-title p {
+        font-size: 12px;
+    }
+
+    #watchViewAdvertisementPage .form-section,
+    #watchViewAdvertisementPage .calculation-section {
+        padding: 17px;
+        border-radius: 14px;
+    }
+
+    #watchViewAdvertisementPage .duration-options {
+        grid-template-columns: 1fr;
+    }
+
+    #watchViewAdvertisementPage .calculation-row,
+    #watchViewAdvertisementPage .summary-row {
+        align-items: flex-start;
+    }
+
+    #watchViewAdvertisementPage .form-actions {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    #watchViewAdvertisementPage
+    #watchViewCancelButton,
+    #watchViewAdvertisementPage
+    #watchViewSubmitButton {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    #watchViewAdvertisementPage {
+        padding: 10px;
+    }
+
+    #watchViewAdvertisementPage .header-title h1 {
+        font-size: 18px;
+    }
+
+    #watchViewAdvertisementPage
+    #watchViewBackButton {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    #watchViewAdvertisementPage
+    .duration-content {
+        min-height: 66px;
+        padding: 13px;
+    }
+
+    #watchViewAdvertisementPage
+    .calculation-row span,
+    #watchViewAdvertisementPage
+    .calculation-row strong,
+    #watchViewAdvertisementPage
+    .summary-row span,
+    #watchViewAdvertisementPage
+    .summary-row strong {
+        font-size: 12px;
+    }
+  }
+
+
+
+
   
   
   /* ===== PREMIUM BINANCE UID WITHDRAWAL POPUP ===== */
