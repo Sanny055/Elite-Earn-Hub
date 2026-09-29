@@ -313,7 +313,769 @@ footer div:last-child{
 
 
 
+/* =========================================================
+   ELITE EARN HUB
+   YOUTUBE WATCH & VIEW ADVERTISEMENT PAGE
+   FULL-SCREEN SEPARATE PAGE
+========================================================= */
 
+#watchViewAdvertisementPage {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            145deg,
+            #06141d,
+            #081d29
+        );
+
+    color: #fff;
+
+    z-index: 99999;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 18px 14px 40px;
+}
+
+
+/* =========================
+   PAGE INNER
+========================= */
+
+#watchViewAdvertisementPage .watch-view-page-inner {
+
+    width: 100%;
+    max-width: 520px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+#watchViewAdvertisementPage .watch-view-header {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+    padding-top: 8px;
+}
+
+
+#watchViewAdvertisementPage .watch-view-back-button {
+
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    border: 1px solid rgba(56,189,248,0.18);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.05);
+
+    color: #fff;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+#watchViewAdvertisementPage .watch-view-back-button:hover {
+
+    background: rgba(56,189,248,0.10);
+
+    border-color: rgba(56,189,248,0.35);
+}
+
+
+#watchViewAdvertisementPage .watch-view-header-text {
+    flex: 1;
+}
+
+
+#watchViewAdvertisementPage .watch-view-header-text h1 {
+
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 19px;
+    font-weight: 750;
+}
+
+
+#watchViewAdvertisementPage .watch-view-header-text p {
+
+    margin: 4px 0 0;
+
+    color: #78909c;
+
+    font-size: 10px;
+}
+
+
+/* =========================
+   COMMON SECTION
+========================= */
+
+#watchViewAdvertisementPage .watch-view-section {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-bottom: 16px;
+
+    padding: 18px;
+
+    border: 1px solid rgba(56,189,248,0.15);
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.035);
+
+    box-shadow: 0 20px 55px rgba(0,0,0,0.30);
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+#watchViewAdvertisementPage .watch-view-section-title {
+
+    margin-bottom: 16px;
+}
+
+
+#watchViewAdvertisementPage .watch-view-section-title h2 {
+
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 750;
+}
+
+
+#watchViewAdvertisementPage .watch-view-section-title p {
+
+    margin: 5px 0 0;
+
+    color: #718b98;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   FORM GROUP
+========================= */
+
+#watchViewAdvertisementPage .watch-view-form-group {
+
+    margin-bottom: 16px;
+}
+
+
+#watchViewAdvertisementPage .watch-view-form-group:last-child {
+
+    margin-bottom: 0;
+}
+
+
+#watchViewAdvertisementPage .watch-view-form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #c8dbe3;
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+#watchViewAdvertisementPage .watch-view-form-group input {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px;
+
+    border: 1px solid rgba(255,255,255,0.09);
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.045);
+
+    color: #fff;
+
+    outline: none;
+
+    font-size: 11px;
+}
+
+
+#watchViewAdvertisementPage .watch-view-form-group input:focus {
+
+    border-color: rgba(56,189,248,0.40);
+
+    background: rgba(255,255,255,0.06);
+}
+
+
+#watchViewAdvertisementPage .watch-view-form-group input::placeholder {
+
+    color: #526b77;
+}
+
+
+/* =========================
+   BUDGET INPUT
+========================= */
+
+#watchViewAdvertisementPage .watch-view-budget-input {
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255,255,255,0.09);
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.045);
+
+    overflow: hidden;
+}
+
+
+#watchViewAdvertisementPage .watch-view-budget-input input {
+
+    flex: 1;
+
+    width: auto;
+
+    border: none;
+
+    border-radius: 0;
+
+    background: transparent;
+}
+
+
+#watchViewAdvertisementPage .watch-view-budget-input input:focus {
+
+    border: none;
+
+    background: transparent;
+}
+
+
+#watchViewAdvertisementPage .watch-view-budget-input span {
+
+    padding-right: 12px;
+
+    color: #7dd3fc;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================
+   DURATION OPTIONS
+========================= */
+
+#watchViewAdvertisementPage .watch-view-duration-options {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+}
+
+
+#watchViewAdvertisementPage .watch-view-duration-option {
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 66px;
+
+    padding: 11px;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.045);
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+#watchViewAdvertisementPage .watch-view-duration-option:hover {
+
+    border-color: rgba(56,189,248,0.30);
+
+    background: rgba(56,189,248,0.07);
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-duration-option:has(input:checked) {
+
+    border-color: rgba(56,189,248,0.55);
+
+    background: rgba(56,189,248,0.10);
+
+    box-shadow:
+        0 0 0 1px rgba(56,189,248,0.10);
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-duration-option input {
+
+    width: 16px;
+    height: 16px;
+
+    margin: 0;
+
+    flex-shrink: 0;
+
+    accent-color: #38bdf8;
+
+    cursor: pointer;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-duration-option > span {
+
+    display: block;
+
+    min-width: 0;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-duration-option strong {
+
+    display: block;
+
+    color: #fff;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-duration-option small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #718b98;
+
+    font-size: 8px;
+
+    line-height: 1.3;
+}
+
+
+/* =========================
+   CALCULATION BOX
+========================= */
+
+#watchViewAdvertisementPage .watch-view-calculation {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-bottom: 16px;
+
+    padding: 18px;
+
+    border: 1px solid rgba(56,189,248,0.15);
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.035);
+
+    box-shadow: 0 20px 55px rgba(0,0,0,0.30);
+}
+
+
+/* =========================
+   CALCULATION ROW
+========================= */
+
+#watchViewAdvertisementPage
+.watch-view-calculation-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-calculation-row:last-child {
+
+    border-bottom: none;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-calculation-row span {
+
+    color: #78909c;
+
+    font-size: 10px;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-calculation-row strong {
+
+    color: #fff;
+
+    font-size: 11px;
+
+    text-align: right;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-calculation-row.watch-view-total-row {
+
+    margin-top: 5px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(56,189,248,0.18);
+
+    border-bottom: none;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-total-row span {
+
+    color: #c8dbe3;
+
+    font-weight: 700;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-total-row strong {
+
+    color: #7dd3fc;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+#watchViewAdvertisementPage
+.watch-view-summary-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-summary-row:last-child {
+
+    border-bottom: none;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-summary-row span {
+
+    color: #78909c;
+
+    font-size: 10px;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-summary-row strong {
+
+    max-width: 60%;
+
+    color: #fff;
+
+    font-size: 10px;
+
+    text-align: right;
+
+    word-break: break-word;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-summary-total {
+
+    margin-top: 5px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(56,189,248,0.18);
+
+    border-bottom: none;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-summary-total span {
+
+    color: #c8dbe3;
+
+    font-weight: 700;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-summary-total strong {
+
+    color: #7dd3fc;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   ADMIN APPROVAL NOTICE
+========================= */
+
+#watchViewAdvertisementPage
+.watch-view-approval-notice {
+
+    margin-bottom: 18px;
+
+    padding: 15px;
+
+    border: 1px solid rgba(56,189,248,0.15);
+
+    border-radius: 15px;
+
+    background: rgba(56,189,248,0.055);
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-approval-notice h3 {
+
+    margin: 0 0 6px;
+
+    color: #fff;
+
+    font-size: 12px;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-approval-notice p {
+
+    margin: 0;
+
+    color: #78909c;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+#watchViewAdvertisementPage .watch-view-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    width: 100%;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-actions button {
+
+    flex: 1;
+
+    min-height: 44px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-cancel-button {
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    background: rgba(255,255,255,0.05);
+
+    color: #c8dbe3;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-cancel-button:hover {
+
+    background: rgba(255,255,255,0.09);
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-submit-button {
+
+    border: 1px solid rgba(56,189,248,0.30);
+
+    background: rgba(56,189,248,0.12);
+
+    color: #7dd3fc;
+}
+
+
+#watchViewAdvertisementPage
+.watch-view-submit-button:hover {
+
+    background: rgba(56,189,248,0.18);
+
+    border-color: rgba(56,189,248,0.45);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    #watchViewAdvertisementPage {
+
+        padding: 14px 12px 35px;
+    }
+
+    #watchViewAdvertisementPage
+    .watch-view-duration-options {
+
+        grid-template-columns: 1fr;
+    }
+
+    #watchViewAdvertisementPage
+    .watch-view-duration-option {
+
+        min-height: 58px;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL SCREENS
+========================= */
+
+@media (max-width: 370px) {
+
+    #watchViewAdvertisementPage
+    .watch-view-header-text h1 {
+
+        font-size: 17px;
+    }
+
+    #watchViewAdvertisementPage
+    .watch-view-section,
+    #watchViewAdvertisementPage
+    .watch-view-calculation {
+
+        padding: 15px;
+    }
+
+  }
 
 
 
