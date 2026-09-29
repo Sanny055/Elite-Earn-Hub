@@ -14072,7 +14072,465 @@ if (watchViewCancelButton) {
 }
 
 
+// =====================================================
+// WATCH & VIEW CALCULATION ONLY
+// =====================================================
 
+const watchViewForm =
+    document.getElementById("watchViewAdvertisementForm");
+
+const watchViewVideoLink =
+    document.getElementById("watchViewVideoLink");
+
+const watchViewVideoName =
+    document.getElementById("watchViewVideoName");
+
+const watchViewBudget =
+    document.getElementById("watchViewBudget");
+
+const watchDurationOptions =
+    document.querySelectorAll('input[name="watchDuration"]');
+
+
+// =====================================================
+// CALCULATION OUTPUTS
+// =====================================================
+
+const selectedWatchDuration =
+    document.getElementById("selectedWatchDuration");
+
+const watchViewRewardPerView =
+    document.getElementById("watchViewRewardPerView");
+
+const watchViewPlatformFee =
+    document.getElementById("watchViewPlatformFee");
+
+const watchViewTotalCostPerView =
+    document.getElementById("watchViewTotalCostPerView");
+
+const watchViewTotalViews =
+    document.getElementById("watchViewTotalViews");
+
+const watchViewTotalUserRewards =
+    document.getElementById("watchViewTotalUserRewards");
+
+const watchViewTotalPlatformFee =
+    document.getElementById("watchViewTotalPlatformFee");
+
+const watchViewFinalAdvertisementCost =
+    document.getElementById("watchViewFinalAdvertisementCost");
+
+
+// =====================================================
+// SUMMARY
+// =====================================================
+
+const summaryVideoName =
+    document.getElementById("summaryVideoName");
+
+const summaryWatchDuration =
+    document.getElementById("summaryWatchDuration");
+
+const summaryRewardPerView =
+    document.getElementById("summaryRewardPerView");
+
+const summaryTotalViews =
+    document.getElementById("summaryTotalViews");
+
+const summaryAdvertisementCost =
+    document.getElementById("summaryAdvertisementCost");
+
+
+// =====================================================
+// REWARD TABLE
+// =====================================================
+
+const WATCH_VIEW_REWARDS = {
+
+    "10": 0.020,
+    "30": 0.060,
+    "60": 0.120,
+    "90": 0.180,
+    "120": 0.240,
+    "180": 0.360
+
+};
+
+
+const WATCH_VIEW_PLATFORM_FEE_RATE = 0.10;
+
+
+// =====================================================
+// DURATION NAME
+// =====================================================
+
+function getWatchDurationName(seconds) {
+
+    switch (seconds) {
+
+        case "10":
+            return "10 Seconds";
+
+        case "30":
+            return "30 Seconds";
+
+        case "60":
+            return "60 Seconds";
+
+        case "90":
+            return "90 Seconds";
+
+        case "120":
+            return "120 Seconds";
+
+        case "180":
+            return "3 Minutes";
+
+        default:
+            return "Not Selected";
+    }
+
+}
+
+
+// =====================================================
+// MAIN CALCULATION
+// =====================================================
+
+function calculateWatchView() {
+
+    const selectedDuration =
+        document.querySelector(
+            'input[name="watchDuration"]:checked'
+        );
+
+    const budget =
+        parseFloat(watchViewBudget.value) || 0;
+
+
+    // No duration selected
+    if (!selectedDuration) {
+
+        selectedWatchDuration.textContent =
+            "Not Selected";
+
+        watchViewRewardPerView.textContent =
+            "0.000 SNX";
+
+        watchViewPlatformFee.textContent =
+            "0.000 SNX";
+
+        watchViewTotalCostPerView.textContent =
+            "0.000 SNX";
+
+        watchViewTotalViews.textContent =
+            "0";
+
+        watchViewTotalUserRewards.textContent =
+            "0.000 SNX";
+
+        watchViewTotalPlatformFee.textContent =
+            "0.000 SNX";
+
+        watchViewFinalAdvertisementCost.textContent =
+            "0.000 SNX";
+
+        summaryWatchDuration.textContent =
+            "Not Selected";
+
+        summaryRewardPerView.textContent =
+            "0.000 SNX";
+
+        summaryTotalViews.textContent =
+            "0";
+
+        summaryAdvertisementCost.textContent =
+            "0.000 SNX";
+
+        return;
+    }
+
+
+    const duration =
+        selectedDuration.value;
+
+    const reward =
+        WATCH_VIEW_REWARDS[duration];
+
+
+    // 10% platform fee
+    const platformFee =
+        reward * WATCH_VIEW_PLATFORM_FEE_RATE;
+
+
+    // Reward + platform fee
+    const totalCostPerView =
+        reward + platformFee;
+
+
+    // Total available views
+    const totalViews =
+        budget > 0
+            ? Math.floor(budget / totalCostPerView)
+            : 0;
+
+
+    // Total user rewards
+    const totalUserRewards =
+        totalViews * reward;
+
+
+    // Total platform fee
+    const totalPlatformFee =
+        totalViews * platformFee;
+
+
+    // Actual advertisement cost
+    const finalAdvertisementCost =
+        totalViews * totalCostPerView;
+
+
+    // =================================================
+    // UPDATE CALCULATION
+    // =================================================
+
+    selectedWatchDuration.textContent =
+        getWatchDurationName(duration);
+
+    watchViewRewardPerView.textContent =
+        reward.toFixed(3) + " SNX";
+
+    watchViewPlatformFee.textContent =
+        platformFee.toFixed(3) + " SNX";
+
+    watchViewTotalCostPerView.textContent =
+        totalCostPerView.toFixed(3) + " SNX";
+
+    watchViewTotalViews.textContent =
+        totalViews.toLocaleString();
+
+    watchViewTotalUserRewards.textContent =
+        totalUserRewards.toFixed(3) + " SNX";
+
+    watchViewTotalPlatformFee.textContent =
+        totalPlatformFee.toFixed(3) + " SNX";
+
+    watchViewFinalAdvertisementCost.textContent =
+        finalAdvertisementCost.toFixed(3) + " SNX";
+
+
+    // =================================================
+    // UPDATE SUMMARY
+    // =================================================
+
+    summaryWatchDuration.textContent =
+        getWatchDurationName(duration);
+
+    summaryRewardPerView.textContent =
+        reward.toFixed(3) + " SNX";
+
+    summaryTotalViews.textContent =
+        totalViews.toLocaleString();
+
+    summaryAdvertisementCost.textContent =
+        finalAdvertisementCost.toFixed(3) + " SNX";
+
+}
+
+
+// =====================================================
+// VIDEO NAME → SUMMARY
+// =====================================================
+
+if (watchViewVideoName) {
+
+    watchViewVideoName.addEventListener(
+        "input",
+        function () {
+
+            summaryVideoName.textContent =
+                watchViewVideoName.value.trim()
+                    ? watchViewVideoName.value.trim()
+                    : "Not Entered";
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// DURATION CHANGE
+// =====================================================
+
+watchDurationOptions.forEach(function (radio) {
+
+    radio.addEventListener(
+        "change",
+        calculateWatchView
+    );
+
+});
+
+
+// =====================================================
+// BUDGET CHANGE
+// =====================================================
+
+if (watchViewBudget) {
+
+    watchViewBudget.addEventListener(
+        "input",
+        calculateWatchView
+    );
+
+}
+
+
+// =====================================================
+// SUBMIT — VALIDATION ONLY
+// =====================================================
+// Abhi koi popup nahi.
+// Baad mein yahin popup add karenge.
+
+if (watchViewForm) {
+
+    watchViewForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const videoLink =
+                watchViewVideoLink.value.trim();
+
+            const videoName =
+                watchViewVideoName.value.trim();
+
+            const budget =
+                parseFloat(watchViewBudget.value);
+
+            const selectedDuration =
+                document.querySelector(
+                    'input[name="watchDuration"]:checked'
+                );
+
+
+            // Video link missing
+            if (!videoLink) {
+
+                alert(
+                    "Please enter the YouTube video link."
+                );
+
+                watchViewVideoLink.focus();
+
+                return;
+            }
+
+
+            // Invalid YouTube link
+            if (
+                !videoLink.includes("youtube.com") &&
+                !videoLink.includes("youtu.be")
+            ) {
+
+                alert(
+                    "Please enter a valid YouTube video link."
+                );
+
+                watchViewVideoLink.focus();
+
+                return;
+            }
+
+
+            // Video name missing
+            if (!videoName) {
+
+                alert(
+                    "Please enter the YouTube video name/title."
+                );
+
+                watchViewVideoName.focus();
+
+                return;
+            }
+
+
+            // Duration missing
+            if (!selectedDuration) {
+
+                alert(
+                    "Please select a watch duration."
+                );
+
+                return;
+            }
+
+
+            // Budget missing
+            if (!budget || budget <= 0) {
+
+                alert(
+                    "Please enter a valid advertisement budget."
+                );
+
+                watchViewBudget.focus();
+
+                return;
+            }
+
+
+            const reward =
+                WATCH_VIEW_REWARDS[
+                    selectedDuration.value
+                ];
+
+            const platformFee =
+                reward * WATCH_VIEW_PLATFORM_FEE_RATE;
+
+            const totalCostPerView =
+                reward + platformFee;
+
+            const totalViews =
+                Math.floor(
+                    budget / totalCostPerView
+                );
+
+
+            // Budget too low
+            if (totalViews < 1) {
+
+                alert(
+                    "Your budget is too low for at least 1 view."
+                );
+
+                watchViewBudget.focus();
+
+                return;
+            }
+
+
+            // =================================================
+            // SUBMIT SUCCESS FOR NOW
+            // CLEAR ALL VALUES
+            // =================================================
+
+            watchViewForm.reset();
+
+            calculateWatchView();
+
+            if (summaryVideoName) {
+                summaryVideoName.textContent =
+                    "Not Entered";
+            }
+
+        }
+    );
+
+}
   
         
 
