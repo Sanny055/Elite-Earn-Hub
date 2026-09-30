@@ -13006,7 +13006,19 @@ if (createLikeAdvertisementBtn) {
       "It will be submitted for Admin Approval."
     );
 
-  });
+
+// ===== CLEAR LIKE ADVERTISEMENT FORM =====
+
+document.getElementById("likeVideoLink").value = "";
+document.getElementById("likeVideoName").value = "";
+document.getElementById("likeDescription").value = "";
+document.getElementById("likeBudget").value = "";
+
+// Reset calculation result
+likeTotalUsers.textContent = "0";
+    
+  
+    });
 
     }
 
