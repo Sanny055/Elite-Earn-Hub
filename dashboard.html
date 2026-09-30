@@ -13247,10 +13247,16 @@ if (createLikeAdvertisementBtn) {
       return;
     }
 
-    alert(
-      "Advertisement details are ready. " +
-      "It will be submitted for Admin Approval."
-    );
+    // ===== OPEN LIKE SUBMIT SUCCESS POPUP =====
+
+const likeSubmitSuccessPopup =
+  document.getElementById("likeSubmitSuccessPopup");
+
+if (likeSubmitSuccessPopup) {
+
+  likeSubmitSuccessPopup.style.display = "flex";
+
+    }
 
 
 // ===== CLEAR LIKE ADVERTISEMENT FORM =====
