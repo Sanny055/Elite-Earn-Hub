@@ -15827,6 +15827,64 @@ if (manageAdvertisementsBackButton) {
 
 
 
+// =========================================
+// LIKE SUBMIT SUCCESS POPUP CONTROLS
+// =========================================
+
+const likeSubmitSuccessPopup =
+  document.getElementById("likeSubmitSuccessPopup");
+
+const likeSubmitPopupClose =
+  document.getElementById("likeSubmitPopupClose");
+
+const likeSubmitManageButton =
+  document.getElementById("likeSubmitManageButton");
+
+const manageAdvertisementsPage =
+  document.getElementById("manageAdvertisementsPage");
+
+
+// ===== CLOSE POPUP =====
+
+if (likeSubmitPopupClose && likeSubmitSuccessPopup) {
+
+  likeSubmitPopupClose.addEventListener("click", function () {
+
+    likeSubmitSuccessPopup.style.display = "none";
+
+  });
+
+}
+
+
+// ===== MANAGE ADVERTISEMENTS =====
+
+if (likeSubmitManageButton) {
+
+  likeSubmitManageButton.addEventListener("click", function () {
+
+    // Close success popup
+    if (likeSubmitSuccessPopup) {
+      likeSubmitSuccessPopup.style.display = "none";
+    }
+
+    // Close Like page
+    if (youtubeLikePage) {
+      youtubeLikePage.style.display = "none";
+    }
+
+    // Open Manage Advertisements page
+    if (manageAdvertisementsPage) {
+      manageAdvertisementsPage.style.display = "block";
+    }
+
+    // Start Manage page from top
+    window.scrollTo(0, 0);
+
+  });
+
+  }
+    
 
   
   
