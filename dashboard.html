@@ -16351,7 +16351,16 @@ if (subscribeBudget) {
 
         }
 
+const subscribeForm =
+    document.getElementById("subscribeAdvertisementForm");
 
+if (subscribeForm) {
+    subscribeForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        alert("Aapki YouTube Subscribe advertisement ki request Admin ke paas chali gayi hai.");
+    });
+    }
   
   
   
