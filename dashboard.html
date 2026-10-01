@@ -16280,6 +16280,41 @@ if (likeSubmitManageButton) {
   }
     
 
+
+
+
+/* =========================================
+   SUBSCRIBE PAGE BACK BUTTON
+========================================= */
+
+const subscribeBackButton =
+    document.getElementById("subscribeBackButton");
+
+const subscribeAdvertisementPage =
+    document.getElementById("subscribeAdvertisementPage");
+
+const advertisementCenterPopup =
+    document.getElementById("advertisementCenterPopup");
+
+
+if (subscribeBackButton) {
+
+    subscribeBackButton.addEventListener("click", function () {
+
+        subscribeAdvertisementPage.style.display = "none";
+
+        if (advertisementCenterPopup) {
+            advertisementCenterPopup.style.display = "flex";
+        }
+
+        document.body.style.overflow = "";
+
+    });
+
+    }
+
+
+  
   
   
   
