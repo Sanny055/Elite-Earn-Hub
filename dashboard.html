@@ -16359,62 +16359,32 @@ if (subscribeForm) {
         e.preventDefault();
 
         alert("Aapki YouTube Subscribe advertisement ki request Admin ke paas chali gayi hai.");
-    });
-    }
-  
-  
 
-
-
-
-        // ===== SUBSCRIBE PAGE RESET + BACK =====
-
-const subscribePage =
-    document.getElementById("subscribeAdvertisementPage");
-
-const subscribeForm =
-    document.getElementById("subscribeAdvertisementForm");
-
-const subscribeBudget =
-    document.getElementById("subscribeBudget");
-
-const subscribeBackButton =
-    document.getElementById("subscribeBackButton");
-
-const advertisementCenterPopup =
-    document.getElementById("advertisementCenterPopup");
-
-function resetSubscribeAdvertisement() {
-
-    if (subscribeForm) {
+        // Form reset
         subscribeForm.reset();
-    }
 
-    document.getElementById("subscribeTotalUsers").textContent = "0";
-    document.getElementById("subscribeTotalRewards").textContent = "0.000 SNX";
-    document.getElementById("subscribeTotalPlatformFee").textContent = "0.000 SNX";
-    document.getElementById("subscribeFinalCost").textContent = "0.000 SNX";
-}
+        // Calculation reset
+        document.getElementById("subscribeTotalUsers").textContent = "0";
+        document.getElementById("subscribeTotalRewards").textContent = "0.000 SNX";
+        document.getElementById("subscribeTotalPlatformFee").textContent = "0.000 SNX";
+        document.getElementById("subscribeFinalCost").textContent = "0.000 SNX";
 
+        // Subscribe page close
+        document.getElementById("subscribeAdvertisementPage").style.display = "none";
 
-// BACK BUTTON
-if (subscribeBackButton) {
-    subscribeBackButton.addEventListener("click", function () {
-
-        resetSubscribeAdvertisement();
-
-        if (subscribePage) {
-            subscribePage.style.display = "none";
-        }
-
-        if (advertisementCenterPopup) {
-            advertisementCenterPopup.style.display = "flex";
-        }
+        // Create Advertisement popup open
+        document.getElementById("createAdvertisementPopup").style.display = "flex";
 
         document.body.style.overflow = "";
-        window.scrollTo(0, 0);
     });
-}
+    }
+  
+  
+
+
+
+
+        
   
   </script>
  
