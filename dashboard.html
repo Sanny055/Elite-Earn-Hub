@@ -14791,11 +14791,26 @@ console.log("Subscribe Popup:", subscribeTaskOverlay);
 
   youtubeSubscribeBtn.addEventListener("click", function () {
 
-    alert("Subscribe button is working!");
+    const subscribePage =
+      document.getElementById("subscribeAdvertisementPage");
+
+    if (subscribePage) {
+
+      subscribePage.style.display = "block";
+      subscribePage.style.position = "fixed";
+      subscribePage.style.inset = "0";
+      subscribePage.style.zIndex = "100002";
+      subscribePage.style.overflowY = "auto";
+
+      document.body.style.overflow = "hidden";
+
+      window.scrollTo(0, 0);
+
+    }
 
   });
 
-}
+    }
     
 
 // STEP 1C — OPEN SUBSCRIBE POPUP
