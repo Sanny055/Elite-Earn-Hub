@@ -16284,34 +16284,72 @@ if (likeSubmitManageButton) {
 
 
 /* =========================================
-   SUBSCRIBE PAGE BACK BUTTON
+   YOUTUBE SUBSCRIBE ADVERTISEMENT CALCULATION
 ========================================= */
 
-const subscribeBackButton =
-    document.getElementById("subscribeBackButton");
+const subscribeBudget =
+    document.getElementById("subscribeBudget");
 
-const subscribeAdvertisementPage =
-    document.getElementById("subscribeAdvertisementPage");
+const subscribeTotalUsers =
+    document.getElementById("subscribeTotalUsers");
 
-const advertisementCenterPopup =
-    document.getElementById("advertisementCenterPopup");
+const subscribeTotalRewards =
+    document.getElementById("subscribeTotalRewards");
+
+const subscribeTotalPlatformFee =
+    document.getElementById("subscribeTotalPlatformFee");
+
+const subscribeFinalCost =
+    document.getElementById("subscribeFinalCost");
 
 
-if (subscribeBackButton) {
+const SUBSCRIBE_REWARD = 0.400;
+const SUBSCRIBE_FEE_RATE = 0.10;
+const SUBSCRIBE_COST = 0.440;
 
-    subscribeBackButton.addEventListener("click", function () {
 
-        subscribeAdvertisementPage.style.display = "none";
+function calculateSubscribeAdvertisement() {
 
-        if (advertisementCenterPopup) {
-            advertisementCenterPopup.style.display = "flex";
+    const budget =
+        parseFloat(subscribeBudget.value) || 0;
+
+    const totalUsers =
+        budget > 0
+            ? Math.floor(budget / SUBSCRIBE_COST)
+            : 0;
+
+    const totalRewards =
+        totalUsers * SUBSCRIBE_REWARD;
+
+    const totalPlatformFee =
+        totalUsers * (SUBSCRIBE_REWARD * SUBSCRIBE_FEE_RATE);
+
+    const finalCost =
+        totalUsers * SUBSCRIBE_COST;
+
+
+    subscribeTotalUsers.textContent =
+        totalUsers.toLocaleString();
+
+    subscribeTotalRewards.textContent =
+        totalRewards.toFixed(3) + " SNX";
+
+    subscribeTotalPlatformFee.textContent =
+        totalPlatformFee.toFixed(3) + " SNX";
+
+    subscribeFinalCost.textContent =
+        finalCost.toFixed(3) + " SNX";
+}
+
+
+if (subscribeBudget) {
+
+    subscribeBudget.addEventListener(
+        "input",
+        calculateSubscribeAdvertisement
+    );
+
         }
-
-        document.body.style.overflow = "";
-
-    });
-
-    }
 
 
   
