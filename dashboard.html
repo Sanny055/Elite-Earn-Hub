@@ -10299,27 +10299,19 @@ footer strong{
 </div>
   
 
-  
-  
-  
 
 
-
+  
+  
   <!-- =========================
-     CUSTOM TASK ADVERTISEMENT PAGE
+     TASK ADVERTISEMENT PAGE
 ========================= -->
 
-<div
-    id="customTaskAdvertisementPage"
-  style="display: block;"
->
+<div id="customTaskAdvertisementPage" style="display:none;">
 
     <div class="custom-task-ad-header">
 
-        <button
-            type="button"
-            id="customTaskBackButton"
-        >
+        <button type="button" id="customTaskBackButton">
             ← Back
         </button>
 
@@ -10330,124 +10322,64 @@ footer strong{
 
     </div>
 
-
     <form id="customTaskAdvertisementForm">
 
-        <!-- TASK TITLE -->
         <div class="custom-task-form-group">
-
-            <label for="customTaskTitle">
-                Task Title
-            </label>
-
+            <label>Task Title</label>
             <input
                 type="text"
                 id="customTaskTitle"
                 placeholder="Enter task title"
                 required
             >
-
         </div>
 
-
-        <!-- TASK LINK -->
         <div class="custom-task-form-group">
-
-            <label for="customTaskLink">
-                Task Link / Website URL
-            </label>
-
+            <label>Task Link / Website URL</label>
             <input
                 type="url"
                 id="customTaskLink"
                 placeholder="Enter website or task link"
                 required
             >
-
         </div>
 
-
-        <!-- DESCRIPTION -->
         <div class="custom-task-form-group">
-
-            <label for="customTaskDescription">
-                Task Description
-            </label>
-
+            <label>Task Description</label>
             <textarea
                 id="customTaskDescription"
                 placeholder="Describe your task"
                 required
             ></textarea>
-
         </div>
 
-
-        <!-- REQUIREMENTS -->
         <div class="custom-task-form-group">
-
-            <label for="customTaskRequirements">
-                Task Requirements / Instructions
-            </label>
-
+            <label>Task Requirements / Instructions</label>
             <textarea
                 id="customTaskRequirements"
                 placeholder="Write exactly what the user needs to do"
                 required
             ></textarea>
-
         </div>
 
-
-        <!-- SCREENSHOT PROOF -->
         <div class="custom-task-proof-box">
-
             <strong>Screenshot Proof</strong>
-
-            <p>
-                Screenshot proof is mandatory for completing this task.
-            </p>
-
+            <p>Screenshot proof is mandatory for completing this task.</p>
             <span>Required</span>
-
         </div>
 
-
-        <!-- COMPLETION LIMIT -->
         <div class="custom-task-form-group">
+            <label>Task Completion Limit</label>
 
-            <label for="customTaskCompletionLimit">
-                Task Completion Limit
-            </label>
-
-            <select
-                id="customTaskCompletionLimit"
-                required
-            >
-
-                <option value="">
-                    Select completion limit
-                </option>
-
-                <option value="once">
-                    One Time Only
-                </option>
-
-                <option value="multiple">
-                    Multiple Times
-                </option>
-
+            <select id="customTaskCompletionLimit" required>
+                <option value="">Select completion limit</option>
+                <option value="once">One Time Only</option>
+                <option value="multiple">Multiple Times</option>
             </select>
-
         </div>
 
-
-        <!-- REWARD PER TASK -->
         <div class="custom-task-form-group">
-
-            <label for="customTaskReward">
-                Reward Per Task
-            </label>
+            <label>Reward Per Task</label>
 
             <input
                 type="number"
@@ -10458,19 +10390,11 @@ footer strong{
                 required
             >
 
-            <small>
-                Minimum reward: 0.3 SNX
-            </small>
-
+            <small>Minimum reward: 0.3 SNX</small>
         </div>
 
-
-        <!-- TOTAL BUDGET -->
         <div class="custom-task-form-group">
-
-            <label for="customTaskBudget">
-                Total Advertisement Budget
-            </label>
+            <label>Total Advertisement Budget</label>
 
             <input
                 type="number"
@@ -10480,66 +10404,37 @@ footer strong{
                 step="0.001"
                 required
             >
-
         </div>
 
-
-        <!-- PLATFORM FEE -->
         <div class="custom-task-fee-box">
-
-            <span>
-                Platform Fee
-            </span>
-
-            <strong>
-                10% Per Completed Task
-            </strong>
-
+            <span>Platform Fee</span>
+            <strong>10% Per Completed Task</strong>
         </div>
 
-
-        <!-- CALCULATIONS -->
         <div class="custom-task-calculation-box">
 
             <div>
                 <span>Total Tasks</span>
-
-                <strong id="customTaskTotalTasks">
-                    0
-                </strong>
+                <strong id="customTaskTotalTasks">0</strong>
             </div>
-
 
             <div>
                 <span>Total User Rewards</span>
-
-                <strong id="customTaskTotalRewards">
-                    0.000 SNX
-                </strong>
+                <strong id="customTaskTotalRewards">0.000 SNX</strong>
             </div>
-
 
             <div>
                 <span>Total Platform Fee</span>
-
-                <strong id="customTaskTotalPlatformFee">
-                    0.000 SNX
-                </strong>
+                <strong id="customTaskTotalPlatformFee">0.000 SNX</strong>
             </div>
-
 
             <div>
                 <span>Final Advertisement Cost</span>
-
-                <strong id="customTaskFinalCost">
-                    0.000 SNX
-                </strong>
+                <strong id="customTaskFinalCost">0.000 SNX</strong>
             </div>
 
         </div>
 
-
-        <!-- SUBMIT -->
         <button
             type="submit"
             id="customTaskSubmitButton"
@@ -10547,16 +10442,14 @@ footer strong{
             Submit Advertisement
         </button>
 
-
     </form>
 
 </div>
 
 <!-- =========================
-     END CUSTOM TASK PAGE
+     END TASK ADVERTISEMENT PAGE
 ========================= -->
-  
-  
+
 
 
   
