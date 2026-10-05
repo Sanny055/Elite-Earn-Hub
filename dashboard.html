@@ -16691,7 +16691,20 @@ if (subscribeForm) {
   
 
 
+// =========================
+// TASK ADVERTISEMENT PAGE
+// OPEN & BACK BUTTON
+// =========================
 
+taskPlatformBtn.addEventListener("click", function () {
+    createAdvertisementPopup.style.display = "none";
+    customTaskAdvertisementPage.style.display = "block";
+});
+
+customTaskBackButton.addEventListener("click", function () {
+    customTaskAdvertisementPage.style.display = "none";
+    createAdvertisementPopup.style.display = "block";
+});
     
 
 
