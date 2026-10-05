@@ -16691,22 +16691,50 @@ if (subscribeForm) {
   
 
 
+    
 // =========================
 // TASK ADVERTISEMENT PAGE
-// OPEN & BACK BUTTON
+// OPEN & BACK
 // =========================
 
-taskPlatformBtn.addEventListener("click", function () {
-    createAdvertisementPopup.style.display = "none";
-    customTaskAdvertisementPage.style.display = "block";
-});
+const taskPlatformBtn =
+    document.getElementById("taskPlatformBtn");
 
-customTaskBackButton.addEventListener("click", function () {
-    customTaskAdvertisementPage.style.display = "none";
-    createAdvertisementPopup.style.display = "block";
-});
-    
+const customTaskAdvertisementPage =
+    document.getElementById("customTaskAdvertisementPage");
 
+const customTaskBackButton =
+    document.getElementById("customTaskBackButton");
+
+if (taskPlatformBtn && customTaskAdvertisementPage) {
+
+    taskPlatformBtn.addEventListener("click", function () {
+
+        // Create Advertisement popup close
+        document.getElementById("createAdvertisementPopup").style.display = "none";
+
+        // Task page open
+        customTaskAdvertisementPage.style.display = "block";
+
+        // Page top
+        window.scrollTo(0, 0);
+
+    });
+}
+
+
+if (customTaskBackButton && customTaskAdvertisementPage) {
+
+    customTaskBackButton.addEventListener("click", function () {
+
+        // Task page close
+        customTaskAdvertisementPage.style.display = "none";
+
+        // Create Advertisement popup back
+        document.getElementById("createAdvertisementPopup").style.display = "flex";
+
+    });
+}
 
 
 
