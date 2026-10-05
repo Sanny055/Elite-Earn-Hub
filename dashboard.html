@@ -10142,7 +10142,203 @@ footer strong{
 
 </div>
   
-<!-- YOUTUBE TASK POPUP -->
+
+  
+  
+  <div id="customTaskAdvertisementPage" style="display: none;">
+
+    <div class="task-page-header">
+        <button type="button" id="taskBackButton">← Back</button>
+
+        <h2>Create Task Advertisement</h2>
+
+        <p>Create your own custom task advertisement.</p>
+    </div>
+
+    <form id="customTaskAdvertisementForm">
+
+        <!-- Task Title -->
+        <div class="task-form-group">
+            <label for="taskTitle">Task Title</label>
+            <input
+                type="text"
+                id="taskTitle"
+                placeholder="Enter task title"
+                required
+            >
+        </div>
+
+        <!-- Task Link -->
+        <div class="task-form-group">
+            <label for="taskLink">Task Link / Website URL</label>
+            <input
+                type="url"
+                id="taskLink"
+                placeholder="Enter website or task link"
+                required
+            >
+        </div>
+
+        <!-- Description -->
+        <div class="task-form-group">
+            <label for="taskDescription">Task Description</label>
+            <textarea
+                id="taskDescription"
+                placeholder="Describe your task"
+                required
+            ></textarea>
+        </div>
+
+        <!-- Requirements -->
+        <div class="task-form-group">
+            <label for="taskRequirements">
+                Task Requirements / Instructions
+            </label>
+
+            <textarea
+                id="taskRequirements"
+                placeholder="Write what the user needs to do to complete this task"
+                required
+            ></textarea>
+        </div>
+
+        <!-- Screenshot Required -->
+        <div class="task-option-box">
+
+            <label>Screenshot Proof</label>
+
+            <div class="task-option-info">
+                Screenshot is required to complete this task.
+            </div>
+
+            <strong>Required</strong>
+
+        </div>
+
+        <!-- Completion Limit -->
+        <div class="task-form-group">
+
+            <label for="taskCompletionLimit">
+                Task Completion Limit
+            </label>
+
+            <select id="taskCompletionLimit" required>
+
+                <option value="">
+                    Select completion limit
+                </option>
+
+                <option value="once">
+                    One Time Only
+                </option>
+
+                <option value="multiple">
+                    Multiple Times
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- Reward Per Task -->
+        <div class="task-form-group">
+
+            <label for="taskRewardPerTask">
+                Reward Per Task
+            </label>
+
+            <input
+                type="number"
+                id="taskRewardPerTask"
+                placeholder="Minimum 0.03 SNX"
+                min="0.03"
+                step="0.001"
+                required
+            >
+
+            <small>
+                Minimum reward: 0.03 SNX
+            </small>
+
+        </div>
+
+        <!-- Total Budget -->
+        <div class="task-form-group">
+
+            <label for="taskTotalBudget">
+                Total Advertisement Budget
+            </label>
+
+            <input
+                type="number"
+                id="taskTotalBudget"
+                placeholder="Enter total budget in SNX"
+                min="0"
+                step="0.001"
+                required
+            >
+
+        </div>
+
+        <!-- Platform Fee -->
+        <div class="task-fee-box">
+
+            <div>Platform Fee</div>
+
+            <strong>10% Per Completed Task</strong>
+
+        </div>
+
+        <!-- Calculation -->
+        <div class="task-calculation-box">
+
+            <div>
+                Total Tasks:
+                <strong id="taskTotalUsers">0</strong>
+            </div>
+
+            <div>
+                Total User Rewards:
+                <strong id="taskTotalRewards">
+                    0.000 SNX
+                </strong>
+            </div>
+
+            <div>
+                Total Platform Fee:
+                <strong id="taskTotalPlatformFee">
+                    0.000 SNX
+                </strong>
+            </div>
+
+            <div>
+                Final Advertisement Cost:
+                <strong id="taskFinalCost">
+                    0.000 SNX
+                </strong>
+            </div>
+
+        </div>
+
+        <!-- Submit -->
+        <button
+            type="submit"
+            id="taskSubmitButton"
+        >
+            Submit Advertisement
+        </button>
+
+    </form>
+
+</div>
+  
+  
+  
+  
+  
+  
+  
+  <!-- YOUTUBE TASK POPUP -->
 
 <div id="youtubeTaskPopup" class="youtube-task-popup">
 
