@@ -16793,6 +16793,35 @@ if (subscribeForm) {
 
 
 
+    
+
+/* TASK PAGE OPEN */
+const taskButton =
+    document.getElementById("taskButton");
+
+const customTaskAdvertisementPage =
+    document.getElementById("customTaskAdvertisementPage");
+
+if (taskButton && customTaskAdvertisementPage) {
+    taskButton.addEventListener("click", function () {
+        customTaskAdvertisementPage.style.display = "block";
+        window.scrollTo(0, 0);
+    });
+}
+
+
+/* TASK PAGE BACK / CLOSE */
+const taskBackButton =
+    document.getElementById("taskBackButton");
+
+if (taskBackButton && customTaskAdvertisementPage) {
+    taskBackButton.addEventListener("click", function () {
+        customTaskAdvertisementPage.style.display = "none";
+    });
+}
+  
+
+
 
         
   
