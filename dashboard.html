@@ -10149,9 +10149,263 @@ footer strong{
   
   
   
+
+
+
+  <!-- =========================
+     CUSTOM TASK ADVERTISEMENT PAGE
+========================= -->
+
+<div
+    id="customTaskAdvertisementPage"
+    style="display: none;"
+>
+
+    <div class="custom-task-ad-header">
+
+        <button
+            type="button"
+            id="customTaskBackButton"
+        >
+            ← Back
+        </button>
+
+        <div>
+            <h2>Create Task Advertisement</h2>
+            <p>Create your own custom task advertisement.</p>
+        </div>
+
+    </div>
+
+
+    <form id="customTaskAdvertisementForm">
+
+        <!-- TASK TITLE -->
+        <div class="custom-task-form-group">
+
+            <label for="customTaskTitle">
+                Task Title
+            </label>
+
+            <input
+                type="text"
+                id="customTaskTitle"
+                placeholder="Enter task title"
+                required
+            >
+
+        </div>
+
+
+        <!-- TASK LINK -->
+        <div class="custom-task-form-group">
+
+            <label for="customTaskLink">
+                Task Link / Website URL
+            </label>
+
+            <input
+                type="url"
+                id="customTaskLink"
+                placeholder="Enter website or task link"
+                required
+            >
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+        <div class="custom-task-form-group">
+
+            <label for="customTaskDescription">
+                Task Description
+            </label>
+
+            <textarea
+                id="customTaskDescription"
+                placeholder="Describe your task"
+                required
+            ></textarea>
+
+        </div>
+
+
+        <!-- REQUIREMENTS -->
+        <div class="custom-task-form-group">
+
+            <label for="customTaskRequirements">
+                Task Requirements / Instructions
+            </label>
+
+            <textarea
+                id="customTaskRequirements"
+                placeholder="Write exactly what the user needs to do"
+                required
+            ></textarea>
+
+        </div>
+
+
+        <!-- SCREENSHOT PROOF -->
+        <div class="custom-task-proof-box">
+
+            <strong>Screenshot Proof</strong>
+
+            <p>
+                Screenshot proof is mandatory for completing this task.
+            </p>
+
+            <span>Required</span>
+
+        </div>
+
+
+        <!-- COMPLETION LIMIT -->
+        <div class="custom-task-form-group">
+
+            <label for="customTaskCompletionLimit">
+                Task Completion Limit
+            </label>
+
+            <select
+                id="customTaskCompletionLimit"
+                required
+            >
+
+                <option value="">
+                    Select completion limit
+                </option>
+
+                <option value="once">
+                    One Time Only
+                </option>
+
+                <option value="multiple">
+                    Multiple Times
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- REWARD PER TASK -->
+        <div class="custom-task-form-group">
+
+            <label for="customTaskReward">
+                Reward Per Task
+            </label>
+
+            <input
+                type="number"
+                id="customTaskReward"
+                placeholder="Minimum 0.03 SNX"
+                min="0.03"
+                step="0.001"
+                required
+            >
+
+            <small>
+                Minimum reward: 0.03 SNX
+            </small>
+
+        </div>
+
+
+        <!-- TOTAL BUDGET -->
+        <div class="custom-task-form-group">
+
+            <label for="customTaskBudget">
+                Total Advertisement Budget
+            </label>
+
+            <input
+                type="number"
+                id="customTaskBudget"
+                placeholder="Enter total budget in SNX"
+                min="0"
+                step="0.001"
+                required
+            >
+
+        </div>
+
+
+        <!-- PLATFORM FEE -->
+        <div class="custom-task-fee-box">
+
+            <span>
+                Platform Fee
+            </span>
+
+            <strong>
+                10% Per Completed Task
+            </strong>
+
+        </div>
+
+
+        <!-- CALCULATIONS -->
+        <div class="custom-task-calculation-box">
+
+            <div>
+                <span>Total Tasks</span>
+
+                <strong id="customTaskTotalTasks">
+                    0
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Total User Rewards</span>
+
+                <strong id="customTaskTotalRewards">
+                    0.000 SNX
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Total Platform Fee</span>
+
+                <strong id="customTaskTotalPlatformFee">
+                    0.000 SNX
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Final Advertisement Cost</span>
+
+                <strong id="customTaskFinalCost">
+                    0.000 SNX
+                </strong>
+            </div>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+        <button
+            type="submit"
+            id="customTaskSubmitButton"
+        >
+            Submit Advertisement
+        </button>
+
+
+    </form>
+
+</div>
+
+<!-- =========================
+     END CUSTOM TASK PAGE
+========================= -->
   
   
-  
+
+
   
   
   <!-- YOUTUBE TASK POPUP -->
