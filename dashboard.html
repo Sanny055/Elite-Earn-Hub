@@ -318,11 +318,16 @@ footer div:last-child{
 ========================= */
 
 #customTaskAdvertisementPage {
+    display: none;
+    position: fixed;
+    inset: 0;
     width: 100%;
-    max-width: 650px;
-    margin: 20px auto;
-    padding: 20px;
+    height: 100vh;
+    background: #06101c;
+    z-index: 99999;
+    overflow-y: auto;
     box-sizing: border-box;
+    padding: 20px;
 }
 
 .custom-task-ad-header {
