@@ -16744,170 +16744,74 @@ if (customTaskBackButton && customTaskAdvertisementPage) {
 
 
 
+
+
 // =========================
-// TASK ADVERTISEMENT
-// CALCULATION + SUBMIT
+// CUSTOM TASK CALCULATIONS
 // =========================
 
-const taskForm = document.getElementById("customTaskAdvertisementForm");
+const taskReward = document.getElementById("customTaskReward");
+const taskBudget = document.getElementById("customTaskBudget");
 
-if (taskForm) {
-
-    const rewardInput = taskForm.querySelector(
-        'input[name="rewardPerTask"], #taskRewardPerTask, #rewardPerTask'
-    );
-
-    const budgetInput = taskForm.querySelector(
-        'input[name="totalAdvertisementBudget"], #totalAdvertisementBudget, #taskBudget'
-    );
-
-    const totalTasksInput = taskForm.querySelector(
-        'input[name="totalTasks"], #totalTasks'
-    );
-
-    const totalRewardsInput = taskForm.querySelector(
-        'input[name="totalUserRewards"], #totalUserRewards'
-    );
-
-    const platformFeeInput = taskForm.querySelector(
-        'input[name="platformFee"], #platformFee'
-    );
-
-    const finalCostInput = taskForm.querySelector(
-        'input[name="finalCost"], #finalCost'
-    );
+const taskTotalTasks = document.getElementById("customTaskTotalTasks");
+const taskTotalRewards = document.getElementById("customTaskTotalRewards");
+const taskTotalPlatformFee = document.getElementById("customTaskTotalPlatformFee");
+const taskFinalCost = document.getElementById("customTaskFinalCost");
 
 
-    function calculateTaskAdvertisement() {
+function calculateCustomTask() {
 
-        const reward = parseFloat(rewardInput?.value) || 0;
-        const budget = parseFloat(budgetInput?.value) || 0;
+    const reward = parseFloat(taskReward.value) || 0;
+    const budget = parseFloat(taskBudget.value) || 0;
 
-        // Reward minimum 0.3 SNX
-        if (reward > 0 && reward < 0.3) {
-            if (rewardInput) rewardInput.value = 0.3;
-        }
+    // 10% platform fee
+    const costPerTask = reward * 1.10;
 
-        const finalReward = Math.max(
-            parseFloat(rewardInput?.value) || 0,
-            0.3
-        );
+    // Total tasks possible within budget
+    let totalTasks = 0;
 
-        // Total number of tasks
-        const totalTasks = Math.floor(budget / (finalReward * 1.10));
-
-        // Total rewards for users
-        const totalUserRewards = totalTasks * finalReward;
-
-        // 10% platform fee
-        const platformFee = totalUserRewards * 0.10;
-
-        // Final advertisement cost
-        const finalCost = totalUserRewards + platformFee;
-
-
-        if (totalTasksInput) {
-            totalTasksInput.value = totalTasks;
-        }
-
-        if (totalRewardsInput) {
-            totalRewardsInput.value = totalUserRewards.toFixed(2) + " SNX";
-        }
-
-        if (platformFeeInput) {
-            platformFeeInput.value = platformFee.toFixed(2) + " SNX";
-        }
-
-        if (finalCostInput) {
-            finalCostInput.value = finalCost.toFixed(2) + " SNX";
-        }
+    if (reward >= 0.3 && budget > 0) {
+        totalTasks = Math.floor(budget / costPerTask);
     }
 
+    // Total rewards for users
+    const totalRewards = totalTasks * reward;
 
-    // Automatic calculation
-    if (rewardInput) {
-        rewardInput.addEventListener("input", calculateTaskAdvertisement);
-    }
+    // 10% platform fee
+    const platformFee = totalRewards * 0.10;
 
-    if (budgetInput) {
-        budgetInput.addEventListener("input", calculateTaskAdvertisement);
-    }
-
-
-    // Submit
-    taskForm.addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        // Required fields check
-        const requiredFields = taskForm.querySelectorAll("[required]");
-
-        for (const field of requiredFields) {
-
-            if (!field.value || !field.value.trim()) {
-
-                alert("Please complete all required fields before submitting.");
-
-                field.focus();
-
-                return;
-            }
-        }
+    // Final advertisement cost
+    const finalCost = totalRewards + platformFee;
 
 
-        // Reward minimum check
-        const reward = parseFloat(rewardInput?.value) || 0;
+    // Show calculations
+    taskTotalTasks.textContent = totalTasks;
 
-        if (reward < 0.3) {
+    taskTotalRewards.textContent =
+        totalRewards.toFixed(3) + " SNX";
 
-            alert("Reward Per Task must be at least 0.3 SNX.");
+    taskTotalPlatformFee.textContent =
+        platformFee.toFixed(3) + " SNX";
 
-            if (rewardInput) {
-                rewardInput.focus();
-            }
-
-            return;
-        }
-
-
-        // Success message
-        alert(
-            "Your task advertisement request has been sent to the Admin successfully."
-        );
-
-
-        // After OK → close Task page
-        if (customTaskAdvertisementPage) {
-            customTaskAdvertisementPage.style.display = "none";
-        }
-
-
-        // Back to Create Advertisement popup
-        const createPopup =
-            document.getElementById("createAdvertisementPopup");
-
-        if (createPopup) {
-            createPopup.style.display = "flex";
-        }
-
-
-        // Reset form
-        taskForm.reset();
-
-        // Reset calculations
-        calculateTaskAdvertisement();
-    });
-
-
-    // Initial calculation
-    calculateTaskAdvertisement();
+    taskFinalCost.textContent =
+        finalCost.toFixed(3) + " SNX";
 }
 
 
+// Reward change
+taskReward.addEventListener("input", calculateCustomTask);
 
+// Budget change
+taskBudget.addEventListener("input", calculateCustomTask);
+
+
+// Initial calculation
+calculateCustomTask();
 
   
         
+  
+ 
   
   </script>
  
