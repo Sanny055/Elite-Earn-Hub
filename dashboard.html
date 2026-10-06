@@ -16744,6 +16744,169 @@ if (customTaskBackButton && customTaskAdvertisementPage) {
 
 
 
+// =========================
+// TASK ADVERTISEMENT
+// CALCULATION + SUBMIT
+// =========================
+
+const taskForm = document.getElementById("customTaskAdvertisementForm");
+
+if (taskForm) {
+
+    const rewardInput = taskForm.querySelector(
+        'input[name="rewardPerTask"], #taskRewardPerTask, #rewardPerTask'
+    );
+
+    const budgetInput = taskForm.querySelector(
+        'input[name="totalAdvertisementBudget"], #totalAdvertisementBudget, #taskBudget'
+    );
+
+    const totalTasksInput = taskForm.querySelector(
+        'input[name="totalTasks"], #totalTasks'
+    );
+
+    const totalRewardsInput = taskForm.querySelector(
+        'input[name="totalUserRewards"], #totalUserRewards'
+    );
+
+    const platformFeeInput = taskForm.querySelector(
+        'input[name="platformFee"], #platformFee'
+    );
+
+    const finalCostInput = taskForm.querySelector(
+        'input[name="finalCost"], #finalCost'
+    );
+
+
+    function calculateTaskAdvertisement() {
+
+        const reward = parseFloat(rewardInput?.value) || 0;
+        const budget = parseFloat(budgetInput?.value) || 0;
+
+        // Reward minimum 0.3 SNX
+        if (reward > 0 && reward < 0.3) {
+            if (rewardInput) rewardInput.value = 0.3;
+        }
+
+        const finalReward = Math.max(
+            parseFloat(rewardInput?.value) || 0,
+            0.3
+        );
+
+        // Total number of tasks
+        const totalTasks = Math.floor(budget / (finalReward * 1.10));
+
+        // Total rewards for users
+        const totalUserRewards = totalTasks * finalReward;
+
+        // 10% platform fee
+        const platformFee = totalUserRewards * 0.10;
+
+        // Final advertisement cost
+        const finalCost = totalUserRewards + platformFee;
+
+
+        if (totalTasksInput) {
+            totalTasksInput.value = totalTasks;
+        }
+
+        if (totalRewardsInput) {
+            totalRewardsInput.value = totalUserRewards.toFixed(2) + " SNX";
+        }
+
+        if (platformFeeInput) {
+            platformFeeInput.value = platformFee.toFixed(2) + " SNX";
+        }
+
+        if (finalCostInput) {
+            finalCostInput.value = finalCost.toFixed(2) + " SNX";
+        }
+    }
+
+
+    // Automatic calculation
+    if (rewardInput) {
+        rewardInput.addEventListener("input", calculateTaskAdvertisement);
+    }
+
+    if (budgetInput) {
+        budgetInput.addEventListener("input", calculateTaskAdvertisement);
+    }
+
+
+    // Submit
+    taskForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        // Required fields check
+        const requiredFields = taskForm.querySelectorAll("[required]");
+
+        for (const field of requiredFields) {
+
+            if (!field.value || !field.value.trim()) {
+
+                alert("Please complete all required fields before submitting.");
+
+                field.focus();
+
+                return;
+            }
+        }
+
+
+        // Reward minimum check
+        const reward = parseFloat(rewardInput?.value) || 0;
+
+        if (reward < 0.3) {
+
+            alert("Reward Per Task must be at least 0.3 SNX.");
+
+            if (rewardInput) {
+                rewardInput.focus();
+            }
+
+            return;
+        }
+
+
+        // Success message
+        alert(
+            "Your task advertisement request has been sent to the Admin successfully."
+        );
+
+
+        // After OK → close Task page
+        if (customTaskAdvertisementPage) {
+            customTaskAdvertisementPage.style.display = "none";
+        }
+
+
+        // Back to Create Advertisement popup
+        const createPopup =
+            document.getElementById("createAdvertisementPopup");
+
+        if (createPopup) {
+            createPopup.style.display = "flex";
+        }
+
+
+        // Reset form
+        taskForm.reset();
+
+        // Reset calculations
+        calculateTaskAdvertisement();
+    });
+
+
+    // Initial calculation
+    calculateTaskAdvertisement();
+}
+
+
+
+
+  
         
   
   </script>
