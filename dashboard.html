@@ -17328,7 +17328,205 @@ if (surfingBackButton && surfingAdvertisementPage) {
 }
 
 
-          
+
+
+
+
+
+    // =========================
+// SURFING ADVERTISEMENT
+// CALCULATION + SUBMIT
+// =========================
+
+const surfingForm =
+    document.getElementById("surfingAdvertisementForm");
+
+const surfingDuration =
+    document.getElementById("surfingDuration");
+
+const surfingReward =
+    document.getElementById("surfingReward");
+
+const surfingBudget =
+    document.getElementById("surfingBudget");
+
+const surfingTotalVisits =
+    document.getElementById("surfingTotalVisits");
+
+const surfingTotalRewards =
+    document.getElementById("surfingTotalRewards");
+
+const surfingTotalPlatformFee =
+    document.getElementById("surfingTotalPlatformFee");
+
+const surfingFinalCost =
+    document.getElementById("surfingFinalCost");
+
+const surfingPage =
+    document.getElementById("surfingAdvertisementPage");
+
+
+// =========================
+// REWARD CALCULATION
+// =========================
+
+function getSurfingReward(duration) {
+
+    if (duration === "10") {
+        return 0.1;
+    }
+
+    if (duration === "30") {
+        return 0.3;
+    }
+
+    if (duration === "90") {
+        return 0.9;
+    }
+
+    return 0;
+}
+
+
+// =========================
+// CALCULATION
+// =========================
+
+function calculateSurfingAdvertisement() {
+
+    const duration =
+        surfingDuration.value;
+
+    const reward =
+        getSurfingReward(duration);
+
+    const budget =
+        parseFloat(surfingBudget.value) || 0;
+
+    const platformFeeRate = 0.10;
+
+    // Reward + 10% platform fee
+    const costPerVisit =
+        reward * (1 + platformFeeRate);
+
+    // Total complete visits
+    const totalVisits =
+        costPerVisit > 0
+            ? Math.floor(budget / costPerVisit)
+            : 0;
+
+    // Total user rewards
+    const totalRewards =
+        totalVisits * reward;
+
+    // Total platform fee
+    const totalPlatformFee =
+        totalRewards * platformFeeRate;
+
+    // Final advertisement cost
+    const finalCost =
+        totalRewards + totalPlatformFee;
+
+
+    // Show reward
+    surfingReward.value =
+        reward.toFixed(3) + " SNX";
+
+    // Show calculations
+    surfingTotalVisits.textContent =
+        totalVisits.toLocaleString();
+
+    surfingTotalRewards.textContent =
+        totalRewards.toFixed(3) + " SNX";
+
+    surfingTotalPlatformFee.textContent =
+        totalPlatformFee.toFixed(3) + " SNX";
+
+    surfingFinalCost.textContent =
+        finalCost.toFixed(3) + " SNX";
+}
+
+
+// Duration change
+if (surfingDuration) {
+
+    surfingDuration.addEventListener(
+        "change",
+        calculateSurfingAdvertisement
+    );
+
+}
+
+
+// Budget change
+if (surfingBudget) {
+
+    surfingBudget.addEventListener(
+        "input",
+        calculateSurfingAdvertisement
+    );
+
+}
+
+
+// =========================
+// SUBMIT
+// =========================
+
+if (surfingForm) {
+
+    surfingForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            // Final calculation
+            calculateSurfingAdvertisement();
+
+
+            // Browser message
+            alert(
+                "Your surfing advertisement request has been sent to the Admin successfully."
+            );
+
+
+            // Clear all form values
+            surfingForm.reset();
+
+
+            // Reset reward
+            surfingReward.value =
+                "0.000 SNX";
+
+
+            // Reset calculations
+            surfingTotalVisits.textContent =
+                "0";
+
+            surfingTotalRewards.textContent =
+                "0.000 SNX";
+
+            surfingTotalPlatformFee.textContent =
+                "0.000 SNX";
+
+            surfingFinalCost.textContent =
+                "0.000 SNX";
+
+
+            // Close Surfing page
+            surfingPage.style.display =
+                "none";
+
+
+            // Return to Dashboard
+            window.scrollTo(0, 0);
+
+        }
+    );
+
+}
  
   
   </script>
