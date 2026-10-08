@@ -10457,6 +10457,169 @@ footer strong{
 
 
 
+
+
+
+<!-- =========================
+     SURFING ADVERTISEMENT PAGE
+     ========================= -->
+
+<div id="surfingAdvertisementPage" style="display:none;">
+
+    <div class="surfing-ad-header">
+
+        <button type="button" id="surfingBackButton">
+            ← Back
+        </button>
+
+        <div>
+            <h2>Create Surfing Advertisement</h2>
+            <p>Create your website surfing advertisement.</p>
+        </div>
+
+    </div>
+
+
+    <form id="surfingAdvertisementForm">
+
+        <!-- Website URL -->
+        <div class="surfing-form-group">
+
+            <label>Website URL</label>
+
+            <input
+                type="url"
+                id="surfingWebsiteURL"
+                placeholder="Enter website URL"
+                required
+            >
+
+        </div>
+
+
+        <!-- Surfing Duration -->
+        <div class="surfing-form-group">
+
+            <label>Surfing Duration</label>
+
+            <select
+                id="surfingDuration"
+                required
+            >
+
+                <option value="">
+                    Select surfing duration
+                </option>
+
+                <option value="10">
+                    10 Seconds — 0.1 SNX
+                </option>
+
+                <option value="30">
+                    30 Seconds — 0.3 SNX
+                </option>
+
+                <option value="90">
+                    90 Seconds — 0.9 SNX
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Reward -->
+        <div class="surfing-form-group">
+
+            <label>Reward Per Visit</label>
+
+            <input
+                type="text"
+                id="surfingReward"
+                value="0.000 SNX"
+                readonly
+            >
+
+        </div>
+
+
+        <!-- Total Advertisement Budget -->
+        <div class="surfing-form-group">
+
+            <label>Total Advertisement Budget</label>
+
+            <input
+                type="number"
+                id="surfingBudget"
+                placeholder="Enter total budget in SNX"
+                min="0"
+                step="0.001"
+                required
+            >
+
+        </div>
+
+
+        <!-- Platform Fee -->
+        <div class="surfing-fee-box">
+
+            <span>Platform Fee</span>
+
+            <strong>
+                10% Per Completed Visit
+            </strong>
+
+        </div>
+
+
+        <!-- Calculation -->
+        <div class="surfing-calculation-box">
+
+            <div>
+                <span>Total Visits</span>
+                <strong id="surfingTotalVisits">
+                    0
+                </strong>
+            </div>
+
+            <div>
+                <span>Total User Rewards</span>
+                <strong id="surfingTotalRewards">
+                    0.000 SNX
+                </strong>
+            </div>
+
+            <div>
+                <span>Total Platform Fee</span>
+                <strong id="surfingTotalPlatformFee">
+                    0.000 SNX
+                </strong>
+            </div>
+
+            <div>
+                <span>Final Advertisement Cost</span>
+                <strong id="surfingFinalCost">
+                    0.000 SNX
+                </strong>
+            </div>
+
+        </div>
+
+
+        <!-- Submit -->
+        <button
+            type="submit"
+            id="surfingSubmitButton"
+        >
+            Submit Advertisement
+        </button>
+
+    </form>
+
+</div>
+
+
+  
   
   
   <!-- YOUTUBE TASK POPUP -->
