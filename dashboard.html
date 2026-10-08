@@ -17273,6 +17273,62 @@ customTaskForm.addEventListener("submit", function(event) {
 
 
 
+
+  // =========================
+// SURFING ADVERTISEMENT PAGE
+// OPEN & BACK
+// =========================
+
+const surfingPlatformBtn =
+    document.getElementById("surfingPlatformBtn");
+
+const surfingAdvertisementPage =
+    document.getElementById("surfingAdvertisementPage");
+
+const surfingBackButton =
+    document.getElementById("surfingBackButton");
+
+
+// =========================
+// OPEN SURFING PAGE
+// =========================
+
+if (surfingPlatformBtn && surfingAdvertisementPage) {
+
+    surfingPlatformBtn.addEventListener("click", function () {
+
+        // Create Advertisement popup close
+        document.getElementById("createAdvertisementPopup").style.display = "none";
+
+        // Surfing page open
+        surfingAdvertisementPage.style.display = "block";
+
+        // Page top
+        window.scrollTo(0, 0);
+
+    });
+}
+
+
+// =========================
+// BACK TO CREATE ADVERTISEMENT
+// =========================
+
+if (surfingBackButton && surfingAdvertisementPage) {
+
+    surfingBackButton.addEventListener("click", function () {
+
+        // Surfing page close
+        surfingAdvertisementPage.style.display = "none";
+
+        // Create Advertisement popup back
+        document.getElementById("createAdvertisementPopup").style.display = "flex";
+
+    });
+}
+
+
+          
  
   
   </script>
