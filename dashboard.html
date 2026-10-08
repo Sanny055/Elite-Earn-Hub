@@ -16746,6 +16746,153 @@ if (customTaskBackButton && customTaskAdvertisementPage) {
 
 
 
+
+
+    // =========================
+// TASK ADVERTISEMENT
+// CALCULATION + SUBMIT
+// =========================
+
+const customTaskForm =
+    document.getElementById("customTaskAdvertisementForm");
+
+const customTaskReward =
+    document.getElementById("customTaskReward");
+
+const customTaskBudget =
+    document.getElementById("customTaskBudget");
+
+const customTaskTotalTasks =
+    document.getElementById("customTaskTotalTasks");
+
+const customTaskTotalRewards =
+    document.getElementById("customTaskTotalRewards");
+
+const customTaskTotalPlatformFee =
+    document.getElementById("customTaskTotalPlatformFee");
+
+const customTaskFinalCost =
+    document.getElementById("customTaskFinalCost");
+
+const customTaskPage =
+    document.getElementById("customTaskAdvertisementPage");
+
+
+// =========================
+// CALCULATION
+// =========================
+
+function calculateCustomTaskAdvertisement() {
+
+    const reward =
+        parseFloat(customTaskReward.value) || 0;
+
+    const budget =
+        parseFloat(customTaskBudget.value) || 0;
+
+    const platformFeeRate = 0.10;
+
+    // Reward + 10% platform fee
+    const costPerTask =
+        reward * (1 + platformFeeRate);
+
+    // Total tasks
+    const totalTasks =
+        costPerTask > 0
+            ? Math.floor(budget / costPerTask)
+            : 0;
+
+    // Total rewards for users
+    const totalUserRewards =
+        totalTasks * reward;
+
+    // Platform fee
+    const totalPlatformFee =
+        totalUserRewards * platformFeeRate;
+
+    // Final advertisement cost
+    const finalCost =
+        totalUserRewards + totalPlatformFee;
+
+
+    customTaskTotalTasks.textContent =
+        totalTasks.toLocaleString();
+
+    customTaskTotalRewards.textContent =
+        totalUserRewards.toFixed(3) + " SNX";
+
+    customTaskTotalPlatformFee.textContent =
+        totalPlatformFee.toFixed(3) + " SNX";
+
+    customTaskFinalCost.textContent =
+        finalCost.toFixed(3) + " SNX";
+}
+
+
+// Automatic calculation
+customTaskReward.addEventListener(
+    "input",
+    calculateCustomTaskAdvertisement
+);
+
+customTaskBudget.addEventListener(
+    "input",
+    calculateCustomTaskAdvertisement
+);
+
+
+// =========================
+// SUBMIT
+// =========================
+
+customTaskForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    // Minimum reward check
+    const reward =
+        parseFloat(customTaskReward.value) || 0;
+
+    if (reward < 0.3) {
+
+        alert("Reward Per Task must be at least 0.3 SNX.");
+
+        customTaskReward.focus();
+
+        return;
+    }
+
+
+    // Browser success message
+    alert(
+        "Your task advertisement request has been sent to the Admin successfully."
+    );
+
+
+    // After OK → close Task page
+    customTaskPage.style.display = "none";
+
+
+    // Reset form
+    customTaskForm.reset();
+
+
+    // Reset calculation display
+    calculateCustomTaskAdvertisement();
+
+
+    // Dashboard remains/open
+    window.scrollTo(0, 0);
+
+});
+
+
+
+  
+
+
+
  
   
   </script>
