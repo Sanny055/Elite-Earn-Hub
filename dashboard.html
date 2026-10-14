@@ -18382,6 +18382,28 @@ document.getElementById("taskAdvertiserLink").addEventListener("click", function
   
 
   
+/* SUBMIT TASK - SCREENSHOT VALIDATION */
+document.getElementById("submitTaskButton").addEventListener("click", function () {
+    const screenshot = document.getElementById("taskProofScreenshot");
+
+    if (!screenshot.files || screenshot.files.length === 0) {
+        alert("Please upload your task screenshot proof first.");
+        screenshot.click();
+        return;
+    }
+
+    alert("Your task submission has been sent to the admin for review.");
+
+    document.getElementById("taskDetailsPage").style.display = "none";
+    document.getElementById("tasksPage").style.display = "block";
+
+    document.getElementById("taskSubmissionSection").style.display = "none";
+    document.getElementById("startTaskButton").style.display = "block";
+    screenshot.value = "";
+});
+
+
+  
   
   
   </script>
