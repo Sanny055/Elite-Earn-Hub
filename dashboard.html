@@ -18403,6 +18403,18 @@ document.getElementById("submitTaskButton").addEventListener("click", function (
 });
 
 
+
+  
+/* CANCEL TASK - BACK TO TASKS PAGE */
+document.getElementById("cancelTaskButton").addEventListener("click", function () {
+    document.getElementById("taskDetailsPage").style.display = "none";
+    document.getElementById("tasksPage").style.display = "block";
+
+    document.getElementById("taskSubmissionSection").style.display = "none";
+    document.getElementById("startTaskButton").style.display = "block";
+    document.getElementById("taskProofScreenshot").value = "";
+});
+
   
   
   
