@@ -17829,6 +17829,55 @@ if (surfingForm) {
 }
  
   
+ 
+  
+
+
+  // =====================================
+// TASKS PAGE OPEN & BACK NAVIGATION
+// =====================================
+
+const tasksBtn = document.getElementById("tasksBtn");
+const tasksPage = document.getElementById("tasksPage");
+const tasksBackButton = document.getElementById("tasksBackButton");
+
+// Open Tasks Page
+if (tasksBtn && tasksPage) {
+
+    tasksBtn.addEventListener("click", function () {
+
+        tasksPage.style.display = "block";
+        tasksPage.style.position = "fixed";
+        tasksPage.style.inset = "0";
+        tasksPage.style.width = "100%";
+        tasksPage.style.height = "100%";
+        tasksPage.style.overflowY = "auto";
+        tasksPage.style.zIndex = "99999";
+
+        document.body.style.overflow = "hidden";
+
+    });
+
+}
+
+// Back to Dashboard
+if (tasksBackButton && tasksPage) {
+
+    tasksBackButton.addEventListener("click", function () {
+
+        tasksPage.style.display = "none";
+        document.body.style.overflow = "";
+
+    });
+
+    }
+  
+  
+  
+  
+  
+  
+  
   </script>
  
   <footer style="
