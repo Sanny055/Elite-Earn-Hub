@@ -18368,6 +18368,18 @@ document.getElementById("startTaskButton").addEventListener("click", function ()
 
 
 
+/* TASK LINK - OPEN IN NEW TAB */
+document.getElementById("taskAdvertiserLink").addEventListener("click", function (event) {
+    const taskLink = this.getAttribute("href");
+
+    if (!taskLink || taskLink === "#") {
+        event.preventDefault();
+        alert("This task link has not been set yet.");
+    }
+});
+
+
+  
 
   
   
