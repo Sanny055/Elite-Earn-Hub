@@ -3152,7 +3152,285 @@ footer div:last-child{
   }
 
   
-/* ===== PREMIUM JAZZCASH WITHDRAWAL POPUP ===== */
+
+  
+  
+  
+
+/* =====================================
+   TASK DETAILS PAGE CSS
+===================================== */
+
+#taskDetailsPage {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 20px 14px 35px;
+    background: linear-gradient(160deg, #071426, #0b1f3a 55%, #06101f);
+    color: #f1f5f9;
+    font-family: Arial, sans-serif;
+    z-index: 100000;
+}
+
+#taskDetailsPage * {
+    box-sizing: border-box;
+}
+
+#taskDetailsPage .task-details-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 700px;
+    margin: 0 auto 22px;
+    padding: 15px;
+    border: 1px solid #233b5c;
+    border-radius: 16px;
+    background: #0d2039;
+}
+
+#taskDetailsPage #taskDetailsBackButton {
+    flex-shrink: 0;
+    padding: 10px 13px;
+    color: #e2e8f0;
+    background: #1a3353;
+    border: 1px solid #355477;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#taskDetailsPage .task-details-header h2 {
+    margin: 0 0 5px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+#taskDetailsPage .task-details-header p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #9fb4ce;
+}
+
+#taskDetailsPage .task-details-content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 22px;
+    border: 1px solid #243e60;
+    border-radius: 20px;
+    background: rgba(12, 30, 53, 0.96);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+#taskDetailsPage .task-details-number {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 7px 12px;
+    border: 1px solid #285b83;
+    border-radius: 20px;
+    background: #102f4c;
+    color: #71c8ff;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#taskDetailsPage #detailsTaskTitle {
+    margin: 0 0 20px;
+    color: #ffffff;
+    font-size: 25px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+#taskDetailsPage .task-details-reward-box {
+    margin-bottom: 22px;
+    padding: 18px;
+    border: 1px solid #236c63;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #103c3b, #102e40);
+}
+
+#taskDetailsPage .task-details-reward-box div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#taskDetailsPage .task-details-reward-box span {
+    color: #a8d9d1;
+    font-size: 13px;
+}
+
+#taskDetailsPage #detailsTaskReward {
+    color: #54edbc;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#taskDetailsPage .task-details-section {
+    margin-bottom: 17px;
+    padding: 17px;
+    border: 1px solid #243b58;
+    border-radius: 14px;
+    background: #0b1a2d;
+}
+
+#taskDetailsPage .task-details-section h3,
+#taskDetailsPage #taskSubmissionSection h3 {
+    margin: 0 0 11px;
+    color: #80caff;
+    font-size: 16px;
+}
+
+#taskDetailsPage .task-details-section p {
+    margin: 0;
+    color: #d1dbea;
+    font-size: 14px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+#taskDetailsPage #startTaskSection {
+    margin-top: 24px;
+}
+
+#taskDetailsPage #startTaskButton,
+#taskDetailsPage #submitTaskButton {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(100deg, #1688ef, #2363db);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 16px rgba(22, 136, 239, 0.2);
+    transition: transform 0.2s, filter 0.2s;
+}
+
+#taskDetailsPage #startTaskButton:active,
+#taskDetailsPage #submitTaskButton:active {
+    transform: scale(0.98);
+}
+
+#taskDetailsPage #taskSubmissionSection {
+    margin-top: 24px;
+    padding: 19px;
+    border: 1px solid #315075;
+    border-radius: 16px;
+    background: #0b1a2d;
+}
+
+#taskDetailsPage #taskSubmissionSection > p {
+    margin: 0 0 20px;
+    color: #b6c7dc;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+#taskDetailsPage .task-screenshot-box {
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px dashed #47749e;
+    border-radius: 12px;
+    background: #10233a;
+}
+
+#taskDetailsPage .task-screenshot-box label {
+    display: block;
+    margin-bottom: 12px;
+    color: #f1f5f9;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#taskDetailsPage #taskProofScreenshot {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    border: 1px solid #34516f;
+    border-radius: 9px;
+    background: #0a1728;
+    color: #dbeafe;
+    font-size: 12px;
+}
+
+#taskDetailsPage .task-screenshot-box small {
+    display: block;
+    margin-top: 10px;
+    color: #9eb4ce;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+#taskDetailsPage #cancelTaskButton {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 12px;
+    padding: 12px 18px;
+    border: 1px solid #75404b;
+    border-radius: 12px;
+    background: #351c29;
+    color: #ffb4bd;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#taskDetailsPage button:focus-visible,
+#taskDetailsPage input:focus-visible {
+    outline: 2px solid #71c8ff;
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    #taskDetailsPage {
+        padding: 12px 10px 25px;
+    }
+
+    #taskDetailsPage .task-details-header {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    #taskDetailsPage .task-details-header h2 {
+        font-size: 18px;
+    }
+
+    #taskDetailsPage .task-details-content {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    #taskDetailsPage #detailsTaskTitle {
+        font-size: 22px;
+    }
+
+    #taskDetailsPage .task-details-section {
+        padding: 14px;
+    }
+}
+
+/* =====================================
+   END TASK DETAILS PAGE CSS
+===================================== */
+
+    
+  
+  
+  
+  /* ===== PREMIUM JAZZCASH WITHDRAWAL POPUP ===== */
 
 .jazzcash-popup {
   display: none;
@@ -18039,7 +18317,24 @@ if (tasksBackButton && tasksPage) {
   
   
   
+
+
+
   
+/* Task Details Page Open */
+document.querySelectorAll(".task-card").forEach(function(card) {
+    card.addEventListener("click", function() {
+        document.getElementById("tasksPage").style.display = "none";
+        document.getElementById("taskDetailsPage").style.display = "block";
+    });
+});
+
+/* Back to Tasks Page */
+document.getElementById("taskDetailsBackButton").addEventListener("click", function() {
+    document.getElementById("taskDetailsPage").style.display = "none";
+    document.getElementById("tasksPage").style.display = "block";
+});
+
   
   
   
