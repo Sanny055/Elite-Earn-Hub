@@ -10101,6 +10101,171 @@ footer strong{
 ============================== -->
   
   
+
+
+
+<!-- =====================================
+     TASK DETAILS PAGE
+===================================== -->
+
+<div id="taskDetailsPage" style="display: none;">
+
+    <!-- Header -->
+    <div class="task-details-header">
+
+        <button type="button" id="taskDetailsBackButton">
+            ← Back
+        </button>
+
+        <div>
+            <h2>Task Details</h2>
+            <p>Read the instructions and complete the task</p>
+        </div>
+
+    </div>
+
+
+    <!-- Task Information -->
+    <div class="task-details-content">
+
+        <!-- Task Number -->
+        <div class="task-details-number">
+            TASK #<span id="detailsTaskNumber">001</span>
+        </div>
+
+
+        <!-- Task Title -->
+        <h2 id="detailsTaskTitle">
+            Task Title
+        </h2>
+
+
+        <!-- Reward -->
+        <div class="task-details-reward-box">
+
+            <div>
+                <span>Your Reward</span>
+
+                <strong id="detailsTaskReward">
+                    0.300 SNX
+                </strong>
+            </div>
+
+        </div>
+
+
+        <!-- Task Description -->
+        <div class="task-details-section">
+
+            <h3>Task Description</h3>
+
+            <p id="detailsTaskDescription">
+                Task description will appear here.
+            </p>
+
+        </div>
+
+
+        <!-- Task Requirements -->
+        <div class="task-details-section">
+
+            <h3>Requirements / Instructions</h3>
+
+            <p id="detailsTaskRequirements">
+                Task requirements and instructions will appear here.
+            </p>
+
+        </div>
+
+
+        <!-- Completion Limit -->
+        <div class="task-details-section">
+
+            <h3>Task Completion Limit</h3>
+
+            <p id="detailsTaskCompletionLimit">
+                One Time Only
+            </p>
+
+        </div>
+
+
+        <!-- Start Task Button -->
+        <div id="startTaskSection">
+
+            <button
+                type="button"
+                id="startTaskButton"
+            >
+                Start Task
+            </button>
+
+        </div>
+
+
+        <!-- =================================
+             TASK SUBMISSION SECTION
+             Initially Hidden
+        ================================== -->
+
+        <div
+            id="taskSubmissionSection"
+            style="display: none;"
+        >
+
+            <h3>Submit Your Task</h3>
+
+            <p>
+                Complete the task and upload your screenshot proof.
+            </p>
+
+
+            <!-- Screenshot Upload -->
+            <div class="task-screenshot-box">
+
+                <label for="taskProofScreenshot">
+                    Upload Screenshot Proof
+                </label>
+
+                <input
+                    type="file"
+                    id="taskProofScreenshot"
+                    accept="image/*"
+                >
+
+                <small>
+                    Screenshot proof is required to submit this task.
+                </small>
+
+            </div>
+
+
+            <!-- Submit Task -->
+            <button
+                type="button"
+                id="submitTaskButton"
+            >
+                Submit Task
+            </button>
+
+
+            <!-- Cancel Task -->
+            <button
+                type="button"
+                id="cancelTaskButton"
+            >
+                Cancel Task
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================
+     END TASK DETAILS PAGE
+===================================== -->
   
   
   
