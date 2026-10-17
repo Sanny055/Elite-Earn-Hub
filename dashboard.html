@@ -10839,18 +10839,14 @@ footer strong{
 
 
 
-<!-- ==============================
-     USER SURFING PAGE
-============================== -->
 
+
+<!-- USER SURFING PAGE -->
 <div id="userSurfingPage" style="display: none;">
 
     <!-- HEADER -->
     <div class="user-surfing-header">
-
-        <button
-            type="button"
-            id="userSurfingBackButton">
+        <button type="button" id="userSurfingBackButton">
             ← Back
         </button>
 
@@ -10858,117 +10854,91 @@ footer strong{
             <h2>Website Surfing</h2>
             <p>Visit websites and earn SNX rewards.</p>
         </div>
-
     </div>
 
-
-    <!-- INTRODUCTION -->
+    <!-- INTRO -->
     <div class="user-surfing-intro">
-
         <h3>Earn by Surfing Websites</h3>
-
         <p>
-            Select an available website, open it in a new tab,
-            and keep your surfing session active until the
-            required timer is completed.
+            Available websites visit karein, required time complete
+            karein aur eligible hone par apna reward claim karein.
         </p>
-
     </div>
 
-
-    <!-- AVAILABLE ADS -->
+    <!-- AVAILABLE WEBSITES -->
     <div class="user-surfing-list">
-
         <h3>Available Websites</h3>
 
         <div id="availableSurfingAds">
 
-            <!-- Website advertisements will be loaded here
-                 through JavaScript later. -->
-
+            <!-- Ads database se load honge -->
             <div class="user-surfing-empty">
-
                 <h4>No Websites Available Yet</h4>
-
                 <p>
-                    Approved surfing advertisements will
-                    appear here.
+                    Abhi koi website available nahi hai.
+                    Baad mein dobara check karein.
                 </p>
-
             </div>
 
         </div>
-
     </div>
 
-
     <!-- SURFING SESSION -->
-    <div
-        id="userSurfingSession"
-        style="display: none;">
+    <div id="userSurfingSession">
 
-        <h3>Surfing Session</h3>
+        <h3>Your Surfing Session</h3>
 
         <p>
-            Website:
-            <span id="activeSurfingWebsite">
-                Not selected
-            </span>
+            <strong>Selected Website:</strong>
+            <span id="activeSurfingWebsite">Not selected</span>
         </p>
 
         <p>
-            Required Duration:
-            <strong id="activeSurfingDuration">
-                0 Seconds
-            </strong>
+            <strong>Required Time:</strong>
+            <span id="activeSurfingDuration">0 seconds</span>
         </p>
 
         <p>
-            Your Reward:
-            <strong id="activeSurfingReward">
-                0.000 SNX
-            </strong>
+            <strong>Reward:</strong>
+            <span id="activeSurfingReward">0 SNX</span>
         </p>
 
         <!-- TIMER -->
         <div class="user-surfing-timer">
-
             <span>Time Remaining</span>
-
-            <h2 id="userSurfingTimer">
-                00:00
-            </h2>
-
+            <h2 id="userSurfingTimer">00:00</h2>
         </div>
 
         <!-- OPEN WEBSITE -->
         <button
             type="button"
-            id="openSurfingWebsiteButton">
-            Open Website
+            id="openSurfingWebsiteButton"
+            disabled
+        >
+            Visit Website
         </button>
 
         <!-- CLAIM REWARD -->
         <button
             type="button"
             id="claimSurfingRewardButton"
-            disabled>
+            disabled
+        >
             Claim Reward
         </button>
 
-        <p id="userSurfingStatus">
-            Start a surfing session to begin.
+        <!-- STATUS -->
+        <p id="userSurfingStatus" role="status">
+            Surfing shuru karne ke liye website select karein.
         </p>
 
     </div>
 
 </div>
-
-<!-- ==============================
-     END USER SURFING PAGE
-============================== -->
+<!-- END USER SURFING PAGE -->
 
 
+  
   
   
   
