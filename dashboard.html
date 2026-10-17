@@ -18852,6 +18852,30 @@ if (userSurfingBackButton) {
 
 
 
+/* CONNECT USER SURFING BUTTON */
+
+const userSurfingButton = document.getElementById("userSurfingBtn");
+
+if (userSurfingButton && userSurfingPage) {
+    userSurfingButton.addEventListener("click", function () {
+        userSurfingPage.style.display = "block";
+        userSurfingPage.style.position = "fixed";
+        userSurfingPage.style.inset = "0";
+        userSurfingPage.style.width = "100%";
+        userSurfingPage.style.height = "100%";
+        userSurfingPage.style.overflowY = "auto";
+        userSurfingPage.style.zIndex = "999999";
+        document.body.style.overflow = "hidden";
+    });
+}
+
+if (userSurfingBackButton && userSurfingPage) {
+    userSurfingBackButton.addEventListener("click", function () {
+        userSurfingPage.style.display = "none";
+        document.body.style.overflow = "";
+    });
+}
+
   
   
   
