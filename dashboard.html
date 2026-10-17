@@ -18815,6 +18815,43 @@ document.getElementById("cancelTaskButton").addEventListener("click", function (
     document.getElementById("taskProofScreenshot").value = "";
 });
 
+
+
+
+
+
+/* ==============================
+   USER SURFING PAGE OPEN / BACK
+============================== */
+
+const userSurfingPage = document.getElementById("userSurfingPage");
+const userSurfingBackButton = document.getElementById("userSurfingBackButton");
+
+// OPEN SURFING PAGE
+// Apne Surfing button ke click event mein
+// openUserSurfingPage() call karna hai.
+
+function openUserSurfingPage() {
+
+    if (userSurfingPage) {
+        userSurfingPage.style.display = "block";
+    }
+
+}
+
+// BACK BUTTON
+if (userSurfingBackButton) {
+
+    userSurfingBackButton.addEventListener("click", function () {
+
+        userSurfingPage.style.display = "none";
+
+    });
+
+}
+
+
+
   
   
   
