@@ -18848,6 +18848,304 @@ if (userSurfingBackButton && userSurfingPage) {
 
   
   
+/* =========================================
+   USER SURFING PAGE - TEST JAVASCRIPT
+   Supabase reward integration abhi pending hai
+========================================= */
+
+(function () {
+    "use strict";
+
+    const page = document.getElementById("userSurfingPage");
+    const adsContainer = document.getElementById("availableSurfingAds");
+    const timerDisplay = document.getElementById("userSurfingTimer");
+    const websiteDisplay = document.getElementById("activeSurfingWebsite");
+    const durationDisplay = document.getElementById("activeSurfingDuration");
+    const rewardDisplay = document.getElementById("activeSurfingReward");
+    const visitButton = document.getElementById("openSurfingWebsiteButton");
+    const claimButton = document.getElementById("claimSurfingRewardButton");
+    const statusDisplay = document.getElementById("userSurfingStatus");
+    const backButton = document.getElementById("userSurfingBackButton");
+
+    if (
+        !page || !adsContainer || !timerDisplay ||
+        !websiteDisplay || !durationDisplay ||
+        !rewardDisplay || !visitButton ||
+        !claimButton || !statusDisplay
+    ) {
+        console.error("Surfing Page ke required HTML elements nahi mile.");
+        return;
+    }
+
+    /*
+      TEST DATA ONLY:
+      Ye example websites hain. Baad mein Supabase
+      se approved advertisements load karenge.
+    */
+
+    const testAds = [
+        {
+            id: "test-1",
+            title: "Example Website",
+            url: "https://example.com/",
+            duration: 10,
+            reward: 0.1
+        },
+        {
+            id: "test-2",
+            title: "Example Website - 30 Seconds",
+            url: "https://example.com/",
+            duration: 30,
+            reward: 0.3
+        },
+        {
+            id: "test-3",
+            title: "Example Website - 90 Seconds",
+            url: "https://example.com/",
+            duration: 90,
+            reward: 0.9
+        }
+    ];
+
+    let selectedAd = null;
+    let timerInterval = null;
+    let timeRemaining = 0;
+    let timerFinished = false;
+    let sessionStarted = false;
+    let sessionClaimed = false;
+
+    function showStatus(message) {
+        statusDisplay.textContent = message;
+    }
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+
+        return (
+            String(minutes).padStart(2, "0") +
+            ":" +
+            String(remainingSeconds).padStart(2, "0")
+        );
+    }
+
+    function stopTimer() {
+        if (timerInterval !== null) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }
+
+    function resetSession() {
+        stopTimer();
+
+        selectedAd = null;
+        timeRemaining = 0;
+        timerFinished = false;
+        sessionStarted = false;
+        sessionClaimed = false;
+
+        websiteDisplay.textContent = "Not selected";
+        durationDisplay.textContent = "0 seconds";
+        rewardDisplay.textContent = "0 SNX";
+        timerDisplay.textContent = "00:00";
+
+        visitButton.disabled = true;
+        visitButton.textContent = "Visit Website";
+
+        claimButton.disabled = true;
+        claimButton.textContent = "Claim Reward";
+    }
+
+    function selectAd(ad) {
+        stopTimer();
+
+        selectedAd = ad;
+        timeRemaining = ad.duration;
+        timerFinished = false;
+        sessionStarted = false;
+        sessionClaimed = false;
+
+        websiteDisplay.textContent = ad.title;
+        durationDisplay.textContent = ad.duration + " seconds";
+        rewardDisplay.textContent = ad.reward.toFixed(3) + " SNX";
+        timerDisplay.textContent = formatTime(ad.duration);
+
+        visitButton.disabled = false;
+        visitButton.textContent = "Visit Website";
+
+        claimButton.disabled = true;
+        claimButton.textContent = "Claim Reward";
+
+        showStatus(
+            "Website select ho gayi. Visit Website par click karein."
+        );
+
+        page.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    function renderAds() {
+        adsContainer.replaceChildren();
+
+        testAds.forEach(function (ad) {
+            const card = document.createElement("div");
+            card.className = "user-surfing-empty";
+
+            const title = document.createElement("h4");
+            title.textContent = ad.title;
+
+            const url = document.createElement("p");
+            url.textContent = ad.url;
+
+            const duration = document.createElement("p");
+            duration.textContent =
+                "Required Time: " + ad.duration + " seconds";
+
+            const reward = document.createElement("p");
+            reward.textContent =
+                "Test Reward: " + ad.reward.toFixed(3) + " SNX";
+
+            const selectButton = document.createElement("button");
+            selectButton.type = "button";
+            selectButton.textContent = "Select Website";
+
+            selectButton.addEventListener("click", function () {
+                selectAd(ad);
+            });
+
+            card.append(
+                title,
+                url,
+                duration,
+                reward,
+                selectButton
+            );
+
+            adsContainer.appendChild(card);
+        });
+    }
+
+    function startTimer() {
+        stopTimer();
+
+        timerInterval = setInterval(function () {
+            timeRemaining = Math.max(0, timeRemaining - 1);
+            timerDisplay.textContent = formatTime(timeRemaining);
+
+            if (timeRemaining <= 0) {
+                stopTimer();
+
+                timerFinished = true;
+                claimButton.disabled = false;
+
+                showStatus(
+                    "Timer complete! Claim Reward par click kar sakte hain. " +
+                    "Filhaal reward sirf test mode mein hai."
+                );
+            }
+        }, 1000);
+    }
+
+    /*
+      Visit Website button:
+      New tab kholne ki koshish karta hai aur timer chalata hai.
+      Browser popup blocking ki surat mein user ko message milega.
+    */
+
+    visitButton.addEventListener("click", function () {
+        if (!selectedAd || sessionStarted || sessionClaimed) {
+            return;
+        }
+
+        let websiteTab;
+
+        try {
+            websiteTab = window.open(
+                selectedAd.url,
+                "_blank",
+                "noopener,noreferrer"
+            );
+        } catch (error) {
+            websiteTab = null;
+        }
+
+        if (!websiteTab) {
+            showStatus(
+                "Website tab open nahi hui. Browser ki popup setting check karein."
+            );
+            return;
+        }
+
+        sessionStarted = true;
+        visitButton.disabled = true;
+        visitButton.textContent = "Website Opened";
+
+        showStatus(
+            "Website new tab mein open hui. Timer chal raha hai."
+        );
+
+        startTimer();
+    });
+
+    /*
+      Claim Reward:
+      Sirf UI testing ke liye.
+      Ye Supabase ya user balance ko update NAHI karta.
+    */
+
+    claimButton.addEventListener("click", function () {
+        if (
+            !selectedAd ||
+            !timerFinished ||
+            !sessionStarted ||
+            sessionClaimed
+        ) {
+            showStatus("Pehle valid surfing session complete karein.");
+            return;
+        }
+
+        sessionClaimed = true;
+        claimButton.disabled = true;
+        claimButton.textContent = "Test Complete";
+
+        showStatus(
+            "Testing complete! " +
+            selectedAd.reward.toFixed(3) +
+            " SNX ka test reward tha. Asal balance update nahi hua. " +
+            "Supabase integration abhi pending hai."
+        );
+
+        alert(
+            "Surfing test complete!\n\n" +
+            "Test reward: " +
+            selectedAd.reward.toFixed(3) +
+            " SNX\n\n" +
+            "Ye reward asal account balance mein add nahi hua."
+        );
+    });
+
+    /*
+      Back button:
+      Sirf Surfing Page hide karta hai.
+      Dashboard ki existing navigation agar alag hai,
+      to uske mutabiq back action adjust karna hoga.
+    */
+
+    if (backButton) {
+        backButton.addEventListener("click", function () {
+            stopTimer();
+            page.style.display = "none";
+        });
+    }
+
+    resetSession();
+    renderAds();
+
+})();
+
 
 
 
