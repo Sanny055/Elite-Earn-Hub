@@ -10569,6 +10569,139 @@ footer strong{
      END TASK DETAILS PAGE
 ===================================== -->
   
+
+
+
+<!-- ==============================
+     USER SURFING PAGE
+============================== -->
+
+<div id="userSurfingPage" style="display: none;">
+
+    <!-- HEADER -->
+    <div class="user-surfing-header">
+
+        <button
+            type="button"
+            id="userSurfingBackButton">
+            ← Back
+        </button>
+
+        <div>
+            <h2>Website Surfing</h2>
+            <p>Visit websites and earn SNX rewards.</p>
+        </div>
+
+    </div>
+
+
+    <!-- INTRODUCTION -->
+    <div class="user-surfing-intro">
+
+        <h3>Earn by Surfing Websites</h3>
+
+        <p>
+            Select an available website, open it in a new tab,
+            and keep your surfing session active until the
+            required timer is completed.
+        </p>
+
+    </div>
+
+
+    <!-- AVAILABLE ADS -->
+    <div class="user-surfing-list">
+
+        <h3>Available Websites</h3>
+
+        <div id="availableSurfingAds">
+
+            <!-- Website advertisements will be loaded here
+                 through JavaScript later. -->
+
+            <div class="user-surfing-empty">
+
+                <h4>No Websites Available Yet</h4>
+
+                <p>
+                    Approved surfing advertisements will
+                    appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SURFING SESSION -->
+    <div
+        id="userSurfingSession"
+        style="display: none;">
+
+        <h3>Surfing Session</h3>
+
+        <p>
+            Website:
+            <span id="activeSurfingWebsite">
+                Not selected
+            </span>
+        </p>
+
+        <p>
+            Required Duration:
+            <strong id="activeSurfingDuration">
+                0 Seconds
+            </strong>
+        </p>
+
+        <p>
+            Your Reward:
+            <strong id="activeSurfingReward">
+                0.000 SNX
+            </strong>
+        </p>
+
+        <!-- TIMER -->
+        <div class="user-surfing-timer">
+
+            <span>Time Remaining</span>
+
+            <h2 id="userSurfingTimer">
+                00:00
+            </h2>
+
+        </div>
+
+        <!-- OPEN WEBSITE -->
+        <button
+            type="button"
+            id="openSurfingWebsiteButton">
+            Open Website
+        </button>
+
+        <!-- CLAIM REWARD -->
+        <button
+            type="button"
+            id="claimSurfingRewardButton"
+            disabled>
+            Claim Reward
+        </button>
+
+        <p id="userSurfingStatus">
+            Start a surfing session to begin.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ==============================
+     END USER SURFING PAGE
+============================== -->
+
+
   
   
   
