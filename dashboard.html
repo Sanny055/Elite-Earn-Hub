@@ -1055,6 +1055,248 @@ footer div:last-child{
 
 
 
+
+
+  
+/* ==================== SURFING PAGE CSS START ==================== */
+
+#userSurfingPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #f1f5f9;
+  background: #071225;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+#userSurfingPage .surfing-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 18px;
+  background: #0d1b32;
+  border: 1px solid #1e3555;
+  border-radius: 14px;
+}
+
+#userSurfingPage #userSurfingBackButton {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  border: 1px solid #334b6b;
+  border-radius: 8px;
+  background: #172b47;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#userSurfingPage #userSurfingBackButton:hover {
+  background: #243f63;
+}
+
+#userSurfingPage .surfing-heading h2 {
+  margin: 0 0 6px;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+#userSurfingPage .surfing-heading p {
+  margin: 0;
+  color: #9fb2cc;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Main Content */
+#userSurfingPage .surfing-content {
+  width: 100%;
+}
+
+#userSurfingPage .surfing-section-heading {
+  margin-bottom: 18px;
+}
+
+#userSurfingPage .surfing-section-heading h3 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+#userSurfingPage .surfing-section-heading p {
+  margin: 0;
+  color: #9fb2cc;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Surfing Task List */
+#userSurfingPage #availableSurfingAds {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+/* Empty State */
+#userSurfingPage #noSurfingTasksMessage {
+  grid-column: 1 / -1;
+  padding: 35px 20px;
+  text-align: center;
+  background: #0d1b32;
+  border: 1px dashed #2b4261;
+  border-radius: 14px;
+}
+
+#userSurfingPage #noSurfingTasksMessage h3 {
+  margin: 0 0 10px;
+  color: #e2eaf5;
+  font-size: 17px;
+}
+
+#userSurfingPage #noSurfingTasksMessage p {
+  margin: 0;
+  color: #91a5c1;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Task Card - for cards added by JavaScript */
+#userSurfingPage .surfing-task-card {
+  min-width: 0;
+  padding: 20px;
+  background: #0d1b32;
+  border: 1px solid #203958;
+  border-radius: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease,
+              transform 0.2s ease;
+}
+
+#userSurfingPage .surfing-task-card:hover {
+  border-color: #3478c8;
+  transform: translateY(-2px);
+}
+
+#userSurfingPage .surfing-task-card h3 {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+
+#userSurfingPage .surfing-task-card p {
+  margin: 8px 0;
+  color: #a9bad0;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+#userSurfingPage .surfing-task-card .surfing-reward {
+  color: #45e0a0;
+  font-weight: 700;
+}
+
+/* Task Buttons */
+#userSurfingPage .surfing-task-card button {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 12px;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease,
+              background 0.2s ease;
+}
+
+#userSurfingPage .surfing-task-card .visit-surfing-button {
+  background: #2477e8;
+  color: #ffffff;
+}
+
+#userSurfingPage .surfing-task-card .visit-surfing-button:hover {
+  background: #3989f5;
+}
+
+#userSurfingPage .surfing-task-card .claim-surfing-button {
+  background: #0e9f6e;
+  color: #ffffff;
+}
+
+#userSurfingPage .surfing-task-card .claim-surfing-button:hover {
+  background: #0bb981;
+}
+
+#userSurfingPage .surfing-task-card button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Status Message */
+#userSurfingPage #userSurfingStatus {
+  margin-top: 18px;
+  padding: 13px 16px;
+  border: 1px solid #294668;
+  border-radius: 10px;
+  background: #0d1b32;
+  color: #dbeafe;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  #userSurfingPage {
+    padding: 12px;
+  }
+
+  #userSurfingPage .surfing-header {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  #userSurfingPage #userSurfingBackButton {
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  #userSurfingPage .surfing-heading h2 {
+    font-size: 20px;
+  }
+
+  #userSurfingPage .surfing-heading p {
+    font-size: 13px;
+  }
+
+  #userSurfingPage .surfing-section-heading h3 {
+    font-size: 17px;
+  }
+
+  #userSurfingPage #availableSurfingAds {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  #userSurfingPage .surfing-task-card {
+    padding: 16px;
+  }
+}
+
+/* ===================== SURFING PAGE CSS END ===================== */
+
   
 
 /* =========================================================
