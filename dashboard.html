@@ -11290,6 +11290,189 @@ footer strong{
 <!-- ===================== PIN TASK PAGE END ===================== -->
 
   
+
+
+
+
+
+  
+<!-- ============== PIN TASK PAGE START ============== -->
+<div id="pinTaskPage" class="page-section" style="display: none;">
+
+  <!-- Header -->
+  <div class="pin-task-header">
+    <button type="button" id="pinTaskBackButton">
+      &#8592; Back
+    </button>
+
+    <div class="pin-task-header-text">
+      <h2>Pin Task</h2>
+      <p>Pin your created tasks and increase their visibility.</p>
+    </div>
+  </div>
+
+  <div class="pin-task-container">
+
+    <!-- Pin Task Form -->
+    <div class="pin-task-form-card">
+      <h3>Pin Your Task</h3>
+      <p>Select your task, position and duration.</p>
+
+      <!-- Select Created Task -->
+      <div class="pin-form-group">
+        <label for="pinTaskSelect">Select Your Task</label>
+
+        <select id="pinTaskSelect" required>
+          <option value="">Select one of your created tasks</option>
+        </select>
+      </div>
+
+      <!-- Select Position -->
+      <div class="pin-form-group">
+        <label>Select Pin Position</label>
+
+        <div class="pin-position-options">
+
+          <label class="pin-position-option">
+            <input
+              type="radio"
+              name="pinPosition"
+              value="1"
+              required
+            >
+            <span class="pin-position-content">
+              <strong>Position 1</strong>
+              <small>Premium</small>
+            </span>
+          </label>
+
+          <label class="pin-position-option">
+            <input
+              type="radio"
+              name="pinPosition"
+              value="2"
+            >
+            <span class="pin-position-content">
+              <strong>Position 2</strong>
+              <small>Standard</small>
+            </span>
+          </label>
+
+          <label class="pin-position-option">
+            <input
+              type="radio"
+              name="pinPosition"
+              value="3"
+            >
+            <span class="pin-position-content">
+              <strong>Position 3</strong>
+              <small>Basic</small>
+            </span>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- Select Duration -->
+      <div class="pin-form-group">
+        <label for="pinDurationSelect">Select Duration</label>
+
+        <select id="pinDurationSelect" required>
+          <option value="">Select pin duration</option>
+          <option value="3_hours">3 Hours</option>
+          <option value="24_hours">24 Hours</option>
+          <option value="3_days">3 Days</option>
+        </select>
+      </div>
+
+      <!-- Price Summary -->
+      <div class="pin-price-summary">
+
+        <div class="pin-price-row">
+          <span>Selected Position</span>
+          <strong id="pinSelectedPosition">Not selected</strong>
+        </div>
+
+        <div class="pin-price-row">
+          <span>Selected Duration</span>
+          <strong id="pinSelectedDuration">Not selected</strong>
+        </div>
+
+        <div class="pin-price-row pin-total-price">
+          <span>Total Price</span>
+          <strong>
+            <span id="pinTaskPrice">0</span> SNX
+          </strong>
+        </div>
+
+      </div>
+
+      <!-- Pin Button -->
+      <button
+        type="button"
+        id="pinMyTaskButton"
+        class="pin-submit-button"
+      >
+        Pin My Task
+      </button>
+
+      <!-- Form Message -->
+      <div
+        id="pinTaskFormMessage"
+        role="status"
+        aria-live="polite"
+        style="display: none;"
+      ></div>
+
+    </div>
+
+    <!-- My Pinned Tasks -->
+    <div class="my-pinned-tasks-card">
+
+      <div class="my-pinned-tasks-heading">
+        <h3>My Pinned Tasks</h3>
+        <p>
+          Check your task positions, status and estimated turn.
+        </p>
+      </div>
+
+      <div class="pinned-tasks-table-wrapper">
+
+        <table id="myPinnedTasksTable">
+
+          <thead>
+            <tr>
+              <th>Task Name</th>
+              <th>Position</th>
+              <th>Duration</th>
+              <th>Price Paid</th>
+              <th>Status</th>
+              <th>Estimated Turn</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="myPinnedTasksTableBody">
+
+            <tr id="noPinnedTasksRow">
+              <td colspan="7">
+                You have not pinned any tasks yet.
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- =============== PIN TASK PAGE END =============== -->
+
+
   
   
   
