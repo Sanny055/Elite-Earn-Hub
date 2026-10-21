@@ -1297,6 +1297,430 @@ footer div:last-child{
 
 /* ===================== SURFING PAGE CSS END ===================== */
 
+
+
+
+
+
+/* ============ PIN TASK PAGE CSS START ============ */
+
+#pinTaskPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #071225;
+  color: #f1f5f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+#pinTaskPage .pin-task-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  background: #0d1b32;
+  border: 1px solid #203958;
+  border-radius: 14px;
+}
+
+#pinTaskPage #pinTaskBackButton {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  background: #172b47;
+  color: #ffffff;
+  border: 1px solid #334b6b;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#pinTaskPage #pinTaskBackButton:hover {
+  background: #254365;
+}
+
+#pinTaskPage .pin-task-header-text h2 {
+  margin: 0 0 7px;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+#pinTaskPage .pin-task-header-text p {
+  margin: 0;
+  color: #9fb2cc;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Main Container */
+#pinTaskPage .pin-task-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* Form Card */
+#pinTaskPage .pin-task-form-card,
+#pinTaskPage .my-pinned-tasks-card {
+  width: 100%;
+  min-width: 0;
+  padding: 22px;
+  box-sizing: border-box;
+  background: #0d1b32;
+  border: 1px solid #203958;
+  border-radius: 14px;
+}
+
+#pinTaskPage .pin-task-form-card h3,
+#pinTaskPage .my-pinned-tasks-heading h3 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#pinTaskPage .pin-task-form-card > p,
+#pinTaskPage .my-pinned-tasks-heading p {
+  margin: 0 0 22px;
+  color: #9fb2cc;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Form Groups */
+#pinTaskPage .pin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+#pinTaskPage .pin-form-group > label {
+  color: #e2eaf5;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#pinTaskPage #pinTaskSelect,
+#pinTaskPage #pinDurationSelect {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  background: #09162a;
+  color: #f1f5f9;
+  border: 1px solid #2a4262;
+  border-radius: 9px;
+  outline: none;
+  font-size: 14px;
+}
+
+#pinTaskPage #pinTaskSelect:focus,
+#pinTaskPage #pinDurationSelect:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+#pinTaskPage #pinTaskSelect option,
+#pinTaskPage #pinDurationSelect option {
+  background: #0d1b32;
+  color: #ffffff;
+}
+
+/* Position Options */
+#pinTaskPage .pin-position-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+#pinTaskPage .pin-position-option {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  cursor: pointer;
+}
+
+#pinTaskPage .pin-position-option input[type="radio"] {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  accent-color: #3b82f6;
+}
+
+#pinTaskPage .pin-position-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 12px;
+  background: #09162a;
+  border: 1px solid #2a4262;
+  border-radius: 10px;
+  transition: border-color 0.2s ease,
+              background 0.2s ease;
+}
+
+#pinTaskPage .pin-position-content strong {
+  padding-right: 16px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+#pinTaskPage .pin-position-content small {
+  color: #9fb2cc;
+  font-size: 12px;
+}
+
+#pinTaskPage .pin-position-option:hover .pin-position-content {
+  border-color: #3b82f6;
+}
+
+#pinTaskPage .pin-position-option:has(input:checked) .pin-position-content {
+  background: #142f50;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+/* Price Summary */
+#pinTaskPage .pin-price-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 8px 0 22px;
+  padding: 4px 16px;
+  background: #09162a;
+  border: 1px solid #203958;
+  border-radius: 10px;
+}
+
+#pinTaskPage .pin-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #203958;
+}
+
+#pinTaskPage .pin-price-row:last-child {
+  border-bottom: none;
+}
+
+#pinTaskPage .pin-price-row span {
+  color: #9fb2cc;
+  font-size: 14px;
+}
+
+#pinTaskPage .pin-price-row strong {
+  color: #f1f5f9;
+  font-size: 14px;
+  text-align: right;
+}
+
+#pinTaskPage .pin-price-row.pin-total-price {
+  margin-top: 2px;
+}
+
+#pinTaskPage .pin-price-row.pin-total-price strong {
+  color: #4ade80;
+  font-size: 20px;
+}
+
+/* Pin Button */
+#pinTaskPage .pin-submit-button {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 18px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease,
+              transform 0.2s ease;
+}
+
+#pinTaskPage .pin-submit-button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+#pinTaskPage .pin-submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Form Status Message */
+#pinTaskPage #pinTaskFormMessage {
+  margin-top: 16px;
+  padding: 12px 14px;
+  color: #dbeafe;
+  background: #10213a;
+  border: 1px solid #294667;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* My Pinned Tasks Table */
+#pinTaskPage .my-pinned-tasks-heading {
+  margin-bottom: 18px;
+}
+
+#pinTaskPage .pinned-tasks-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #203958;
+  border-radius: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+#pinTaskPage #myPinnedTasksTable {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  background: #09162a;
+}
+
+#pinTaskPage #myPinnedTasksTable th {
+  padding: 15px 14px;
+  background: #132844;
+  color: #dbeafe;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #294667;
+}
+
+#pinTaskPage #myPinnedTasksTable td {
+  padding: 15px 14px;
+  color: #cbd5e1;
+  font-size: 13px;
+  line-height: 1.6;
+  border-bottom: 1px solid #1c304a;
+  vertical-align: middle;
+}
+
+#pinTaskPage #myPinnedTasksTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+#pinTaskPage #myPinnedTasksTable tbody tr:hover {
+  background: #10213a;
+}
+
+#pinTaskPage #noPinnedTasksRow td {
+  padding: 28px 16px;
+  color: #91a5c1;
+  text-align: center;
+}
+
+/* Table Action Buttons */
+#pinTaskPage #myPinnedTasksTable td button {
+  padding: 7px 11px;
+  background: #172b47;
+  color: #dbeafe;
+  border: 1px solid #334b6b;
+  border-radius: 7px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#pinTaskPage #myPinnedTasksTable td button:hover {
+  background: #254365;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  #pinTaskPage {
+    padding: 12px;
+  }
+
+  #pinTaskPage .pin-task-header {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  #pinTaskPage #pinTaskBackButton {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+
+  #pinTaskPage .pin-task-header-text h2 {
+    font-size: 21px;
+  }
+
+  #pinTaskPage .pin-task-header-text p {
+    font-size: 12px;
+  }
+
+  #pinTaskPage .pin-task-form-card,
+  #pinTaskPage .my-pinned-tasks-card {
+    padding: 16px;
+  }
+
+  #pinTaskPage .pin-task-form-card h3,
+  #pinTaskPage .my-pinned-tasks-heading h3 {
+    font-size: 18px;
+  }
+
+  #pinTaskPage .pin-position-options {
+    gap: 7px;
+  }
+
+  #pinTaskPage .pin-position-content {
+    padding: 16px 8px 12px;
+  }
+
+  #pinTaskPage .pin-position-content strong {
+    font-size: 12px;
+  }
+
+  #pinTaskPage .pin-position-content small {
+    font-size: 11px;
+  }
+
+  #pinTaskPage .pin-position-option input[type="radio"] {
+    top: 7px;
+    right: 7px;
+  }
+
+  #pinTaskPage .pin-price-summary {
+    padding: 4px 12px;
+  }
+
+  #pinTaskPage .pin-price-row span,
+  #pinTaskPage .pin-price-row strong {
+    font-size: 13px;
+  }
+
+  #pinTaskPage .pin-price-row.pin-total-price strong {
+    font-size: 18px;
+  }
+}
+
+/* ============= PIN TASK PAGE CSS END ============= */
+
+
+
+
+
+
+
+  
   
 
 /* =========================================================
@@ -11128,168 +11552,6 @@ footer strong{
 
 
 
-<!-- ==================== PIN TASK PAGE START ==================== -->
-<div id="pinTaskPage" class="page-section" style="display: none;">
-
-  <!-- Page Header -->
-  <div class="pin-task-header">
-    <button type="button" id="pinTaskBackButton">
-      &#8592; Back
-    </button>
-
-    <div>
-      <h2>Pin Task</h2>
-      <p>Pin your created tasks and increase their visibility.</p>
-    </div>
-  </div>
-
-  <!-- Pin Task Form -->
-  <div class="pin-task-container">
-
-    <div class="pin-task-form-card">
-      <h3>Pin Your Task</h3>
-      <p>Select your task, position and duration.</p>
-
-      <!-- Select Created Task -->
-      <div class="pin-form-group">
-        <label for="pinTaskSelect">Select Your Task</label>
-
-        <select id="pinTaskSelect" required>
-          <option value="">Select one of your created tasks</option>
-        </select>
-      </div>
-
-      <!-- Select Position -->
-      <div class="pin-form-group">
-        <label>Select Pin Position</label>
-
-        <div class="pin-position-options">
-
-          <label class="pin-position-option">
-            <input
-              type="radio"
-              name="pinPosition"
-              value="1"
-              required
-            >
-            <span class="pin-position-content">
-              <strong>Position 1</strong>
-              <small>Premium</small>
-            </span>
-          </label>
-
-          <label class="pin-position-option">
-            <input
-              type="radio"
-              name="pinPosition"
-              value="2"
-            >
-            <span class="pin-position-content">
-              <strong>Position 2</strong>
-              <small>Standard</small>
-            </span>
-          </label>
-
-          <label class="pin-position-option">
-            <input
-              type="radio"
-              name="pinPosition"
-              value="3"
-            >
-            <span class="pin-position-content">
-              <strong>Position 3</strong>
-              <small>Basic</small>
-            </span>
-          </label>
-
-        </div>
-      </div>
-
-      <!-- Select Duration -->
-      <div class="pin-form-group">
-        <label for="pinDurationSelect">Select Duration</label>
-
-        <select id="pinDurationSelect" required>
-          <option value="">Select pin duration</option>
-          <option value="3_hours">3 Hours</option>
-          <option value="24_hours">24 Hours</option>
-          <option value="3_days">3 Days</option>
-        </select>
-      </div>
-
-      <!-- Price Preview -->
-      <div class="pin-price-summary">
-        <div>
-          <span>Selected Position</span>
-          <strong id="pinSelectedPosition">Not selected</strong>
-        </div>
-
-        <div>
-          <span>Selected Duration</span>
-          <strong id="pinSelectedDuration">Not selected</strong>
-        </div>
-
-        <div class="pin-total-price">
-          <span>Pin Price</span>
-          <strong>
-            <span id="pinTaskPrice">0</span> SNX
-          </strong>
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <button
-        type="button"
-        id="pinMyTaskButton"
-        class="pin-submit-button"
-      >
-        Pin My Task
-      </button>
-
-      <p id="pinTaskFormMessage" role="status" aria-live="polite"
-         style="display: none;"></p>
-    </div>
-
-    <!-- My Pinned Tasks Table -->
-    <div class="my-pinned-tasks-card">
-
-      <div class="my-pinned-tasks-heading">
-        <h3>My Pinned Tasks</h3>
-        <p>Track your pinned tasks, positions and estimated turn.</p>
-      </div>
-
-      <div class="pinned-tasks-table-wrapper">
-        <table id="myPinnedTasksTable">
-          <thead>
-            <tr>
-              <th>Task Name</th>
-              <th>Position</th>
-              <th>Duration</th>
-              <th>Price Paid</th>
-              <th>Status</th>
-              <th>Estimated Turn</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody id="myPinnedTasksTableBody">
-            <tr id="noPinnedTasksRow">
-              <td colspan="7">
-                You have not pinned any tasks yet.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-<!-- ===================== PIN TASK PAGE END ===================== -->
-
-  
 
 
 
