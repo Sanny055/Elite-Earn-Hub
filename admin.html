@@ -1,1 +1,404 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Earn Hub | Admin Panel</title>
+
+<style>
+:root {
+  --bg:#090711;
+  --panel:#151122;
+  --purple:#8b5cf6;
+  --gold:#f4c76b;
+  --text:#f6f2ff;
+  --muted:#aaa0bd;
+  --border:#302442;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+}
+button { cursor:pointer; font:inherit; }
+.app { display:flex; min-height:100vh; }
+.sidebar {
+  width:250px;
+  flex-shrink:0;
+  background:#100d1a;
+  border-right:1px solid var(--border);
+  padding:22px 14px;
+}
+.brand {
+  color:var(--gold);
+  font-size:17px;
+  font-weight:bold;
+  padding:10px;
+  margin-bottom:20px;
+}
+.brand small {
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:7px;
+  letter-spacing:2px;
+}
+.nav-title {
+  color:#887b9f;
+  font-size:10px;
+  margin:22px 10px 9px;
+  letter-spacing:1.5px;
+}
+.nav-btn {
+  display:block;
+  width:100%;
+  padding:12px;
+  margin:4px 0;
+  text-align:left;
+  border:1px solid transparent;
+  border-radius:9px;
+  color:#d5cce5;
+  background:transparent;
+  font-size:12px;
+}
+.nav-btn:hover,.nav-btn.active {
+  background:#8b5cf622;
+  border-color:#8b5cf655;
+  color:white;
+}
+.main { flex:1; min-width:0; }
+.topbar {
+  padding:20px 25px;
+  border-bottom:1px solid var(--border);
+  background:#100d1a;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.topbar h2 { margin:0; font-size:19px; }
+.admin-label { color:var(--gold); font-size:11px; }
+.content { padding:25px; }
+.welcome { margin-bottom:22px; }
+.welcome h1 { margin:0; font-size:25px; }
+.welcome p,.muted { color:var(--muted); font-size:12px; line-height:1.7; }
+.notice {
+  padding:14px;
+  margin-bottom:22px;
+  border:1px solid #f4c76b55;
+  border-radius:10px;
+  background:#f4c76b0b;
+  color:var(--gold);
+  font-size:12px;
+  line-height:1.7;
+}
+.section-title { margin:25px 0 13px; font-size:15px; }
+.stats {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:13px;
+}
+.card {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:17px;
+}
+.stat {
+  color:var(--muted);
+  font-size:11px;
+}
+.stat strong {
+  display:block;
+  color:var(--gold);
+  font-size:24px;
+  margin-top:13px;
+}
+.stat small {
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:8px;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+  margin-top:18px;
+}
+.page { display:none; }
+.page.active { display:block; }
+.table-wrap { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; }
+th,td {
+  text-align:left;
+  padding:12px 9px;
+  border-bottom:1px solid var(--border);
+  font-size:11px;
+}
+th { color:var(--gold); }
+.action-btn {
+  background:var(--purple);
+  border:0;
+  border-radius:7px;
+  color:white;
+  padding:9px 12px;
+  font-size:11px;
+}
+.footer {
+  color:var(--muted);
+  font-size:10px;
+  padding:25px 0 5px;
+}
+@media(max-width:1000px) {
+  .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:700px) {
+  .app { display:block; }
+  .sidebar { width:100%; border-right:0; }
+  .grid { grid-template-columns:1fr; }
+  .content { padding:16px; }
+  .topbar { padding:16px; }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <div class="brand">
+    ELITE EARN HUB
+    <small>ADMIN CONTROL CENTER</small>
+  </div>
+
+  <div class="nav-title">MAIN MENU</div>
+  <button class="nav-btn active" data-page="dashboard">◈ Dashboard Overview</button>
+  <button class="nav-btn" data-page="users">♙ User Management</button>
+  <button class="nav-btn" data-page="profiles">▣ Profile Checker</button>
+
+  <div class="nav-title">ADVERTISEMENT CENTER</div>
+  <button class="nav-btn" data-page="ads">▤ All Advertisements</button>
+  <button class="nav-btn" data-page="like">♡ Like Ads</button>
+  <button class="nav-btn" data-page="watch">▷ View / Watch Ads</button>
+  <button class="nav-btn" data-page="subscribe">◎ Subscribe Ads</button>
+  <button class="nav-btn" data-page="surfing">⌁ Surfing Ads</button>
+  <button class="nav-btn" data-page="tasks">☑ Task Management</button>
+  <button class="nav-btn" data-page="pin">⌖ Pin Task Management</button>
+
+  <div class="nav-title">FINANCE & REWARDS</div>
+  <button class="nav-btn" data-page="deposits">↙ Deposits</button>
+  <button class="nav-btn" data-page="withdrawals">↗ Withdrawals</button>
+  <button class="nav-btn" data-page="conversion">⇄ SNX Conversion</button>
+  <button class="nav-btn" data-page="balances">◉ Balance Management</button>
+  <button class="nav-btn" data-page="ratings">☆ Rating Points</button>
+
+  <div class="nav-title">SYSTEM</div>
+  <button class="nav-btn" data-page="settings">⚙ Platform Settings</button>
+  <button class="nav-btn" data-page="security">♢ Admin Security</button>
+  <button class="nav-btn" data-page="logs">≡ Activity Logs</button>
+</aside>
+
+
+
+  
+<main class="main">
+
+<header class="topbar">
+  <h2 id="pageTitle">Dashboard Overview</h2>
+  <span class="admin-label">● ADMIN PREVIEW</span>
+</header>
+
+<div class="content">
+
+<section class="page active" id="dashboard">
+  <div class="welcome">
+    <h1>Welcome, Admin ✦</h1>
+    <p>Elite Earn Hub platform overview and management center.</p>
+  </div>
+
+  <div class="notice">
+    ⚠ Preview Mode: Statistics abhi live Supabase data nahi hain.
+    Admin security aur database connection agle step mein configure honge.
+  </div>
+
+  <h3 class="section-title">Platform Overview</h3>
+
+  <div class="stats">
+    <div class="card stat">Total Users<strong>—</strong><small>Live data pending</small></div>
+    <div class="card stat">New Profiles<strong>—</strong><small>Review queue</small></div>
+    <div class="card stat">Main Balance Total<strong>— SNX</strong><small>User balances</small></div>
+    <div class="card stat">Advertisement Balance<strong>— SNX</strong><small>User ad balances</small></div>
+    <div class="card stat">Total Advertisements<strong>—</strong><small>All ad categories</small></div>
+    <div class="card stat">Pending Ad Requests<strong>—</strong><small>Awaiting review</small></div>
+    <div class="card stat">Pending Deposits<strong>—</strong><small>Payment verification</small></div>
+    <div class="card stat">Pending Withdrawals<strong>—</strong><small>Request review</small></div>
+  </div>
+
+  <h3 class="section-title">Other Pending Requests</h3>
+  <div class="grid">
+    <div class="card">
+      <h3>Tasks & Pin Tasks</h3>
+      <p class="muted">Pending general tasks and Pin Task requests.</p>
+      <button class="action-btn" onclick="openPage('tasks')">Manage Tasks</button>
+    </div>
+    <div class="card">
+      <h3>Recent Activity</h3>
+      <p class="muted">Admin activity logs will appear here after database connection.</p>
+      <button class="action-btn" onclick="openPage('logs')">View Logs</button>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="users">
+  <h2>User Management</h2>
+  <p class="muted">User accounts, account status and account details.</p>
+  <div class="card"><h3>User Records</h3><p class="muted">Supabase connection required to load real users.</p></div>
+</section>
+
+<section class="page" id="profiles">
+  <h2>Profile Checker</h2>
+  <p class="muted">Review user profile information and verification status.</p>
+  <div class="card"><h3>Profile Reviews</h3><p class="muted">Profile records will appear after backend connection.</p></div>
+</section>
+
+<section class="page" id="ads">
+  <h2>All Advertisements</h2>
+  <p class="muted">Central list for every advertisement category.</p>
+  <div class="card"><h3>Advertisement Requests</h3><p class="muted">Live requests are not connected yet.</p></div>
+</section>
+
+<section class="page" id="like">
+  <h2>Like Ads</h2>
+  <div class="card"><p class="muted">Manage YouTube Like advertisement submissions.</p></div>
+</section>
+
+<section class="page" id="watch">
+  <h2>View / Watch Ads</h2>
+  <div class="card"><p class="muted">Manage video watch duration, budgets and submissions.</p></div>
+</section>
+
+<section class="page" id="subscribe">
+  <h2>Subscribe Ads</h2>
+  <div class="card"><p class="muted">Manage Subscribe advertisement requests.</p></div>
+</section>
+
+<section class="page" id="surfing">
+  <h2>Surfing Ads</h2>
+  <div class="card"><p class="muted">Manage surfing advertisements and submitted URLs.</p></div>
+</section>
+
+<section class="page" id="tasks">
+  <h2>Task Management</h2>
+  <div class="card"><p class="muted">Manage general tasks created by users, separate from YouTube tasks.</p></div>
+</section>
+
+<section class="page" id="pin">
+  <h2>Pin Task Management</h2>
+  <div class="card"><p class="muted">Review Pin Task positions, durations and requests.</p></div>
+</section>
+
+<section class="page" id="deposits">
+  <h2>Deposits</h2>
+  <div class="card"><p class="muted">Review deposit requests and payment proofs.</p></div>
+</section>
+
+<section class="page" id="withdrawals">
+  <h2>Withdrawals</h2>
+  <div class="card"><p class="muted">Review withdrawal requests and payout details.</p></div>
+</section>
+
+<section class="page" id="conversion">
+  <h2>SNX Conversion</h2>
+  <div class="card"><p class="muted">Manage SNX conversion requests and fee records.</p></div>
+</section>
+
+<section class="page" id="balances">
+  <h2>Balance Management</h2>
+  <div class="card"><p class="muted">Review Main Balance, Advertisement Balance and transaction history.</p></div>
+</section>
+
+<section class="page" id="ratings">
+  <h2>Rating Points</h2>
+  <div class="card"><p class="muted">Review user rating points and point history.</p></div>
+</section>
+
+<section class="page" id="settings">
+  <h2>Platform Settings</h2>
+  <div class="card">
+    <p class="muted">Initial display settings based on the project plan.</p>
+    <label>SNX display rate (PKR)</label><br><br>
+    <input id="snxRate" type="number" value="4"><br><br>
+    <label>Minimum conversion (SNX)</label><br><br>
+    <input id="minSNX" type="number" value="300"><br><br>
+    <label>Conversion fee (SNX)</label><br><br>
+    <input id="feeSNX" type="number" value="30"><br><br>
+    <button class="action-btn" onclick="alert('Preview only: settings abhi save nahi huin.')">Preview Settings</button>
+  </div>
+</section>
+
+<section class="page" id="security">
+  <h2>Admin Security</h2>
+  <div class="card">
+    <h3>Security Setup Required</h3>
+    <p class="muted">Supabase Auth, admin role verification aur Row Level Security (RLS) zaroori hain. HTML mein password ya service-role key rakhna secure nahi hai.</p>
+  </div>
+</section>
+
+<section class="page" id="logs">
+  <h2>Activity Logs</h2>
+  <div class="card"><p class="muted">Real admin actions ki audit history backend connection ke baad yahan show hogi.</p></div>
+</section>
+
+<div class="footer">© Elite Earn Hub | Admin Panel</div>
+</div>
+</main>
+</div>
+
+
+  
+<script>
+function openPage(pageId) {
+  const selectedPage = document.getElementById(pageId);
+
+  if (!selectedPage) {
+    return;
+  }
+
+  document.querySelectorAll('.page').forEach(function(page) {
+    page.classList.remove('active');
+  });
+
+  document.querySelectorAll('.nav-btn').forEach(function(button) {
+    button.classList.remove('active');
+  });
+
+  selectedPage.classList.add('active');
+
+  const activeButton = document.querySelector(
+    '.nav-btn[data-page="' + pageId + '"]'
+  );
+
+  if (activeButton) {
+    activeButton.classList.add('active');
+  }
+
+  const title = selectedPage.querySelector('h1, h2');
+  document.getElementById('pageTitle').textContent =
+    title ? title.textContent : 'Admin Panel';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.nav-btn').forEach(function(button) {
+  button.addEventListener('click', function() {
+    openPage(button.dataset.page);
+  });
+});
+</script>
+
+</body>
+</html>
