@@ -20004,6 +20004,195 @@ if (pinTaskBackButton && pinTaskPage) {
 
 
 
+
+
+
+/* =========================================
+   PIN TASK - PRICE, VALIDATION & SUBMIT
+========================================= */
+
+(function () {
+    const page = document.getElementById("pinTaskPage");
+    const taskSelect = document.getElementById("pinTaskSelect");
+    const durationSelect = document.getElementById("pinDurationSelect");
+    const priceDisplay = document.getElementById("pinTaskPrice");
+    const positionDisplay = document.getElementById("pinSelectedPosition");
+    const durationDisplay = document.getElementById("pinSelectedDuration");
+    const submitButton = document.getElementById("pinMyTaskButton");
+    const message = document.getElementById("pinTaskFormMessage");
+    const backButton = document.getElementById("pinTaskBackButton");
+
+    if (
+        !page || !taskSelect || !durationSelect ||
+        !priceDisplay || !positionDisplay ||
+        !durationDisplay || !submitButton
+    ) {
+        return;
+    }
+
+    // Position aur duration ke mutabiq prices
+    const prices = {
+        "1": {
+            "3_hours": 5,
+            "24_hours": 10,
+            "3_days": 25
+        },
+        "2": {
+            "3_hours": 3,
+            "24_hours": 5,
+            "3_days": 15
+        },
+        "3": {
+            "3_hours": 1,
+            "24_hours": 5,
+            "3_days": 10
+        }
+    };
+
+    const durationNames = {
+        "3_hours": "3 Hours",
+        "24_hours": "24 Hours",
+        "3_days": "3 Days"
+    };
+
+    function getSelectedPosition() {
+        const selected = document.querySelector(
+            '#pinTaskPage input[name="pinPosition"]:checked'
+        );
+        return selected ? selected.value : "";
+    }
+
+    function calculatePinPrice() {
+        const position = getSelectedPosition();
+        const duration = durationSelect.value;
+
+        positionDisplay.textContent = position
+            ? "Position " + position
+            : "Not selected";
+
+        durationDisplay.textContent = duration
+            ? (durationNames[duration] || "Not selected")
+            : "Not selected";
+
+        const price =
+            position && duration && prices[position]
+                ? prices[position][duration]
+                : 0;
+
+        priceDisplay.textContent = price.toFixed(3);
+        return price;
+    }
+
+    function showMessage(text) {
+        if (!message) return;
+
+        message.textContent = text;
+        message.style.display = "block";
+    }
+
+    function resetPinForm() {
+        taskSelect.value = "";
+        durationSelect.value = "";
+
+        document.querySelectorAll(
+            '#pinTaskPage input[name="pinPosition"]'
+        ).forEach(function (radio) {
+            radio.checked = false;
+        });
+
+        calculatePinPrice();
+
+        if (message) {
+            message.textContent = "";
+            message.style.display = "none";
+        }
+    }
+
+    // Position change par automatic calculation
+    document.querySelectorAll(
+        '#pinTaskPage input[name="pinPosition"]'
+    ).forEach(function (radio) {
+        radio.addEventListener("change", calculatePinPrice);
+    });
+
+    // Duration change par automatic calculation
+    durationSelect.addEventListener(
+        "change",
+        calculatePinPrice
+    );
+
+    // Task selection change
+    taskSelect.addEventListener("change", function () {
+        if (message) {
+            message.style.display = "none";
+        }
+    });
+
+    // Pin My Task button
+    submitButton.addEventListener("click", function () {
+        const taskId = taskSelect.value;
+        const position = getSelectedPosition();
+        const duration = durationSelect.value;
+        const price = calculatePinPrice();
+
+        if (!taskId) {
+            alert("Please select your created task first.");
+            taskSelect.focus();
+            return;
+        }
+
+        if (!position) {
+            alert("Please select a pin position.");
+            return;
+        }
+
+        if (!duration) {
+            alert("Please select a pin duration.");
+            durationSelect.focus();
+            return;
+        }
+
+        if (price <= 0) {
+            alert("Please check your pin selection.");
+            return;
+        }
+
+        // Admin approval se pehle koi balance deduct nahi hoga.
+        alert(
+            "Your Pin Task request has been sent to the Admin.\n\n" +
+            "Status: Pending Admin Approval\n" +
+            "Position: " + position + "\n" +
+            "Duration: " + durationNames[duration] + "\n" +
+            "Requested Price: " + price.toFixed(3) + " SNX\n\n" +
+            "Please wait for Admin approval."
+        );
+
+        // Alert par OK karne ke baad Dashboard par wapas
+        page.style.display = "none";
+        document.body.style.overflow = "";
+
+        resetPinForm();
+        window.scrollTo(0, 0);
+    });
+
+    // Back button
+    if (backButton) {
+        backButton.addEventListener("click", function () {
+            page.style.display = "none";
+            document.body.style.overflow = "";
+            window.scrollTo(0, 0);
+        });
+    }
+
+    // Initial price
+    calculatePinPrice();
+})();
+
+
+
+
+  
+
   
   </script>
  
