@@ -19946,6 +19946,50 @@ if (userSurfingBackButton && userSurfingPage) {
 
 
 
+
+                          
+/* ===== PIN TASK PAGE OPEN & BACK ===== */
+
+const pinTaskButton = document.getElementById("pinTaskBtn");
+const pinTaskPage = document.getElementById("pinTaskPage");
+const pinTaskBackButton = document.getElementById("pinTaskBackButton");
+
+let previousPinTaskPage = null;
+
+// Open Pin Task Page
+if (pinTaskButton && pinTaskPage) {
+  pinTaskButton.addEventListener("click", function () {
+    previousPinTaskPage = Array.from(
+      document.querySelectorAll(".page-section")
+    ).find(page =>
+      page !== pinTaskPage &&
+      getComputedStyle(page).display !== "none"
+    );
+
+    document.querySelectorAll(".page-section").forEach(page => {
+      page.style.display = "none";
+    });
+
+    pinTaskPage.style.display = "block";
+  });
+}
+
+// Back to Previous Page
+if (pinTaskBackButton && pinTaskPage) {
+  pinTaskBackButton.addEventListener("click", function () {
+    pinTaskPage.style.display = "none";
+
+    if (previousPinTaskPage) {
+      previousPinTaskPage.style.display = "block";
+    }
+  });
+}
+
+/* ===== PIN TASK PAGE OPEN & BACK END ===== */
+
+
+
+
   
   </script>
  
