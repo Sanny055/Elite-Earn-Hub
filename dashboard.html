@@ -313,6 +313,133 @@ footer div:last-child{
 
 
 
+/* ===== ELITE PREMIUM ADVERTISEMENT CENTER CARD ===== */
+
+.advertisement-center-card {
+  position: relative;
+  min-height: 112px;
+  padding: 22px 18px;
+  margin-top: 22px;
+  gap: 16px;
+  overflow: hidden;
+
+  border: 1px solid rgba(56, 189, 248, 0.48);
+  border-radius: 20px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(0, 190, 255, 0.20),
+      transparent 48%
+    ),
+    linear-gradient(
+      135deg,
+      #102d48 0%,
+      #0a1c30 55%,
+      #071525 100%
+    );
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.30),
+    0 0 22px rgba(0, 160, 255, 0.09);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.advertisement-center-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  width: 4px;
+  height: 70%;
+  border-radius: 0 5px 5px 0;
+  background: linear-gradient(
+    180deg,
+    #67e8f9,
+    #3b82f6
+  );
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.55);
+}
+
+.advertisement-center-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(0, 160, 255, 0.16);
+}
+
+.advertisement-center-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 17px;
+  font-size: 27px;
+  color: #e0f7ff;
+
+  background: linear-gradient(
+    145deg,
+    rgba(56, 189, 248, 0.24),
+    rgba(37, 99, 235, 0.15)
+  );
+
+  border: 1px solid rgba(125, 211, 252, 0.35);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 5px 15px rgba(0, 0, 0, 0.18);
+}
+
+.advertisement-center-content h3 {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: #f0faff;
+}
+
+.advertisement-center-content p {
+  margin-top: 7px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #a5c9df;
+}
+
+.advertisement-center-arrow {
+  font-size: 32px;
+  font-weight: 400;
+  color: #7dd3fc;
+  opacity: 1;
+  padding-left: 4px;
+}
+
+@media (max-width: 480px) {
+  .advertisement-center-card {
+    min-height: 106px;
+    padding: 19px 15px;
+    gap: 13px;
+    border-radius: 18px;
+  }
+
+  .advertisement-center-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .advertisement-center-content h3 {
+    font-size: 15px;
+  }
+
+  .advertisement-center-content p {
+    font-size: 11px;
+  }
+}
+
+/* ===== PREMIUM CARD CSS END ===== */
+
 
 
 
