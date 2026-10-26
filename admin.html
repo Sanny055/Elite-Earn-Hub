@@ -4,20 +4,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0B1424">
 <title>Elite Earn Hub | Admin Panel</title>
 
 <style>
 :root {
-  --bg: #0B1424;
-  --card: #142238;
-  --card2: #182B43;
-  --border: #263950;
-  --gold: #D8B56D;
-  --teal: #40D6B1;
-  --white: #F4F7FB;
-  --muted: #A8B6C9;
-  --red: #F27777;
+  --bg: #091321;
+  --panel: #111f32;
+  --panel2: #182a40;
+  --gold: #d8b56d;
+  --teal: #40d6b1;
+  --text: #f4f7fb;
+  --muted: #a8b5c5;
+  --border: #293b51;
 }
 
 * {
@@ -27,413 +25,357 @@
 body {
   margin: 0;
   background: var(--bg);
-  color: var(--white);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  font-family: Arial, sans-serif;
 }
 
-button, input, select, textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--teal);
-  outline-offset: 2px;
-}
-
-.app {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 0 22px;
-  margin-bottom: 26px;
+header {
+  padding: 22px;
+  background: #0d1a2b;
   border-bottom: 1px solid var(--border);
-}
-
-.brand-icon {
-  width: 54px;
-  height: 54px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  border: 1px solid #695B3D;
-  border-radius: 16px;
-  background: var(--card);
-  color: var(--gold);
-  font-size: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
 .brand {
-  flex: 1;
-  min-width: 0;
-}
-
-.brand h1 {
-  margin: 0 0 6px;
-  font-size: clamp(20px, 4vw, 28px);
-}
-
-.brand p {
-  margin: 0;
   color: var(--gold);
-  font-size: 13px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.eyebrow {
-  margin-top: 6px;
+.admin-info {
   color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 1.5px;
+  font-size: 13px;
+  text-align: right;
+  line-height: 1.6;
 }
 
-.admin-pill {
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  background: var(--card);
-  color: var(--teal);
-  font-size: 12px;
+main {
+  width: min(1200px, 100%);
+  margin: auto;
+  padding: 22px;
+}
+
+h2 {
+  color: var(--gold);
+  font-size: 20px;
+  margin: 0 0 16px;
+}
+
+h3 {
+  margin: 0 0 14px;
+  font-size: 17px;
 }
 
 .section {
-  margin: 28px 0;
+  margin-bottom: 26px;
 }
 
-.section-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 17px;
-}
-
-.section-title .icon {
-  color: var(--gold);
-  font-size: 25px;
-}
-
-.section-title h2 {
-  margin: 0;
-  font-size: clamp(22px, 4vw, 29px);
-}
-
-.grid {
+.stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 13px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
 }
 
-.card {
-  min-width: 0;
-  padding: 18px;
+.stat-card,
+.panel {
+  background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--card);
-  color: var(--white);
-  text-align: left;
-  transition: border-color .2s, transform .2s;
+  border-radius: 16px;
+  padding: 19px;
 }
 
-button.card:hover {
-  transform: translateY(-2px);
-  border-color: var(--gold);
-}
-
-.card-icon {
-  display: block;
-  margin-bottom: 14px;
-  color: var(--gold);
-  font-size: 28px;
-}
-
-.card-title {
-  display: block;
-  margin-bottom: 7px;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.card-description {
+.stat-label {
   display: block;
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 13px;
+  margin-bottom: 12px;
 }
 
-.card-arrow {
+.stat-value {
   display: block;
-  margin-top: 12px;
-  color: var(--gold);
-  text-align: right;
-  font-size: 20px;
-}
-
-.stats-grid .card {
-  min-height: 145px;
-}
-
-.stat-number {
-  display: block;
-  margin: 10px 0;
-  font-size: 32px;
-  font-weight: bold;
-}
-
-.stat-caption {
   color: var(--teal);
-  font-size: 11px;
+  font-size: 27px;
+  font-weight: bold;
 }
 
 .wallet {
-  margin-top: 17px;
-  padding: 21px;
+  background: linear-gradient(120deg, #14283e, #102033);
   border: 1px solid var(--gold);
   border-radius: 18px;
-  background: linear-gradient(145deg, #172A40, #122035);
-}
-
-.wallet-heading {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.wallet-icon {
-  color: var(--gold);
-  font-size: 30px;
-}
-
-.wallet-heading h3 {
-  margin: 0 0 5px;
-  font-size: 18px;
-}
-
-.wallet-heading p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
+  padding: 22px;
 }
 
 .wallet-balance {
-  margin: 20px 0 5px;
+  font-size: 32px;
   color: var(--gold);
-  font-size: clamp(28px, 6vw, 38px);
   font-weight: bold;
+  margin: 12px 0;
 }
 
-.wallet-note {
-  margin: 0 0 16px;
+.note {
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
-.primary-button,
-.secondary-button {
-  padding: 12px 15px;
-  border-radius: 11px;
-  font-weight: bold;
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
-.primary-button {
-  border: none;
-  background: var(--teal);
-  color: #071B1A;
-}
-
-.secondary-button {
-  border: 1px solid var(--border);
-  background: var(--card2);
-  color: var(--white);
-}
-
-.button-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.notice {
-  margin-top: 15px;
-  padding: 12px;
-  border: 1px solid var(--border);
+.admin-button {
+  width: 100%;
+  min-height: 58px;
+  padding: 14px;
   border-radius: 12px;
-  background: var(--card);
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
+  border: 1px solid #315067;
+  background: var(--panel2);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  cursor: default;
+}
+
+.admin-button .symbol {
+  color: var(--teal);
+  margin-right: 8px;
+}
+
+.admin-button:focus {
+  outline: none;
 }
 
 footer {
-  margin-top: 35px;
-  padding: 20px 0 10px;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
+  padding: 24px;
   text-align: center;
-  font-size: 11px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-size: 13px;
 }
 
-.hidden {
-  display: none !important;
-}
-
-@media (min-width: 760px) {
-  .app {
-    padding: 28px;
-  }
-
+@media (max-width: 800px) {
   .stats-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .management-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .button-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 420px) {
-  .app {
+  main {
     padding: 14px;
   }
 
-  .topbar {
-    gap: 9px;
+  header {
+    padding: 17px;
   }
 
-  .brand-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 23px;
+  .brand {
+    font-size: 21px;
   }
 
-  .admin-pill {
-    padding: 7px 9px;
-    font-size: 10px;
+  .button-grid {
+    grid-template-columns: 1fr;
   }
 
-  .card {
+  .stat-card {
     padding: 14px;
-  }
-
-  .card-title {
-    font-size: 13px;
-  }
-
-  .card-description {
-    font-size: 11px;
-  }
-
-  .stat-number {
-    font-size: 27px;
   }
 }
 </style>
 </head>
 
 <body>
-<div class="app">
 
-<header class="topbar">
-  <div class="brand-icon">⬡</div>
+<header>
+  <div class="brand">✦ Elite Earn Hub</div>
 
-  <div class="brand">
-    <h1>Elite Earn Hub</h1>
-    <p>Sanny Jatt — CEO / Managing Director</p>
-    <div class="eyebrow">ADMIN CONTROL PANEL</div>
+  <div class="admin-info">
+    <strong>Sanny Jatt</strong><br>
+    CEO / Managing Director<br>
+    Admin Control Panel
   </div>
-
-  <div class="admin-pill">ADMIN</div>
 </header>
 
-<main id="appMain">
+<main>
 
   <!-- DASHBOARD OVERVIEW -->
-
   <section class="section">
-    <div class="section-title">
-      <span class="icon">◈</span>
-      <h2>Dashboard Overview</h2>
-    </div>
+    <h2>Dashboard Overview</h2>
 
-    <div class="grid stats-grid">
-
-      <div class="card">
-        <span class="card-icon">♙</span>
-        <span class="card-title">Total Users</span>
-        <span class="stat-number" id="totalUsers">0</span>
-        <span class="stat-caption">Registered users</span>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Total Users</span>
+        <span class="stat-value">0</span>
       </div>
 
-      <div class="card">
-        <span class="card-icon">⇩</span>
-        <span class="card-title">Deposit Requests</span>
-        <span class="stat-number" id="depositRequests">0</span>
-        <span class="stat-caption">Pending requests</span>
+      <div class="stat-card">
+        <span class="stat-label">Deposit Requests</span>
+        <span class="stat-value">0</span>
       </div>
 
-      <div class="card">
-        <span class="card-icon">⇧</span>
-        <span class="card-title">Withdrawal Requests</span>
-        <span class="stat-number" id="withdrawalRequests">0</span>
-        <span class="stat-caption">Pending requests</span>
+      <div class="stat-card">
+        <span class="stat-label">Withdrawal Requests</span>
+        <span class="stat-value">0</span>
       </div>
 
-      <div class="card">
-        <span class="card-icon">☷</span>
-        <span class="card-title">Verification Requests</span>
-        <span class="stat-number" id="verificationRequests">0</span>
-        <span class="stat-caption">Pending verification</span>
+      <div class="stat-card">
+        <span class="stat-label">Verification Requests</span>
+        <span class="stat-value">0</span>
       </div>
-
     </div>
   </section>
 
-  <!-- PLATFORM BALANCE WALLET -->
+  <!-- PLATFORM WALLET -->
+  <section class="section">
+    <div class="wallet">
+      <h2>Platform Balance Wallet</h2>
+      <div class="wallet-balance">0 SNX</div>
+      <p class="note">
+        Platform fees and balance summary.
+        Live balance abhi database se connected nahi hai.
+      </p>
 
-  <section class="wallet">
-    <div class="wallet-heading">
-      <span class="wallet-icon">▣</span>
+      <div class="button-grid">
+        <button type="button" class="admin-button">
+          <span class="symbol">✧</span> Send Gift / Reward
+        </button>
 
-      <div>
-        <h3>Platform Balance Wallet</h3>
-        <p>Platform fees aur available balance</p>
+        <button type="button" class="admin-button">
+          <span class="symbol">▤</span> View Wallet History
+        </button>
       </div>
-    </div>
-
-    <div class="wallet-balance">
-      <span id="platformBalance">0</span> SNX
-    </div>
-
-    <p class="wallet-note">
-      Platform fees aur transactions ka balance yahan show hoga.
-      Real balance secure database se connect hone ke baad load hoga.
-    </p>
-
-    <div class="button-row">
-      <button class="primary-button" onclick="openGiftPage()">
-        ✧ Send Gift / Reward
-      </button>
-
-      <button class="secondary-button" onclick="openWalletHistory()">
-        View Wallet History
-      </button>
     </div>
   </section>
 
-  <!-- MANAGEMENT BUTTONS WILL BE ADDED IN PART 2, 3 AND 4 -->
+  <!-- USER MANAGEMENT -->
+  <section class="section">
+    <div class="panel">
+      <h2>User Management</h2>
 
-  <div id="nextParts"></div>
+      <div class="button-grid">
+        <button type="button" class="admin-button">
+          <span class="symbol">♙</span> User Profiles
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">▣</span> Wallet Management
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">✧</span> Send Gift / Reward
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">⊘</span> Block / Unblock Users
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TASKS AND LEADERBOARD -->
+  <section class="section">
+    <div class="panel">
+      <h2>Tasks &amp; Leaderboard</h2>
+
+      <div class="button-grid">
+        <button type="button" class="admin-button">
+          <span class="symbol">✓</span> Mandatory Task Management
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">📌</span> Pinned Task Requests
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">★</span> Leaderboard
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">☷</span> General Task Requests
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUESTS AND OTHER MANAGEMENT -->
+  <section class="section">
+    <div class="panel">
+      <h2>Requests &amp; Other Management</h2>
+
+      <div class="button-grid">
+        <button type="button" class="admin-button">
+          <span class="symbol">↓</span> Deposit Requests
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">↑</span> Withdrawal Requests
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">◉</span> Face Verification
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">▶</span> YouTube Requests
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">↗</span> Surfing Requests
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">▤</span> Advertisements
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">🎟</span> Raffles Management
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">◇</span> Services Requests
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MORE MANAGEMENT -->
+  <section class="section">
+    <div class="panel">
+      <h2>More Management</h2>
+
+      <div class="button-grid">
+        <button type="button" class="admin-button">
+          <span class="symbol">♢</span> Notifications
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">≋</span> Scrolling Announcement Bar
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">⚙</span> Platform Settings
+        </button>
+
+        <button type="button" class="admin-button">
+          <span class="symbol">?</span> Help &amp; Feedback
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <p class="note">
+    Admin panel structure preview only. Buttons are intentionally inactive.
+    User records, requests, balances and transactions are not connected.
+  </p>
 
 </main>
 
@@ -441,839 +383,5 @@ footer {
   Elite Earn Hub · Admin Control Panel
 </footer>
 
-</div>
-
-<!-- PART 1 JAVASCRIPT -->
-
-<script>
-/*
-  PART 1 FOUNDATION
-
-  Important:
-  These counters currently start at zero.
-  They are NOT live database counters yet.
-
-  Supabase/backend connection will be added and secured
-  in the integration stage. Never put a service-role key
-  inside browser JavaScript.
-*/
-
-const dashboardData = {
-  totalUsers: 0,
-  depositRequests: 0,
-  withdrawalRequests: 0,
-  verificationRequests: 0,
-  platformBalance: 0
-};
-
-function animateCounter(elementId, targetValue) {
-  const element = document.getElementById(elementId);
-
-  if (!element) return;
-
-  const target = Number(targetValue) || 0;
-  const duration = 700;
-  const startTime = performance.now();
-
-  function updateCounter(currentTime) {
-    const progress = Math.min(
-      (currentTime - startTime) / duration,
-      1
-    );
-
-    const easedProgress = 1 - Math.pow(1 - progress, 3);
-    const currentValue = Math.round(target * easedProgress);
-
-    element.textContent = currentValue.toLocaleString();
-
-    if (progress < 1) {
-      requestAnimationFrame(updateCounter);
-    }
-  }
-
-  requestAnimationFrame(updateCounter);
-}
-
-function renderDashboardCounters() {
-  animateCounter("totalUsers", dashboardData.totalUsers);
-  animateCounter("depositRequests", dashboardData.depositRequests);
-  animateCounter("withdrawalRequests", dashboardData.withdrawalRequests);
-  animateCounter("verificationRequests", dashboardData.verificationRequests);
-
-  const wallet = document.getElementById("platformBalance");
-
-  if (wallet) {
-    wallet.textContent = Number(
-      dashboardData.platformBalance
-    ).toLocaleString(undefined, {
-      maximumFractionDigits: 4
-    });
-  }
-}
-
-/*
-  Temporary navigation placeholders.
-  Part 2 will replace these with proper pages.
-*/
-
-function openGiftPage() {
-  alert("Send Gift / Reward page Part 2 mein add hoga.");
-}
-
-function openWalletHistory() {
-  alert("Platform Wallet History page baad ke part mein add hoga.");
-}
-
-renderDashboardCounters();
-</script>
-
-
-
-
-<style>
-.hidden { display: none !important; }
-
-.page {
-  background: #142238;
-  border: 1px solid #263950;
-  border-radius: 18px;
-  padding: 20px;
-  margin: 20px 0;
-  color: #F4F7FB;
-}
-
-.page h2 { margin-top: 0; color: #D8B56D; }
-
-.page-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 14px;
-  margin-top: 18px;
-}
-
-.page-card {
-  background: #182B43;
-  border: 1px solid #263950;
-  border-radius: 14px;
-  padding: 17px;
-  color: #F4F7FB;
-  text-align: left;
-  cursor: pointer;
-  width: 100%;
-}
-
-.page-card:hover { border-color: #40D6B1; }
-
-.page-card strong {
-  display: block;
-  color: #40D6B1;
-  margin-bottom: 8px;
-  font-size: 15px;
-}
-
-.page-card span { color: #A8B6C9; font-size: 13px; }
-
-.page-btn {
-  background: #40D6B1;
-  color: #0B1424;
-  border: 0;
-  border-radius: 9px;
-  padding: 10px 14px;
-  font-weight: 700;
-  cursor: pointer;
-  margin: 5px 5px 5px 0;
-}
-
-.page-btn.secondary {
-  background: #263950;
-  color: #F4F7FB;
-}
-
-.page input, .page select, .page textarea {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 6px 0 14px;
-  padding: 11px;
-  border: 1px solid #263950;
-  border-radius: 9px;
-  background: #0B1424;
-  color: #F4F7FB;
-}
-
-.page label { color: #A8B6C9; font-size: 13px; }
-
-.page-note {
-  color: #A8B6C9;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.page-table-wrap { overflow-x: auto; }
-
-.page table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-.page th, .page td {
-  padding: 11px;
-  border-bottom: 1px solid #263950;
-  text-align: left;
-  font-size: 13px;
-}
-
-.page th { color: #D8B56D; }
-.page td { color: #F4F7FB; }
-</style>
-
-<div id="userManagementPage" class="page hidden">
-  <button class="page-btn secondary" onclick="backToDashboard()">← Dashboard</button>
-  <h2>User Management</h2>
-  <p class="page-note">Users ke profiles, wallets, rewards aur account status manage karne ke liye.</p>
-
-  <div class="page-grid">
-    <button class="page-card" onclick="showAdminPage('userProfilesPage')">
-      <strong>User Profiles</strong>
-      <span>Users ki list kholain aur kisi user ki details dekhein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('walletManagementPage')">
-      <strong>Wallet Management</strong>
-      <span>User balances aur wallet records check karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('giftRewardPage')">
-      <strong>Send Gift / Reward</strong>
-      <span>User ko reward dene ka form kholain.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('blockUsersPage')">
-      <strong>Block / Unblock Users</strong>
-      <span>Account status manage karne ka page.</span>
-    </button>
-  </div>
-</div>
-
-<div id="userProfilesPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('userManagementPage')">← User Management</button>
-  <h2>User Profiles</h2>
-  <p class="page-note">Database connect hone par yahan registered users ki asli list nazar aayegi.</p>
-  <label>Search user by name, email or ID</label>
-  <input id="profileSearch" placeholder="Search users..." oninput="filterUserProfiles()">
-  <div class="page-table-wrap">
-    <table>
-      <thead><tr><th>User</th><th>Email / ID</th><th>Action</th></tr></thead>
-      <tbody id="profileTableBody">
-        <tr><td colspan="3">Abhi database se users load nahi ho rahe.</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="page-note">Live user profiles ke liye Supabase query aur admin permissions Part 5 mein connect karni hongi.</p>
-</div>
-
-<div id="userProfileDetailPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('userProfilesPage')">← User Profiles</button>
-  <h2>User Profile Details</h2>
-  <div id="userProfileDetailContent" class="page-note">User select karne par details yahan show hongi.</div>
-</div>
-
-<div id="walletManagementPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('userManagementPage')">← User Management</button>
-  <h2>Wallet Management</h2>
-  <p class="page-note">User wallet balances aur transactions yahan manage honge.</p>
-  <label>User ID or email</label>
-  <input id="walletUserLookup" placeholder="Enter user ID or email">
-  <button class="page-btn" onclick="lookupUserWallet()">Find Wallet</button>
-  <div id="walletLookupResult" class="page-note" style="margin-top:15px">
-    Wallet details dekhne ke liye user ID enter karein.
-  </div>
-</div>
-
-<div id="giftRewardPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('userManagementPage')">← User Management</button>
-  <h2>Send Gift / Reward</h2>
-  <p class="page-note">Reward sirf verified admin action aur available platform balance ke through bhejna chahiye.</p>
-  <form id="giftRewardForm" onsubmit="submitGiftReward(event)">
-    <label>User ID or email</label>
-    <input id="giftUserId" required placeholder="Enter recipient user ID or email">
-    <label>Reward amount (SNX)</label>
-    <input id="giftAmount" type="number" min="0.01" step="0.01" required placeholder="Enter SNX amount">
-    <label>Reason / message</label>
-    <textarea id="giftReason" rows="3" placeholder="Reason for this reward"></textarea>
-    <button class="page-btn" type="submit">Submit Reward Request</button>
-  </form>
-  <p class="page-note">Abhi form request ko validate karta hai; real SNX transfer tabhi hoga jab secure backend aur admin authorization connect honge.</p>
-</div>
-
-<div id="blockUsersPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('userManagementPage')">← User Management</button>
-  <h2>Block / Unblock Users</h2>
-  <p class="page-note">Account status change karne se pehle user ki identity verify karein.</p>
-  <label>User ID or email</label>
-  <input id="blockUserId" placeholder="Enter user ID or email">
-  <label>Action</label>
-  <select id="blockUserAction">
-    <option value="block">Block user</option>
-    <option value="unblock">Unblock user</option>
-  </select>
-  <label>Reason</label>
-  <textarea id="blockUserReason" rows="3" placeholder="Enter reason"></textarea>
-  <button class="page-btn" onclick="submitBlockRequest()">Submit Status Request</button>
-  <p class="page-note">Yeh abhi request form hai. Asli account status tabhi badlega jab backend integration ho.</p>
-</div>
-
-<script>
-function showAdminPage(pageId) {
-  const dashboardSections = document.querySelectorAll(
-    '#appMain > .section, #appMain > .wallet'
-  );
-
-  dashboardSections.forEach(section => section.classList.add('hidden'));
-
-  document.querySelectorAll('#nextParts .page').forEach(page => {
-    page.classList.add('hidden');
-  });
-
-  const target = document.getElementById(pageId);
-  if (target) target.classList.remove('hidden');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function backToDashboard() {
-  document.querySelectorAll('#nextParts .page').forEach(page => {
-    page.classList.add('hidden');
-  });
-
-  document.querySelectorAll('#appMain > .section, #appMain > .wallet')
-    .forEach(section => section.classList.remove('hidden'));
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function openGiftPage() {
-  showAdminPage('giftRewardPage');
-}
-
-function openWalletHistory() {
-  showAdminPage('walletManagementPage');
-}
-
-function filterUserProfiles() {
-  const search = document.getElementById('profileSearch').value.toLowerCase();
-  document.querySelectorAll('#profileTableBody tr').forEach(row => {
-    row.style.display = row.textContent.toLowerCase().includes(search) ? '' : 'none';
-  });
-}
-
-function lookupUserWallet() {
-  const user = document.getElementById('walletUserLookup').value.trim();
-  if (!user) {
-    alert('Pehle user ID ya email enter karein.');
-    return;
-  }
-  document.getElementById('walletLookupResult').textContent =
-    'Wallet lookup request tayyar hai. Asli balance dekhne ke liye database integration zaroori hai.';
-}
-
-function submitGiftReward(event) {
-  event.preventDefault();
-  const user = document.getElementById('giftUserId').value.trim();
-  const amount = Number(document.getElementById('giftAmount').value);
-
-  if (!user || !Number.isFinite(amount) || amount <= 0) {
-    alert('Valid user ID aur reward amount enter karein.');
-    return;
-  }
-
-  alert('Reward request form validate ho gaya. Real SNX transfer abhi nahi hua; backend integration zaroori hai.');
-}
-
-function submitBlockRequest() {
-  const user = document.getElementById('blockUserId').value.trim();
-  if (!user) {
-    alert('Pehle user ID ya email enter karein.');
-    return;
-  }
-
-  alert('Status request validate ho gayi. Account abhi block/unblock nahi hua; backend integration zaroori hai.');
-}
-</script>
-
-
-
-
-  
-<div id="tasksManagementPage" class="page hidden">
-  <button class="page-btn secondary" onclick="backToDashboard()">← Dashboard</button>
-  <h2>Tasks &amp; Leaderboard</h2>
-  <p class="page-note">Platform ke tasks, user-submitted requests aur leaderboard manage karne ke liye.</p>
-
-  <div class="page-grid">
-    <button class="page-card" onclick="showAdminPage('mandatoryTasksPage')">
-      <strong>Mandatory Task Management</strong>
-      <span>Required tasks aur unki settings manage karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('pinnedTaskRequestsPage')">
-      <strong>Pinned Task Requests</strong>
-      <span>Pinned task banane ya pin requests review karne ke liye.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('leaderboardPage')">
-      <strong>Leaderboard</strong>
-      <span>Top users aur unki ranking check karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('generalTaskRequestsPage')">
-      <strong>General Task Requests</strong>
-      <span>Users ke general tasks ki requests review karein.</span>
-    </button>
-  </div>
-</div>
-
-<div id="mandatoryTasksPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('tasksManagementPage')">← Tasks &amp; Leaderboard</button>
-  <h2>Mandatory Task Management</h2>
-  <p class="page-note">Admin ke banaye hue required tasks ki list yahan manage hogi.</p>
-
-  <form onsubmit="createAdminTask(event, 'mandatory')">
-    <label>Task title</label>
-    <input id="mandatoryTaskTitle" required placeholder="Enter task title">
-    <label>Task description</label>
-    <textarea id="mandatoryTaskDescription" rows="3" required placeholder="Explain what users must do"></textarea>
-    <label>Reward (SNX)</label>
-    <input id="mandatoryTaskReward" type="number" min="0" step="0.01" required placeholder="Enter reward">
-    <label>Task link (optional)</label>
-    <input id="mandatoryTaskLink" type="url" placeholder="https://">
-    <button class="page-btn" type="submit">Prepare Task</button>
-  </form>
-
-  <h3>Mandatory Tasks List</h3>
-  <div id="mandatoryTasksList" class="page-note">Abhi koi task is browser session mein add nahi hua.</div>
-</div>
-
-<div id="pinnedTaskRequestsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('tasksManagementPage')">← Tasks &amp; Leaderboard</button>
-  <h2>Pinned Task Requests</h2>
-  <p class="page-note">User ki pinned-task requests database connect hone par yahan nazar aayengi.</p>
-  <div class="page-table-wrap">
-    <table>
-      <thead><tr><th>Request</th><th>User</th><th>Status</th><th>Action</th></tr></thead>
-      <tbody id="pinnedRequestsList">
-        <tr><td colspan="4">Requests load karne ke liye backend integration zaroori hai.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div id="leaderboardPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('tasksManagementPage')">← Tasks &amp; Leaderboard</button>
-  <h2>Leaderboard</h2>
-  <p class="page-note">Users ki ranking unke verified points ya completed tasks ke mutabiq dikhai jayegi.</p>
-  <div class="page-table-wrap">
-    <table>
-      <thead><tr><th>Rank</th><th>User</th><th>Points</th><th>Completed Tasks</th></tr></thead>
-      <tbody id="leaderboardList">
-        <tr><td colspan="4">Live leaderboard ke liye database integration zaroori hai.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div id="generalTaskRequestsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('tasksManagementPage')">← Tasks &amp; Leaderboard</button>
-  <h2>General Task Requests</h2>
-  <p class="page-note">YouTube tasks se alag general tasks ki user requests yahan review hongi.</p>
-  <div class="page-table-wrap">
-    <table>
-      <thead><tr><th>Task</th><th>User</th><th>Submitted</th><th>Status</th></tr></thead>
-      <tbody id="generalTaskRequestsList">
-        <tr><td colspan="4">General task requests backend connect hone par yahan load hongi.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<script>
-function createAdminTask(event, type) {
-  event.preventDefault();
-
-  const titleInput = document.getElementById(
-    type === 'mandatory' ? 'mandatoryTaskTitle' : 'mandatoryTaskTitle'
-  );
-  const descInput = document.getElementById('mandatoryTaskDescription');
-  const rewardInput = document.getElementById('mandatoryTaskReward');
-  const linkInput = document.getElementById('mandatoryTaskLink');
-
-  const title = titleInput.value.trim();
-  const description = descInput.value.trim();
-  const reward = Number(rewardInput.value);
-  const link = linkInput.value.trim();
-
-  if (!title || !description || !Number.isFinite(reward) || reward < 0) {
-    alert('Task title, description aur valid reward enter karein.');
-    return;
-  }
-
-  const list = document.getElementById('mandatoryTasksList');
-  const item = document.createElement('div');
-  item.style.cssText = 'background:#182B43;border:1px solid #263950;border-radius:12px;padding:14px;margin:10px 0;';
-
-  const heading = document.createElement('strong');
-  heading.style.color = '#40D6B1';
-  heading.textContent = title;
-
-  const detail = document.createElement('p');
-  detail.className = 'page-note';
-  detail.textContent = description + ' | Reward: ' + reward + ' SNX';
-
-  item.appendChild(heading);
-  item.appendChild(detail);
-
-  if (link) {
-    const linkText = document.createElement('p');
-    linkText.className = 'page-note';
-    linkText.textContent = 'Task link: ' + link;
-    item.appendChild(linkText);
-  }
-
-  if (list.textContent.includes('Abhi koi task')) list.textContent = '';
-  list.appendChild(item);
-
-  alert('Task is page par add ho gaya. Database mein save nahi hua; backend integration baad mein hogi.');
-  event.target.reset();
-}
-</script>
-
-
-<div id="requestsManagementPage" class="page hidden">
-  <button class="page-btn secondary" onclick="backToDashboard()">← Dashboard</button>
-  <h2>Requests &amp; Other Management</h2>
-  <p class="page-note">Platform ki requests aur additional features ko alag pages se manage karein.</p>
-
-  <div class="page-grid">
-    <button class="page-card" onclick="showAdminPage('depositRequestsPage')">
-      <strong>Deposit Requests</strong><span>Deposit submissions review karne ke liye.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('withdrawalRequestsPage')">
-      <strong>Withdrawal Requests</strong><span>Withdrawal requests review karne ke liye.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('faceVerificationPage')">
-      <strong>Face Verification</strong><span>Verification requests aur status review karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('youtubeRequestsPage')">
-      <strong>YouTube Requests</strong><span>YouTube task submissions check karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('surfingRequestsPage')">
-      <strong>Surfing Requests</strong><span>Surfing task submissions review karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('advertisementsPage')">
-      <strong>Advertisements</strong><span>Advertiser submissions aur ad requests manage karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('rafflesPage')">
-      <strong>Raffles Management</strong><span>Raffles aur entries manage karne ke liye.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('servicesRequestsPage')">
-      <strong>Services Requests</strong><span>Users ki service requests review karein.</span>
-    </button>
-  </div>
-</div>
-
-<div id="depositRequestsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
-  <h2>Deposit Requests</h2>
-  <p class="page-note">Deposit proof, transaction reference aur amount verify karne ke baad hi request approve karein.</p>
-  <div class="page-table-wrap"><table>
-    <thead><tr><th>User</th><th>Amount</th><th>Method</th><th>Reference</th><th>Status</th></tr></thead>
-    <tbody id="adminDepositList"><tr><td colspan="5">Live deposit requests ke liye database connection zaroori hai.</td></tr></tbody>
-  </table></div>
-</div>
-
-<div id="withdrawalRequestsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
-  <h2>Withdrawal Requests</h2>
-  <p class="page-note">Account details, available balance aur withdrawal eligibility verify karein.</p>
-  <div class="page-table-wrap"><table>
-    <thead><tr><th>User</th><th>Amount</th><th>Method</th><th>Account</th><th>Status</th></tr></thead>
-    <tbody id="adminWithdrawalList"><tr><td colspan="5">Live withdrawal requests ke liye database connection zaroori hai.</td></tr></tbody>
-  </table></div>
-</div>
-
-<div id="faceVerificationPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
-  <h2>Face Verification</h2>
-  <p class="page-note">Verification status aur submitted requests authorized admin workflow mein review honi chahiye. Sensitive photos ko publicly expose na karein.</p>
-  <div class="page-table-wrap"><table>
-    <thead><tr><th>User ID</th><th>Submitted</th><th>Status</th></tr></thead>
-    <tbody id="adminVerificationList"><tr><td colspan="3">Verification records backend connect hone par load honge.</td></tr></tbody>
-  </table></div>
-</div>
-
-<div id="youtubeRequestsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
-  <h2>YouTube Requests</h2>
-  <p class="page-note">YouTube Like, Watch/View aur Subscribe task submissions ki list.</p>
-  <div class="page-table-wrap"><table>
-    <thead><tr><th>User</th><th>Task Type</th><th>Proof</th><th>Status</th></tr></thead>
-    <tbody id="adminYoutubeList"><tr><td colspan="4">YouTube requests backend connect hone par load hongi.</td></tr></tbody>
-  </table></div>
-</div>
-
-<div id="surfingRequestsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
-  <h2>Surfing Requests</h2>
-  <p class="page-note">Website surfing task submissions aur review status.</p>
-  <div class="page-table-wrap"><table>
-    <thead><tr><th>User</th><th>Website</th><th>Duration</th><th>Status</th></tr></thead>
-    <tbody id="adminSurfingList"><tr><td colspan="4">Surfing requests backend connect hone par load hongi.</td></tr></tbody>
-  </table></div>
-</div>
-
-<div id="advertisementsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
-  <h2>Advertisements</h2>
-  <p class="page-note">Like, Watch/View, Subscribe aur doosri ad submissions ki details yahan manage hongi.</p>
-  <div class="page-table-wrap"><table>
-    <thead><tr><th>Advertiser</th><th>Ad Type</th><th>Budget</th><th>Status</th></tr></thead>
-    <tbody id="adminAdvertisementsList"><tr><td colspan="4">Advertisement records backend connect hone par load honge.</td></tr></tbody>
-  </table></div>
-</div>
-
-<div id="rafflesPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
-  <h2>Raffles Management</h2>
-  <p class="page-note">Raffle details aur entries manage karne ke liye.</p>
-  <form onsubmit="prepareRaffle(event)">
-    <label>Raffle title</label>
-    <input id="raffleTitle" required placeholder="Enter raffle title">
-    <label>Entry cost (SNX)</label>
-    <input id="raffleCost" type="number" min="0" step="0.01" required placeholder="Enter entry cost">
-    <label>Prize details</label>
-    <textarea id="rafflePrize" rows="2" required placeholder="Describe the prize"></textarea>
-    <button class="page-btn" type="submit">Prepare Raffle</button>
-  </form>
-  <div id="raffleResult" class="page-note"></div>
-</div>
-
-<div id="servicesRequestsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
-  <h2>Services Requests</h2>
-  <p class="page-note">Website, app, bot aur doosri services ke user requests.</p>
-  <div class="page-table-wrap"><table>
-    <thead><tr><th>User</th><th>Service</th><th>Description</th><th>Status</th></tr></thead>
-    <tbody id="adminServicesList"><tr><td colspan="4">Service requests backend connect hone par load hongi.</td></tr></tbody>
-  </table></div>
-</div>
-
-<script>
-function prepareRaffle(event) {
-  event.preventDefault();
-
-  const title = document.getElementById('raffleTitle').value.trim();
-  const cost = Number(document.getElementById('raffleCost').value);
-  const prize = document.getElementById('rafflePrize').value.trim();
-
-  if (!title || !prize || !Number.isFinite(cost) || cost < 0) {
-    alert('Raffle ki tamam required details sahi enter karein.');
-    return;
-  }
-
-  document.getElementById('raffleResult').textContent =
-    'Raffle "' + title + '" ka form tayyar hai. Entry cost: ' +
-    cost + ' SNX. Prize: ' + prize +
-    '. Abhi database mein save nahi hua.';
-
-  alert('Raffle form validate ho gaya. Live raffle banane ke liye backend integration zaroori hai.');
-}
-</script>
-
-
-<div id="finalManagementPage" class="page hidden">
-  <button class="page-btn secondary" onclick="backToDashboard()">← Dashboard</button>
-  <h2>More Management</h2>
-  <p class="page-note">Announcements, bell notifications, settings aur feedback ke separate pages.</p>
-
-  <div class="page-grid">
-    <button class="page-card" onclick="showAdminPage('notificationsPage')">
-      <strong>Notifications</strong><span>Bell notifications create aur manage karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('announcementPage')">
-      <strong>Announcement Bar</strong><span>Dashboard par scrolling message set karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('platformSettingsPage')">
-      <strong>Platform Settings</strong><span>Platform ki settings aur display values manage karein.</span>
-    </button>
-    <button class="page-card" onclick="showAdminPage('helpFeedbackPage')">
-      <strong>Help &amp; Feedback</strong><span>User feedback aur support requests review karein.</span>
-    </button>
-  </div>
-</div>
-
-<div id="notificationsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('finalManagementPage')">← More Management</button>
-  <h2>Bell Notifications</h2>
-  <p class="page-note">Ye dashboard ke scrolling announcement se alag feature hai.</p>
-  <form onsubmit="createAdminNotification(event)">
-    <label>Notification title</label>
-    <input id="notificationTitle" required placeholder="Enter title">
-    <label>Notification message</label>
-    <textarea id="notificationMessage" rows="3" required placeholder="Write notification message"></textarea>
-    <label>Audience</label>
-    <select id="notificationAudience">
-      <option value="all">All users</option>
-      <option value="verified">Verified users</option>
-    </select>
-    <button class="page-btn" type="submit">Prepare Notification</button>
-  </form>
-  <h3>Prepared Notifications</h3>
-  <div id="notificationList" class="page-note">Abhi koi notification prepare nahi ki gayi.</div>
-</div>
-
-<div id="announcementPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('finalManagementPage')">← More Management</button>
-  <h2>Scrolling Announcement Bar</h2>
-  <p class="page-note">Yahan set kiya gaya message dashboard par alag announcement bar mein dikhaya jayega.</p>
-  <label>Announcement message</label>
-  <textarea id="announcementInput" rows="3" placeholder="Write announcement for dashboard"></textarea>
-  <button class="page-btn" onclick="saveAnnouncement()">Save Announcement</button>
-  <button class="page-btn secondary" onclick="clearAnnouncement()">Clear Announcement</button>
-  <p id="announcementStatus" class="page-note"></p>
-</div>
-
-<div id="platformSettingsPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('finalManagementPage')">← More Management</button>
-  <h2>Platform Settings</h2>
-  <p class="page-note">Ye values abhi isi browser mein preview hoti hain. Live platform settings ke liye database integration zaroori hai.</p>
-  <label>Displayed exchange rate (PKR per SNX)</label>
-  <input id="settingRate" type="number" min="0" step="0.01" value="4">
-  <label>Minimum conversion (SNX)</label>
-  <input id="settingMinimum" type="number" min="0" step="0.01" value="300">
-  <label>Conversion fee (SNX)</label>
-  <input id="settingFee" type="number" min="0" step="0.01" value="30">
-  <button class="page-btn" onclick="previewPlatformSettings()">Preview Settings</button>
-  <p id="settingsPreview" class="page-note"></p>
-</div>
-
-<div id="helpFeedbackPage" class="page hidden">
-  <button class="page-btn secondary" onclick="showAdminPage('finalManagementPage')">← More Management</button>
-  <h2>Help &amp; Feedback</h2>
-  <p class="page-note">Users ki support requests aur feedback yahan list honge jab backend connect hoga.</p>
-  <div class="page-table-wrap">
-    <table>
-      <thead><tr><th>User</th><th>Category</th><th>Message</th><th>Status</th></tr></thead>
-      <tbody id="adminFeedbackList">
-        <tr><td colspan="4">Feedback records backend integration ke baad load honge.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- Dashboard announcement preview -->
-<div id="dashboardAnnouncement" class="hidden" style="margin:12px 0;padding:12px 16px;background:#182B43;border:1px solid #D8B56D;border-radius:12px;color:#D8B56D;overflow:hidden;white-space:nowrap">
-  <marquee id="dashboardAnnouncementText">Elite Earn Hub announcement</marquee>
-</div>
-
-<script>
-function createAdminNotification(event) {
-  event.preventDefault();
-
-  const title = document.getElementById('notificationTitle').value.trim();
-  const message = document.getElementById('notificationMessage').value.trim();
-  const audience = document.getElementById('notificationAudience').value;
-
-  if (!title || !message) {
-    alert('Title aur message dono enter karein.');
-    return;
-  }
-
-  const list = document.getElementById('notificationList');
-  const card = document.createElement('div');
-  card.style.cssText = 'background:#182B43;border:1px solid #263950;border-radius:12px;padding:12px;margin:10px 0;';
-
-  const heading = document.createElement('strong');
-  heading.style.color = '#40D6B1';
-  heading.textContent = title;
-
-  const body = document.createElement('p');
-  body.className = 'page-note';
-  body.textContent = message + ' | Audience: ' + audience;
-
-  card.appendChild(heading);
-  card.appendChild(body);
-
-  if (list.textContent.includes('Abhi koi notification')) list.textContent = '';
-  list.appendChild(card);
-
-  alert('Notification preview add ho gaya. Users ko notification bhejne ke liye backend zaroori hai.');
-  event.target.reset();
-}
-
-function saveAnnouncement() {
-  const message = document.getElementById('announcementInput').value.trim();
-  if (!message) {
-    alert('Pehle announcement message likhein.');
-    return;
-  }
-
-  const bar = document.getElementById('dashboardAnnouncement');
-  document.getElementById('dashboardAnnouncementText').textContent = message;
-  bar.classList.remove('hidden');
-  document.getElementById('announcementStatus').textContent =
-    'Announcement preview dashboard par set ho gaya. Abhi server par save nahi hua.';
-  alert('Announcement preview update ho gaya.');
-}
-
-function clearAnnouncement() {
-  document.getElementById('dashboardAnnouncement').classList.add('hidden');
-  document.getElementById('announcementInput').value = '';
-  document.getElementById('announcementStatus').textContent = 'Announcement preview clear ho gaya.';
-}
-
-function previewPlatformSettings() {
-  const rate = Number(document.getElementById('settingRate').value);
-  const minimum = Number(document.getElementById('settingMinimum').value);
-  const fee = Number(document.getElementById('settingFee').value);
-
-  if (![rate, minimum, fee].every(Number.isFinite) || rate < 0 || minimum < 0 || fee < 0) {
-    alert('Settings mein valid positive values enter karein.');
-    return;
-  }
-
-  document.getElementById('settingsPreview').textContent =
-    'Preview: 1 SNX = ' + rate + ' PKR | Minimum conversion: ' +
-    minimum + ' SNX | Fee: ' + fee + ' SNX. Ye abhi live platform settings nahi hain.';
-  alert('Settings preview tayyar hai; live settings abhi change nahi hui.');
-}
-
-/* Final navigation: existing Part 1 dashboard and Parts 2–5 pages */
-function showAdminPage(pageId) {
-  const dashboardSections = document.querySelectorAll(
-    '#appMain > .section, #appMain > .wallet'
-  );
-
-  dashboardSections.forEach(section => section.classList.add('hidden'));
-
-  document.querySelectorAll('.page').forEach(page => {
-    page.classList.add('hidden');
-  });
-
-  const target = document.getElementById(pageId);
-  if (target) target.classList.remove('hidden');
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function backToDashboard() {
-  document.querySelectorAll('.page').forEach(page => {
-    page.classList.add('hidden');
-  });
-
-  document.querySelectorAll('#appMain > .section, #appMain > .wallet')
-    .forEach(section => section.classList.remove('hidden'));
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* Main category buttons will call these functions */
-function openUserManagement() { showAdminPage('userManagementPage'); }
-function openTasksManagement() { showAdminPage('tasksManagementPage'); }
-function openRequestsManagement() { showAdminPage('requestsManagementPage'); }
-function openMoreManagement() { showAdminPage('finalManagementPage'); }
-</script>
-
-<!-- ADMIN PANEL PARTS COMPLETE -->
-
-
-  
 </body>
 </html>
