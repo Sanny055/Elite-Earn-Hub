@@ -840,7 +840,177 @@
   }
 </script>
 
-<!-- PART 4 WILL BE ADDED NEXT -->
+
+    
+<!-- PART 4: REQUESTS & OTHER MANAGEMENT -->
+
+<h2 class="section-title">4. Requests &amp; Other Management</h2>
+
+<div class="overview-grid">
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('deposits')">
+    <div class="overview-icon">▣</div>
+    <div class="overview-label">Deposit Requests</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('withdrawals')">
+    <div class="overview-icon">↗</div>
+    <div class="overview-label">Withdrawal Requests</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('verification')">
+    <div class="overview-icon">◉</div>
+    <div class="overview-label">Face Verification</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('youtube')">
+    <div class="overview-icon">▶</div>
+    <div class="overview-label">YouTube Requests</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('surfing')">
+    <div class="overview-icon">〰</div>
+    <div class="overview-label">Surfing Requests</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('advertisements')">
+    <div class="overview-icon">▤</div>
+    <div class="overview-label">Advertisements</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('raffles')">
+    <div class="overview-icon">🎟</div>
+    <div class="overview-label">Raffles Management</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('services')">
+    <div class="overview-icon">⚙</div>
+    <div class="overview-label">Services Requests</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('notifications')">
+    <div class="overview-icon">♧</div>
+    <div class="overview-label">Notifications</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('settings')">
+    <div class="overview-icon">⚙</div>
+    <div class="overview-label">Platform Settings</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openManagementSection('help')">
+    <div class="overview-icon">?</div>
+    <div class="overview-label">Help &amp; Feedback</div>
+  </button>
+
+</div>
+
+<!-- MANAGEMENT WORKSPACE -->
+<section id="management-workspace"
+         class="overview-card"
+         style="display:none; margin-top:20px;">
+
+  <button type="button"
+          class="close-button"
+          onclick="closeManagementSection()">
+    ← Back to Dashboard
+  </button>
+
+  <h3 id="management-heading">Management</h3>
+
+  <p id="management-description" class="note"></p>
+
+  <div id="management-content" class="task-placeholder">
+    Real records will appear after secure database integration.
+  </div>
+
+</section>
+
+<script>
+  /* PART 4: MANAGEMENT SECTION NAVIGATION */
+
+  const managementDetails = {
+    deposits: {
+      title: "Deposit Requests",
+      description: "Review deposit submissions, payment references and request status."
+    },
+    withdrawals: {
+      title: "Withdrawal Requests",
+      description: "Review withdrawal requests and their processing status."
+    },
+    verification: {
+      title: "Face Verification",
+      description: "Review user verification submissions and their status. Restrict access to authorized admins."
+    },
+    youtube: {
+      title: "YouTube Requests",
+      description: "Manage YouTube Like, Watch / View and Subscribe requests."
+    },
+    surfing: {
+      title: "Surfing Requests",
+      description: "Review surfing submissions and task activity."
+    },
+    advertisements: {
+      title: "Advertisements",
+      description: "Review, manage and inspect submitted advertisements."
+    },
+    raffles: {
+      title: "Raffles Management",
+      description: "Manage raffle entries, rounds and results."
+    },
+    services: {
+      title: "Services Requests",
+      description: "Review users' service requests and their status."
+    },
+    notifications: {
+      title: "Notifications",
+      description: "Prepare announcements and notifications for users."
+    },
+    settings: {
+      title: "Platform Settings",
+      description: "Platform configuration. Sensitive settings must be protected by server-side authorization."
+    },
+    help: {
+      title: "Help & Feedback",
+      description: "Review user help requests, complaints, feedback and suggestions."
+    }
+  };
+
+  function openManagementSection(section) {
+    const details = managementDetails[section];
+
+    if (!details) return;
+
+    document.getElementById("management-workspace").style.display = "block";
+    document.getElementById("management-heading").textContent = details.title;
+    document.getElementById("management-description").textContent = details.description;
+
+    document.getElementById("management-content").textContent =
+      "This section is ready for its interface. Live records and actions require secure database integration.";
+
+    document.getElementById("management-workspace").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function closeManagementSection() {
+    document.getElementById("management-workspace").style.display = "none";
+  }
+</script>
+
+<!-- PART 5 WILL BE ADDED NEXT -->
 
 
 
