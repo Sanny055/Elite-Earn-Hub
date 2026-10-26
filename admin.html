@@ -527,7 +527,275 @@ function openWalletHistory() {
 renderDashboardCounters();
 </script>
 
-<!-- PART 2, PART 3, PART 4 AND PART 5 WILL BE ADDED HERE -->
 
+
+
+<style>
+.hidden { display: none !important; }
+
+.page {
+  background: #142238;
+  border: 1px solid #263950;
+  border-radius: 18px;
+  padding: 20px;
+  margin: 20px 0;
+  color: #F4F7FB;
+}
+
+.page h2 { margin-top: 0; color: #D8B56D; }
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.page-card {
+  background: #182B43;
+  border: 1px solid #263950;
+  border-radius: 14px;
+  padding: 17px;
+  color: #F4F7FB;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+
+.page-card:hover { border-color: #40D6B1; }
+
+.page-card strong {
+  display: block;
+  color: #40D6B1;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.page-card span { color: #A8B6C9; font-size: 13px; }
+
+.page-btn {
+  background: #40D6B1;
+  color: #0B1424;
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 5px 5px 5px 0;
+}
+
+.page-btn.secondary {
+  background: #263950;
+  color: #F4F7FB;
+}
+
+.page input, .page select, .page textarea {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 6px 0 14px;
+  padding: 11px;
+  border: 1px solid #263950;
+  border-radius: 9px;
+  background: #0B1424;
+  color: #F4F7FB;
+}
+
+.page label { color: #A8B6C9; font-size: 13px; }
+
+.page-note {
+  color: #A8B6C9;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.page-table-wrap { overflow-x: auto; }
+
+.page table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+.page th, .page td {
+  padding: 11px;
+  border-bottom: 1px solid #263950;
+  text-align: left;
+  font-size: 13px;
+}
+
+.page th { color: #D8B56D; }
+.page td { color: #F4F7FB; }
+</style>
+
+<div id="userManagementPage" class="page hidden">
+  <button class="page-btn secondary" onclick="backToDashboard()">← Dashboard</button>
+  <h2>User Management</h2>
+  <p class="page-note">Users ke profiles, wallets, rewards aur account status manage karne ke liye.</p>
+
+  <div class="page-grid">
+    <button class="page-card" onclick="showAdminPage('userProfilesPage')">
+      <strong>User Profiles</strong>
+      <span>Users ki list kholain aur kisi user ki details dekhein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('walletManagementPage')">
+      <strong>Wallet Management</strong>
+      <span>User balances aur wallet records check karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('giftRewardPage')">
+      <strong>Send Gift / Reward</strong>
+      <span>User ko reward dene ka form kholain.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('blockUsersPage')">
+      <strong>Block / Unblock Users</strong>
+      <span>Account status manage karne ka page.</span>
+    </button>
+  </div>
+</div>
+
+<div id="userProfilesPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('userManagementPage')">← User Management</button>
+  <h2>User Profiles</h2>
+  <p class="page-note">Database connect hone par yahan registered users ki asli list nazar aayegi.</p>
+  <label>Search user by name, email or ID</label>
+  <input id="profileSearch" placeholder="Search users..." oninput="filterUserProfiles()">
+  <div class="page-table-wrap">
+    <table>
+      <thead><tr><th>User</th><th>Email / ID</th><th>Action</th></tr></thead>
+      <tbody id="profileTableBody">
+        <tr><td colspan="3">Abhi database se users load nahi ho rahe.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="page-note">Live user profiles ke liye Supabase query aur admin permissions Part 5 mein connect karni hongi.</p>
+</div>
+
+<div id="userProfileDetailPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('userProfilesPage')">← User Profiles</button>
+  <h2>User Profile Details</h2>
+  <div id="userProfileDetailContent" class="page-note">User select karne par details yahan show hongi.</div>
+</div>
+
+<div id="walletManagementPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('userManagementPage')">← User Management</button>
+  <h2>Wallet Management</h2>
+  <p class="page-note">User wallet balances aur transactions yahan manage honge.</p>
+  <label>User ID or email</label>
+  <input id="walletUserLookup" placeholder="Enter user ID or email">
+  <button class="page-btn" onclick="lookupUserWallet()">Find Wallet</button>
+  <div id="walletLookupResult" class="page-note" style="margin-top:15px">
+    Wallet details dekhne ke liye user ID enter karein.
+  </div>
+</div>
+
+<div id="giftRewardPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('userManagementPage')">← User Management</button>
+  <h2>Send Gift / Reward</h2>
+  <p class="page-note">Reward sirf verified admin action aur available platform balance ke through bhejna chahiye.</p>
+  <form id="giftRewardForm" onsubmit="submitGiftReward(event)">
+    <label>User ID or email</label>
+    <input id="giftUserId" required placeholder="Enter recipient user ID or email">
+    <label>Reward amount (SNX)</label>
+    <input id="giftAmount" type="number" min="0.01" step="0.01" required placeholder="Enter SNX amount">
+    <label>Reason / message</label>
+    <textarea id="giftReason" rows="3" placeholder="Reason for this reward"></textarea>
+    <button class="page-btn" type="submit">Submit Reward Request</button>
+  </form>
+  <p class="page-note">Abhi form request ko validate karta hai; real SNX transfer tabhi hoga jab secure backend aur admin authorization connect honge.</p>
+</div>
+
+<div id="blockUsersPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('userManagementPage')">← User Management</button>
+  <h2>Block / Unblock Users</h2>
+  <p class="page-note">Account status change karne se pehle user ki identity verify karein.</p>
+  <label>User ID or email</label>
+  <input id="blockUserId" placeholder="Enter user ID or email">
+  <label>Action</label>
+  <select id="blockUserAction">
+    <option value="block">Block user</option>
+    <option value="unblock">Unblock user</option>
+  </select>
+  <label>Reason</label>
+  <textarea id="blockUserReason" rows="3" placeholder="Enter reason"></textarea>
+  <button class="page-btn" onclick="submitBlockRequest()">Submit Status Request</button>
+  <p class="page-note">Yeh abhi request form hai. Asli account status tabhi badlega jab backend integration ho.</p>
+</div>
+
+<script>
+function showAdminPage(pageId) {
+  const dashboardSections = document.querySelectorAll(
+    '#appMain > .section, #appMain > .wallet'
+  );
+
+  dashboardSections.forEach(section => section.classList.add('hidden'));
+
+  document.querySelectorAll('#nextParts .page').forEach(page => {
+    page.classList.add('hidden');
+  });
+
+  const target = document.getElementById(pageId);
+  if (target) target.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToDashboard() {
+  document.querySelectorAll('#nextParts .page').forEach(page => {
+    page.classList.add('hidden');
+  });
+
+  document.querySelectorAll('#appMain > .section, #appMain > .wallet')
+    .forEach(section => section.classList.remove('hidden'));
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openGiftPage() {
+  showAdminPage('giftRewardPage');
+}
+
+function openWalletHistory() {
+  showAdminPage('walletManagementPage');
+}
+
+function filterUserProfiles() {
+  const search = document.getElementById('profileSearch').value.toLowerCase();
+  document.querySelectorAll('#profileTableBody tr').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(search) ? '' : 'none';
+  });
+}
+
+function lookupUserWallet() {
+  const user = document.getElementById('walletUserLookup').value.trim();
+  if (!user) {
+    alert('Pehle user ID ya email enter karein.');
+    return;
+  }
+  document.getElementById('walletLookupResult').textContent =
+    'Wallet lookup request tayyar hai. Asli balance dekhne ke liye database integration zaroori hai.';
+}
+
+function submitGiftReward(event) {
+  event.preventDefault();
+  const user = document.getElementById('giftUserId').value.trim();
+  const amount = Number(document.getElementById('giftAmount').value);
+
+  if (!user || !Number.isFinite(amount) || amount <= 0) {
+    alert('Valid user ID aur reward amount enter karein.');
+    return;
+  }
+
+  alert('Reward request form validate ho gaya. Real SNX transfer abhi nahi hua; backend integration zaroori hai.');
+}
+
+function submitBlockRequest() {
+  const user = document.getElementById('blockUserId').value.trim();
+  if (!user) {
+    alert('Pehle user ID ya email enter karein.');
+    return;
+  }
+
+  alert('Status request validate ho gayi. Account abhi block/unblock nahi hua; backend integration zaroori hai.');
+}
+</script>
+
+<!-- PART 3, PART 4 AND PART 5 WILL BE ADDED HERE -->
+
+
+
+  
 </body>
 </html>
