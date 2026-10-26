@@ -1077,7 +1077,201 @@ function prepareRaffle(event) {
 }
 </script>
 
-<!-- PART 5 WILL BE ADDED HERE -->
+
+<div id="finalManagementPage" class="page hidden">
+  <button class="page-btn secondary" onclick="backToDashboard()">← Dashboard</button>
+  <h2>More Management</h2>
+  <p class="page-note">Announcements, bell notifications, settings aur feedback ke separate pages.</p>
+
+  <div class="page-grid">
+    <button class="page-card" onclick="showAdminPage('notificationsPage')">
+      <strong>Notifications</strong><span>Bell notifications create aur manage karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('announcementPage')">
+      <strong>Announcement Bar</strong><span>Dashboard par scrolling message set karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('platformSettingsPage')">
+      <strong>Platform Settings</strong><span>Platform ki settings aur display values manage karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('helpFeedbackPage')">
+      <strong>Help &amp; Feedback</strong><span>User feedback aur support requests review karein.</span>
+    </button>
+  </div>
+</div>
+
+<div id="notificationsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('finalManagementPage')">← More Management</button>
+  <h2>Bell Notifications</h2>
+  <p class="page-note">Ye dashboard ke scrolling announcement se alag feature hai.</p>
+  <form onsubmit="createAdminNotification(event)">
+    <label>Notification title</label>
+    <input id="notificationTitle" required placeholder="Enter title">
+    <label>Notification message</label>
+    <textarea id="notificationMessage" rows="3" required placeholder="Write notification message"></textarea>
+    <label>Audience</label>
+    <select id="notificationAudience">
+      <option value="all">All users</option>
+      <option value="verified">Verified users</option>
+    </select>
+    <button class="page-btn" type="submit">Prepare Notification</button>
+  </form>
+  <h3>Prepared Notifications</h3>
+  <div id="notificationList" class="page-note">Abhi koi notification prepare nahi ki gayi.</div>
+</div>
+
+<div id="announcementPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('finalManagementPage')">← More Management</button>
+  <h2>Scrolling Announcement Bar</h2>
+  <p class="page-note">Yahan set kiya gaya message dashboard par alag announcement bar mein dikhaya jayega.</p>
+  <label>Announcement message</label>
+  <textarea id="announcementInput" rows="3" placeholder="Write announcement for dashboard"></textarea>
+  <button class="page-btn" onclick="saveAnnouncement()">Save Announcement</button>
+  <button class="page-btn secondary" onclick="clearAnnouncement()">Clear Announcement</button>
+  <p id="announcementStatus" class="page-note"></p>
+</div>
+
+<div id="platformSettingsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('finalManagementPage')">← More Management</button>
+  <h2>Platform Settings</h2>
+  <p class="page-note">Ye values abhi isi browser mein preview hoti hain. Live platform settings ke liye database integration zaroori hai.</p>
+  <label>Displayed exchange rate (PKR per SNX)</label>
+  <input id="settingRate" type="number" min="0" step="0.01" value="4">
+  <label>Minimum conversion (SNX)</label>
+  <input id="settingMinimum" type="number" min="0" step="0.01" value="300">
+  <label>Conversion fee (SNX)</label>
+  <input id="settingFee" type="number" min="0" step="0.01" value="30">
+  <button class="page-btn" onclick="previewPlatformSettings()">Preview Settings</button>
+  <p id="settingsPreview" class="page-note"></p>
+</div>
+
+<div id="helpFeedbackPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('finalManagementPage')">← More Management</button>
+  <h2>Help &amp; Feedback</h2>
+  <p class="page-note">Users ki support requests aur feedback yahan list honge jab backend connect hoga.</p>
+  <div class="page-table-wrap">
+    <table>
+      <thead><tr><th>User</th><th>Category</th><th>Message</th><th>Status</th></tr></thead>
+      <tbody id="adminFeedbackList">
+        <tr><td colspan="4">Feedback records backend integration ke baad load honge.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Dashboard announcement preview -->
+<div id="dashboardAnnouncement" class="hidden" style="margin:12px 0;padding:12px 16px;background:#182B43;border:1px solid #D8B56D;border-radius:12px;color:#D8B56D;overflow:hidden;white-space:nowrap">
+  <marquee id="dashboardAnnouncementText">Elite Earn Hub announcement</marquee>
+</div>
+
+<script>
+function createAdminNotification(event) {
+  event.preventDefault();
+
+  const title = document.getElementById('notificationTitle').value.trim();
+  const message = document.getElementById('notificationMessage').value.trim();
+  const audience = document.getElementById('notificationAudience').value;
+
+  if (!title || !message) {
+    alert('Title aur message dono enter karein.');
+    return;
+  }
+
+  const list = document.getElementById('notificationList');
+  const card = document.createElement('div');
+  card.style.cssText = 'background:#182B43;border:1px solid #263950;border-radius:12px;padding:12px;margin:10px 0;';
+
+  const heading = document.createElement('strong');
+  heading.style.color = '#40D6B1';
+  heading.textContent = title;
+
+  const body = document.createElement('p');
+  body.className = 'page-note';
+  body.textContent = message + ' | Audience: ' + audience;
+
+  card.appendChild(heading);
+  card.appendChild(body);
+
+  if (list.textContent.includes('Abhi koi notification')) list.textContent = '';
+  list.appendChild(card);
+
+  alert('Notification preview add ho gaya. Users ko notification bhejne ke liye backend zaroori hai.');
+  event.target.reset();
+}
+
+function saveAnnouncement() {
+  const message = document.getElementById('announcementInput').value.trim();
+  if (!message) {
+    alert('Pehle announcement message likhein.');
+    return;
+  }
+
+  const bar = document.getElementById('dashboardAnnouncement');
+  document.getElementById('dashboardAnnouncementText').textContent = message;
+  bar.classList.remove('hidden');
+  document.getElementById('announcementStatus').textContent =
+    'Announcement preview dashboard par set ho gaya. Abhi server par save nahi hua.';
+  alert('Announcement preview update ho gaya.');
+}
+
+function clearAnnouncement() {
+  document.getElementById('dashboardAnnouncement').classList.add('hidden');
+  document.getElementById('announcementInput').value = '';
+  document.getElementById('announcementStatus').textContent = 'Announcement preview clear ho gaya.';
+}
+
+function previewPlatformSettings() {
+  const rate = Number(document.getElementById('settingRate').value);
+  const minimum = Number(document.getElementById('settingMinimum').value);
+  const fee = Number(document.getElementById('settingFee').value);
+
+  if (![rate, minimum, fee].every(Number.isFinite) || rate < 0 || minimum < 0 || fee < 0) {
+    alert('Settings mein valid positive values enter karein.');
+    return;
+  }
+
+  document.getElementById('settingsPreview').textContent =
+    'Preview: 1 SNX = ' + rate + ' PKR | Minimum conversion: ' +
+    minimum + ' SNX | Fee: ' + fee + ' SNX. Ye abhi live platform settings nahi hain.';
+  alert('Settings preview tayyar hai; live settings abhi change nahi hui.');
+}
+
+/* Final navigation: existing Part 1 dashboard and Parts 2–5 pages */
+function showAdminPage(pageId) {
+  const dashboardSections = document.querySelectorAll(
+    '#appMain > .section, #appMain > .wallet'
+  );
+
+  dashboardSections.forEach(section => section.classList.add('hidden'));
+
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.add('hidden');
+  });
+
+  const target = document.getElementById(pageId);
+  if (target) target.classList.remove('hidden');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToDashboard() {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.add('hidden');
+  });
+
+  document.querySelectorAll('#appMain > .section, #appMain > .wallet')
+    .forEach(section => section.classList.remove('hidden'));
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* Main category buttons will call these functions */
+function openUserManagement() { showAdminPage('userManagementPage'); }
+function openTasksManagement() { showAdminPage('tasksManagementPage'); }
+function openRequestsManagement() { showAdminPage('requestsManagementPage'); }
+function openMoreManagement() { showAdminPage('finalManagementPage'); }
+</script>
+
+<!-- ADMIN PANEL PARTS COMPLETE -->
 
 
   
