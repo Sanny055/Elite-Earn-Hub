@@ -935,7 +935,150 @@ function createAdminTask(event, type) {
 }
 </script>
 
-<!-- PART 4 AND PART 5 WILL BE ADDED HERE -->
+
+<div id="requestsManagementPage" class="page hidden">
+  <button class="page-btn secondary" onclick="backToDashboard()">← Dashboard</button>
+  <h2>Requests &amp; Other Management</h2>
+  <p class="page-note">Platform ki requests aur additional features ko alag pages se manage karein.</p>
+
+  <div class="page-grid">
+    <button class="page-card" onclick="showAdminPage('depositRequestsPage')">
+      <strong>Deposit Requests</strong><span>Deposit submissions review karne ke liye.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('withdrawalRequestsPage')">
+      <strong>Withdrawal Requests</strong><span>Withdrawal requests review karne ke liye.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('faceVerificationPage')">
+      <strong>Face Verification</strong><span>Verification requests aur status review karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('youtubeRequestsPage')">
+      <strong>YouTube Requests</strong><span>YouTube task submissions check karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('surfingRequestsPage')">
+      <strong>Surfing Requests</strong><span>Surfing task submissions review karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('advertisementsPage')">
+      <strong>Advertisements</strong><span>Advertiser submissions aur ad requests manage karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('rafflesPage')">
+      <strong>Raffles Management</strong><span>Raffles aur entries manage karne ke liye.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('servicesRequestsPage')">
+      <strong>Services Requests</strong><span>Users ki service requests review karein.</span>
+    </button>
+  </div>
+</div>
+
+<div id="depositRequestsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
+  <h2>Deposit Requests</h2>
+  <p class="page-note">Deposit proof, transaction reference aur amount verify karne ke baad hi request approve karein.</p>
+  <div class="page-table-wrap"><table>
+    <thead><tr><th>User</th><th>Amount</th><th>Method</th><th>Reference</th><th>Status</th></tr></thead>
+    <tbody id="adminDepositList"><tr><td colspan="5">Live deposit requests ke liye database connection zaroori hai.</td></tr></tbody>
+  </table></div>
+</div>
+
+<div id="withdrawalRequestsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
+  <h2>Withdrawal Requests</h2>
+  <p class="page-note">Account details, available balance aur withdrawal eligibility verify karein.</p>
+  <div class="page-table-wrap"><table>
+    <thead><tr><th>User</th><th>Amount</th><th>Method</th><th>Account</th><th>Status</th></tr></thead>
+    <tbody id="adminWithdrawalList"><tr><td colspan="5">Live withdrawal requests ke liye database connection zaroori hai.</td></tr></tbody>
+  </table></div>
+</div>
+
+<div id="faceVerificationPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
+  <h2>Face Verification</h2>
+  <p class="page-note">Verification status aur submitted requests authorized admin workflow mein review honi chahiye. Sensitive photos ko publicly expose na karein.</p>
+  <div class="page-table-wrap"><table>
+    <thead><tr><th>User ID</th><th>Submitted</th><th>Status</th></tr></thead>
+    <tbody id="adminVerificationList"><tr><td colspan="3">Verification records backend connect hone par load honge.</td></tr></tbody>
+  </table></div>
+</div>
+
+<div id="youtubeRequestsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
+  <h2>YouTube Requests</h2>
+  <p class="page-note">YouTube Like, Watch/View aur Subscribe task submissions ki list.</p>
+  <div class="page-table-wrap"><table>
+    <thead><tr><th>User</th><th>Task Type</th><th>Proof</th><th>Status</th></tr></thead>
+    <tbody id="adminYoutubeList"><tr><td colspan="4">YouTube requests backend connect hone par load hongi.</td></tr></tbody>
+  </table></div>
+</div>
+
+<div id="surfingRequestsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
+  <h2>Surfing Requests</h2>
+  <p class="page-note">Website surfing task submissions aur review status.</p>
+  <div class="page-table-wrap"><table>
+    <thead><tr><th>User</th><th>Website</th><th>Duration</th><th>Status</th></tr></thead>
+    <tbody id="adminSurfingList"><tr><td colspan="4">Surfing requests backend connect hone par load hongi.</td></tr></tbody>
+  </table></div>
+</div>
+
+<div id="advertisementsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
+  <h2>Advertisements</h2>
+  <p class="page-note">Like, Watch/View, Subscribe aur doosri ad submissions ki details yahan manage hongi.</p>
+  <div class="page-table-wrap"><table>
+    <thead><tr><th>Advertiser</th><th>Ad Type</th><th>Budget</th><th>Status</th></tr></thead>
+    <tbody id="adminAdvertisementsList"><tr><td colspan="4">Advertisement records backend connect hone par load honge.</td></tr></tbody>
+  </table></div>
+</div>
+
+<div id="rafflesPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
+  <h2>Raffles Management</h2>
+  <p class="page-note">Raffle details aur entries manage karne ke liye.</p>
+  <form onsubmit="prepareRaffle(event)">
+    <label>Raffle title</label>
+    <input id="raffleTitle" required placeholder="Enter raffle title">
+    <label>Entry cost (SNX)</label>
+    <input id="raffleCost" type="number" min="0" step="0.01" required placeholder="Enter entry cost">
+    <label>Prize details</label>
+    <textarea id="rafflePrize" rows="2" required placeholder="Describe the prize"></textarea>
+    <button class="page-btn" type="submit">Prepare Raffle</button>
+  </form>
+  <div id="raffleResult" class="page-note"></div>
+</div>
+
+<div id="servicesRequestsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('requestsManagementPage')">← Requests</button>
+  <h2>Services Requests</h2>
+  <p class="page-note">Website, app, bot aur doosri services ke user requests.</p>
+  <div class="page-table-wrap"><table>
+    <thead><tr><th>User</th><th>Service</th><th>Description</th><th>Status</th></tr></thead>
+    <tbody id="adminServicesList"><tr><td colspan="4">Service requests backend connect hone par load hongi.</td></tr></tbody>
+  </table></div>
+</div>
+
+<script>
+function prepareRaffle(event) {
+  event.preventDefault();
+
+  const title = document.getElementById('raffleTitle').value.trim();
+  const cost = Number(document.getElementById('raffleCost').value);
+  const prize = document.getElementById('rafflePrize').value.trim();
+
+  if (!title || !prize || !Number.isFinite(cost) || cost < 0) {
+    alert('Raffle ki tamam required details sahi enter karein.');
+    return;
+  }
+
+  document.getElementById('raffleResult').textContent =
+    'Raffle "' + title + '" ka form tayyar hai. Entry cost: ' +
+    cost + ' SNX. Prize: ' + prize +
+    '. Abhi database mein save nahi hua.';
+
+  alert('Raffle form validate ho gaya. Live raffle banane ke liye backend integration zaroori hai.');
+}
+</script>
+
+<!-- PART 5 WILL BE ADDED HERE -->
+
 
   
 </body>
