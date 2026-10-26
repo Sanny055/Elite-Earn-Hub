@@ -500,7 +500,347 @@
       }
     </script>
 
-    <!-- PART 3 AND PART 4 WILL BE ADDED NEXT -->
+
+
+    
+<!-- PART 3: TASKS & LEADERBOARD -->
+
+<h2 class="section-title">3. Tasks &amp; Leaderboard</h2>
+
+<div class="overview-grid">
+
+  <button class="overview-card management-button"
+          onclick="openTaskSection('mandatory')">
+    <div class="overview-icon">☑</div>
+    <div class="overview-label">Mandatory Task Management</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openTaskSection('pinned')">
+    <div class="overview-icon">📌</div>
+    <div class="overview-label">Pinned Task Requests</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openTaskSection('leaderboard')">
+    <div class="overview-icon">🏆</div>
+    <div class="overview-label">Leaderboard</div>
+  </button>
+
+  <button class="overview-card management-button"
+          onclick="openTaskSection('general')">
+    <div class="overview-icon">☷</div>
+    <div class="overview-label">General Task Requests</div>
+  </button>
+
+</div>
+
+<!-- TASK MANAGEMENT WORKSPACE -->
+<section id="task-workspace"
+         class="overview-card"
+         style="display:none; margin-top:20px;">
+
+  <button type="button"
+          class="close-button"
+          onclick="closeTaskSection()">
+    ← Back to Dashboard
+  </button>
+
+  <!-- MANDATORY TASKS -->
+  <div id="mandatory-area" class="task-area" style="display:none;">
+    <h3>Mandatory Task Management</h3>
+    <p class="note">
+      Create and manage tasks users must complete.
+    </p>
+
+    <label for="mandatory-title">Task Title</label>
+    <input id="mandatory-title"
+           type="text"
+           placeholder="Enter task title">
+
+    <label for="mandatory-description">Task Description</label>
+    <textarea id="mandatory-description"
+              rows="3"
+              placeholder="Enter task instructions"></textarea>
+
+    <label for="mandatory-reward">Reward (SNX)</label>
+    <input id="mandatory-reward"
+           type="number"
+           min="0"
+           step="any"
+           placeholder="Enter reward">
+
+    <label for="mandatory-status">Task Status</label>
+    <select id="mandatory-status">
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+
+    <button type="button"
+            class="action-button"
+            onclick="validateMandatoryTask()">
+      Validate Task Details
+    </button>
+
+    <p id="mandatory-message" class="note">
+      Task creation and saving will require database integration.
+    </p>
+
+    <h3>Existing Mandatory Tasks</h3>
+    <div id="mandatory-list" class="task-placeholder">
+      Task list will appear here after database connection.
+    </div>
+  </div>
+
+  <!-- PINNED TASK REQUESTS -->
+  <div id="pinned-area" class="task-area" style="display:none;">
+    <h3>Pinned Task Requests</h3>
+    <p class="note">
+      Review requests submitted by users for pinned tasks.
+    </p>
+
+    <label for="pinned-filter">Request Status</label>
+    <select id="pinned-filter">
+      <option value="all">All Requests</option>
+      <option value="pending">Pending</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+    </select>
+
+    <button type="button"
+            class="action-button"
+            onclick="showPinnedStatus()">
+      Apply Filter
+    </button>
+
+    <div id="pinned-list" class="task-placeholder">
+      Pinned task requests will appear here after database connection.
+    </div>
+
+    <p id="pinned-message" class="note"></p>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div id="leaderboard-area" class="task-area" style="display:none;">
+    <h3>Leaderboard</h3>
+    <p class="note">
+      Check user rankings, scores and positions.
+    </p>
+
+    <label for="leaderboard-period">Leaderboard Period</label>
+    <select id="leaderboard-period">
+      <option value="all-time">All Time</option>
+      <option value="monthly">Monthly</option>
+      <option value="weekly">Weekly</option>
+    </select>
+
+    <button type="button"
+            class="action-button"
+            onclick="showLeaderboardStatus()">
+      View Rankings
+    </button>
+
+    <div class="table-scroll">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>User ID</th>
+            <th>Points / Score</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-list">
+          <tr>
+            <td colspan="4">
+              Rankings will load after database connection.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p id="leaderboard-message" class="note"></p>
+  </div>
+
+  <!-- GENERAL TASK REQUESTS -->
+  <div id="general-area" class="task-area" style="display:none;">
+    <h3>General Task Requests</h3>
+    <p class="note">
+      Review task submissions and manage their status.
+    </p>
+
+    <label for="general-filter">Request Status</label>
+    <select id="general-filter">
+      <option value="all">All Requests</option>
+      <option value="pending">Pending</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+    </select>
+
+    <button type="button"
+            class="action-button"
+            onclick="showGeneralStatus()">
+      Apply Filter
+    </button>
+
+    <div id="general-list" class="task-placeholder">
+      General task requests will appear here after database connection.
+    </div>
+
+    <p id="general-message" class="note"></p>
+  </div>
+
+</section>
+
+<style>
+  /* PART 3: TASK MANAGEMENT STYLES */
+
+  #task-workspace h3 {
+    margin-top: 22px;
+  }
+
+  #task-workspace label {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin: 15px 0 7px;
+  }
+
+  #task-workspace input,
+  #task-workspace textarea,
+  #task-workspace select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    color: var(--white);
+    background: #0B1424;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+  }
+
+  #task-workspace textarea {
+    resize: vertical;
+  }
+
+  #task-workspace input:focus,
+  #task-workspace textarea:focus,
+  #task-workspace select:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+
+  .task-area {
+    margin-top: 15px;
+  }
+
+  .task-placeholder {
+    padding: 16px;
+    margin-top: 15px;
+    background: #0B1424;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 15px;
+  }
+
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 480px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .admin-table th {
+    color: var(--teal);
+  }
+</style>
+
+<script>
+  /* PART 3: TASK SECTION NAVIGATION */
+
+  function openTaskSection(section) {
+    document.getElementById("task-workspace").style.display = "block";
+
+    document.querySelectorAll(".task-area").forEach(function(area) {
+      area.style.display = "none";
+    });
+
+    const selectedArea = document.getElementById(section + "-area");
+
+    if (selectedArea) {
+      selectedArea.style.display = "block";
+    }
+
+    document.getElementById("task-workspace").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function closeTaskSection() {
+    document.getElementById("task-workspace").style.display = "none";
+  }
+
+  function validateMandatoryTask() {
+    const title = document.getElementById("mandatory-title").value.trim();
+    const description = document.getElementById("mandatory-description").value.trim();
+    const reward = Number(document.getElementById("mandatory-reward").value);
+    const message = document.getElementById("mandatory-message");
+
+    if (!title || !description ||
+        document.getElementById("mandatory-reward").value === "" ||
+        !Number.isFinite(reward) || reward < 0) {
+      message.textContent =
+        "Please enter the title, description and a valid non-negative reward.";
+      return;
+    }
+
+    message.textContent =
+      "Details validated. Task has not been saved; database integration is required.";
+  }
+
+  function showPinnedStatus() {
+    const status = document.getElementById("pinned-filter").value;
+
+    document.getElementById("pinned-message").textContent =
+      "Selected filter: " + status +
+      ". Actual requests will load after database integration.";
+  }
+
+  function showLeaderboardStatus() {
+    const period = document.getElementById("leaderboard-period").value;
+
+    document.getElementById("leaderboard-message").textContent =
+      "Selected period: " + period +
+      ". Real rankings require connection to your leaderboard data.";
+  }
+
+  function showGeneralStatus() {
+    const status = document.getElementById("general-filter").value;
+
+    document.getElementById("general-message").textContent =
+      "Selected filter: " + status +
+      ". Actual task requests will load after database integration.";
+  }
+</script>
+
+<!-- PART 4 WILL BE ADDED NEXT -->
 
 
 
