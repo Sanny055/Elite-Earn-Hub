@@ -208,8 +208,303 @@
       The dash symbol means live data is not connected yet.
     </p>
 
-    <!-- PART 2, 3, 4 AND 5 WILL BE ADDED NEXT -->
 
+
+    <!-- PART 2: USER MANAGEMENT -->
+
+    <h2 class="section-title">2. User Management</h2>
+
+    <div class="overview-grid">
+
+      <!-- USER PROFILES -->
+      <button class="overview-card management-button"
+              onclick="showUserSection('profiles')">
+        <div class="overview-icon">♙</div>
+        <div class="overview-label">User Profiles</div>
+      </button>
+
+      <!-- WALLET MANAGEMENT -->
+      <button class="overview-card management-button"
+              onclick="showUserSection('wallet')">
+        <div class="overview-icon">▣</div>
+        <div class="overview-label">Wallet Management</div>
+      </button>
+
+      <!-- SEND GIFT -->
+      <button class="overview-card management-button"
+              onclick="showUserSection('gift')">
+        <div class="overview-icon">🎁</div>
+        <div class="overview-label">Send Gift / Reward</div>
+      </button>
+
+      <!-- BLOCK / UNBLOCK -->
+      <button class="overview-card management-button"
+              onclick="showUserSection('block')">
+        <div class="overview-icon">⛔</div>
+        <div class="overview-label">Block / Unblock Users</div>
+      </button>
+
+    </div>
+
+    <!-- USER MANAGEMENT WORKSPACE -->
+    <section id="user-workspace"
+             class="overview-card"
+             style="display:none; margin-top:20px;">
+
+      <button type="button"
+              class="close-button"
+              onclick="closeUserSection()">
+        ← Back to Dashboard
+      </button>
+
+      <!-- SEARCH USER -->
+      <div id="user-search-area">
+        <h3>User Search</h3>
+        <p class="note">
+          Search by Username, Gmail or User ID.
+        </p>
+
+        <label for="user-search-input">Username / Gmail / User ID</label>
+
+        <input id="user-search-input"
+               type="text"
+               placeholder="Enter username, Gmail or User ID">
+
+        <button type="button"
+                class="action-button"
+                onclick="searchAdminUser()">
+          Search User
+        </button>
+
+        <p id="user-search-message" class="note">
+          Search functionality will be connected to Supabase.
+        </p>
+
+        <div id="user-profile-result"></div>
+      </div>
+
+      <!-- WALLET WORKSPACE -->
+      <div id="wallet-area" style="display:none;">
+        <h3>Wallet Management</h3>
+        <p class="note">
+          Search for a user first to inspect their wallet.
+          Balance changes require secure admin authorization.
+        </p>
+      </div>
+
+      <!-- GIFT WORKSPACE -->
+      <div id="gift-area" style="display:none;">
+        <h3>Send Gift / Reward</h3>
+
+        <label for="gift-user-id">Recipient User ID</label>
+        <input id="gift-user-id"
+               type="text"
+               placeholder="Enter recipient User ID">
+
+        <label for="gift-amount">Gift Amount (SNX)</label>
+        <input id="gift-amount"
+               type="number"
+               min="0"
+               step="any"
+               placeholder="Enter SNX amount">
+
+        <label for="gift-message">Gift Message</label>
+        <input id="gift-message"
+               type="text"
+               maxlength="200"
+               placeholder="Optional message">
+
+        <button type="button"
+                class="action-button"
+                onclick="prepareGift()">
+          Validate Gift Details
+        </button>
+
+        <p id="gift-message-status" class="note">
+          Gift sending will be enabled after secure database integration.
+        </p>
+      </div>
+
+      <!-- BLOCK / UNBLOCK WORKSPACE -->
+      <div id="block-area" style="display:none;">
+        <h3>Block / Unblock User</h3>
+
+        <label for="block-user-id">User ID</label>
+        <input id="block-user-id"
+               type="text"
+               placeholder="Enter User ID">
+
+        <div class="management-actions">
+          <button type="button"
+                  class="action-button"
+                  onclick="setBlockStatus('blocked')">
+            Block User
+          </button>
+
+          <button type="button"
+                  class="action-button"
+                  onclick="setBlockStatus('active')">
+            Unblock User
+          </button>
+        </div>
+
+        <p id="block-message-status" class="note">
+          Block status will be updated after secure database integration.
+        </p>
+      </div>
+
+    </section>
+
+    <style>
+      /* PART 2: MATCH THE EXISTING CARD DESIGN */
+
+      .management-button {
+        width: 100%;
+        text-align: left;
+        color: var(--white);
+        font: inherit;
+        cursor: pointer;
+        transition: border-color 0.2s, transform 0.2s;
+      }
+
+      .management-button:hover {
+        border-color: var(--teal);
+        transform: translateY(-2px);
+      }
+
+      .close-button,
+      .action-button {
+        padding: 11px 16px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 8px 8px 8px 0;
+      }
+
+      .close-button {
+        color: var(--white);
+        background: #20334A;
+      }
+
+      .action-button {
+        color: #071820;
+        background: var(--teal);
+        border-color: var(--teal);
+        font-weight: bold;
+      }
+
+      #user-workspace h3 {
+        margin-top: 22px;
+      }
+
+      #user-workspace label {
+        display: block;
+        color: var(--muted);
+        font-size: 13px;
+        margin: 15px 0 7px;
+      }
+
+      #user-workspace input {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        color: var(--white);
+        background: #0B1424;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        outline: none;
+      }
+
+      #user-workspace input:focus {
+        border-color: var(--teal);
+      }
+
+      .management-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+    </style>
+
+    <script>
+      /* PART 2: USER MANAGEMENT NAVIGATION */
+
+      function showUserSection(section) {
+        const workspace = document.getElementById("user-workspace");
+
+        workspace.style.display = "block";
+
+        document.getElementById("user-search-area").style.display =
+          section === "profiles" ? "block" : "none";
+
+        document.getElementById("wallet-area").style.display =
+          section === "wallet" ? "block" : "none";
+
+        document.getElementById("gift-area").style.display =
+          section === "gift" ? "block" : "none";
+
+        document.getElementById("block-area").style.display =
+          section === "block" ? "block" : "none";
+
+        workspace.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+      function closeUserSection() {
+        document.getElementById("user-workspace").style.display = "none";
+      }
+
+      function searchAdminUser() {
+        const query = document.getElementById("user-search-input").value.trim();
+
+        const message = document.getElementById("user-search-message");
+
+        if (!query) {
+          message.textContent = "Please enter a Username, Gmail or User ID.";
+          return;
+        }
+
+        message.textContent =
+          "Search UI ready. Connect Supabase securely to retrieve real user profiles.";
+      }
+
+      function prepareGift() {
+        const userId = document.getElementById("gift-user-id").value.trim();
+        const amount = Number(document.getElementById("gift-amount").value);
+        const status = document.getElementById("gift-message-status");
+
+        if (!userId || !Number.isFinite(amount) || amount <= 0) {
+          status.textContent =
+            "Enter a valid Recipient User ID and a gift amount greater than zero.";
+          return;
+        }
+
+        status.textContent =
+          "Details validated. No gift has been sent; secure database integration is still required.";
+      }
+
+      function setBlockStatus(statusValue) {
+        const userId = document.getElementById("block-user-id").value.trim();
+        const status = document.getElementById("block-message-status");
+
+        if (!userId) {
+          status.textContent = "Please enter the User ID first.";
+          return;
+        }
+
+        status.textContent =
+          "Request prepared for " + userId + ". No account status has changed; secure database integration is required.";
+      }
+    </script>
+
+    <!-- PART 3 AND PART 4 WILL BE ADDED NEXT -->
+
+
+
+    
   </div>
 </body>
 </html>
