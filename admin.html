@@ -792,9 +792,150 @@ function submitBlockRequest() {
 }
 </script>
 
-<!-- PART 3, PART 4 AND PART 5 WILL BE ADDED HERE -->
 
 
+
+  
+<div id="tasksManagementPage" class="page hidden">
+  <button class="page-btn secondary" onclick="backToDashboard()">← Dashboard</button>
+  <h2>Tasks &amp; Leaderboard</h2>
+  <p class="page-note">Platform ke tasks, user-submitted requests aur leaderboard manage karne ke liye.</p>
+
+  <div class="page-grid">
+    <button class="page-card" onclick="showAdminPage('mandatoryTasksPage')">
+      <strong>Mandatory Task Management</strong>
+      <span>Required tasks aur unki settings manage karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('pinnedTaskRequestsPage')">
+      <strong>Pinned Task Requests</strong>
+      <span>Pinned task banane ya pin requests review karne ke liye.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('leaderboardPage')">
+      <strong>Leaderboard</strong>
+      <span>Top users aur unki ranking check karein.</span>
+    </button>
+    <button class="page-card" onclick="showAdminPage('generalTaskRequestsPage')">
+      <strong>General Task Requests</strong>
+      <span>Users ke general tasks ki requests review karein.</span>
+    </button>
+  </div>
+</div>
+
+<div id="mandatoryTasksPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('tasksManagementPage')">← Tasks &amp; Leaderboard</button>
+  <h2>Mandatory Task Management</h2>
+  <p class="page-note">Admin ke banaye hue required tasks ki list yahan manage hogi.</p>
+
+  <form onsubmit="createAdminTask(event, 'mandatory')">
+    <label>Task title</label>
+    <input id="mandatoryTaskTitle" required placeholder="Enter task title">
+    <label>Task description</label>
+    <textarea id="mandatoryTaskDescription" rows="3" required placeholder="Explain what users must do"></textarea>
+    <label>Reward (SNX)</label>
+    <input id="mandatoryTaskReward" type="number" min="0" step="0.01" required placeholder="Enter reward">
+    <label>Task link (optional)</label>
+    <input id="mandatoryTaskLink" type="url" placeholder="https://">
+    <button class="page-btn" type="submit">Prepare Task</button>
+  </form>
+
+  <h3>Mandatory Tasks List</h3>
+  <div id="mandatoryTasksList" class="page-note">Abhi koi task is browser session mein add nahi hua.</div>
+</div>
+
+<div id="pinnedTaskRequestsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('tasksManagementPage')">← Tasks &amp; Leaderboard</button>
+  <h2>Pinned Task Requests</h2>
+  <p class="page-note">User ki pinned-task requests database connect hone par yahan nazar aayengi.</p>
+  <div class="page-table-wrap">
+    <table>
+      <thead><tr><th>Request</th><th>User</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody id="pinnedRequestsList">
+        <tr><td colspan="4">Requests load karne ke liye backend integration zaroori hai.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="leaderboardPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('tasksManagementPage')">← Tasks &amp; Leaderboard</button>
+  <h2>Leaderboard</h2>
+  <p class="page-note">Users ki ranking unke verified points ya completed tasks ke mutabiq dikhai jayegi.</p>
+  <div class="page-table-wrap">
+    <table>
+      <thead><tr><th>Rank</th><th>User</th><th>Points</th><th>Completed Tasks</th></tr></thead>
+      <tbody id="leaderboardList">
+        <tr><td colspan="4">Live leaderboard ke liye database integration zaroori hai.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="generalTaskRequestsPage" class="page hidden">
+  <button class="page-btn secondary" onclick="showAdminPage('tasksManagementPage')">← Tasks &amp; Leaderboard</button>
+  <h2>General Task Requests</h2>
+  <p class="page-note">YouTube tasks se alag general tasks ki user requests yahan review hongi.</p>
+  <div class="page-table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>User</th><th>Submitted</th><th>Status</th></tr></thead>
+      <tbody id="generalTaskRequestsList">
+        <tr><td colspan="4">General task requests backend connect hone par yahan load hongi.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function createAdminTask(event, type) {
+  event.preventDefault();
+
+  const titleInput = document.getElementById(
+    type === 'mandatory' ? 'mandatoryTaskTitle' : 'mandatoryTaskTitle'
+  );
+  const descInput = document.getElementById('mandatoryTaskDescription');
+  const rewardInput = document.getElementById('mandatoryTaskReward');
+  const linkInput = document.getElementById('mandatoryTaskLink');
+
+  const title = titleInput.value.trim();
+  const description = descInput.value.trim();
+  const reward = Number(rewardInput.value);
+  const link = linkInput.value.trim();
+
+  if (!title || !description || !Number.isFinite(reward) || reward < 0) {
+    alert('Task title, description aur valid reward enter karein.');
+    return;
+  }
+
+  const list = document.getElementById('mandatoryTasksList');
+  const item = document.createElement('div');
+  item.style.cssText = 'background:#182B43;border:1px solid #263950;border-radius:12px;padding:14px;margin:10px 0;';
+
+  const heading = document.createElement('strong');
+  heading.style.color = '#40D6B1';
+  heading.textContent = title;
+
+  const detail = document.createElement('p');
+  detail.className = 'page-note';
+  detail.textContent = description + ' | Reward: ' + reward + ' SNX';
+
+  item.appendChild(heading);
+  item.appendChild(detail);
+
+  if (link) {
+    const linkText = document.createElement('p');
+    linkText.className = 'page-note';
+    linkText.textContent = 'Task link: ' + link;
+    item.appendChild(linkText);
+  }
+
+  if (list.textContent.includes('Abhi koi task')) list.textContent = '';
+  list.appendChild(item);
+
+  alert('Task is page par add ho gaya. Database mein save nahi hua; backend integration baad mein hogi.');
+  event.target.reset();
+}
+</script>
+
+<!-- PART 4 AND PART 5 WILL BE ADDED HERE -->
 
   
 </body>
