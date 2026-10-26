@@ -1010,7 +1010,163 @@
   }
 </script>
 
-<!-- PART 5 WILL BE ADDED NEXT -->
+
+<style>
+/* PART 5 — FINAL RESPONSIVE POLISH */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg, #0B1424);
+  color: var(--white, #F4F7FB);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
+  border-radius: 8px;
+  padding: 11px 12px;
+  border: 1px solid var(--border, #24364D);
+  background: #0B1729;
+  color: var(--white, #F4F7FB);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8D9BB0;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 1px solid var(--teal, #40D6B1);
+  border-color: var(--teal, #40D6B1);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--gold, #D8B56D);
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border, #24364D);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+th {
+  color: var(--gold, #D8B56D);
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container,
+  .dashboard-container,
+  .main-content {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    box-sizing: border-box;
+  }
+
+  .cards,
+  .card-grid,
+  .stats-grid,
+  .management-grid,
+  .overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .card {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .cards,
+  .card-grid,
+  .stats-grid,
+  .management-grid,
+  .overview-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  th,
+  td {
+    padding: 9px;
+  }
+}
+</style>
+
+<script>
+/* PART 5 — BASIC SETUP CHECK */
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Elite Earn Hub Admin Panel UI loaded.");
+
+  const adminTitle = document.title;
+  if (!adminTitle || !adminTitle.trim()) {
+    document.title = "Elite Earn Hub | Admin Panel";
+  }
+});
+</script>
+</>
 
 
 
