@@ -2,1176 +2,532 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elite Earn Hub | Admin Panel</title>
-
-  <!-- PART 1: BASIC HTML & THEME STARTER -->
-  <style>
-    :root {
-      --bg: #0B1424;
-      --card: #142238;
-      --border: #24364D;
-      --teal: #40D6B1;
-      --gold: #D8B56D;
-      --white: #FFFFFF;
-      --muted: #A9B9CD;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 20px;
-      background: var(--bg);
-      color: var(--white);
-      font-family: Arial, sans-serif;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 20px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      margin-bottom: 25px;
-    }
-
-    .logo {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #123B45;
-      border-radius: 12px;
-      color: var(--teal);
-      font-size: 25px;
-      font-weight: bold;
-    }
-
-    .brand h1 {
-      margin: 0 0 5px;
-      font-size: 23px;
-    }
-
-    .brand p {
-      margin: 4px 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .owner {
-      color: var(--gold) !important;
-      font-size: 14px !important;
-      font-weight: bold;
-    }
-
-    .admin-badge {
-      margin-left: auto;
-      padding: 7px 12px;
-      border-radius: 20px;
-      background: #164B3C;
-      color: var(--teal);
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .section-title {
-      margin: 25px 0 15px;
-      font-size: 19px;
-    }
-
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .overview-card {
-      padding: 20px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .overview-icon {
-      color: var(--teal);
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-
-    .overview-label {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .overview-number {
-      margin-top: 10px;
-      font-size: 25px;
-      font-weight: bold;
-    }
-
-    .note {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 15px;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 12px;
-      }
-
-      .header {
-        padding: 15px;
-        gap: 10px;
-      }
-
-      .brand h1 {
-        font-size: 18px;
-      }
-
-      .admin-badge {
-        padding: 6px 8px;
-        font-size: 10px;
-      }
-
-      .overview-card {
-        padding: 15px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-
-    <!-- ADMIN HEADER -->
-    <header class="header">
-      <div class="logo">EH</div>
-
-      <div class="brand">
-        <h1>Elite Earn Hub</h1>
-        <p>ADMIN CONTROL PANEL</p>
-        <p class="owner">
-          Sanny Jatt — CEO / Managing Director
-        </p>
-      </div>
-
-      <div class="admin-badge">ADMIN</div>
-    </header>
-
-    <!-- DASHBOARD OVERVIEW -->
-    <h2 class="section-title">1. Dashboard Overview</h2>
-
-    <div class="overview-grid">
-
-      <div class="overview-card">
-        <div class="overview-icon">♙</div>
-        <div class="overview-label">Total Users</div>
-        <div class="overview-number">—</div>
-      </div>
-
-      <div class="overview-card">
-        <div class="overview-icon">▣</div>
-        <div class="overview-label">Deposit Requests</div>
-        <div class="overview-number">—</div>
-      </div>
-
-      <div class="overview-card">
-        <div class="overview-icon">↕</div>
-        <div class="overview-label">Withdrawal Requests</div>
-        <div class="overview-number">—</div>
-      </div>
-
-      <div class="overview-card">
-        <div class="overview-icon">◉</div>
-        <div class="overview-label">Pending Verification</div>
-        <div class="overview-number">—</div>
-      </div>
-
-    </div>
-
-    <p class="note">
-      Dashboard counts will be connected to the database in a later step.
-      The dash symbol means live data is not connected yet.
-    </p>
-
-
-
-    <!-- PART 2: USER MANAGEMENT -->
-
-    <h2 class="section-title">2. User Management</h2>
-
-    <div class="overview-grid">
-
-      <!-- USER PROFILES -->
-      <button class="overview-card management-button"
-              onclick="showUserSection('profiles')">
-        <div class="overview-icon">♙</div>
-        <div class="overview-label">User Profiles</div>
-      </button>
-
-      <!-- WALLET MANAGEMENT -->
-      <button class="overview-card management-button"
-              onclick="showUserSection('wallet')">
-        <div class="overview-icon">▣</div>
-        <div class="overview-label">Wallet Management</div>
-      </button>
-
-      <!-- SEND GIFT -->
-      <button class="overview-card management-button"
-              onclick="showUserSection('gift')">
-        <div class="overview-icon">🎁</div>
-        <div class="overview-label">Send Gift / Reward</div>
-      </button>
-
-      <!-- BLOCK / UNBLOCK -->
-      <button class="overview-card management-button"
-              onclick="showUserSection('block')">
-        <div class="overview-icon">⛔</div>
-        <div class="overview-label">Block / Unblock Users</div>
-      </button>
-
-    </div>
-
-    <!-- USER MANAGEMENT WORKSPACE -->
-    <section id="user-workspace"
-             class="overview-card"
-             style="display:none; margin-top:20px;">
-
-      <button type="button"
-              class="close-button"
-              onclick="closeUserSection()">
-        ← Back to Dashboard
-      </button>
-
-      <!-- SEARCH USER -->
-      <div id="user-search-area">
-        <h3>User Search</h3>
-        <p class="note">
-          Search by Username, Gmail or User ID.
-        </p>
-
-        <label for="user-search-input">Username / Gmail / User ID</label>
-
-        <input id="user-search-input"
-               type="text"
-               placeholder="Enter username, Gmail or User ID">
-
-        <button type="button"
-                class="action-button"
-                onclick="searchAdminUser()">
-          Search User
-        </button>
-
-        <p id="user-search-message" class="note">
-          Search functionality will be connected to Supabase.
-        </p>
-
-        <div id="user-profile-result"></div>
-      </div>
-
-      <!-- WALLET WORKSPACE -->
-      <div id="wallet-area" style="display:none;">
-        <h3>Wallet Management</h3>
-        <p class="note">
-          Search for a user first to inspect their wallet.
-          Balance changes require secure admin authorization.
-        </p>
-      </div>
-
-      <!-- GIFT WORKSPACE -->
-      <div id="gift-area" style="display:none;">
-        <h3>Send Gift / Reward</h3>
-
-        <label for="gift-user-id">Recipient User ID</label>
-        <input id="gift-user-id"
-               type="text"
-               placeholder="Enter recipient User ID">
-
-        <label for="gift-amount">Gift Amount (SNX)</label>
-        <input id="gift-amount"
-               type="number"
-               min="0"
-               step="any"
-               placeholder="Enter SNX amount">
-
-        <label for="gift-message">Gift Message</label>
-        <input id="gift-message"
-               type="text"
-               maxlength="200"
-               placeholder="Optional message">
-
-        <button type="button"
-                class="action-button"
-                onclick="prepareGift()">
-          Validate Gift Details
-        </button>
-
-        <p id="gift-message-status" class="note">
-          Gift sending will be enabled after secure database integration.
-        </p>
-      </div>
-
-      <!-- BLOCK / UNBLOCK WORKSPACE -->
-      <div id="block-area" style="display:none;">
-        <h3>Block / Unblock User</h3>
-
-        <label for="block-user-id">User ID</label>
-        <input id="block-user-id"
-               type="text"
-               placeholder="Enter User ID">
-
-        <div class="management-actions">
-          <button type="button"
-                  class="action-button"
-                  onclick="setBlockStatus('blocked')">
-            Block User
-          </button>
-
-          <button type="button"
-                  class="action-button"
-                  onclick="setBlockStatus('active')">
-            Unblock User
-          </button>
-        </div>
-
-        <p id="block-message-status" class="note">
-          Block status will be updated after secure database integration.
-        </p>
-      </div>
-
-    </section>
-
-    <style>
-      /* PART 2: MATCH THE EXISTING CARD DESIGN */
-
-      .management-button {
-        width: 100%;
-        text-align: left;
-        color: var(--white);
-        font: inherit;
-        cursor: pointer;
-        transition: border-color 0.2s, transform 0.2s;
-      }
-
-      .management-button:hover {
-        border-color: var(--teal);
-        transform: translateY(-2px);
-      }
-
-      .close-button,
-      .action-button {
-        padding: 11px 16px;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        margin: 8px 8px 8px 0;
-      }
-
-      .close-button {
-        color: var(--white);
-        background: #20334A;
-      }
-
-      .action-button {
-        color: #071820;
-        background: var(--teal);
-        border-color: var(--teal);
-        font-weight: bold;
-      }
-
-      #user-workspace h3 {
-        margin-top: 22px;
-      }
-
-      #user-workspace label {
-        display: block;
-        color: var(--muted);
-        font-size: 13px;
-        margin: 15px 0 7px;
-      }
-
-      #user-workspace input {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        color: var(--white);
-        background: #0B1424;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        outline: none;
-      }
-
-      #user-workspace input:focus {
-        border-color: var(--teal);
-      }
-
-      .management-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-    </style>
-
-    <script>
-      /* PART 2: USER MANAGEMENT NAVIGATION */
-
-      function showUserSection(section) {
-        const workspace = document.getElementById("user-workspace");
-
-        workspace.style.display = "block";
-
-        document.getElementById("user-search-area").style.display =
-          section === "profiles" ? "block" : "none";
-
-        document.getElementById("wallet-area").style.display =
-          section === "wallet" ? "block" : "none";
-
-        document.getElementById("gift-area").style.display =
-          section === "gift" ? "block" : "none";
-
-        document.getElementById("block-area").style.display =
-          section === "block" ? "block" : "none";
-
-        workspace.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-
-      function closeUserSection() {
-        document.getElementById("user-workspace").style.display = "none";
-      }
-
-      function searchAdminUser() {
-        const query = document.getElementById("user-search-input").value.trim();
-
-        const message = document.getElementById("user-search-message");
-
-        if (!query) {
-          message.textContent = "Please enter a Username, Gmail or User ID.";
-          return;
-        }
-
-        message.textContent =
-          "Search UI ready. Connect Supabase securely to retrieve real user profiles.";
-      }
-
-      function prepareGift() {
-        const userId = document.getElementById("gift-user-id").value.trim();
-        const amount = Number(document.getElementById("gift-amount").value);
-        const status = document.getElementById("gift-message-status");
-
-        if (!userId || !Number.isFinite(amount) || amount <= 0) {
-          status.textContent =
-            "Enter a valid Recipient User ID and a gift amount greater than zero.";
-          return;
-        }
-
-        status.textContent =
-          "Details validated. No gift has been sent; secure database integration is still required.";
-      }
-
-      function setBlockStatus(statusValue) {
-        const userId = document.getElementById("block-user-id").value.trim();
-        const status = document.getElementById("block-message-status");
-
-        if (!userId) {
-          status.textContent = "Please enter the User ID first.";
-          return;
-        }
-
-        status.textContent =
-          "Request prepared for " + userId + ". No account status has changed; secure database integration is required.";
-      }
-    </script>
-
-
-
-    
-<!-- PART 3: TASKS & LEADERBOARD -->
-
-<h2 class="section-title">3. Tasks &amp; Leaderboard</h2>
-
-<div class="overview-grid">
-
-  <button class="overview-card management-button"
-          onclick="openTaskSection('mandatory')">
-    <div class="overview-icon">☑</div>
-    <div class="overview-label">Mandatory Task Management</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openTaskSection('pinned')">
-    <div class="overview-icon">📌</div>
-    <div class="overview-label">Pinned Task Requests</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openTaskSection('leaderboard')">
-    <div class="overview-icon">🏆</div>
-    <div class="overview-label">Leaderboard</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openTaskSection('general')">
-    <div class="overview-icon">☷</div>
-    <div class="overview-label">General Task Requests</div>
-  </button>
-
-</div>
-
-<!-- TASK MANAGEMENT WORKSPACE -->
-<section id="task-workspace"
-         class="overview-card"
-         style="display:none; margin-top:20px;">
-
-  <button type="button"
-          class="close-button"
-          onclick="closeTaskSection()">
-    ← Back to Dashboard
-  </button>
-
-  <!-- MANDATORY TASKS -->
-  <div id="mandatory-area" class="task-area" style="display:none;">
-    <h3>Mandatory Task Management</h3>
-    <p class="note">
-      Create and manage tasks users must complete.
-    </p>
-
-    <label for="mandatory-title">Task Title</label>
-    <input id="mandatory-title"
-           type="text"
-           placeholder="Enter task title">
-
-    <label for="mandatory-description">Task Description</label>
-    <textarea id="mandatory-description"
-              rows="3"
-              placeholder="Enter task instructions"></textarea>
-
-    <label for="mandatory-reward">Reward (SNX)</label>
-    <input id="mandatory-reward"
-           type="number"
-           min="0"
-           step="any"
-           placeholder="Enter reward">
-
-    <label for="mandatory-status">Task Status</label>
-    <select id="mandatory-status">
-      <option value="active">Active</option>
-      <option value="inactive">Inactive</option>
-    </select>
-
-    <button type="button"
-            class="action-button"
-            onclick="validateMandatoryTask()">
-      Validate Task Details
-    </button>
-
-    <p id="mandatory-message" class="note">
-      Task creation and saving will require database integration.
-    </p>
-
-    <h3>Existing Mandatory Tasks</h3>
-    <div id="mandatory-list" class="task-placeholder">
-      Task list will appear here after database connection.
-    </div>
-  </div>
-
-  <!-- PINNED TASK REQUESTS -->
-  <div id="pinned-area" class="task-area" style="display:none;">
-    <h3>Pinned Task Requests</h3>
-    <p class="note">
-      Review requests submitted by users for pinned tasks.
-    </p>
-
-    <label for="pinned-filter">Request Status</label>
-    <select id="pinned-filter">
-      <option value="all">All Requests</option>
-      <option value="pending">Pending</option>
-      <option value="approved">Approved</option>
-      <option value="rejected">Rejected</option>
-    </select>
-
-    <button type="button"
-            class="action-button"
-            onclick="showPinnedStatus()">
-      Apply Filter
-    </button>
-
-    <div id="pinned-list" class="task-placeholder">
-      Pinned task requests will appear here after database connection.
-    </div>
-
-    <p id="pinned-message" class="note"></p>
-  </div>
-
-  <!-- LEADERBOARD -->
-  <div id="leaderboard-area" class="task-area" style="display:none;">
-    <h3>Leaderboard</h3>
-    <p class="note">
-      Check user rankings, scores and positions.
-    </p>
-
-    <label for="leaderboard-period">Leaderboard Period</label>
-    <select id="leaderboard-period">
-      <option value="all-time">All Time</option>
-      <option value="monthly">Monthly</option>
-      <option value="weekly">Weekly</option>
-    </select>
-
-    <button type="button"
-            class="action-button"
-            onclick="showLeaderboardStatus()">
-      View Rankings
-    </button>
-
-    <div class="table-scroll">
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>User ID</th>
-            <th>Points / Score</th>
-          </tr>
-        </thead>
-        <tbody id="leaderboard-list">
-          <tr>
-            <td colspan="4">
-              Rankings will load after database connection.
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p id="leaderboard-message" class="note"></p>
-  </div>
-
-  <!-- GENERAL TASK REQUESTS -->
-  <div id="general-area" class="task-area" style="display:none;">
-    <h3>General Task Requests</h3>
-    <p class="note">
-      Review task submissions and manage their status.
-    </p>
-
-    <label for="general-filter">Request Status</label>
-    <select id="general-filter">
-      <option value="all">All Requests</option>
-      <option value="pending">Pending</option>
-      <option value="approved">Approved</option>
-      <option value="rejected">Rejected</option>
-    </select>
-
-    <button type="button"
-            class="action-button"
-            onclick="showGeneralStatus()">
-      Apply Filter
-    </button>
-
-    <div id="general-list" class="task-placeholder">
-      General task requests will appear here after database connection.
-    </div>
-
-    <p id="general-message" class="note"></p>
-  </div>
-
-</section>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0B1424">
+<title>Elite Earn Hub | Admin Panel</title>
 
 <style>
-  /* PART 3: TASK MANAGEMENT STYLES */
+:root {
+  --bg: #0B1424;
+  --card: #142238;
+  --card2: #182B43;
+  --border: #263950;
+  --gold: #D8B56D;
+  --teal: #40D6B1;
+  --white: #F4F7FB;
+  --muted: #A8B6C9;
+  --red: #F27777;
+}
 
-  #task-workspace h3 {
-    margin-top: 22px;
-  }
-
-  #task-workspace label {
-    display: block;
-    color: var(--muted);
-    font-size: 13px;
-    margin: 15px 0 7px;
-  }
-
-  #task-workspace input,
-  #task-workspace textarea,
-  #task-workspace select {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    color: var(--white);
-    background: #0B1424;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font: inherit;
-  }
-
-  #task-workspace textarea {
-    resize: vertical;
-  }
-
-  #task-workspace input:focus,
-  #task-workspace textarea:focus,
-  #task-workspace select:focus {
-    outline: none;
-    border-color: var(--teal);
-  }
-
-  .task-area {
-    margin-top: 15px;
-  }
-
-  .task-placeholder {
-    padding: 16px;
-    margin-top: 15px;
-    background: #0B1424;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.6;
-  }
-
-  .table-scroll {
-    width: 100%;
-    overflow-x: auto;
-    margin-top: 15px;
-  }
-
-  .admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 480px;
-  }
-
-  .admin-table th,
-  .admin-table td {
-    text-align: left;
-    padding: 12px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-
-  .admin-table th {
-    color: var(--teal);
-  }
-</style>
-
-<script>
-  /* PART 3: TASK SECTION NAVIGATION */
-
-  function openTaskSection(section) {
-    document.getElementById("task-workspace").style.display = "block";
-
-    document.querySelectorAll(".task-area").forEach(function(area) {
-      area.style.display = "none";
-    });
-
-    const selectedArea = document.getElementById(section + "-area");
-
-    if (selectedArea) {
-      selectedArea.style.display = "block";
-    }
-
-    document.getElementById("task-workspace").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-
-  function closeTaskSection() {
-    document.getElementById("task-workspace").style.display = "none";
-  }
-
-  function validateMandatoryTask() {
-    const title = document.getElementById("mandatory-title").value.trim();
-    const description = document.getElementById("mandatory-description").value.trim();
-    const reward = Number(document.getElementById("mandatory-reward").value);
-    const message = document.getElementById("mandatory-message");
-
-    if (!title || !description ||
-        document.getElementById("mandatory-reward").value === "" ||
-        !Number.isFinite(reward) || reward < 0) {
-      message.textContent =
-        "Please enter the title, description and a valid non-negative reward.";
-      return;
-    }
-
-    message.textContent =
-      "Details validated. Task has not been saved; database integration is required.";
-  }
-
-  function showPinnedStatus() {
-    const status = document.getElementById("pinned-filter").value;
-
-    document.getElementById("pinned-message").textContent =
-      "Selected filter: " + status +
-      ". Actual requests will load after database integration.";
-  }
-
-  function showLeaderboardStatus() {
-    const period = document.getElementById("leaderboard-period").value;
-
-    document.getElementById("leaderboard-message").textContent =
-      "Selected period: " + period +
-      ". Real rankings require connection to your leaderboard data.";
-  }
-
-  function showGeneralStatus() {
-    const status = document.getElementById("general-filter").value;
-
-    document.getElementById("general-message").textContent =
-      "Selected filter: " + status +
-      ". Actual task requests will load after database integration.";
-  }
-</script>
-
-
-    
-<!-- PART 4: REQUESTS & OTHER MANAGEMENT -->
-
-<h2 class="section-title">4. Requests &amp; Other Management</h2>
-
-<div class="overview-grid">
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('deposits')">
-    <div class="overview-icon">▣</div>
-    <div class="overview-label">Deposit Requests</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('withdrawals')">
-    <div class="overview-icon">↗</div>
-    <div class="overview-label">Withdrawal Requests</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('verification')">
-    <div class="overview-icon">◉</div>
-    <div class="overview-label">Face Verification</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('youtube')">
-    <div class="overview-icon">▶</div>
-    <div class="overview-label">YouTube Requests</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('surfing')">
-    <div class="overview-icon">〰</div>
-    <div class="overview-label">Surfing Requests</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('advertisements')">
-    <div class="overview-icon">▤</div>
-    <div class="overview-label">Advertisements</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('raffles')">
-    <div class="overview-icon">🎟</div>
-    <div class="overview-label">Raffles Management</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('services')">
-    <div class="overview-icon">⚙</div>
-    <div class="overview-label">Services Requests</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('notifications')">
-    <div class="overview-icon">♧</div>
-    <div class="overview-label">Notifications</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('settings')">
-    <div class="overview-icon">⚙</div>
-    <div class="overview-label">Platform Settings</div>
-  </button>
-
-  <button class="overview-card management-button"
-          onclick="openManagementSection('help')">
-    <div class="overview-icon">?</div>
-    <div class="overview-label">Help &amp; Feedback</div>
-  </button>
-
-</div>
-
-<!-- MANAGEMENT WORKSPACE -->
-<section id="management-workspace"
-         class="overview-card"
-         style="display:none; margin-top:20px;">
-
-  <button type="button"
-          class="close-button"
-          onclick="closeManagementSection()">
-    ← Back to Dashboard
-  </button>
-
-  <h3 id="management-heading">Management</h3>
-
-  <p id="management-description" class="note"></p>
-
-  <div id="management-content" class="task-placeholder">
-    Real records will appear after secure database integration.
-  </div>
-
-</section>
-
-<script>
-  /* PART 4: MANAGEMENT SECTION NAVIGATION */
-
-  const managementDetails = {
-    deposits: {
-      title: "Deposit Requests",
-      description: "Review deposit submissions, payment references and request status."
-    },
-    withdrawals: {
-      title: "Withdrawal Requests",
-      description: "Review withdrawal requests and their processing status."
-    },
-    verification: {
-      title: "Face Verification",
-      description: "Review user verification submissions and their status. Restrict access to authorized admins."
-    },
-    youtube: {
-      title: "YouTube Requests",
-      description: "Manage YouTube Like, Watch / View and Subscribe requests."
-    },
-    surfing: {
-      title: "Surfing Requests",
-      description: "Review surfing submissions and task activity."
-    },
-    advertisements: {
-      title: "Advertisements",
-      description: "Review, manage and inspect submitted advertisements."
-    },
-    raffles: {
-      title: "Raffles Management",
-      description: "Manage raffle entries, rounds and results."
-    },
-    services: {
-      title: "Services Requests",
-      description: "Review users' service requests and their status."
-    },
-    notifications: {
-      title: "Notifications",
-      description: "Prepare announcements and notifications for users."
-    },
-    settings: {
-      title: "Platform Settings",
-      description: "Platform configuration. Sensitive settings must be protected by server-side authorization."
-    },
-    help: {
-      title: "Help & Feedback",
-      description: "Review user help requests, complaints, feedback and suggestions."
-    }
-  };
-
-  function openManagementSection(section) {
-    const details = managementDetails[section];
-
-    if (!details) return;
-
-    document.getElementById("management-workspace").style.display = "block";
-    document.getElementById("management-heading").textContent = details.title;
-    document.getElementById("management-description").textContent = details.description;
-
-    document.getElementById("management-content").textContent =
-      "This section is ready for its interface. Live records and actions require secure database integration.";
-
-    document.getElementById("management-workspace").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-
-  function closeManagementSection() {
-    document.getElementById("management-workspace").style.display = "none";
-  }
-</script>
-
-
-<style>
-/* PART 5 — FINAL RESPONSIVE POLISH */
-
-html {
-  scroll-behavior: smooth;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: var(--bg, #0B1424);
-  color: var(--white, #F4F7FB);
+  background: var(--bg);
+  color: var(--white);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-button,
-input,
-select,
-textarea {
+button, input, select, textarea {
   font: inherit;
-  box-sizing: border-box;
 }
 
 button {
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-button:hover {
-  opacity: 0.9;
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
 }
 
-button:active {
-  transform: scale(0.98);
+.app {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
 }
 
-input,
-select,
-textarea {
-  max-width: 100%;
-  border-radius: 8px;
-  padding: 11px 12px;
-  border: 1px solid var(--border, #24364D);
-  background: #0B1729;
-  color: var(--white, #F4F7FB);
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0 22px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--border);
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: #8D9BB0;
+.brand-icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid #695B3D;
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--gold);
+  font-size: 28px;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 1px solid var(--teal, #40D6B1);
-  border-color: var(--teal, #40D6B1);
+.brand {
+  flex: 1;
+  min-width: 0;
 }
 
-button:focus-visible {
-  outline: 2px solid var(--gold, #D8B56D);
-  outline-offset: 3px;
+.brand h1 {
+  margin: 0 0 6px;
+  font-size: clamp(20px, 4vw, 28px);
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.brand p {
+  margin: 0;
+  color: var(--gold);
+  font-size: 13px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.eyebrow {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1.5px;
 }
 
-th,
-td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border, #24364D);
+.admin-pill {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: var(--card);
+  color: var(--teal);
+  font-size: 12px;
+}
+
+.section {
+  margin: 28px 0;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 17px;
+}
+
+.section-title .icon {
+  color: var(--gold);
+  font-size: 25px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: clamp(22px, 4vw, 29px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.card {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--white);
   text-align: left;
-  overflow-wrap: anywhere;
+  transition: border-color .2s, transform .2s;
 }
 
-th {
-  color: var(--gold, #D8B56D);
+button.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
 }
 
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
+.card-icon {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--gold);
+  font-size: 28px;
+}
+
+.card-title {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.card-description {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.card-arrow {
+  display: block;
+  margin-top: 12px;
+  color: var(--gold);
+  text-align: right;
+  font-size: 20px;
+}
+
+.stats-grid .card {
+  min-height: 145px;
+}
+
+.stat-number {
+  display: block;
+  margin: 10px 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.stat-caption {
+  color: var(--teal);
+  font-size: 11px;
+}
+
+.wallet {
+  margin-top: 17px;
+  padding: 21px;
+  border: 1px solid var(--gold);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #172A40, #122035);
+}
+
+.wallet-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wallet-icon {
+  color: var(--gold);
+  font-size: 30px;
+}
+
+.wallet-heading h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+}
+
+.wallet-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.wallet-balance {
+  margin: 20px 0 5px;
+  color: var(--gold);
+  font-size: clamp(28px, 6vw, 38px);
+  font-weight: bold;
+}
+
+.wallet-note {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 12px 15px;
+  border-radius: 11px;
+  font-weight: bold;
+}
+
+.primary-button {
+  border: none;
+  background: var(--teal);
+  color: #071B1A;
+}
+
+.secondary-button {
+  border: 1px solid var(--border);
+  background: var(--card2);
+  color: var(--white);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.notice {
+  margin-top: 15px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+footer {
+  margin-top: 35px;
+  padding: 20px 0 10px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  text-align: center;
+  font-size: 11px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 760px) {
+  .app {
+    padding: 28px;
   }
 
-  .container,
-  .dashboard-container,
-  .main-content {
-    width: 100%;
-    max-width: 100%;
-    padding-left: 12px;
-    padding-right: 12px;
-    box-sizing: border-box;
+  .stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .cards,
-  .card-grid,
-  .stats-grid,
-  .management-grid,
-  .overview-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .card {
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-
-  input,
-  select,
-  textarea {
-    width: 100%;
-  }
-
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+  .management-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 420px) {
-  .cards,
-  .card-grid,
-  .stats-grid,
-  .management-grid,
-  .overview-grid {
-    grid-template-columns: minmax(0, 1fr);
+  .app {
+    padding: 14px;
   }
 
-  th,
-  td {
-    padding: 9px;
+  .topbar {
+    gap: 9px;
+  }
+
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 23px;
+  }
+
+  .admin-pill {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .card-title {
+    font-size: 13px;
+  }
+
+  .card-description {
+    font-size: 11px;
+  }
+
+  .stat-number {
+    font-size: 27px;
   }
 }
 </style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="topbar">
+  <div class="brand-icon">⬡</div>
+
+  <div class="brand">
+    <h1>Elite Earn Hub</h1>
+    <p>Sanny Jatt — CEO / Managing Director</p>
+    <div class="eyebrow">ADMIN CONTROL PANEL</div>
+  </div>
+
+  <div class="admin-pill">ADMIN</div>
+</header>
+
+<main id="appMain">
+
+  <!-- DASHBOARD OVERVIEW -->
+
+  <section class="section">
+    <div class="section-title">
+      <span class="icon">◈</span>
+      <h2>Dashboard Overview</h2>
+    </div>
+
+    <div class="grid stats-grid">
+
+      <div class="card">
+        <span class="card-icon">♙</span>
+        <span class="card-title">Total Users</span>
+        <span class="stat-number" id="totalUsers">0</span>
+        <span class="stat-caption">Registered users</span>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">⇩</span>
+        <span class="card-title">Deposit Requests</span>
+        <span class="stat-number" id="depositRequests">0</span>
+        <span class="stat-caption">Pending requests</span>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">⇧</span>
+        <span class="card-title">Withdrawal Requests</span>
+        <span class="stat-number" id="withdrawalRequests">0</span>
+        <span class="stat-caption">Pending requests</span>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">☷</span>
+        <span class="card-title">Verification Requests</span>
+        <span class="stat-number" id="verificationRequests">0</span>
+        <span class="stat-caption">Pending verification</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PLATFORM BALANCE WALLET -->
+
+  <section class="wallet">
+    <div class="wallet-heading">
+      <span class="wallet-icon">▣</span>
+
+      <div>
+        <h3>Platform Balance Wallet</h3>
+        <p>Platform fees aur available balance</p>
+      </div>
+    </div>
+
+    <div class="wallet-balance">
+      <span id="platformBalance">0</span> SNX
+    </div>
+
+    <p class="wallet-note">
+      Platform fees aur transactions ka balance yahan show hoga.
+      Real balance secure database se connect hone ke baad load hoga.
+    </p>
+
+    <div class="button-row">
+      <button class="primary-button" onclick="openGiftPage()">
+        ✧ Send Gift / Reward
+      </button>
+
+      <button class="secondary-button" onclick="openWalletHistory()">
+        View Wallet History
+      </button>
+    </div>
+  </section>
+
+  <!-- MANAGEMENT BUTTONS WILL BE ADDED IN PART 2, 3 AND 4 -->
+
+  <div id="nextParts"></div>
+
+</main>
+
+<footer>
+  Elite Earn Hub · Admin Control Panel
+</footer>
+
+</div>
+
+<!-- PART 1 JAVASCRIPT -->
 
 <script>
-/* PART 5 — BASIC SETUP CHECK */
+/*
+  PART 1 FOUNDATION
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Elite Earn Hub Admin Panel UI loaded.");
+  Important:
+  These counters currently start at zero.
+  They are NOT live database counters yet.
 
-  const adminTitle = document.title;
-  if (!adminTitle || !adminTitle.trim()) {
-    document.title = "Elite Earn Hub | Admin Panel";
+  Supabase/backend connection will be added and secured
+  in the integration stage. Never put a service-role key
+  inside browser JavaScript.
+*/
+
+const dashboardData = {
+  totalUsers: 0,
+  depositRequests: 0,
+  withdrawalRequests: 0,
+  verificationRequests: 0,
+  platformBalance: 0
+};
+
+function animateCounter(elementId, targetValue) {
+  const element = document.getElementById(elementId);
+
+  if (!element) return;
+
+  const target = Number(targetValue) || 0;
+  const duration = 700;
+  const startTime = performance.now();
+
+  function updateCounter(currentTime) {
+    const progress = Math.min(
+      (currentTime - startTime) / duration,
+      1
+    );
+
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    const currentValue = Math.round(target * easedProgress);
+
+    element.textContent = currentValue.toLocaleString();
+
+    if (progress < 1) {
+      requestAnimationFrame(updateCounter);
+    }
   }
-});
+
+  requestAnimationFrame(updateCounter);
+}
+
+function renderDashboardCounters() {
+  animateCounter("totalUsers", dashboardData.totalUsers);
+  animateCounter("depositRequests", dashboardData.depositRequests);
+  animateCounter("withdrawalRequests", dashboardData.withdrawalRequests);
+  animateCounter("verificationRequests", dashboardData.verificationRequests);
+
+  const wallet = document.getElementById("platformBalance");
+
+  if (wallet) {
+    wallet.textContent = Number(
+      dashboardData.platformBalance
+    ).toLocaleString(undefined, {
+      maximumFractionDigits: 4
+    });
+  }
+}
+
+/*
+  Temporary navigation placeholders.
+  Part 2 will replace these with proper pages.
+*/
+
+function openGiftPage() {
+  alert("Send Gift / Reward page Part 2 mein add hoga.");
+}
+
+function openWalletHistory() {
+  alert("Platform Wallet History page baad ke part mein add hoga.");
+}
+
+renderDashboardCounters();
 </script>
-</>
 
+<!-- PART 2, PART 3, PART 4 AND PART 5 WILL BE ADDED HERE -->
 
-
-    
-  </div>
 </body>
 </html>
-
