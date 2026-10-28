@@ -1,0 +1,746 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ==========================================
+       SECTION 1: HTML HEAD
+       Elite Earn Hub Admin Panel
+       ========================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14251F">
+  <title>Elite Earn Hub | Admin Panel</title>
+
+  <!-- Fonts: heading and smaller button text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- ==========================================
+       SECTION 2: CSS
+       Theme, layout, premium borders and animations
+       ========================================== -->
+  <style>
+    :root {
+      --bg: #14251F;
+      --panel: #192F27;
+      --panel2: #20372D;
+      --green: #39D98A;
+      --yellow: #FFD447;
+      --blue: #45B8FF;
+      --purple: #A78BFA;
+      --rose: #FF8FA3;
+      --text: #F5F8F5;
+      --muted: #AABBB1;
+      --border: rgba(190,218,201,.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at top left, rgba(57,217,138,.10), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", Arial, sans-serif;
+    }
+
+    .app {
+      width: min(1160px, 100%);
+      margin: auto;
+      padding: 20px 16px 35px;
+    }
+
+    /* Premium top header */
+    .hero {
+      text-align: center;
+      padding: 28px 18px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,212,71,.48);
+      border-radius: 23px;
+      background: linear-gradient(140deg, #1C382D, #172A22 65%, #14251F);
+      box-shadow: 0 18px 42px rgba(0,0,0,.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      color: var(--yellow);
+      border: 1px solid var(--yellow);
+      border-radius: 18px;
+      background: #243F32;
+      font-size: 25px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--green);
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(25px, 4vw, 37px);
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .hero h2 {
+      margin: 7px 0 13px;
+      font-family: "Manrope", sans-serif;
+      font-size: 18px;
+      letter-spacing: .16em;
+    }
+
+    .hero-line {
+      width: 90px;
+      height: 2px;
+      margin: auto auto 12px;
+      background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+    }
+
+    .owner {
+      margin: 0;
+      color: var(--yellow);
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .role { margin: 5px 0; font-size: 13px; }
+    .intro { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+
+    /* Section headings */
+    .section { margin-top: 27px; }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      font-family: "Manrope", sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .section-heading::before {
+      content: "";
+      width: 4px;
+      height: 23px;
+      border-radius: 10px;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(57,217,138,.25);
+    }
+
+    .section-number {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .1em;
+    }
+
+    /* Dashboard statistics */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .stat-card {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(145deg, #20372D, #172B22);
+    }
+
+    .stat-icon {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    .green-bg { color: var(--green); background: rgba(57,217,138,.10); }
+    .gold-bg { color: var(--yellow); background: rgba(255,212,71,.10); }
+    .blue-bg { color: var(--blue); background: rgba(69,184,255,.10); }
+    .purple-bg { color: var(--purple); background: rgba(167,139,250,.10); }
+
+    .stat-label {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .stat-value {
+      margin-top: 5px;
+      font-family: "Manrope", sans-serif;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .stat-status {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* ==========================================
+       PREMIUM BUTTON CSS
+       All menu buttons are clickable.
+       The pages are intentionally not opened yet.
+       ========================================== */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .menu-button {
+      --accent: var(--green);
+      width: 100%;
+      min-width: 0;
+      min-height: 76px;
+      padding: 13px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+      color: var(--text);
+      background: linear-gradient(145deg, #20372D, #192F27);
+      border: 1px solid color-mix(in srgb, var(--accent) 62%, transparent);
+      border-radius: 15px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04),
+                  0 8px 20px rgba(0,0,0,.13);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .18s ease, box-shadow .18s ease,
+                  border-color .18s ease, background .18s ease;
+    }
+
+    .menu-button:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 24px rgba(0,0,0,.20);
+    }
+
+    .menu-button:active,
+    .menu-button.is-clicked {
+      transform: scale(.975);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+
+    .menu-button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .icon-box {
+      flex: 0 0 40px;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 11%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    /* Button text is intentionally smaller than headings */
+    .button-label {
+      min-width: 0;
+      font-family: "DM Sans", sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .button-arrow {
+      margin-left: auto;
+      color: var(--accent);
+      font-size: 11px;
+    }
+
+    .accent-green { --accent: var(--green); }
+    .accent-gold { --accent: var(--yellow); }
+    .accent-blue { --accent: var(--blue); }
+    .accent-purple { --accent: var(--purple); }
+    .accent-rose { --accent: var(--rose); }
+
+    /* YouTube Like / Subscribe / View: equal dimensions */
+    .youtube-panel {
+      margin-top: 13px;
+      padding: 15px;
+      border: 1px solid rgba(57,217,138,.48);
+      border-radius: 18px;
+      background: linear-gradient(140deg, #1E392B, #14251F);
+      box-shadow: 0 12px 30px rgba(0,0,0,.15);
+    }
+
+    .youtube-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 13px;
+      font-family: "Manrope", sans-serif;
+      font-size: 15px;
+    }
+
+    .youtube-title i { color: var(--green); font-size: 19px; }
+
+    .youtube-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .youtube-grid .menu-button {
+      min-height: 78px;
+      padding: 10px 5px;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      gap: 7px;
+    }
+
+    .youtube-grid .icon-box {
+      width: 32px;
+      height: 32px;
+      flex-basis: 32px;
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .youtube-grid .button-label { font-size: 12px; }
+    .youtube-grid .button-arrow { display: none; }
+
+    /* Live Activity Feed */
+    .activity-panel {
+      padding: 16px;
+      border: 1px solid rgba(69,184,255,.38);
+      border-radius: 18px;
+      background: linear-gradient(145deg, #1B3039, #172B22);
+    }
+
+    .activity-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 13px;
+    }
+
+    .activity-head h3 {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      font-size: 15px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 1.6s infinite;
+    }
+
+    .live-pill {
+      margin-left: auto;
+      padding: 5px 8px;
+      border: 1px solid rgba(57,217,138,.35);
+      border-radius: 20px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .activity-empty {
+      padding: 16px;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .activity-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    /* Click feedback toast */
+    .toast {
+      position: fixed;
+      z-index: 99;
+      left: 50%;
+      bottom: 22px;
+      transform: translate(-50%,18px);
+      width: max-content;
+      max-width: calc(100% - 28px);
+      padding: 12px 16px;
+      border: 1px solid rgba(57,217,138,.5);
+      border-radius: 13px;
+      background: #1B352A;
+      color: var(--text);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%,0);
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px 8px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 4px rgba(57,217,138,.08); }
+      50% { box-shadow: 0 0 0 7px rgba(57,217,138,.02); }
+    }
+
+    @media (max-width: 850px) {
+      .stats-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .app { padding: 13px 12px 28px; }
+      .hero { padding: 23px 13px; }
+      .stats-grid { gap: 9px; }
+      .stat-card { padding: 13px; }
+      .stat-value { font-size: 22px; }
+      .button-grid { gap: 9px; }
+      .menu-button { min-height: 72px; padding: 10px; gap: 8px; }
+      .icon-box { width: 35px; height: 35px; flex-basis: 35px; }
+      .button-label { font-size: 11.5px; }
+      .youtube-grid { gap: 7px; }
+      .youtube-grid .menu-button { min-height: 72px; }
+      .youtube-grid .button-label { font-size: 11px; }
+      .section-heading { font-size: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ==========================================
+       SECTION 3: HTML BODY
+       Complete dashboard layout and all buttons
+       ========================================== -->
+  <div class="app">
+
+    <!-- Header -->
+    <header class="hero">
+      <div class="logo"><i class="fa-solid fa-shield-halved"></i></div>
+      <h1>ELITE EARN HUB</h1>
+      <h2>ADMIN PANEL</h2>
+      <div class="hero-line"></div>
+      <p class="owner">Sunny Jat</p>
+      <p class="role">CEO &amp; Managing Director</p>
+      <p class="intro">Founder &amp; Administrator of Elite Earn Hub</p>
+    </header>
+
+    <!-- 01: Dashboard Overview -->
+    <section class="section">
+      <h2 class="section-heading">Dashboard Overview <span class="section-number">01</span></h2>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon green-bg"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-label">Total Users</div>
+          <div class="stat-value" id="totalUsers">—</div>
+          <div class="stat-status">Awaiting database connection</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon gold-bg"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+          <div class="stat-label">Total Withdrawal Requests</div>
+          <div class="stat-value" id="totalWithdrawals">—</div>
+          <div class="stat-status">Awaiting database connection</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon blue-bg"><i class="fa-solid fa-arrow-down-to-bracket"></i></div>
+          <div class="stat-label">Total Deposit Requests</div>
+          <div class="stat-value" id="totalDeposits">—</div>
+          <div class="stat-status">Awaiting database connection</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon purple-bg"><i class="fa-solid fa-user-check"></i></div>
+          <div class="stat-label">Today's Verifications</div>
+          <div class="stat-value" id="todayVerifications">—</div>
+          <div class="stat-status">Awaiting database connection</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 02: User Management -->
+    <section class="section">
+      <h2 class="section-heading">User Management <span class="section-number">02</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-green" data-label="User Profile">
+          <span class="icon-box"><i class="fa-solid fa-user"></i></span>
+          <span class="button-label">User Profile</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-blue" data-label="Referral">
+          <span class="icon-box"><i class="fa-solid fa-people-arrows-left-right"></i></span>
+          <span class="button-label">Referral</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 03: Requests & Finance -->
+    <section class="section">
+      <h2 class="section-heading">Requests &amp; Finance <span class="section-number">03</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-blue" data-label="Deposit Requests">
+          <span class="icon-box"><i class="fa-solid fa-arrow-down-to-bracket"></i></span>
+          <span class="button-label">Deposit Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-gold" data-label="Withdrawal Requests">
+          <span class="icon-box"><i class="fa-solid fa-arrow-up-from-bracket"></i></span>
+          <span class="button-label">Withdrawal Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-purple" data-label="Transaction History">
+          <span class="icon-box"><i class="fa-solid fa-clock-rotate-left"></i></span>
+          <span class="button-label">Transaction History</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-green" data-label="Platform Wallet">
+          <span class="icon-box"><i class="fa-solid fa-building-columns"></i></span>
+          <span class="button-label">Platform Wallet</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 04: Advertisement Center -->
+    <section class="section">
+      <h2 class="section-heading">Advertisement Center <span class="section-number">04</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-green" data-label="Task Requests">
+          <span class="icon-box"><i class="fa-solid fa-list-check"></i></span>
+          <span class="button-label">Task Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-blue" data-label="Surfing Requests">
+          <span class="icon-box"><i class="fa-solid fa-water"></i></span>
+          <span class="button-label">Surfing Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+
+      <div class="youtube-panel">
+        <h3 class="youtube-title"><i class="fa-brands fa-youtube"></i> YouTube</h3>
+        <div class="youtube-grid">
+          <button class="menu-button accent-green" data-label="YouTube Like">
+            <span class="icon-box"><i class="fa-solid fa-thumbs-up"></i></span>
+            <span class="button-label">Like</span>
+          </button>
+          <button class="menu-button accent-green" data-label="YouTube Subscribe">
+            <span class="icon-box"><i class="fa-solid fa-bell"></i></span>
+            <span class="button-label">Subscribe</span>
+          </button>
+          <button class="menu-button accent-green" data-label="YouTube View">
+            <span class="icon-box"><i class="fa-solid fa-play"></i></span>
+            <span class="button-label">View</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05: Mandatory Tasks -->
+    <section class="section">
+      <h2 class="section-heading">Mandatory Tasks <span class="section-number">05</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-green" data-label="Create Mandatory Task">
+          <span class="icon-box"><i class="fa-solid fa-circle-plus"></i></span>
+          <span class="button-label">Create Mandatory Task</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-purple" data-label="Manage Mandatory Tasks">
+          <span class="icon-box"><i class="fa-solid fa-list-check"></i></span>
+          <span class="button-label">Manage Mandatory Tasks</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 06: Verification & Service Requests -->
+    <section class="section">
+      <h2 class="section-heading">Verification &amp; Service Requests <span class="section-number">06</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-blue" data-label="Face Verification Requests">
+          <span class="icon-box"><i class="fa-solid fa-face-smile"></i></span>
+          <span class="button-label">Face Verification Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-green" data-label="Service Requests">
+          <span class="icon-box"><i class="fa-solid fa-clipboard-list"></i></span>
+          <span class="button-label">Service Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-purple" data-label="Leaderboard">
+          <span class="icon-box"><i class="fa-solid fa-trophy"></i></span>
+          <span class="button-label">Leaderboard</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-gold" data-label="Pin Task Requests">
+          <span class="icon-box"><i class="fa-solid fa-thumbtack"></i></span>
+          <span class="button-label">Pin Task Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 07: Notifications -->
+    <section class="section">
+      <h2 class="section-heading">Notifications <span class="section-number">07</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-green" data-label="Login Notification">
+          <span class="icon-box"><i class="fa-solid fa-bell"></i></span>
+          <span class="button-label">Login Notification</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-blue" data-label="Scrolling Notification">
+          <span class="icon-box"><i class="fa-solid fa-bars-staggered"></i></span>
+          <span class="button-label">Scrolling Notification</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 08: Help, Feedback & Gifts -->
+    <section class="section">
+      <h2 class="section-heading">Help, Feedback &amp; Gifts <span class="section-number">08</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-blue" data-label="Help & Feedback">
+          <span class="icon-box"><i class="fa-solid fa-comments"></i></span>
+          <span class="button-label">Help &amp; Feedback</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-green" data-label="Send Gift">
+          <span class="icon-box"><i class="fa-solid fa-gift"></i></span>
+          <span class="button-label">Send Gift</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 09: User & Platform Controls -->
+    <section class="section">
+      <h2 class="section-heading">User &amp; Platform Controls <span class="section-number">09</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-rose" data-label="Block User">
+          <span class="icon-box"><i class="fa-solid fa-user-slash"></i></span>
+          <span class="button-label">Block User</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-purple" data-label="Platform Settings">
+          <span class="icon-box"><i class="fa-solid fa-sliders"></i></span>
+          <span class="button-label">Platform Settings</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 10: Live Activity Feed -->
+    <section class="section">
+      <h2 class="section-heading">Live Activity Feed <span class="section-number">10</span></h2>
+      <div class="activity-panel">
+        <div class="activity-head">
+          <span class="live-dot"></span>
+          <h3>Recent Platform Activity</h3>
+          <span class="live-pill">LIVE FEED</span>
+        </div>
+        <div class="activity-empty" id="activityList">
+          Live activities will appear here after the registration, deposit,
+          withdrawal and conversion tables are connected to Supabase.
+        </div>
+        <div class="activity-note">
+          Real usernames, timestamps and successful statuses will come from
+          confirmed database records after integration.
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Elite Earn Hub · Admin Control Panel<br>
+      Pages and database functions will be added step by step.
+    </footer>
+  </div>
+
+  <div class="toast" id="buttonToast" role="status" aria-live="polite"></div>
+
+  <!-- ==========================================
+       SECTION 4: JAVASCRIPT
+       Button click animation + message.
+       No next page opens at this stage.
+       ========================================== -->
+  <script>
+    const buttons = document.querySelectorAll(".menu-button");
+    const toast = document.getElementById("buttonToast");
+    let toastTimer;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1900);
+    }
+
+    buttons.forEach((button) => {
+      button.type = "button";
+
+      button.addEventListener("click", () => {
+        button.classList.remove("is-clicked");
+
+        // Restart the animation on every click.
+        void button.offsetWidth;
+        button.classList.add("is-clicked");
+
+        setTimeout(() => {
+          button.classList.remove("is-clicked");
+        }, 320);
+
+        const label = button.dataset.label || "This section";
+        showToast(label + " — next page will be added later.");
+      });
+    });
+  </script>
+</body>
+</html>
