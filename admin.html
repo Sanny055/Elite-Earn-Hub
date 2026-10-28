@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elite Earn Hub | Admin Panel</title>
+<title>Elite Earn Hub - Admin Panel</title>
 
 <style>
 :root {
@@ -18,9 +18,7 @@
   --border: #293b51;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -30,31 +28,31 @@ body {
 }
 
 header {
-  padding: 22px;
+  padding: 20px 24px;
   background: #0d1a2b;
   border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 14px;
+  flex-wrap: wrap;
 }
 
 .brand {
-  color: var(--gold);
   font-size: 24px;
   font-weight: bold;
+  color: var(--gold);
 }
 
 .admin-info {
+  text-align: right;
   color: var(--muted);
   font-size: 13px;
-  text-align: right;
   line-height: 1.6;
 }
 
 main {
-  width: min(1200px, 100%);
+  max-width: 1200px;
   margin: auto;
   padding: 22px;
 }
@@ -65,27 +63,21 @@ h2 {
   margin: 0 0 16px;
 }
 
-h3 {
-  margin: 0 0 14px;
-  font-size: 17px;
-}
+h3 { margin-top: 0; }
 
-.section {
-  margin-bottom: 26px;
-}
+.section { margin-bottom: 22px; }
 
-.stats-grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
 
-.stat-card,
-.panel {
+.card, .panel {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 19px;
+  padding: 18px;
 }
 
 .stat-label {
@@ -111,8 +103,8 @@ h3 {
 
 .wallet-balance {
   font-size: 32px;
-  color: var(--gold);
   font-weight: bold;
+  color: var(--gold);
   margin: 12px 0;
 }
 
@@ -139,56 +131,108 @@ h3 {
   font-size: 14px;
   font-weight: bold;
   text-align: left;
-  cursor: default;
+  cursor: pointer;
 }
 
-.admin-button .symbol {
+.admin-button:hover {
+  border-color: var(--teal);
+  background: #20364d;
+}
+
+.symbol {
   color: var(--teal);
   margin-right: 8px;
 }
 
-.admin-button:focus {
-  outline: none;
+.page {
+  display: none;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
+
+.page.active { display: block; }
+
+.page-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.back-button {
+  border: 1px solid var(--border);
+  background: #20364d;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+label {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 12px 0 6px;
+}
+
+input, select, textarea {
+  width: 100%;
+  background: #091827;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 9px;
+  padding: 11px;
+  font: inherit;
+}
+
+.empty-state {
+  border: 1px dashed #315067;
+  border-radius: 12px;
+  padding: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.announcement {
+  display: none;
+  padding: 12px;
+  margin-bottom: 20px;
+  background: #182b43;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  color: var(--gold);
 }
 
 footer {
-  padding: 24px;
   text-align: center;
+  padding: 24px;
   color: var(--muted);
   border-top: 1px solid var(--border);
   font-size: 13px;
 }
 
 @media (max-width: 800px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .button-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .button-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 420px) {
-  main {
-    padding: 14px;
-  }
-
-  header {
-    padding: 17px;
-  }
-
-  .brand {
-    font-size: 21px;
-  }
-
-  .button-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .stat-card {
-    padding: 14px;
-  }
+@media (max-width: 480px) {
+  main { padding: 14px; }
+  header { padding: 16px; }
+  .brand { font-size: 21px; }
+  .button-grid, .page-grid { grid-template-columns: 1fr; }
+  .card { padding: 14px; }
 }
 </style>
 </head>
@@ -197,7 +241,6 @@ footer {
 
 <header>
   <div class="brand">✦ Elite Earn Hub</div>
-
   <div class="admin-info">
     <strong>Sanny Jatt</strong><br>
     CEO / Managing Director<br>
@@ -207,181 +250,228 @@ footer {
 
 <main>
 
-  <!-- DASHBOARD OVERVIEW -->
+<!-- DASHBOARD -->
+<div id="dashboardView">
+
   <section class="section">
     <h2>Dashboard Overview</h2>
-
-    <div class="stats-grid">
-      <div class="stat-card">
+    <div class="grid">
+      <div class="card">
         <span class="stat-label">Total Users</span>
         <span class="stat-value">0</span>
       </div>
-
-      <div class="stat-card">
+      <div class="card">
         <span class="stat-label">Deposit Requests</span>
         <span class="stat-value">0</span>
       </div>
-
-      <div class="stat-card">
+      <div class="card">
         <span class="stat-label">Withdrawal Requests</span>
         <span class="stat-value">0</span>
       </div>
-
-      <div class="stat-card">
+      <div class="card">
         <span class="stat-label">Verification Requests</span>
         <span class="stat-value">0</span>
       </div>
     </div>
   </section>
 
-  <!-- PLATFORM WALLET -->
-  <section class="section">
-    <div class="wallet">
-      <h2>Platform Balance Wallet</h2>
-      <div class="wallet-balance">0 SNX</div>
-      <p class="note">
-        Platform fees and balance summary.
-        Live balance abhi database se connected nahi hai.
-      </p>
-
-      <div class="button-grid">
-        <button type="button" class="admin-button">
-          <span class="symbol">✧</span> Send Gift / Reward
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">▤</span> View Wallet History
-        </button>
-      </div>
+  <section class="section wallet">
+    <h2>Platform Balance Wallet</h2>
+    <div class="wallet-balance">0 SNX</div>
+    <p class="note">
+      Platform fees and balance summary.
+      Live balance database se connect hone ke baad aayega.
+    </p>
+    <div class="button-grid">
+      <button class="admin-button" data-page="giftRewardPage">
+        <span class="symbol">✧</span>Send Gift / Reward
+      </button>
+      <button class="admin-button" data-page="walletManagementPage">
+        <span class="symbol">▤</span>View Wallet History
+      </button>
     </div>
   </section>
 
-  <!-- USER MANAGEMENT -->
-  <section class="section">
-    <div class="panel">
-      <h2>User Management</h2>
-
-      <div class="button-grid">
-        <button type="button" class="admin-button">
-          <span class="symbol">♙</span> User Profiles
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">▣</span> Wallet Management
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">✧</span> Send Gift / Reward
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">⊘</span> Block / Unblock Users
-        </button>
-      </div>
+  <section class="section panel">
+    <h2>User Management</h2>
+    <div class="button-grid">
+      <button class="admin-button" data-page="userProfilesPage">♙ User Profiles</button>
+      <button class="admin-button" data-page="walletManagementPage">▣ Wallet Management</button>
+      <button class="admin-button" data-page="giftRewardPage">✧ Send Gift / Reward</button>
+      <button class="admin-button" data-page="blockUsersPage">⊘ Block / Unblock Users</button>
     </div>
   </section>
 
-  <!-- TASKS AND LEADERBOARD -->
-  <section class="section">
-    <div class="panel">
-      <h2>Tasks &amp; Leaderboard</h2>
-
-      <div class="button-grid">
-        <button type="button" class="admin-button">
-          <span class="symbol">✓</span> Mandatory Task Management
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">📌</span> Pinned Task Requests
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">★</span> Leaderboard
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">☷</span> General Task Requests
-        </button>
-      </div>
+  <section class="section panel">
+    <h2>Tasks &amp; Leaderboard</h2>
+    <div class="button-grid">
+      <button class="admin-button" data-page="mandatoryTasksPage">✓ Mandatory Task Management</button>
+      <button class="admin-button" data-page="pinnedTaskRequestsPage">📌 Pinned Task Requests</button>
+      <button class="admin-button" data-page="leaderboardPage">★ Leaderboard</button>
+      <button class="admin-button" data-page="generalTaskRequestsPage">☷ General Task Requests</button>
     </div>
   </section>
 
-  <!-- REQUESTS AND OTHER MANAGEMENT -->
-  <section class="section">
-    <div class="panel">
-      <h2>Requests &amp; Other Management</h2>
-
-      <div class="button-grid">
-        <button type="button" class="admin-button">
-          <span class="symbol">↓</span> Deposit Requests
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">↑</span> Withdrawal Requests
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">◉</span> Face Verification
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">▶</span> YouTube Requests
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">↗</span> Surfing Requests
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">▤</span> Advertisements
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">🎟</span> Raffles Management
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">◇</span> Services Requests
-        </button>
-      </div>
+  <section class="section panel">
+    <h2>Requests &amp; Other Management</h2>
+    <div class="button-grid">
+      <button class="admin-button" data-page="depositRequestsPage">↓ Deposit Requests</button>
+      <button class="admin-button" data-page="withdrawalRequestsPage">↑ Withdrawal Requests</button>
+      <button class="admin-button" data-page="faceVerificationPage">◉ Face Verification</button>
+      <button class="admin-button" data-page="youtubeRequestsPage">▶ YouTube Requests</button>
+      <button class="admin-button" data-page="surfingRequestsPage">↗ Surfing Requests</button>
+      <button class="admin-button" data-page="advertisementsPage">▤ Advertisements</button>
+      <button class="admin-button" data-page="rafflesPage">🎟 Raffles Management</button>
+      <button class="admin-button" data-page="servicesRequestsPage">◇ Services Requests</button>
     </div>
   </section>
 
-  <!-- MORE MANAGEMENT -->
-  <section class="section">
-    <div class="panel">
-      <h2>More Management</h2>
-
-      <div class="button-grid">
-        <button type="button" class="admin-button">
-          <span class="symbol">♢</span> Notifications
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">≋</span> Scrolling Announcement Bar
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">⚙</span> Platform Settings
-        </button>
-
-        <button type="button" class="admin-button">
-          <span class="symbol">?</span> Help &amp; Feedback
-        </button>
-      </div>
+  <section class="section panel">
+    <h2>More Management</h2>
+    <div class="button-grid">
+      <button class="admin-button" data-page="notificationsPage">♢ Notifications</button>
+      <button class="admin-button" data-page="announcementPage">≋ Scrolling Announcement Bar</button>
+      <button class="admin-button" data-page="platformSettingsPage">⚙ Platform Settings</button>
+      <button class="admin-button" data-page="helpFeedbackPage">? Help &amp; Feedback</button>
     </div>
   </section>
 
   <p class="note">
-    Admin panel structure preview only. Buttons are intentionally inactive.
-    User records, requests, balances and transactions are not connected.
+    Structure preview. Live user data, balances and transactions are not connected.
   </p>
+</div>
+
+<!-- PAGES ARE CREATED BELOW BY JAVASCRIPT -->
+<div id="pageContainer"></div>
 
 </main>
 
-<footer>
-  Elite Earn Hub · Admin Control Panel
-</footer>
+<footer>Elite Earn Hub · Admin Control Panel</footer>
+
+<script>
+const pages = [
+  ["userProfilesPage","User Profiles","User Management","User profile records will appear after backend integration.",["Search users"]],
+  ["walletManagementPage","Wallet Management & History","User Management","Wallet data and transaction history are not connected yet.",["User ID or email"]],
+  ["giftRewardPage","Send Gift / Reward","User Management","No SNX will be transferred. Secure backend and admin authorization are required.",["Recipient user ID or email","Reward amount (SNX)","Reason / message"]],
+  ["blockUsersPage","Block / Unblock Users","User Management","Account status will not change until backend integration.",["User ID or email","Reason"]],
+  ["mandatoryTasksPage","Mandatory Task Management","Tasks & Leaderboard","Task management form placeholder.",["Task title","Task instructions"]],
+  ["pinnedTaskRequestsPage","Pinned Task Requests","Tasks & Leaderboard","Pinned task requests will appear after backend integration.",["Search requests"]],
+  ["leaderboardPage","Leaderboard","Tasks & Leaderboard","Leaderboard records will appear after backend integration.",[]],
+  ["generalTaskRequestsPage","General Task Requests","Tasks & Leaderboard","General task requests will appear after backend integration.",["Search requests"]],
+  ["depositRequestsPage","Deposit Requests","Requests & Other Management","Deposit requests are not connected yet.",["Search requests"]],
+  ["withdrawalRequestsPage","Withdrawal Requests","Requests & Other Management","Withdrawal requests are not connected yet.",["Search requests"]],
+  ["faceVerificationPage","Face Verification","Requests & Other Management","Verification records are not connected yet.",["Search users"]],
+  ["youtubeRequestsPage","YouTube Requests","Requests & Other Management","YouTube submissions will appear after backend integration.",["Search requests"]],
+  ["surfingRequestsPage","Surfing Requests","Requests & Other Management","Surfing submissions will appear after backend integration.",["Search requests"]],
+  ["advertisementsPage","Advertisements","Requests & Other Management","Advertisement records are not connected yet.",["Search advertisements"]],
+  ["rafflesPage","Raffles Management","Requests & Other Management","Raffle records are not connected yet.",["Raffle title"]],
+  ["servicesRequestsPage","Services Requests","Requests & Other Management","Service requests are not connected yet.",["Search requests"]],
+  ["notificationsPage","Notifications","More Management","Preview only. This does not send notifications to users.",["Notification title","Notification message"]],
+  ["announcementPage","Scrolling Announcement Bar","More Management","Preview announcement locally in this browser only.",["Announcement message"]],
+  ["platformSettingsPage","Platform Settings","More Management","Preview only. Live platform settings are not changed.",["Exchange rate (PKR per SNX)","Minimum conversion (SNX)","Conversion fee (SNX)"]],
+  ["helpFeedbackPage","Help & Feedback","More Management","Support records are not connected yet.",["Search feedback"]]
+];
+
+const pageContainer = document.getElementById("pageContainer");
+
+pages.forEach(function(page) {
+  const [id, title, group, description, fields] = page;
+
+  const section = document.createElement("section");
+  section.className = "page";
+  section.id = id;
+
+  const top = document.createElement("div");
+  top.className = "page-top";
+
+  const titleWrap = document.createElement("div");
+  const heading = document.createElement("h2");
+  heading.textContent = title;
+  heading.style.marginBottom = "6px";
+
+  const category = document.createElement("div");
+  category.className = "note";
+  category.textContent = group;
+
+  titleWrap.append(heading, category);
+
+  const back = document.createElement("button");
+  back.type = "button";
+  back.className = "back-button";
+  back.textContent = "← Dashboard";
+  back.addEventListener("click", showDashboard);
+
+  top.append(titleWrap, back);
+  section.appendChild(top);
+
+  const note = document.createElement("p");
+  note.className = "note";
+  note.textContent = description;
+  section.appendChild(note);
+
+  if (fields.length > 0) {
+    const formGrid = document.createElement("div");
+    formGrid.className = "page-grid";
+
+    fields.forEach(function(fieldName) {
+      const wrapper = document.createElement("div");
+      const label = document.createElement("label");
+      label.textContent = fieldName;
+
+      let input;
+      if (/instructions|message|reason/i.test(fieldName)) {
+        input = document.createElement("textarea");
+        input.rows = 3;
+      } else {
+        input = document.createElement("input");
+        input.type = /amount|rate|minimum|fee/i.test(fieldName) ? "number" : "text";
+      }
+
+      input.placeholder = fieldName;
+      input.disabled = true;
+
+      wrapper.append(label, input);
+      formGrid.appendChild(wrapper);
+    });
+
+    section.appendChild(formGrid);
+  } else {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No records to display. Backend integration will be added later.";
+    section.appendChild(empty);
+  }
+
+  pageContainer.appendChild(section);
+});
+
+function showDashboard() {
+  document.getElementById("dashboardView").style.display = "block";
+  document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
+  });
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+function showPage(pageId) {
+  const target = document.getElementById(pageId);
+  if (!target) return;
+
+  document.getElementById("dashboardView").style.display = "none";
+  document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  target.classList.add("active");
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+document.querySelectorAll("[data-page]").forEach(function(button) {
+  button.addEventListener("click", function() {
+    showPage(button.dataset.page);
+  });
+});
+</script>
 
 </body>
 </html>
