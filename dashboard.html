@@ -314,6 +314,133 @@ footer div:last-child{
 
 
 
+/* ===== PREMIUM SERVICES CARDS ===== */
+
+.services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.service-card {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 12px 14px;
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+
+    background: linear-gradient(135deg, #101f38, #172c4b);
+    border: 1px solid rgba(69, 184, 255, 0.35);
+    border-radius: 18px;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.22);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    border-color: #45B8FF;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(69, 184, 255, 0.13);
+}
+
+.service-icon {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+}
+
+.service-card h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+.service-card p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+
+    color: #b9c9dc;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.service-btn {
+    grid-column: 3;
+    grid-row: 1;
+
+    width: auto;
+    min-width: 105px;
+    margin: 0;
+    padding: 11px 16px;
+
+    border: 1px solid #45B8FF;
+    border-radius: 11px;
+
+    background: linear-gradient(135deg, #1678bd, #15518c);
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(69, 184, 255, 0.18);
+    transition: all 0.2s ease;
+}
+
+.service-btn:hover {
+    background: linear-gradient(135deg, #239ce8, #176bb0);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(69, 184, 255, 0.3);
+}
+
+.service-btn:active {
+    transform: scale(0.94);
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 480px) {
+    .service-card {
+        grid-template-columns: 34px minmax(0, 1fr) auto;
+        gap: 10px;
+        padding: 15px 12px;
+        border-radius: 15px;
+    }
+
+    .service-icon {
+        font-size: 25px;
+    }
+
+    .service-card h3 {
+        font-size: 14px;
+    }
+
+    .service-btn {
+        min-width: 85px;
+        padding: 10px 11px;
+        font-size: 11px;
+    }
+
+    .service-card p {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+}
+
 
 
 
