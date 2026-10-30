@@ -313,9 +313,152 @@ footer div:last-child{
 
 
 
-l
 
 
+
+
+/* ===== PREMIUM LIVE ACTIVITY FEED ===== */
+
+.activity-feed-section {
+    margin: 25px 0;
+    padding: 20px 16px;
+    background: linear-gradient(145deg, #111f32, #0d1929);
+    border: 1px solid rgba(69,184,255,0.18);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+}
+
+.activity-feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.activity-feed-header h2 {
+    color: #ffffff;
+    font-size: 19px;
+    margin: 0 0 5px;
+    font-weight: 700;
+}
+
+.activity-feed-header p {
+    color: #899bb1;
+    font-size: 12px;
+    margin: 0;
+}
+
+.activity-live {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #39D98A;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: #39D98A;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #39D98A;
+}
+
+.activity-feed-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+    padding-bottom: 2px;
+}
+
+.activity-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    font-size: 17px;
+}
+
+.user-icon {
+    background: rgba(57,217,138,0.13);
+    color: #39D98A;
+}
+
+.deposit-icon {
+    background: rgba(255,212,71,0.13);
+    color: #FFD447;
+}
+
+.withdrawal-icon {
+    background: rgba(69,184,255,0.13);
+    color: #45B8FF;
+}
+
+.conversion-icon {
+    background: rgba(167,139,250,0.13);
+    color: #A78BFA;
+}
+
+.activity-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-details h4 {
+    color: #f1f5f9;
+    font-size: 13px;
+    font-weight: 650;
+    margin: 0 0 5px;
+}
+
+.activity-details p {
+    color: #91a2b7;
+    font-size: 11px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.activity-time {
+    color: #8294a9;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+@media (max-width: 380px) {
+    .activity-feed-section {
+        padding: 16px 12px;
+    }
+
+    .activity-item {
+        gap: 9px;
+    }
+
+    .activity-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+    }
+
+    .activity-time {
+        font-size: 9px;
+    }
+}
 
 
 
