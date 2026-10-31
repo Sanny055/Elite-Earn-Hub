@@ -461,8 +461,18 @@ footer div:last-child{
 }
 
 #exploreServicesPage * {
-    box-sizing: border-box;
+ 
+  box-sizing: border-box;
+display: none;
+position: fixed;
+inset: 0;
+z-index: 100005;
+overflow-y: auto;
+
+
+
 }
+  
 
 /* HEADER */
 
@@ -21051,7 +21061,39 @@ document.querySelectorAll(".order-now-btn").forEach(button => {
 });
 
   
+// EXPLORE SERVICES PAGE OPEN & BACK
 
+const exploreServicesBtn = document.getElementById("exploreServicesBtn");
+const exploreServicesPage = document.getElementById("exploreServicesPage");
+const exploreBackBtn = exploreServicesPage?.querySelector(".back-btn");
+
+// OPEN EXPLORE SERVICES
+if (exploreServicesBtn && exploreServicesPage) {
+
+    exploreServicesBtn.addEventListener("click", function () {
+
+        exploreServicesPage.style.display = "block";
+        document.body.style.overflow = "hidden";
+
+        window.scrollTo(0, 0);
+
+    });
+
+}
+
+// BACK TO DASHBOARD
+if (exploreBackBtn && exploreServicesPage) {
+
+    exploreBackBtn.addEventListener("click", function () {
+
+        exploreServicesPage.style.display = "none";
+        document.body.style.overflow = "";
+
+        window.scrollTo(0, 0);
+
+    });
+
+    }
 
   
 
