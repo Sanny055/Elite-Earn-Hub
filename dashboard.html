@@ -314,6 +314,270 @@ footer div:last-child{
 
 
 
+
+
+  /* =====================================
+   EXPLORE SERVICES - PREMIUM CSS
+===================================== */
+
+/* MAIN EXPLORE SERVICES PAGE */
+#exploreServicesPage {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 100005;
+
+    background: #071426;
+    color: #ffffff;
+    padding: 22px;
+    box-sizing: border-box;
+
+    font-family: Arial, sans-serif;
+}
+
+/* PAGE HEADER */
+#exploreServicesPage .explore-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(69, 184, 255, 0.25);
+}
+
+#exploreServicesPage .explore-header h1,
+#exploreServicesPage .explore-header h2 {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 800;
+    margin: 0;
+}
+
+/* BACK BUTTON */
+#exploreServicesPage .back-btn {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    border: 1px solid #45B8FF;
+    border-radius: 12px;
+    background: #102B46;
+    color: #45B8FF;
+    font-size: 23px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#exploreServicesPage .back-btn:hover {
+    background: #45B8FF;
+    color: #071426;
+}
+
+/* HERO SECTION */
+#exploreServicesPage .explore-hero {
+    background: linear-gradient(135deg, #102B46, #142D3B);
+    border: 1px solid rgba(69, 184, 255, 0.35);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 22px;
+}
+
+/* SEARCH BAR */
+#exploreServicesPage #serviceSearch {
+    width: 100%;
+    height: 52px;
+    padding: 0 17px;
+    margin-bottom: 22px;
+    box-sizing: border-box;
+
+    background: #102238;
+    border: 1px solid #294761;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 15px;
+    outline: none;
+}
+
+#exploreServicesPage #serviceSearch:focus {
+    border-color: #45B8FF;
+    box-shadow: 0 0 0 3px rgba(69, 184, 255, 0.12);
+}
+
+#exploreServicesPage #serviceSearch::placeholder {
+    color: #8FA7BB;
+}
+
+/* CATEGORY BUTTONS */
+#exploreServicesPage .service-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+#exploreServicesPage .service-categories button {
+    padding: 11px 17px;
+    border: 1px solid #294761;
+    border-radius: 30px;
+    background: #102238;
+    color: #C7D9E8;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#exploreServicesPage .service-categories button:hover,
+#exploreServicesPage .service-categories button.active {
+    background: #45B8FF;
+    border-color: #45B8FF;
+    color: #071426;
+}
+
+/* SERVICES COUNT */
+#exploreServicesPage #serviceCount {
+    color: #45B8FF;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+/* SERVICES GRID */
+#exploreServicesPage #exploreServicesList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+/* SERVICE CARD */
+#exploreServicesPage .service-card {
+    background: linear-gradient(145deg, #102238, #0B1B2D);
+    border: 1px solid #294761;
+    border-radius: 17px;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.25s;
+}
+
+#exploreServicesPage .service-card:hover {
+    border-color: #45B8FF;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* SERVICE NAME */
+#exploreServicesPage .service-name {
+    color: #ffffff;
+    font-size: 19px;
+    font-weight: 800;
+    margin: 0 0 10px;
+}
+
+/* CATEGORY LABEL */
+#exploreServicesPage .service-category {
+    display: inline-block;
+    background: rgba(69, 184, 255, 0.12);
+    color: #45B8FF;
+    border: 1px solid rgba(69, 184, 255, 0.3);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+
+/* DESCRIPTION */
+#exploreServicesPage .service-description {
+    color: #B6C7D6;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+/* PROVIDER NAME */
+#exploreServicesPage .provider-name {
+    color: #A78BFA;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* SERVICE PRICE */
+#exploreServicesPage .service-price {
+    color: #FFD447;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+/* CARD BUTTONS */
+#exploreServicesPage .view-details-btn,
+#exploreServicesPage .order-now-btn {
+    width: 100%;
+    min-height: 44px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#exploreServicesPage .view-details-btn {
+    background: transparent;
+    color: #45B8FF;
+    border: 1px solid #45B8FF;
+    margin-bottom: 10px;
+}
+
+#exploreServicesPage .view-details-btn:hover {
+    background: #45B8FF;
+    color: #071426;
+}
+
+#exploreServicesPage .order-now-btn {
+    background: #39D98A;
+    color: #071426;
+    border: 1px solid #39D98A;
+}
+
+#exploreServicesPage .order-now-btn:hover {
+    background: #24BD73;
+    border-color: #24BD73;
+    transform: translateY(-2px);
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+
+    #exploreServicesPage {
+        padding: 15px;
+    }
+
+    #exploreServicesPage .explore-header h1,
+    #exploreServicesPage .explore-header h2 {
+        font-size: 21px;
+    }
+
+    #exploreServicesPage #exploreServicesList {
+        grid-template-columns: 1fr;
+    }
+
+    #exploreServicesPage .service-categories {
+        gap: 8px;
+    }
+
+    #exploreServicesPage .service-categories button {
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+  }
+
+
+
 /* ===== PREMIUM SERVICES CARDS ===== */
 
 .services-grid {
