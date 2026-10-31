@@ -20845,183 +20845,36 @@ if (pinTaskBackButton && pinTaskPage) {
 
 
 
-    /* =================================
-   EXPLORE SERVICES PAGE JAVASCRIPT
-================================= */
 
-// HTML ELEMENTS
-const serviceSearch = document.getElementById("serviceSearch");
-const serviceCards = document.querySelectorAll(".service-card");
-const serviceCount = document.getElementById("serviceCount");
-const categoryButtons = document.querySelectorAll(".service-categories button");
+  // EXPLORE SERVICES PAGE OPEN & BACK
 
-// SELECTED CATEGORY
-let selectedCategory = "All Services";
+const exploreBtn = document.getElementById("exploreServicesBtn");
+const explorePage = document.getElementById("exploreServicesPage");
+const exploreBack = explorePage?.querySelector(".back-btn");
 
-// SEARCH AND FILTER FUNCTION
-function filterServices() {
+// OPEN NEW PAGE
+exploreBtn?.addEventListener("click", function () {
 
-    const searchText = serviceSearch.value.toLowerCase().trim();
+    explorePage.style.display = "block";
+    document.body.style.overflow = "hidden";
 
-    let visibleServices = 0;
-
-    serviceCards.forEach(card => {
-
-        const serviceName =
-            card.querySelector(".service-name")?.textContent.toLowerCase() || "";
-
-        const serviceCategory =
-            card.querySelector(".service-category")?.textContent.toLowerCase() || "";
-
-        const serviceDescription =
-            card.querySelector(".service-description")?.textContent.toLowerCase() || "";
-
-        const providerName =
-            card.querySelector(".provider-name")?.textContent.toLowerCase() || "";
-
-        const matchesSearch =
-            serviceName.includes(searchText) ||
-            serviceCategory.includes(searchText) ||
-            serviceDescription.includes(searchText) ||
-            providerName.includes(searchText);
-
-        const matchesCategory =
-            selectedCategory === "All Services" ||
-            serviceCategory === selectedCategory.toLowerCase();
-
-        if (matchesSearch && matchesCategory) {
-            card.style.display = "";
-            visibleServices++;
-        } else {
-            card.style.display = "none";
-        }
-
-    });
-
-    // UPDATE SERVICE COUNT
-    serviceCount.textContent =
-        visibleServices + (visibleServices === 1 ? " Service" : " Services");
-}
-
-// SEARCH EVENT
-serviceSearch.addEventListener("input", filterServices);
-
-
-// CATEGORY FILTER
-categoryButtons.forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        categoryButtons.forEach(btn => {
-            btn.classList.remove("active");
-        });
-
-        this.classList.add("active");
-
-        selectedCategory = this.textContent.trim();
-
-        filterServices();
-
-    });
+    window.scrollTo(0, 0);
 
 });
-
-
-// VIEW DETAILS FUNCTION
-function viewServiceDetails(button) {
-
-    const card = button.closest(".service-card");
-
-    const serviceName =
-        card.querySelector(".service-name").textContent.trim();
-
-    alert("Selected Service: " + serviceName);
-
-    // View Details page baad mein connect karenge.
-}
-
-
-// WHATSAPP ORDER FUNCTION
-function orderService(button) {
-
-    const card = button.closest(".service-card");
-
-    const serviceName =
-        card.querySelector(".service-name").textContent.trim();
-
-    // Seller ka WhatsApp number service card ke data-whatsapp attribute se milega
-    const phoneNumber = card.dataset.whatsapp || "";
-
-    const phone = phoneNumber.replace(/\D/g, "");
-
-    if (!phone) {
-        alert("Seller WhatsApp number is not available.");
-        return;
-    }
-
-    const message = encodeURIComponent(
-        "Hello! I am interested in your " + serviceName +
-        " service on Elite Earn Hub."
-    );
-
-    window.open(
-        "https://wa.me/" + phone + "?text=" + message,
-        "_blank"
-    );
-}
-
-
-// INITIAL SERVICE COUNT
-filterServices();
-
-
-// CONNECT BUTTONS
-document.querySelectorAll(".view-details-btn").forEach(button => {
-    button.addEventListener("click", function () {
-        viewServiceDetails(this);
-    });
-});
-
-document.querySelectorAll(".order-now-btn").forEach(button => {
-    button.addEventListener("click", function () {
-        orderService(this);
-    });
-});
-
-  
-// EXPLORE SERVICES PAGE OPEN & BACK
-
-const exploreServicesBtn = document.getElementById("exploreServicesBtn");
-const exploreServicesPage = document.getElementById("exploreServicesPage");
-const exploreBackBtn = exploreServicesPage?.querySelector(".back-btn");
-
-// OPEN EXPLORE SERVICES
-if (exploreServicesBtn && exploreServicesPage) {
-
-    exploreServicesBtn.addEventListener("click", function () {
-
-        exploreServicesPage.style.display = "block";
-        document.body.style.overflow = "hidden";
-
-        window.scrollTo(0, 0);
-
-    });
-
-}
 
 // BACK TO DASHBOARD
-if (exploreBackBtn && exploreServicesPage) {
+exploreBack?.addEventListener("click", function () {
 
-    exploreBackBtn.addEventListener("click", function () {
+    explorePage.style.display = "none";
+    document.body.style.overflow = "";
 
-        exploreServicesPage.style.display = "none";
-        document.body.style.overflow = "";
+    window.scrollTo(0, 0);
 
-        window.scrollTo(0, 0);
+});
 
-    });
 
-    }
+
+  
 
   
 
