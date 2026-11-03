@@ -21345,7 +21345,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+// PLATFORM GUIDE PAGE OPEN / BACK
 
+const platformGuideBtn = document.getElementById("platformGuideBtn");
+const platformGuidePage = document.getElementById("platformGuidePage");
+const platformGuideBack = document.getElementById("platformGuideBack");
+
+platformGuideBtn?.addEventListener("click", function () {
+
+    platformGuidePage.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+    window.scrollTo(0, 0);
+
+});
+
+platformGuideBack?.addEventListener("click", function () {
+
+    platformGuidePage.style.display = "none";
+
+    document.body.style.overflow = "";
+
+    window.scrollTo(0, 0);
+
+});
+
+
+    
 
 
   
