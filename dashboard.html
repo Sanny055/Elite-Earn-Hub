@@ -342,6 +342,346 @@ footer div:last-child{
 
 
 
+/* =========================================
+   ELITE EARN HUB - PLATFORM GUIDE COMPLETE CSS
+========================================= */
+
+#platformGuidePage {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 100010;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background:
+        radial-gradient(circle at top right, rgba(56,189,248,.10), transparent 35%),
+        linear-gradient(145deg, #061525, #081b2d 55%, #061321);
+    color: #eaf4ff;
+    padding: 18px 15px 35px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+#platformGuidePage * {
+    box-sizing: border-box;
+}
+
+/* MAIN HEADER */
+
+.platform-guide-page-header {
+    position: relative;
+    padding: 15px 10px 25px;
+    border: 1px solid rgba(56,189,248,.22);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #102c45, #091b2d);
+    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    margin-bottom: 20px;
+}
+
+.platform-guide-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 17px;
+    border-radius: 11px;
+    border: 1px solid #28749b;
+    background: linear-gradient(135deg, #123b59, #0b2940);
+    color: #dff5ff;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.platform-guide-back-btn:active {
+    transform: scale(.96);
+}
+
+.platform-guide-main-title {
+    text-align: center;
+    padding: 20px 5px 5px;
+}
+
+.platform-guide-main-icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 5px 12px rgba(56,189,248,.25));
+}
+
+.platform-guide-main-title h1 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+}
+
+.platform-guide-main-title h2 {
+    margin: 9px 0 0;
+    font-size: 15px;
+    letter-spacing: 1.8px;
+    color: #38bdf8;
+    font-weight: 800;
+}
+
+.platform-guide-main-title p {
+    margin: 9px 0 0;
+    font-size: 12px;
+    color: #91aec3;
+}
+
+/* TRANSLATE BUTTON */
+
+.platform-guide-translate-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 15px;
+    padding: 10px 18px;
+    border-radius: 11px;
+    border: 1px solid rgba(56,189,248,.55);
+    background: linear-gradient(135deg, #087cae, #07547d);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,150,220,.15);
+    transition: .2s ease;
+}
+
+.platform-guide-translate-btn:active {
+    transform: scale(.96);
+}
+
+/* INTRO CARD */
+
+.guide-intro-card {
+    padding: 20px;
+    margin-bottom: 17px;
+    border-radius: 17px;
+    border: 1px solid rgba(56,189,248,.35);
+    background: linear-gradient(145deg, #10334e, #0a2135);
+    box-shadow: 0 8px 22px rgba(0,0,0,.20);
+}
+
+.guide-intro-card h2 {
+    margin: 0 0 12px;
+    color: #38bdf8;
+    font-size: 19px;
+    font-weight: 850;
+}
+
+.guide-intro-card p {
+    margin: 0;
+    color: #c3d8e8;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* GUIDE SECTIONS */
+
+.guide-section {
+    position: relative;
+    padding: 19px;
+    margin-bottom: 14px;
+    border-radius: 16px;
+    border: 1px solid #1c405a;
+    background: linear-gradient(145deg, #0d263b, #091c2e);
+    box-shadow: 0 7px 18px rgba(0,0,0,.17);
+}
+
+.guide-section h3 {
+    margin: 0 0 13px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid rgba(56,189,248,.18);
+    color: #45c5ff;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 850;
+}
+
+.guide-section p {
+    margin: 10px 0;
+    color: #c2d5e4;
+    font-size: 13px;
+    line-height: 1.85;
+}
+
+.guide-section strong {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.guide-section ul,
+.guide-section ol {
+    padding-left: 22px;
+    margin: 12px 0;
+    color: #c7d9e7;
+}
+
+.guide-section li {
+    padding-left: 3px;
+    margin: 8px 0;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.guide-section li::marker {
+    color: #38bdf8;
+    font-weight: 800;
+}
+
+/* LIVE ACTIVITY SECTION */
+
+.guide-live-feed-section {
+    border-color: rgba(56,189,248,.42);
+    background: linear-gradient(145deg, #102d43, #091d30);
+}
+
+.guide-live-feed-section h3 {
+    color: #ff7777;
+}
+
+.guide-live-feed-section h3::after {
+    content: " LIVE";
+    display: inline-block;
+    margin-left: 7px;
+    padding: 3px 7px;
+    border-radius: 6px;
+    background: rgba(239,68,68,.15);
+    color: #ff7777;
+    font-size: 9px;
+    vertical-align: middle;
+}
+
+/* THANK YOU CARD */
+
+.guide-thank-you-card {
+    text-align: center;
+    padding: 25px 18px;
+    margin-top: 20px;
+    border-radius: 19px;
+    border: 1px solid rgba(56,189,248,.4);
+    background: linear-gradient(145deg, #103650, #0a2136);
+    box-shadow: 0 10px 25px rgba(0,0,0,.22);
+}
+
+.guide-thank-you-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.guide-thank-you-card h2 {
+    margin: 0 0 13px;
+    color: #ffffff;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+.guide-thank-you-card p {
+    margin: 10px 0;
+    color: #b9d0e1;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.guide-thank-you-card strong {
+    display: block;
+    margin-top: 17px;
+    color: #38bdf8;
+    font-size: 13px;
+    letter-spacing: .5px;
+}
+
+/* SCROLLBAR */
+
+#platformGuidePage::-webkit-scrollbar {
+    width: 5px;
+}
+
+#platformGuidePage::-webkit-scrollbar-track {
+    background: #071827;
+}
+
+#platformGuidePage::-webkit-scrollbar-thumb {
+    background: #245879;
+    border-radius: 10px;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 520px) {
+
+    #platformGuidePage {
+        padding: 12px 11px 25px;
+    }
+
+    .platform-guide-page-header {
+        padding: 12px 10px 20px;
+        border-radius: 16px;
+    }
+
+    .platform-guide-main-title h1 {
+        font-size: 23px;
+    }
+
+    .platform-guide-main-title h2 {
+        font-size: 13px;
+    }
+
+    .platform-guide-main-icon {
+        font-size: 36px;
+    }
+
+    .guide-intro-card {
+        padding: 17px;
+    }
+
+    .guide-intro-card h2 {
+        font-size: 17px;
+    }
+
+    .guide-section {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .guide-section h3 {
+        font-size: 14px;
+    }
+
+    .guide-section p,
+    .guide-section li,
+    .guide-intro-card p {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .guide-thank-you-card {
+        padding: 22px 15px;
+    }
+
+    .guide-thank-you-card h2 {
+        font-size: 17px;
+    }
+}
+
+/* =========================================
+   END PLATFORM GUIDE COMPLETE CSS
+========================================= */
+
+
+
+
+
+
+
+  
+
 
 /* ===== PREMIUM SERVICES CARDS ===== */
 
