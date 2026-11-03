@@ -20790,6 +20790,123 @@ exploreBack?.addEventListener("click", function () {
 
   
 
+  /* =====================================
+   EXPLORE SERVICES - PAGE FUNCTIONALITY
+===================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const exploreBtn = document.getElementById("exploreServicesBtn");
+    const explorePage = document.getElementById("exploreServicesPage");
+    const exploreBack = explorePage?.querySelector(".back-btn");
+
+    const searchInput = document.getElementById("serviceSearch");
+    const categoryButtons = document.querySelectorAll(
+        "#exploreServicesPage .explore-categories button"
+    );
+
+    let selectedCategory = "all";
+
+    // OPEN PAGE
+    exploreBtn?.addEventListener("click", function () {
+        if (!explorePage) return;
+
+        explorePage.style.display = "block";
+        document.body.style.overflow = "hidden";
+        window.scrollTo(0, 0);
+    });
+
+    // BACK TO DASHBOARD
+    exploreBack?.addEventListener("click", function () {
+        if (!explorePage) return;
+
+        explorePage.style.display = "none";
+        document.body.style.overflow = "";
+        window.scrollTo(0, 0);
+    });
+
+    // CATEGORY FILTER
+    categoryButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            categoryButtons.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            selectedCategory = button.dataset.category || "all";
+
+            filterServices();
+        });
+
+    });
+
+    // SEARCH FILTER
+    searchInput?.addEventListener("input", filterServices);
+
+    // FILTER FUNCTION
+    function filterServices() {
+
+        const searchText = searchInput?.value
+            .trim()
+            .toLowerCase() || "";
+
+        const serviceCards = document.querySelectorAll(
+            "#exploreServicesList .service-card"
+        );
+
+        let visibleCount = 0;
+
+        serviceCards.forEach(function (card) {
+
+            const cardText = card.textContent.toLowerCase();
+            const cardCategory = (
+                card.dataset.category || ""
+            ).toLowerCase();
+
+            const matchesSearch = cardText.includes(searchText);
+
+            const matchesCategory =
+                selectedCategory === "all" ||
+                cardCategory === selectedCategory;
+
+            if (matchesSearch && matchesCategory) {
+                card.style.display = "";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+
+        });
+
+        const countElement = document.getElementById("serviceCount");
+
+        if (countElement) {
+            countElement.textContent = visibleCount + " Services";
+        }
+    }
+
+    // DEFAULT CATEGORY
+    const allButton = document.querySelector(
+        '#exploreServicesPage .explore-categories button[data-category="all"]'
+    );
+
+    allButton?.classList.add("active");
+
+});
+
+
+
+
+
+
+
+
+
+
+
   
 
   
