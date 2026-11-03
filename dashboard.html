@@ -14580,7 +14580,64 @@ footer strong{
 
 
   
+<!-- EXPLORE SERVICES FULL PAGE -->
+<section id="exploreServicesPage" style="
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 99999;
+    background: #071321;
+    padding: 20px;
+">
 
+    <!-- PAGE HEADER -->
+    <div class="explore-page-header">
+        <button type="button" class="back-btn">← Back</button>
+        <h2>Explore Services</h2>
+        <p>Discover services offered by our community</p>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="explore-search-box">
+        <input
+            type="text"
+            id="serviceSearch"
+            placeholder="Search services..."
+        >
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="explore-categories">
+        <button type="button" data-category="all">All</button>
+        <button type="button" data-category="website">Website</button>
+        <button type="button" data-category="app">App Development</button>
+        <button type="button" data-category="graphic">Graphic Design</button>
+        <button type="button" data-category="telegram">Telegram Bot</button>
+        <button type="button" data-category="video">Video Editing</button>
+        <button type="button" data-category="other">Other</button>
+    </div>
+
+    <!-- SERVICES COUNT -->
+    <div class="explore-results-header">
+        <h3>Available Services</h3>
+        <span id="serviceCount">0 Services</span>
+    </div>
+
+    <!-- SERVICES LIST -->
+    <div id="exploreServicesList">
+
+        <div class="explore-empty-state">
+            <h3>No Services Available</h3>
+            <p>New services will appear here soon.</p>
+        </div>
+
+    </div>
+
+</section>
+<!-- END EXPLORE SERVICES FULL PAGE -->
  
   
   
