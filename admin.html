@@ -994,7 +994,9 @@ profileBackBtn.addEventListener("click", function () {
   userProfilePage.style.display = "none";
 
   document.querySelectorAll(".app > section").forEach(section => {
-    section.style.display = "";
+    if (section.id !== "userProfilePage") {
+      section.style.display = "";
+    }
   });
 });
   
