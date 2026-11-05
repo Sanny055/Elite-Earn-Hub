@@ -972,8 +972,7 @@
 
 
 
-    
-  // USER PROFILE OPEN / CLOSE
+    // USER PROFILE PAGE OPEN / CLOSE
 
 const userProfileBtn = document.querySelector(
   '.menu-button[data-label="User Profile"]'
@@ -982,25 +981,39 @@ const userProfileBtn = document.querySelector(
 const userProfilePage = document.getElementById("userProfilePage");
 const profileBackBtn = document.getElementById("profileBackBtn");
 
-userProfileBtn.addEventListener("click", function () {
-  document.querySelectorAll(".app > section").forEach(section => {
-    section.style.display = "none";
+const adminSections = Array.from(
+  document.querySelectorAll(".app > section")
+).filter(section => section.id !== "userProfilePage");
+
+if (userProfileBtn && userProfilePage && profileBackBtn) {
+
+  userProfileBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    adminSections.forEach(section => {
+      section.style.display = "none";
+    });
+
+    userProfilePage.style.display = "block";
+
+    document.querySelector(".hero").style.display = "none";
+    window.scrollTo(0, 0);
   });
 
-  userProfilePage.style.display = "block";
-});
+  profileBackBtn.addEventListener("click", function () {
 
-profileBackBtn.addEventListener("click", function () {
-  userProfilePage.style.display = "none";
+    userProfilePage.style.display = "none";
 
-  document.querySelectorAll(".app > section").forEach(section => {
-    if (section.id !== "userProfilePage") {
+    adminSections.forEach(section => {
       section.style.display = "";
-    }
+    });
+
+    document.querySelector(".hero").style.display = "";
+
+    window.scrollTo(0, 0);
   });
-});
-  
-  
+
+    }
   
      
   
