@@ -1454,7 +1454,8 @@ document.addEventListener("DOMContentLoaded", function () {
   loadOverviewTotalUsers();
 
   // Database mein user add/delete hone par counter refresh karein
-  const usersLiveChannel = window.supabaseClient
+  if (!window.usersLiveChannel) {
+  window.usersLiveChannel = window.supabaseClient
     .channel("dashboard-total-users-live")
     .on(
       "postgres_changes",
@@ -1466,6 +1467,7 @@ document.addEventListener("DOMContentLoaded", function () {
       () => loadOverviewTotalUsers()
     )
     .subscribe();
+    }
 
 
 
