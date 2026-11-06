@@ -1176,7 +1176,11 @@
           SUPABASE_ANON_KEY
         );
 
-        const { data: userData, error: userError } =
+     window.supabaseClient = supabaseClient;
+        
+    
+    
+    const { data: userData, error: userError } =
           await supabaseClient.auth.getUser();
 
         if (userError) throw userError;
