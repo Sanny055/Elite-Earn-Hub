@@ -1219,48 +1219,58 @@
 
 
 
-    // USER PROFILE PAGE OPEN / CLOSE
+// USER PROFILE PAGE OPEN / CLOSE
 
-const userProfileBtn = document.querySelector(
-  '.menu-button[data-label="User Profile"]'
-);
+document.addEventListener("DOMContentLoaded", function () {
 
-const userProfilePage = document.getElementById("userProfilePage");
-const profileBackBtn = document.getElementById("profileBackBtn");
+  const profileBtn = document.querySelector(
+    '.menu-button[data-label="User Profile"]'
+  );
 
-const adminSections = Array.from(
-  document.querySelectorAll(".app > section")
-).filter(section => section.id !== "userProfilePage");
+  const profilePage = document.getElementById("userProfilePage");
+  const profileBackBtn = document.getElementById("profileBackBtn");
+  const referralPage = document.getElementById("referralPage");
+  const hero = document.querySelector(".hero");
 
-if (userProfileBtn && userProfilePage && profileBackBtn) {
+  const dashboardSections = document.querySelectorAll(
+    ".app > section:not(#userProfilePage):not(#referralPage)"
+  );
 
-  userProfileBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
+  if (!profileBtn || !profilePage || !profileBackBtn) return;
 
-    adminSections.forEach(section => {
+  // OPEN PROFILE PAGE
+  profileBtn.addEventListener("click", function () {
+
+    dashboardSections.forEach(section => {
       section.style.display = "none";
     });
 
-    userProfilePage.style.display = "block";
+    if (referralPage) referralPage.style.display = "none";
 
-    document.querySelector(".hero").style.display = "none";
+    profilePage.style.display = "block";
+
+    if (hero) hero.style.display = "none";
+
     window.scrollTo(0, 0);
   });
 
+  // BACK TO FULL DASHBOARD
   profileBackBtn.addEventListener("click", function () {
 
-    userProfilePage.style.display = "none";
+    profilePage.style.display = "none";
 
-    adminSections.forEach(section => {
+    if (referralPage) referralPage.style.display = "none";
+
+    dashboardSections.forEach(section => {
       section.style.display = "";
     });
 
-    document.querySelector(".hero").style.display = "";
+    if (hero) hero.style.display = "";
 
     window.scrollTo(0, 0);
   });
 
-    }
+});
   
 
 
