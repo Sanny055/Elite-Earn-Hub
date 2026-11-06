@@ -1444,43 +1444,98 @@ document.addEventListener("DOMContentLoaded", function () {
     renderUsers(allUsers);
   }
 
-  function renderUsers(users) {
 
-    if (!users.length) {
-      usersList.textContent = "No registered users found.";
-      return;
-    }
 
-    usersList.className = "";
 
-    usersList.innerHTML = users.map(user => `
-      <div style="
-        background:#1c332a;
-        border:1px solid #39D98A55;
-        border-radius:12px;
-        padding:15px;
-        margin-bottom:12px;
-        color:#fff;
-        overflow-wrap:anywhere;
-      ">
-        <h3 style="margin:0 0 8px;color:#39D98A;">
-          ${escapeHTML(user.username || "Unknown User")}
-        </h3>
+function renderUsers(users) {
 
-        <p>User ID: ${escapeHTML(user.id || "")}</p>
-        <p>Email: ${escapeHTML(user.email || "Not available in profiles")}</p>
-        <p>Main Balance: ${Number(user.main_balance || 0)} SNX</p>
-        <p>Advertisement Balance: ${Number(user.advertisement_balance || 0)} SNX</p>
-        <p>Rating Points: ${Number(user.rating_points || 0)}</p>
-        <p>Status: ${escapeHTML(user.account_status || "active")}</p>
-        <p>Registered: ${
-          user.created_at
-            ? new Date(user.created_at).toLocaleString()
-            : "Unknown"
-        }</p>
-      </div>
-    `).join("");
+  if (!users.length) {
+    usersList.textContent = "No registered users found.";
+    return;
   }
+
+  usersList.innerHTML = users.map(user => `
+    <div style="
+      background:#1c332a;
+      border:1px solid #315b48;
+      border-radius:10px;
+      padding:11px 13px;
+      margin-bottom:9px;
+      color:#e5eee9;
+      font-size:13px;
+      line-height:1.5;
+      overflow-wrap:anywhere;
+    ">
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:8px;
+        margin-bottom:8px;
+      ">
+        <strong style="color:#39D98A;font-size:15px;">
+          ${escapeHTML(user.username || "Unknown User")}
+        </strong>
+
+        <span style="
+          color:#39D98A;
+          background:#39D98A18;
+          padding:3px 8px;
+          border-radius:20px;
+          font-size:10px;
+          font-weight:bold;
+        ">
+          ${escapeHTML(user.account_status || "ACTIVE").toUpperCase()}
+        </span>
+      </div>
+
+      <div style="
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:8px 12px;
+      ">
+
+        <div>
+          <b style="color:#45B8FF;">EMAIL</b><br>
+          ${escapeHTML(user.email || "Not available")}
+        </div>
+
+        <div>
+          <b style="color:#FFD447;">MAIN BALANCE</b><br>
+          ${Number(user.main_balance || 0)} SNX
+        </div>
+
+        <div>
+          <b style="color:#A78BFA;">ADVERTISEMENT BALANCE</b><br>
+          ${Number(user.advertisement_balance || 0)} SNX
+        </div>
+
+        <div>
+          <b style="color:#39D98A;">RATING POINTS</b><br>
+          ${Number(user.rating_points || 0)}
+        </div>
+
+      </div>
+
+      <div style="margin-top:8px;border-top:1px solid #315b48;padding-top:7px;">
+        <b style="color:#45B8FF;">USER ID:</b>
+        <span style="font-size:11px;">${escapeHTML(user.id || "")}</span>
+      </div>
+
+      <div style="margin-top:4px;">
+        <b style="color:#FFD447;">REGISTERED:</b>
+        ${user.created_at
+          ? new Date(user.created_at).toLocaleDateString()
+          : "Unknown"}
+      </div>
+
+    </div>
+  `).join("");
+}
+
+  
+    
 
   function escapeHTML(value) {
     return String(value).replace(/[&<>"']/g, char => ({
