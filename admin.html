@@ -1497,6 +1497,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
 function renderUsers(users) {
 
   if (!users.length) {
@@ -1568,9 +1569,15 @@ function renderUsers(users) {
 
       </div>
 
-      <div style="margin-top:8px;border-top:1px solid #315b48;padding-top:7px;">
+      <div style="
+        margin-top:8px;
+        border-top:1px solid #315b48;
+        padding-top:7px;
+      ">
         <b style="color:#45B8FF;">USER ID:</b>
-        <span style="font-size:11px;">${escapeHTML(user.id || "")}</span>
+        <span style="font-size:11px;">
+          ${escapeHTML(user.id || "")}
+        </span>
       </div>
 
       <div style="margin-top:4px;">
@@ -1580,11 +1587,40 @@ function renderUsers(users) {
           : "Unknown"}
       </div>
 
+      <button
+        type="button"
+        class="view-user-details-btn"
+        data-user-id="${escapeHTML(user.id || "")}"
+        style="
+          width:100%;
+          margin-top:12px;
+          padding:11px;
+          background:linear-gradient(135deg,#39D98A,#27B875);
+          color:#14251F;
+          border:1px solid #39D98A;
+          border-radius:8px;
+          font-size:13px;
+          font-weight:800;
+          cursor:pointer;
+        "
+      >
+        VIEW DETAILS →
+      </button>
+
     </div>
   `).join("");
 }
 
-  
+
+
+
+
+
+
+
+
+
+            
     
 
   function escapeHTML(value) {
