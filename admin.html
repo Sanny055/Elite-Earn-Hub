@@ -1417,8 +1417,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const { data, error } = await client
       .from("profiles")
-      .select("*")
-
+.select("*")
+.neq("role", "admin")
 
     if (error) {
       console.error("User loading error:", error);
