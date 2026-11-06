@@ -1271,8 +1271,7 @@ if (userProfileBtn && userProfilePage && profileBackBtn) {
 
 
     
-
-// REFERRAL PAGE OPEN / CLOSE
+// REFERRAL PAGE OPEN / CLOSE - FIXED
 
 const referralBtn = document.querySelector(
   '.menu-button[data-label="Referral"]'
@@ -1281,17 +1280,17 @@ const referralBtn = document.querySelector(
 const referralPage = document.getElementById("referralPage");
 const referralBackBtn = document.getElementById("referralBackBtn");
 
-const referralAdminSections = Array.from(
-  document.querySelectorAll(".app > section")
-).filter(section => section.id !== "referralPage");
-
+const allAdminSections = document.querySelectorAll(".app > section");
+const dashboardOverview = document.querySelector(
+  ".app > section"
+);
 const referralHero = document.querySelector(".hero");
 
 if (referralBtn && referralPage && referralBackBtn) {
 
   referralBtn.addEventListener("click", function () {
 
-    referralAdminSections.forEach(section => {
+    allAdminSections.forEach(section => {
       section.style.display = "none";
     });
 
@@ -1306,11 +1305,15 @@ if (referralBtn && referralPage && referralBackBtn) {
 
   referralBackBtn.addEventListener("click", function () {
 
+    allAdminSections.forEach(section => {
+      section.style.display = "none";
+    });
+
     referralPage.style.display = "none";
 
-    referralAdminSections.forEach(section => {
-      section.style.display = "";
-    });
+    if (dashboardOverview) {
+      dashboardOverview.style.display = "block";
+    }
 
     if (referralHero) {
       referralHero.style.display = "";
@@ -1319,8 +1322,7 @@ if (referralBtn && referralPage && referralBackBtn) {
     window.scrollTo(0, 0);
   });
 
-}
-
+    }
 
 
 
