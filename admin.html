@@ -1428,6 +1428,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
     allUsers = data || [];
 
+
+  // ===== LIVE DASHBOARD TOTAL USERS COUNTER =====
+  async function loadOverviewTotalUsers() {
+    const client = window.supabaseClient;
+    const counter = document.getElementById("totalUsers");
+
+    if (!client || !counter) return;
+
+    const { count, error } = await client
+      .from("profiles")
+      .select("id", { count: "exact", head: true })
+      .neq("role", "admin");
+
+    if (error) {
+      console.error("Total Users Counter Error:", error);
+      counter.textContent = "—";
+      return;
+    }
+
+    counter.textContent = count ?? 0;
+  }
+
+  // Dashboard khulte hi total users load karein
+  loadOverviewTotalUsers();
+
+  // Database mein user add/delete hone par counter refresh karein
+  const usersLiveChannel = window.supabaseClient
+    .channel("dashboard-total-users-live")
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "profiles"
+      },
+      () => loadOverviewTotalUsers()
+    )
+    .subscribe();
+
+
+
+
+
+
+    
+
+
+
+    
+
     document.getElementById("profileTotalUsers").textContent =
       allUsers.length;
 
