@@ -1383,7 +1383,139 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-  
+
+
+
+
+
+
+
+
+    
+// ===== LOAD REAL USER PROFILES FROM SUPABASE =====
+document.addEventListener("DOMContentLoaded", function () {
+
+  const profileBtn = document.querySelector(
+    '.menu-button[data-label="User Profile"]'
+  );
+
+  const searchInput = document.getElementById("profileSearch");
+  const usersList = document.getElementById("registeredUsersList");
+
+  let allUsers = [];
+
+  async function loadRegisteredUsers() {
+
+    const client = window.supabaseClient;
+
+    if (!client) {
+      usersList.textContent = "Supabase connection not ready. Please reload.";
+      return;
+    }
+
+    usersList.textContent = "Loading users...";
+
+    const { data, error } = await client
+      .from("profiles")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("User loading error:", error);
+      usersList.textContent = "Could not load users: " + error.message;
+      return;
+    }
+
+    allUsers = data || [];
+
+    document.getElementById("profileTotalUsers").textContent =
+      allUsers.length;
+
+    const today = new Date().toDateString();
+
+    const newUsersToday = allUsers.filter(user =>
+      user.created_at &&
+      new Date(user.created_at).toDateString() === today
+    ).length;
+
+    document.getElementById("profileNewUsers").textContent =
+      newUsersToday;
+
+    renderUsers(allUsers);
+  }
+
+  function renderUsers(users) {
+
+    if (!users.length) {
+      usersList.textContent = "No registered users found.";
+      return;
+    }
+
+    usersList.className = "";
+
+    usersList.innerHTML = users.map(user => `
+      <div style="
+        background:#1c332a;
+        border:1px solid #39D98A55;
+        border-radius:12px;
+        padding:15px;
+        margin-bottom:12px;
+        color:#fff;
+        overflow-wrap:anywhere;
+      ">
+        <h3 style="margin:0 0 8px;color:#39D98A;">
+          ${escapeHTML(user.username || "Unknown User")}
+        </h3>
+
+        <p>User ID: ${escapeHTML(user.id || "")}</p>
+        <p>Email: ${escapeHTML(user.email || "Not available in profiles")}</p>
+        <p>Main Balance: ${Number(user.main_balance || 0)} SNX</p>
+        <p>Advertisement Balance: ${Number(user.advertisement_balance || 0)} SNX</p>
+        <p>Rating Points: ${Number(user.rating_points || 0)}</p>
+        <p>Status: ${escapeHTML(user.account_status || "active")}</p>
+        <p>Registered: ${
+          user.created_at
+            ? new Date(user.created_at).toLocaleString()
+            : "Unknown"
+        }</p>
+      </div>
+    `).join("");
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  if (profileBtn) {
+    profileBtn.addEventListener("click", loadRegisteredUsers);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+
+      const filtered = allUsers.filter(user =>
+        String(user.username || "").toLowerCase().includes(query) ||
+        String(user.email || "").toLowerCase().includes(query) ||
+        String(user.id || "").toLowerCase().includes(query)
+      );
+
+      renderUsers(filtered);
+    });
+  }
+
+});
+
+
+
+
+                                 
   
   </script>
 </body>
