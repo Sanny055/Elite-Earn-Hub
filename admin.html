@@ -717,7 +717,89 @@
   
     
     
-    
+    <!-- REFERRAL MANAGEMENT PAGE -->
+<section class="referral-page" id="referralPage" style="display: none;">
+
+  <h2 class="section-heading">Referral Management</h2>
+
+  <!-- BACK BUTTON -->
+  <button class="referral-back-btn" id="referralBackBtn">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Admin Panel
+  </button>
+
+  <!-- ADMIN REFERRAL STATS -->
+  <div class="referral-stats">
+
+    <div class="referral-stat-card">
+      <span>My Total Referrals</span>
+      <strong id="myTotalReferrals">—</strong>
+    </div>
+
+    <div class="referral-stat-card">
+      <span>My Active Referrals</span>
+      <strong id="myActiveReferrals">—</strong>
+    </div>
+
+  </div>
+
+  <!-- MY ADMIN REFERRALS -->
+  <div class="referral-section">
+
+    <h3>My Admin Referrals</h3>
+
+    <p class="referral-description">
+      Users registered through Admin referral link.
+    </p>
+
+    <div id="myAdminReferralList" class="referral-empty">
+      <i class="fa-solid fa-users"></i>
+      <p>Admin referral records will appear here after database connection.</p>
+    </div>
+
+  </div>
+
+  <!-- TOP REFERRAL USERS -->
+  <div class="referral-section">
+
+    <h3>Top Referral Users</h3>
+
+    <p class="referral-description">
+      Users ranked by their total referral count.
+    </p>
+
+    <div id="topReferralUsersList" class="referral-empty">
+      <i class="fa-solid fa-ranking-star"></i>
+      <p>Top referral users will appear here after database connection.</p>
+    </div>
+
+  </div>
+
+  <!-- REFERRAL HISTORY -->
+  <div class="referral-section">
+
+    <h3>Referral History – All Users</h3>
+
+    <!-- SEARCH -->
+    <div class="referral-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="referralHistorySearch"
+        placeholder="Search username or User ID..."
+      >
+    </div>
+
+    <div id="referralHistoryList" class="referral-empty">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      <p>Referral history will appear here after database connection.</p>
+    </div>
+
+  </div>
+
+</section>
+<!-- END REFERRAL MANAGEMENT PAGE -->
     
     
     
