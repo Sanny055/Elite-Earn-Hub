@@ -1270,59 +1270,60 @@ if (userProfileBtn && userProfilePage && profileBackBtn) {
 
 
 
-    
-// REFERRAL PAGE OPEN / CLOSE - FIXED
+// REFERRAL PAGE OPEN / CLOSE
 
-const referralBtn = document.querySelector(
-  '.menu-button[data-label="Referral"]'
-);
+document.addEventListener("DOMContentLoaded", function () {
 
-const referralPage = document.getElementById("referralPage");
-const referralBackBtn = document.getElementById("referralBackBtn");
+  const referralBtn = document.querySelector(
+    '.menu-button[data-label="Referral"]'
+  );
 
-const allAdminSections = document.querySelectorAll(".app > section");
-const dashboardOverview = document.querySelector(
-  ".app > section"
-);
-const referralHero = document.querySelector(".hero");
+  const referralPage = document.getElementById("referralPage");
+  const referralBackBtn = document.getElementById("referralBackBtn");
 
-if (referralBtn && referralPage && referralBackBtn) {
+  const allSections = document.querySelectorAll(
+    ".app > section:not(#referralPage):not(#userProfilePage)"
+  );
 
+  const hero = document.querySelector(".hero");
+
+  if (!referralBtn || !referralPage || !referralBackBtn) return;
+
+  // OPEN REFERRAL PAGE
   referralBtn.addEventListener("click", function () {
 
-    allAdminSections.forEach(section => {
+    allSections.forEach(section => {
       section.style.display = "none";
     });
 
     referralPage.style.display = "block";
 
-    if (referralHero) {
-      referralHero.style.display = "none";
-    }
+    const profilePage = document.getElementById("userProfilePage");
+    if (profilePage) profilePage.style.display = "none";
+
+    if (hero) hero.style.display = "none";
 
     window.scrollTo(0, 0);
   });
 
+  // BACK TO FULL ADMIN DASHBOARD
   referralBackBtn.addEventListener("click", function () {
-
-    allAdminSections.forEach(section => {
-      section.style.display = "none";
-    });
 
     referralPage.style.display = "none";
 
-    if (dashboardOverview) {
-      dashboardOverview.style.display = "block";
-    }
+    const profilePage = document.getElementById("userProfilePage");
+    if (profilePage) profilePage.style.display = "none";
 
-    if (referralHero) {
-      referralHero.style.display = "";
-    }
+    allSections.forEach(section => {
+      section.style.display = "";
+    });
+
+    if (hero) hero.style.display = "";
 
     window.scrollTo(0, 0);
   });
 
-    }
+});
 
 
 
