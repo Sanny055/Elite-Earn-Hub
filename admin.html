@@ -1662,7 +1662,28 @@
           return;
         }
 
-        // Only verified admins can see the Admin Panel.
+       
+        // LOAD TOTAL USERS ON INITIAL DASHBOARD OPEN
+const totalUsersCounter = document.getElementById("totalUsers");
+
+if (totalUsersCounter) {
+  const { count, error } = await supabaseClient
+    .from("profiles")
+    .select("id", { count: "exact", head: true })
+    .neq("role", "admin");
+
+  if (error) {
+    console.error("Dashboard Total Users Error:", error);
+  } else {
+    totalUsersCounter.textContent = count ?? 0;
+  }
+            }
+    
+    
+    
+    
+    
+    // Only verified admins can see the Admin Panel.
         document.documentElement.classList.remove("auth-pending");
       } catch (error) {
         console.error("Admin access verification failed:", error);
