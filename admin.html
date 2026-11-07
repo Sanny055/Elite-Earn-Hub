@@ -1724,6 +1724,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (referralPage) referralPage.style.display = "none";
 
+
+    document.getElementById("userDetailsPage").style.display = "none";
+    
+    
+    
+    
     dashboardSections.forEach(section => {
       section.style.display = "";
     });
@@ -1755,8 +1761,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const referralBackBtn = document.getElementById("referralBackBtn");
 
   const allSections = document.querySelectorAll(
-    ".app > section:not(#referralPage):not(#userProfilePage)"
-  );
+  ".app > section:not(#referralPage):not(#userProfilePage):not(#userDetailsPage)"
+);
 
   const hero = document.querySelector(".hero");
 
