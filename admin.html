@@ -1802,8 +1802,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
+
+
+    // OPEN USER DETAILS PAGE
+document.addEventListener("click", function (e) {
+  const viewBtn = e.target.closest(".view-user-details-btn");
+  if (!viewBtn) return;
+
+  const profilePage = document.getElementById("userProfilePage");
+  const detailsPage = document.getElementById("userDetailsPage");
+
+  if (!profilePage || !detailsPage) {
+    console.error("User Profile ya User Details page ka ID nahi mila.");
+    return;
+  }
+
+  profilePage.style.display = "none";
+  detailsPage.style.display = "block";
+});
+
+
+// BACK TO USER PROFILES
+document.getElementById("detailsBackBtn")?.addEventListener("click", function () {
+  document.getElementById("userDetailsPage").style.display = "none";
+  document.getElementById("userProfilePage").style.display = "block";
+});
+
     
-  
+
+
+
+    
   
   
             </script>
