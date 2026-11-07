@@ -150,6 +150,266 @@
     }
 
   
+
+
+
+
+
+/* =====================================
+   USER DETAILS PAGE - PREMIUM DESIGN
+===================================== */
+
+.user-details-page {
+  width: 100%;
+  padding: 12px 0 25px;
+  color: #eaf4ee;
+  font-family: 'Outfit', 'Trebuchet MS', sans-serif;
+}
+
+/* SECTION SPACING */
+
+.details-section {
+  margin-bottom: 17px;
+}
+
+/* SECTION HEADINGS */
+
+.details-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 10px;
+  color: #39D98A;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.details-section-heading i {
+  font-size: 15px;
+  color: #45B8FF;
+}
+
+/* MAIN INFORMATION CARDS */
+
+.details-card {
+  background: linear-gradient(145deg, #1c332a, #192e25);
+  border: 1px solid rgba(57, 217, 138, 0.24);
+  border-radius: 13px;
+  padding: 14px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.16);
+}
+
+/* INFORMATION GRID */
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px 12px;
+}
+
+.details-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+/* PREMIUM FIELD LABELS */
+
+.details-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.9px;
+  line-height: 1.4;
+  color: #39D98A;
+}
+
+/* DIFFERENT LABEL COLORS */
+
+.details-item:nth-child(4n+2) .details-label {
+  color: #45B8FF;
+}
+
+.details-item:nth-child(4n+3) .details-label {
+  color: #FFD447;
+}
+
+.details-item:nth-child(4n+4) .details-label {
+  color: #A78BFA;
+}
+
+/* USER INFORMATION VALUES */
+
+.details-value {
+  color: #f1f7f3;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ACTION BUTTON */
+
+.details-action-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px 13px;
+  border: 1px solid #39D98A;
+  border-radius: 9px;
+  background: linear-gradient(120deg, #1b4935, #19382b);
+  color: #39D98A;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.details-action-btn:active {
+  transform: scale(0.97);
+  background: #24583f;
+}
+
+/* REFERRED USERS */
+
+.referred-users-section {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #315b48;
+}
+
+.referred-users-section h4 {
+  margin: 0 0 10px;
+  color: #45B8FF;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+.referred-users-grid {
+  background: #14251F;
+  border: 1px solid #315b48;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.referred-users-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 11px;
+  color: #39D98A;
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+/* HISTORY BUTTONS */
+
+.details-history-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 2px;
+  border: none;
+  border-bottom: 1px solid rgba(49, 91, 72, 0.7);
+  background: transparent;
+  color: #eaf4ee;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.details-history-btn:last-child {
+  border-bottom: none;
+}
+
+.details-history-btn span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-history-btn span i {
+  color: #39D98A;
+  font-size: 16px;
+}
+
+.details-history-btn:active {
+  color: #39D98A;
+  transform: scale(0.98);
+}
+
+/* BACK BUTTON */
+
+.details-back-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 7px;
+  padding: 13px;
+  border: 1px solid #39D98A;
+  border-radius: 9px;
+  background: transparent;
+  color: #39D98A;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.details-back-btn:active {
+  background: #1c4935;
+  transform: scale(0.98);
+}
+
+/* SMALL SCREEN OPTIMIZATION */
+
+@media (max-width: 380px) {
+
+  .details-card {
+    padding: 12px;
+  }
+
+  .details-grid {
+    gap: 13px 8px;
+  }
+
+  .details-label {
+    font-size: 9px;
+  }
+
+  .details-value {
+    font-size: 12px;
+  }
+
+  .details-section-heading {
+    font-size: 12px;
+  }
+    }
+
+
     
 
 /* REFERRAL MANAGEMENT PAGE */
