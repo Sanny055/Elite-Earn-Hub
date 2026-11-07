@@ -1805,32 +1805,108 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    // OPEN USER DETAILS PAGE
-document.addEventListener("click", function (e) {
+    // =====================================
+// USER DETAILS: OPEN + LOAD USER DATA
+// =====================================
+
+document.addEventListener("click", async function (e) {
+
   const viewBtn = e.target.closest(".view-user-details-btn");
   if (!viewBtn) return;
 
+  const userId = viewBtn.dataset.userId;
   const profilePage = document.getElementById("userProfilePage");
   const detailsPage = document.getElementById("userDetailsPage");
+  const client = window.supabaseClient;
 
-  if (!profilePage || !detailsPage) {
-    console.error("User Profile ya User Details page ka ID nahi mila.");
+  if (!userId || !client) {
+    alert("User ID ya Supabase connection available nahi hai.");
     return;
   }
 
   profilePage.style.display = "none";
   detailsPage.style.display = "block";
+
+  // Reset fields while loading
+  [
+    "detailUsername",
+    "detailEmail",
+    "detailUserId",
+    "detailJoinedDate",
+    "detailMainBalance",
+    "detailAdBalance",
+    "detailRatingPoints",
+    "detailAccountStatus",
+    "detailTotalReferrals",
+    "detailActiveReferrals",
+    "detailReferredBy",
+    "detailReferralCode"
+  ].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = "Loading...";
+  });
+
+  try {
+
+    const { data: user, error } = await client
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .single();
+
+    if (error) throw error;
+
+    const setValue = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent =
+        value === null || value === undefined || value === ""
+          ? "Not available"
+          : value;
+    };
+
+    // PERSONAL INFORMATION
+    setValue("detailUsername", user.username);
+    setValue("detailEmail", user.email);
+    setValue("detailUserId", user.id);
+    setValue(
+      "detailJoinedDate",
+      user.created_at
+        ? new Date(user.created_at).toLocaleDateString()
+        : "Unknown"
+    );
+
+    // WALLET INFORMATION
+    setValue("detailMainBalance", Number(user.main_balance || 0) + " SNX");
+    setValue("detailAdBalance", Number(user.advertisement_balance || 0) + " SNX");
+    setValue("detailRatingPoints", Number(user.rating_points || 0));
+    setValue("detailAccountStatus", user.account_status || "ACTIVE");
+
+    // REFERRAL FIELDS — awaiting database column confirmation
+    setValue("detailTotalReferrals", "—");
+    setValue("detailActiveReferrals", "—");
+    setValue("detailReferredBy", "—");
+    setValue("detailReferralCode", "—");
+
+  } catch (error) {
+
+    console.error("User Details Error:", error);
+    alert("User details load nahi ho sake: " + error.message);
+
+  }
+
 });
 
 
+// =====================================
 // BACK TO USER PROFILES
+// =====================================
+
 document.getElementById("detailsBackBtn")?.addEventListener("click", function () {
+
   document.getElementById("userDetailsPage").style.display = "none";
   document.getElementById("userProfilePage").style.display = "block";
+
 });
-
-    
-
 
 
     
