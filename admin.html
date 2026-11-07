@@ -880,6 +880,205 @@
       </section>
                                                                    
   
+
+<!-- USER DETAILS PAGE -->
+<section class="user-details-page" id="userDetailsPage" style="display:none;">
+
+  <!-- 01: PERSONAL INFORMATION -->
+  <div class="details-section">
+
+    <h3 class="details-section-heading">
+      <i class="fa-solid fa-user"></i>
+      PERSONAL INFORMATION
+    </h3>
+
+    <div class="details-card">
+
+      <div class="details-grid">
+
+        <div class="details-item">
+          <span class="details-label">USERNAME</span>
+          <span class="details-value" id="detailUsername">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">EMAIL ADDRESS</span>
+          <span class="details-value" id="detailEmail">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">USER ID</span>
+          <span class="details-value" id="detailUserId">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">JOINED DATE</span>
+          <span class="details-value" id="detailJoinedDate">—</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 02: WALLET INFORMATION -->
+  <div class="details-section">
+
+    <h3 class="details-section-heading">
+      <i class="fa-solid fa-wallet"></i>
+      WALLET INFORMATION
+    </h3>
+
+    <div class="details-card">
+
+      <div class="details-grid">
+
+        <div class="details-item">
+          <span class="details-label">MAIN BALANCE</span>
+          <span class="details-value" id="detailMainBalance">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">ADVERTISEMENT BALANCE</span>
+          <span class="details-value" id="detailAdBalance">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">RATING POINTS</span>
+          <span class="details-value" id="detailRatingPoints">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">ACCOUNT STATUS</span>
+          <span class="details-value" id="detailAccountStatus">—</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 03: REFERRAL INFORMATION -->
+  <div class="details-section">
+
+    <h3 class="details-section-heading">
+      <i class="fa-solid fa-users"></i>
+      REFERRAL INFORMATION
+    </h3>
+
+    <div class="details-card">
+
+      <div class="details-grid">
+
+        <div class="details-item">
+          <span class="details-label">TOTAL REFERRALS</span>
+          <span class="details-value" id="detailTotalReferrals">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">ACTIVE REFERRALS</span>
+          <span class="details-value" id="detailActiveReferrals">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">REFERRED BY</span>
+          <span class="details-value" id="detailReferredBy">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">REFERRAL CODE</span>
+          <span class="details-value" id="detailReferralCode">—</span>
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="details-action-btn"
+        id="checkReferralsBtn"
+      >
+        <i class="fa-solid fa-people-group"></i>
+        CHECK REFERRALS
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- REFERRED USERS LIST -->
+      <div class="referred-users-section" id="referredUsersSection" style="display:none;">
+
+        <h4>REFERRED USERS</h4>
+
+        <div class="referred-users-grid">
+          <div class="referred-users-heading">
+            <span>USER ID</span>
+            <span>MAIN BALANCE</span>
+          </div>
+
+          <div id="referredUsersList">
+            No referred users found.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 04: ACCOUNT ACTIVITY -->
+  <div class="details-section">
+
+    <h3 class="details-section-heading">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      ACCOUNT ACTIVITY
+    </h3>
+
+    <div class="details-card">
+
+      <button
+        type="button"
+        class="details-history-btn"
+        id="detailDepositHistoryBtn"
+      >
+        <span>
+          <i class="fa-solid fa-circle-arrow-down"></i>
+          DEPOSIT HISTORY
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <button
+        type="button"
+        class="details-history-btn"
+        id="detailWithdrawalHistoryBtn"
+      >
+        <span>
+          <i class="fa-solid fa-circle-arrow-up"></i>
+          WITHDRAWAL HISTORY
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- BACK TO USER PROFILES -->
+  <button
+    type="button"
+    class="details-back-btn"
+    id="detailsBackBtn"
+  >
+    <i class="fa-solid fa-arrow-left"></i>
+    BACK TO USER PROFILES
+  </button>
+
+</section>
+<!-- END USER DETAILS PAGE -->
+
+
+
     
     
     <!-- REFERRAL MANAGEMENT PAGE -->
