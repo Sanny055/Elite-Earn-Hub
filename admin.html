@@ -2090,6 +2090,110 @@ if (totalUsersCounter) {
 
 
 
+
+    
+/* =========================================
+   ELITE EARN HUB — COMMON PAGE NAVIGATION
+========================================= */
+
+(function () {
+
+  const pageIds = new Set([
+    "userProfilePage",
+    "referralPage",
+    "userDetailsPage",
+    "userReferralsPage"
+  ]);
+
+  const pageHistory = [];
+  let currentPage = "dashboard";
+
+  function showDashboard() {
+
+    document.querySelectorAll(".app > section").forEach(section => {
+      section.style.display = pageIds.has(section.id) ? "none" : "";
+    });
+
+    const hero = document.querySelector(".hero");
+    if (hero) hero.style.display = "";
+
+    currentPage = "dashboard";
+    window.scrollTo(0, 0);
+  }
+
+  function openPage(pageId) {
+
+    const target = document.getElementById(pageId);
+
+    if (!target) {
+      console.error("Admin page not found:", pageId);
+      return false;
+    }
+
+    pageIds.add(pageId);
+    pageHistory.push(currentPage);
+
+    document.querySelectorAll(".app > section").forEach(section => {
+      section.style.display = "none";
+    });
+
+    const hero = document.querySelector(".hero");
+    if (hero) hero.style.display = "none";
+
+    target.style.display = "block";
+    currentPage = pageId;
+
+    window.scrollTo(0, 0);
+    return true;
+  }
+
+  function goBack() {
+
+    const previousPage = pageHistory.pop() || "dashboard";
+
+    if (previousPage === "dashboard") {
+      showDashboard();
+      return;
+    }
+
+    const target = document.getElementById(previousPage);
+
+    if (!target) {
+      showDashboard();
+      return;
+    }
+
+    document.querySelectorAll(".app > section").forEach(section => {
+      section.style.display = "none";
+    });
+
+    target.style.display = "block";
+
+    const hero = document.querySelector(".hero");
+    if (hero) hero.style.display = "none";
+
+    currentPage = previousPage;
+    window.scrollTo(0, 0);
+  }
+
+  window.adminPageNavigation = {
+    open: openPage,
+    back: goBack,
+    dashboard: showDashboard
+  };
+
+  // Initial dashboard state
+  showDashboard();
+
+})();
+
+
+
+
+
+    
+
+
 // USER PROFILE PAGE OPEN / CLOSE
 
 document.addEventListener("DOMContentLoaded", function () {
