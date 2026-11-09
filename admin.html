@@ -2634,6 +2634,222 @@ function renderUsers(users) {
 
 
 
+
+
+<script>
+(function () {
+  const client = window.supabaseClient;
+  let selectedUserId = null;
+  let allProfiles = [];
+  let directReferrals = [];
+
+  const $ = id => document.getElementById(id);
+
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[ch]);
+
+  const active = user =>
+    ['ACTIVE', 'VERIFIED', 'APPROVED'].includes(
+      String(user.account_status || user.status || 'ACTIVE').toUpperCase()
+    );
+
+  function setText(id, value) {
+    const el = $(id);
+    if (el) el.textContent = value;
+  }
+
+  function teamCount(userId) {
+    const visited = new Set([userId]);
+    let current = [userId];
+    let total = 0;
+
+    while (current.length) {
+      const next = [];
+
+      allProfiles.forEach(user => {
+        if (user.referred_by && current.includes(user.referred_by)
+            && !visited.has(user.id)) {
+          visited.add(user.id);
+          next.push(user.id);
+          total++;
+        }
+      });
+
+      current = next;
+    }
+
+    return total;
+  }
+
+  function renderReferralList(query = '') {
+    const list = $('userReferralsList');
+    if (!list) return;
+
+    const q = query.trim().toLowerCase();
+
+    const filtered = directReferrals.filter(user =>
+      String(user.username || '').toLowerCase().includes(q) ||
+      String(user.id || '').toLowerCase().includes(q)
+    );
+
+    if (!filtered.length) {
+      list.innerHTML = '<div class="user-referrals-empty">No referred users found.</div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(user => `
+      <article class="user-referral-card">
+        <div class="user-referral-user-top">
+          <strong class="user-referral-username">
+            ${esc(user.username || 'Unknown User')}
+          </strong>
+          <span class="user-referral-status ${active(user) ? 'active' : 'non-active'}">
+            ${active(user) ? 'ACTIVE' : 'INACTIVE'}
+          </span>
+        </div>
+
+        <div class="user-referral-id">
+          User ID: ${esc(user.id)}
+        </div>
+
+        <div class="user-referral-count">
+          <span>Main Balance</span>
+          <strong>${Number(user.main_balance || 0)} SNX</strong>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  async function loadSelectedUserReferrals() {
+    if (!selectedUserId || !client) return;
+
+    const ids = [
+      'detailTotalReferrals',
+      'detailActiveReferrals',
+      'detailReferredBy',
+      'detailReferralCode',
+      'selectedUserTotalReferrals',
+      'selectedUserActiveReferrals',
+      'selectedUserTeamReferrals'
+    ];
+
+    ids.forEach(id => setText(id, 'Loading...'));
+
+    const list = $('userReferralsList');
+    if (list) list.innerHTML =
+      '<div class="user-referrals-empty">Loading referral data...</div>';
+
+    try {
+      const { data, error } = await client
+        .from('profiles')
+        .select('*');
+
+      if (error) throw error;
+
+      allProfiles = data || [];
+
+      const selectedUser = allProfiles.find(
+        user => user.id === selectedUserId
+      );
+
+      if (!selectedUser) throw new Error('Selected user not found.');
+
+      directReferrals = allProfiles.filter(
+        user => user.referred_by === selectedUserId
+      );
+
+      const total = directReferrals.length;
+      const activeTotal = directReferrals.filter(active).length;
+
+      // User Details referral information
+      setText('detailTotalReferrals', total);
+      setText('detailActiveReferrals', activeTotal);
+      setText('detailReferralCode', selectedUser.referral_code || 'Not available');
+
+      const referrer = allProfiles.find(
+        user => user.id === selectedUser.referred_by
+      );
+
+      setText(
+        'detailReferredBy',
+        referrer ? (referrer.username || 'Admin') :
+        (selectedUser.referred_by ? 'Referrer not found' : 'Admin')
+      );
+
+      // Check Referrals page statistics
+      setText('selectedUserTotalReferrals', total);
+      setText('selectedUserActiveReferrals', activeTotal);
+      setText('selectedUserTeamReferrals', teamCount(selectedUserId));
+
+      // Referred users list inside User Details page
+      const oldList = $('referredUsersList');
+      const oldSection = $('referredUsersSection');
+
+      if (oldSection) oldSection.style.display = 'block';
+
+      if (oldList) {
+        oldList.innerHTML = directReferrals.length
+          ? directReferrals.map(user => `
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px;border-bottom:1px solid #315b48;color:#fff;font-size:11px;">
+                <span>${esc(user.username || 'Unknown User')}</span>
+                <span>${Number(user.main_balance || 0)} SNX</span>
+              </div>
+            `).join('')
+          : '<div style="padding:12px;color:#AABBB1;">No referred users found.</div>';
+      }
+
+      renderReferralList($('userReferralsSearch')?.value || '');
+
+    } catch (error) {
+      console.error('User Referral Data Error:', error);
+
+      ids.forEach(id => setText(id, 'Error'));
+
+      if (list) {
+        list.innerHTML = `
+          <div class="user-referrals-empty">
+            Could not load referral data: ${esc(error.message)}
+          </div>`;
+      }
+    }
+  }
+
+  // Detect which user's details are being opened
+  document.addEventListener('click', function (e) {
+    const button = e.target.closest('.view-user-details-btn');
+    if (!button) return;
+
+    selectedUserId = button.dataset.userId;
+    loadSelectedUserReferrals();
+  });
+
+  // Open Check Referrals page
+  $('checkReferralsBtn')?.addEventListener('click', function () {
+    loadSelectedUserReferrals();
+  });
+
+  // Search referred users
+  $('userReferralsSearch')?.addEventListener('input', function () {
+    renderReferralList(this.value);
+  });
+
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    
                                  
   
   </script>
