@@ -360,11 +360,27 @@
 
         try {
 
-          const {
-            data,
-            error
-          } =
-            await supabaseClient.auth.signUp({
+          const referralCodeValue = document
+  .getElementById("referralCode")
+  .value
+  .trim()
+  .toUpperCase();
+
+const {
+  data,
+  error
+} = await supabaseClient.auth.signUp({
+  email: emailValue,
+  password: passwordValue,
+  options: {
+    data: {
+      username: userNameValue,
+      referral_code: referralCodeValue
+    },
+    emailRedirectTo:
+      "https://sanny055.github.io/EliteEarnHub/login.html"
+  }
+});
 
               email: emailValue,
 
