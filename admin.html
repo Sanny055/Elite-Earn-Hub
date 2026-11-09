@@ -1798,7 +1798,7 @@
       <input
         type="search"
         id="referralHistorySearch"
-        placeholder="Search username or User ID..."
+        placeholder="Search username..."
       >
     </div>
 
@@ -2737,23 +2737,68 @@ function renderUsers(users) {
       </div>`).join('');
   }
 
-  function renderHistory(query = '') {
-    const byId = new Map(referralRows.map(user => [user.id, user]));
-    const { counts, activeCounts } = directCounts(referralRows);
-    const q = query.toLowerCase().trim();
-    const filtered = referralRows
-      .filter(user => user.id !== adminId)
-      .filter(user => {
-        const referrer = getReferrerName(user, byId);
-        return !q || [user.username, user.email, user.id, user.referral_code, user.referred_by, referrer]
-          .some(value => String(value || '').toLowerCase().includes(q));
-      });
-    if (!filtered.length) return showEmpty(historyList, q ? 'No matching referral records found.' : 'No referral records found.');
-    historyList.className = 'referral-list';
-    historyList.innerHTML = filtered.map(user => renderCard(
-      user, getReferrerName(user, byId), counts.get(user.id) || 0, activeCounts.get(user.id) || 0
-    )).join('');
+
+
+
+function renderHistory(query = '') {
+  const { counts } = directCounts(referralRows);
+  const q = query.toLowerCase().trim();
+
+  const filtered = referralRows
+    .filter(user => user.id !== adminId)
+    .filter(user =>
+      String(user.username || '')
+        .toLowerCase()
+        .includes(q)
+    );
+
+  if (!filtered.length) {
+    return showEmpty(
+      historyList,
+      q ? 'No matching users found.' : 'No users found.'
+    );
   }
+
+  historyList.className = 'referral-list';
+
+  historyList.innerHTML = filtered.map(user => `
+    <article style="
+      background:#1c332a;
+      border:1px solid #315b48;
+      border-radius:12px;
+      padding:15px;
+      margin-bottom:10px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    ">
+      <strong style="
+        color:#ffffff;
+        font-size:14px;
+        overflow-wrap:anywhere;
+      ">
+        ${esc(user.username || 'Unknown User')}
+      </strong>
+
+      <span style="
+        color:#39D98A;
+        font-size:13px;
+        font-weight:800;
+        white-space:nowrap;
+      ">
+        ${counts.get(user.id) || 0} Referrals
+      </span>
+    </article>
+  `).join('');
+}
+
+
+
+
+
+
+  
 
   async function loadReferralManagement() {
     if (isLoading) return;
