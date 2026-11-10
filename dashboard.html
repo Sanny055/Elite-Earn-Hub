@@ -22018,7 +22018,75 @@ function closeYouTubeViewTasks() {
   document.getElementById("youtubeViewTasksPage").style.display = "none";
 }
 
+// YOUTUBE VIEW TASK TIMER
+let youtubeWatchInterval = null;
+let youtubeWatchSeconds = 30;
+let youtubeWatchRemaining = 30;
 
+function startYouTubeViewTask() {
+
+  clearInterval(youtubeWatchInterval);
+
+  youtubeWatchSeconds = 30;
+  youtubeWatchRemaining = 30;
+
+  document.getElementById("youtubeAvailableTasks").style.display = "none";
+  document.getElementById("youtubeWatchingSection").style.display = "block";
+
+  document.getElementById("youtubeCurrentVideoTitle").textContent =
+    "Sample Video Title";
+
+  document.getElementById("youtubeClaimButton").style.display = "none";
+
+  updateYouTubeWatchTimer();
+
+  youtubeWatchInterval = setInterval(function() {
+
+    youtubeWatchRemaining--;
+
+    updateYouTubeWatchTimer();
+
+    if (youtubeWatchRemaining <= 0) {
+
+      clearInterval(youtubeWatchInterval);
+
+      document.getElementById("youtubeWatchMessage").textContent =
+        "Watching time completed! You can claim your reward.";
+
+      document.getElementById("youtubeClaimButton").style.display = "block";
+
+    }
+
+  }, 1000);
+}
+
+function updateYouTubeWatchTimer() {
+
+  let completed = youtubeWatchSeconds - youtubeWatchRemaining;
+
+  let percentage = (completed / youtubeWatchSeconds) * 100;
+
+  document.getElementById("youtubeWatchTimer").textContent =
+    completed + " / " + youtubeWatchSeconds + " Sec";
+
+  document.getElementById("youtubeWatchProgress").style.width =
+    percentage + "%";
+}
+
+function claimYouTubeViewReward() {
+
+  if (youtubeWatchRemaining > 0) {
+    return;
+  }
+
+  clearInterval(youtubeWatchInterval);
+
+  alert("Demo: Watching task completed!");
+
+  document.getElementById("youtubeWatchingSection").style.display = "none";
+  document.getElementById("youtubeAvailableTasks").style.display = "block";
+
+    }
       
   
 
