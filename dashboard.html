@@ -18754,6 +18754,75 @@ binanceAmount.addEventListener("input", function () {
 
 
 
+
+
+// ======================================
+// SUPABASE DEPOSIT SUBMISSION FUNCTION
+// ======================================
+
+async function saveDepositRequest(paymentMethod, amount, screenshot) {
+
+  if (!currentUser || !currentProfile) {
+    throw new Error("User profile is not loaded. Please refresh the page.");
+  }
+
+  if (!screenshot || !screenshot.files || !screenshot.files.length) {
+    throw new Error("Please upload your payment screenshot.");
+  }
+
+  const file = screenshot.files[0];
+
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please select a valid image.");
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    throw new Error("Screenshot size must be 5 MB or less.");
+  }
+
+  const extension = file.name.split(".").pop().toLowerCase();
+
+  const filePath =
+    currentUser.id + "/" + crypto.randomUUID() + "." + extension;
+
+  // Upload screenshot to private Storage bucket
+  const { data: uploadedFile, error: uploadError } =
+    await supabaseClient.storage
+      .from("deposit-proofs")
+      .upload(filePath, file, {
+        contentType: file.type,
+        upsert: false
+      });
+
+  if (uploadError) {
+    throw uploadError;
+  }
+
+  // Save deposit request in database
+  const { error: insertError } =
+    await supabaseClient
+      .from("deposit_requests")
+      .insert({
+        user_id: currentUser.id,
+        username: currentProfile.username || currentUser.email?.split("@")[0] || "User",
+        email: currentUser.email || "",
+        amount: amount,
+        payment_method: paymentMethod,
+        proof_url: uploadedFile.path,
+        status: "pending"
+      });
+
+  if (insertError) {
+    throw insertError;
+  }
+
+  return true;
+}
+
+
+
+  
+
     const depositSuccessOverlay =
   document.getElementById("depositSuccessOverlay");
 
@@ -18761,10 +18830,12 @@ const checkTransactionHistory =
   document.getElementById("checkTransactionHistory");
 
 
-submitBinanceDeposit.addEventListener("click", function () {
 
-  const amount =
-    parseFloat(binanceAmount.value) || 0;
+
+
+submitBinanceDeposit.addEventListener("click", async function () {
+
+  const amount = parseFloat(binanceAmount.value) || 0;
 
   if (!binanceAmount.value || amount <= 0) {
     alert("Please enter your deposit amount.");
@@ -18783,19 +18854,44 @@ submitBinanceDeposit.addEventListener("click", function () {
     return;
   }
 
-  /* Successful submission */
+  const button = submitBinanceDeposit;
+  button.disabled = true;
+  button.textContent = "Submitting...";
 
-  binanceAmount.value = "";
-  binanceScreenshot.value = "";
+  try {
 
-  binanceFee.textContent = "$0.00";
-  binanceYouPay.textContent = "$0.00";
-  binanceYouReceive.textContent = "0.00";
+    await saveDepositRequest(
+      "Binance",
+      amount,
+      binanceScreenshot
+    );
 
-  binanceDepositOverlay.classList.remove("show");
-  depositSuccessOverlay.classList.add("show");
+    binanceAmount.value = "";
+    binanceScreenshot.value = "";
+    binanceFee.textContent = "$0.00";
+    binanceYouPay.textContent = "$0.00";
+    binanceYouReceive.textContent = "0.00";
+
+    binanceDepositOverlay.classList.remove("show");
+    depositSuccessOverlay.classList.add("show");
+
+  } catch (error) {
+
+    console.error("Binance Deposit Error:", error);
+    alert("Deposit submission failed: " + error.message);
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "Submit Deposit";
+
+  }
 
 });
+
+
+
+  
 
 
   
@@ -18849,7 +18945,7 @@ jazzcashDepositClose.addEventListener("click", function () {
 
 
   const jazzcashAmount =
-document.getElementById("jazzcashWithdrawAmount");
+document.getElementById("jazzcashAmount");
 
     const jazzcashFee =
   document.getElementById("jazzcashFee");
@@ -18899,47 +18995,62 @@ const jazzcashScreenshot =
   document.getElementById("jazzcashScreenshot");
 
 
-submitJazzCashDeposit.addEventListener("click", function () {
+submitJazzCashDeposit.addEventListener("click", async function () {
 
-  const amount =
-    parseFloat(jazzcashAmount.value) || 0;
+  const amount = parseFloat(jazzcashAmount.value) || 0;
 
-  // Amount empty
   if (!jazzcashAmount.value || amount <= 0) {
     alert("Please enter your deposit amount.");
     jazzcashAmount.focus();
     return;
   }
 
-  // Minimum 280 PKR
   if (amount < 280) {
     alert("Minimum deposit is 280 PKR.");
     jazzcashAmount.focus();
     return;
   }
 
-  // Screenshot required
   if (!jazzcashScreenshot.files.length) {
     alert("Please upload your payment screenshot.");
     return;
   }
 
-  // Reset form
-  jazzcashAmount.value = "";
-  jazzcashScreenshot.value = "";
+  const button = submitJazzCashDeposit;
+  button.disabled = true;
+  button.textContent = "Submitting...";
 
-  jazzcashFee.textContent = "PKR 0.00";
-  jazzcashYouPay.textContent = "PKR 0.00";
-  jazzcashYouReceive.textContent = "0.00";
+  try {
 
-  // Close JazzCash popup
-  jazzcashDepositOverlay.classList.remove("show");
+    await saveDepositRequest(
+      "JazzCash",
+      amount,
+      jazzcashScreenshot
+    );
 
-  // Open existing success popup
-  depositSuccessOverlay.classList.add("show");
+    jazzcashAmount.value = "";
+    jazzcashScreenshot.value = "";
+
+    jazzcashFee.textContent = "PKR 0.00";
+    jazzcashYouPay.textContent = "PKR 0.00";
+    jazzcashYouReceive.textContent = "0.00";
+
+    jazzcashDepositOverlay.classList.remove("show");
+    depositSuccessOverlay.classList.add("show");
+
+  } catch (error) {
+
+    console.error("JazzCash Deposit Error:", error);
+    alert("Deposit submission failed: " + error.message);
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "💚 Submit Deposit";
+
+  }
 
 });
-  
 
 
 
@@ -19096,95 +19207,79 @@ if (copyEasyPaisaNumber) {
 
 // ---------- SUBMIT EASYPAISA DEPOSIT ----------
 
-if (submitEasyPaisaDeposit) {
+
+      
+
+      if (submitEasyPaisaDeposit) {
 
   submitEasyPaisaDeposit.addEventListener(
     "click",
-    function () {
+    async function () {
 
       const amount =
         parseFloat(easypaisaAmount.value) || 0;
 
-
-      // Amount empty
-      if (
-        !easypaisaAmount.value ||
-        amount <= 0
-      ) {
-
-        alert(
-          "Please enter your deposit amount."
-        );
-
+      if (!easypaisaAmount.value || amount <= 0) {
+        alert("Please enter your deposit amount.");
         easypaisaAmount.focus();
-
         return;
       }
 
-
-      // Minimum 280 PKR
       if (amount < 280) {
-
-        alert(
-          "Minimum deposit is 280 PKR."
-        );
-
+        alert("Minimum deposit is 280 PKR.");
         easypaisaAmount.focus();
-
         return;
       }
 
-
-      // Screenshot required
-      if (
-        !easypaisaScreenshot.files.length
-      ) {
-
-        alert(
-          "Please upload your payment screenshot."
-        );
-
+      if (!easypaisaScreenshot.files.length) {
+        alert("Please upload your payment screenshot.");
         return;
       }
 
+      const button = submitEasyPaisaDeposit;
+      button.disabled = true;
+      button.textContent = "Submitting...";
 
-      // ---------- RESET FORM ----------
+      try {
 
-      easypaisaAmount.value = "";
-
-      easypaisaScreenshot.value = "";
-
-      easypaisaFee.textContent =
-        "PKR 0.00";
-
-      easypaisaYouPay.textContent =
-        "PKR 0.00";
-
-      easypaisaYouReceive.textContent =
-        "0.00";
-
-
-      // ---------- CLOSE EASYPAISA POPUP ----------
-
-      easypaisaDepositOverlay.classList.remove(
-        "show"
-      );
-
-
-      // ---------- OPEN SUCCESS POPUP ----------
-
-      if (depositSuccessOverlay) {
-
-        depositSuccessOverlay.classList.add(
-          "show"
+        await saveDepositRequest(
+          "EasyPaisa",
+          amount,
+          easypaisaScreenshot
         );
+
+        easypaisaAmount.value = "";
+        easypaisaScreenshot.value = "";
+
+        easypaisaFee.textContent = "PKR 0.00";
+        easypaisaYouPay.textContent = "PKR 0.00";
+        easypaisaYouReceive.textContent = "0.00";
+
+        easypaisaDepositOverlay.classList.remove("show");
+
+        if (depositSuccessOverlay) {
+          depositSuccessOverlay.classList.add("show");
+        }
+
+      } catch (error) {
+
+        console.error("EasyPaisa Deposit Error:", error);
+        alert("Deposit submission failed: " + error.message);
+
+      } finally {
+
+        button.disabled = false;
+        button.textContent = "💚 Submit Deposit";
 
       }
 
     }
   );
 
-}
+      }
+
+
+  
 
 
 // ---------- TRANSACTION HISTORY ----------
