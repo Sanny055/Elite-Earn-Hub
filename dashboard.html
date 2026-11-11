@@ -11009,126 +11009,124 @@ footer strong{
 
 
     
-    <!-- JAZZCASH DEPOSIT POPUP -->
+
+
+
+<!-- JAZZCASH DEPOSIT POPUP -->
 <div class="jazzcash-deposit-overlay" id="jazzcashDepositOverlay">
 
   <div class="jazzcash-deposit-popup">
 
-    <button
-      type="button"
-      class="jazzcash-deposit-close"
-      id="jazzcashDepositClose">
-      ×
-    </button>
+    <button type="button" class="jazzcash-deposit-close" id="jazzcashDepositClose">×</button>
 
-    <div class="jazzcash-deposit-icon">
-      💚
-    </div>
-
+    <div class="jazzcash-deposit-icon">💚</div>
     <h2>JazzCash Deposit</h2>
+    <p class="jazzcash-deposit-subtitle">Deposit using JazzCash</p>
 
-    <p class="jazzcash-deposit-subtitle">
-      Deposit PKR using JazzCash
-    </p>
+    <!-- STAGE 1: AMOUNT -->
+    <div id="jazzcashAmountStage">
 
-    <!-- PAYMENT DETAILS -->
-    <div class="jazzcash-payment-details">
-
-      <div class="jazzcash-payment-label">
-        JazzCash Payment Details
+      <div class="deposit-field">
+        <label for="jazzcashAmount">Amount in SNX</label>
+        <input
+          type="number"
+          id="jazzcashAmount"
+          min="67.5"
+          step="0.01"
+          placeholder="Minimum 67.5 SNX"
+        >
       </div>
 
-      <div class="jazzcash-payment-row">
-        <span>JazzCash Number</span>
-        <strong id="jazzcashNumber">
-          03XX-XXXXXXX
-        </strong>
-      </div>
+      <p>Minimum Deposit: 67.5 SNX</p>
 
-      <div class="jazzcash-payment-row">
-        <span>Account Name</span>
-        <strong id="jazzcashAccountName">
-          Your Name
-        </strong>
-      </div>
-
-      <button
-        type="button"
-        id="copyJazzCashNumber">
-        📋 Copy Number
+      <button type="button" id="jazzcashPayButton">
+        Continue to Payment
       </button>
 
     </div>
 
-    <!-- AMOUNT -->
-    <div class="deposit-field">
+    <!-- STAGE 2: PAYMENT -->
+    <div id="jazzcashPaymentStage" style="display:none;">
 
-      <label for="jazzcashAmount">
-        Deposit Amount (PKR)
-      </label>
+      <div class="jazzcash-payment-details">
 
-      <input
-        type="number"
-        id="jazzcashAmount"
-        min="280"
-        step="1"
-        placeholder="Minimum 280 PKR"
-      >
+        <div class="jazzcash-payment-label">
+          JazzCash Payment Details
+        </div>
 
-    </div>
+        <div class="jazzcash-payment-row">
+          <span>JazzCash Number</span>
+          <strong id="jazzcashNumber">03XX-XXXXXXX</strong>
+        </div>
 
-    <!-- CALCULATION -->
-    <div class="jazzcash-calculation">
+        <div class="jazzcash-payment-row">
+          <span>Account Name</span>
+          <strong id="jazzcashAccountName">Your Name</strong>
+        </div>
 
-      <div>
-        <span>Transaction Fee (10%)</span>
-        <strong id="jazzcashFee">PKR 0.00</strong>
+        <button type="button" id="copyJazzCashNumber">
+          📋 Copy Number
+        </button>
+
       </div>
 
-      <div>
-        <span>You Pay</span>
-        <strong id="jazzcashYouPay">PKR 0.00</strong>
+      <div class="jazzcash-calculation">
+
+        <div>
+          <span>Deposit Amount</span>
+          <strong><span id="jazzcashSummarySNX">0.00</span> SNX</strong>
+        </div>
+
+        <div>
+          <span>Payment Amount</span>
+          <strong id="jazzcashPaymentAmount">PKR 0.00</strong>
+        </div>
+
+        <div>
+          <span>Transaction Fee (10%)</span>
+          <strong id="jazzcashFee">PKR 0.00</strong>
+        </div>
+
+        <div>
+          <span>Total to Pay</span>
+          <strong id="jazzcashYouPay">PKR 0.00</strong>
+        </div>
+
+        <div>
+          <span>You Will Receive</span>
+          <strong><span id="jazzcashYouReceive">0.00</span> SNX</strong>
+        </div>
+
       </div>
 
-      <div>
-        <span>You Receive</span>
-        <strong>
-          <span id="jazzcashYouReceive">0.00</span> SNX
-        </strong>
+      <div class="deposit-field">
+        <label for="jazzcashScreenshot">Payment Screenshot</label>
+        <input
+          type="file"
+          id="jazzcashScreenshot"
+          accept="image/*"
+        >
       </div>
 
-    </div>
-
-    <!-- SCREENSHOT -->
-    <div class="deposit-field">
-
-      <label for="jazzcashScreenshot">
-        Payment Screenshot
-      </label>
-
-      <input
-        type="file"
-        id="jazzcashScreenshot"
-        accept="image/*"
-      >
+      <button
+        type="button"
+        class="jazzcash-submit-btn"
+        id="submitJazzCashDeposit">
+        💚 Submit Proof
+      </button>
 
     </div>
-
-    <!-- SUBMIT -->
-    <button
-      type="button"
-      class="jazzcash-submit-btn"
-      id="submitJazzCashDeposit">
-      💚 Submit Deposit
-    </button>
 
   </div>
 
 </div>
 
+
+
+
     
 
-<!-- EASYPAISA DEPOSIT POPUP -->
+    <!-- EASYPAISA DEPOSIT POPUP -->
 <div class="easypaisa-deposit-overlay" id="easypaisaDepositOverlay">
 
   <div class="easypaisa-deposit-popup">
@@ -18908,7 +18906,12 @@ submitBinanceDeposit.addEventListener("click", async function () {
 
     
     
-  const jazzcashDepositOverlay =
+
+// ==========================================
+// JAZZCASH DEPOSIT - COMPLETE JAVASCRIPT
+// ==========================================
+
+const jazzcashDepositOverlay =
   document.getElementById("jazzcashDepositOverlay");
 
 const jazzcashDepositClose =
@@ -18917,28 +18920,25 @@ const jazzcashDepositClose =
 const jazzcashDepositButton =
   document.querySelector('.new-deposit-method[data-method="jazzcash"]');
 
+const jazzcashAmountStage =
+  document.getElementById("jazzcashAmountStage");
 
-jazzcashDepositButton.addEventListener("click", function () {
+const jazzcashPaymentStage =
+  document.getElementById("jazzcashPaymentStage");
 
-  newDepositOverlay.classList.remove("show");
+const jazzcashAmount =
+  document.getElementById("jazzcashAmount");
 
-  jazzcashDepositOverlay.classList.add("show");
+const jazzcashPayButton =
+  document.getElementById("jazzcashPayButton");
 
-});
+const jazzcashSummarySNX =
+  document.getElementById("jazzcashSummarySNX");
 
+const jazzcashPaymentAmount =
+  document.getElementById("jazzcashPaymentAmount");
 
-jazzcashDepositClose.addEventListener("click", function () {
-
-  jazzcashDepositOverlay.classList.remove("show");
-
-});
-
-
-
-  const jazzcashAmount =
-document.getElementById("jazzcashAmount");
-
-    const jazzcashFee =
+const jazzcashFee =
   document.getElementById("jazzcashFee");
 
 const jazzcashYouPay =
@@ -18947,58 +18947,78 @@ const jazzcashYouPay =
 const jazzcashYouReceive =
   document.getElementById("jazzcashYouReceive");
 
-
-jazzcashAmount.addEventListener("input", function () {
-
-  const amount =
-    parseFloat(jazzcashAmount.value) || 0;
-
-  // 10% transaction fee
-  const fee =
-    amount * 0.10;
-
-  const youPay =
-    amount + fee;
-
-  // 280 PKR = 67.5 SNX
-  const youReceive =
-    amount * (67.5 / 280);
-
-
-  jazzcashFee.textContent =
-    "PKR " + fee.toFixed(2);
-
-  jazzcashYouPay.textContent =
-    "PKR " + youPay.toFixed(2);
-
-  jazzcashYouReceive.textContent =
-    youReceive.toFixed(2);
-
-});
-
-
-  
-    
-    const submitJazzCashDeposit =
-  document.getElementById("submitJazzCashDeposit");
-
 const jazzcashScreenshot =
   document.getElementById("jazzcashScreenshot");
 
+const submitJazzCashDeposit =
+  document.getElementById("submitJazzCashDeposit");
 
-submitJazzCashDeposit.addEventListener("click", async function () {
+const copyJazzCashNumber =
+  document.getElementById("copyJazzCashNumber");
 
-  const amount = parseFloat(jazzcashAmount.value) || 0;
+const jazzcashNumber =
+  document.getElementById("jazzcashNumber");
 
-  if (!jazzcashAmount.value || amount <= 0) {
-    alert("Please enter your deposit amount.");
+let jazzcashPendingSNX = 0;
+
+// OPEN JAZZCASH POPUP
+jazzcashDepositButton.addEventListener("click", function () {
+  newDepositOverlay.classList.remove("show");
+  jazzcashDepositOverlay.classList.add("show");
+});
+
+// CLOSE JAZZCASH POPUP
+jazzcashDepositClose.addEventListener("click", function () {
+  jazzcashDepositOverlay.classList.remove("show");
+});
+
+// COPY JAZZCASH NUMBER
+copyJazzCashNumber.addEventListener("click", async function () {
+  const number = jazzcashNumber.textContent.trim();
+
+  try {
+    await navigator.clipboard.writeText(number);
+    alert("JazzCash number copied!");
+  } catch (error) {
+    alert("Please copy the JazzCash number manually: " + number);
+  }
+});
+
+// STAGE 1: CALCULATE PAYMENT
+jazzcashPayButton.addEventListener("click", function () {
+  const snxAmount = parseFloat(jazzcashAmount.value) || 0;
+
+  if (snxAmount < 67.5) {
+    alert("Minimum deposit is 67.5 SNX.");
     jazzcashAmount.focus();
     return;
   }
 
-  if (amount < 280) {
-    alert("Minimum deposit is 280 PKR.");
-    jazzcashAmount.focus();
+  // 280 PKR = 67.5 SNX
+  const paymentAmount = snxAmount * (280 / 67.5);
+
+  // 10% transaction fee
+  const fee = paymentAmount * 0.10;
+
+  const total = paymentAmount + fee;
+
+  jazzcashPendingSNX = snxAmount;
+
+  jazzcashSummarySNX.textContent = snxAmount.toFixed(2);
+  jazzcashPaymentAmount.textContent = "PKR " + paymentAmount.toFixed(2);
+  jazzcashFee.textContent = "PKR " + fee.toFixed(2);
+  jazzcashYouPay.textContent = "PKR " + total.toFixed(2);
+  jazzcashYouReceive.textContent = snxAmount.toFixed(2);
+
+  jazzcashAmountStage.style.display = "none";
+  jazzcashPaymentStage.style.display = "block";
+});
+
+// STAGE 2: SUBMIT PAYMENT PROOF
+submitJazzCashDeposit.addEventListener("click", async function () {
+
+  if (!jazzcashPendingSNX || jazzcashPendingSNX < 67.5) {
+    alert("Please enter a valid SNX amount.");
     return;
   }
 
@@ -19008,6 +19028,7 @@ submitJazzCashDeposit.addEventListener("click", async function () {
   }
 
   const button = submitJazzCashDeposit;
+
   button.disabled = true;
   button.textContent = "Submitting...";
 
@@ -19015,16 +19036,16 @@ submitJazzCashDeposit.addEventListener("click", async function () {
 
     await saveDepositRequest(
       "JazzCash",
-      amount,
+      jazzcashPendingSNX,
       jazzcashScreenshot
     );
 
     jazzcashAmount.value = "";
     jazzcashScreenshot.value = "";
+    jazzcashPendingSNX = 0;
 
-    jazzcashFee.textContent = "PKR 0.00";
-    jazzcashYouPay.textContent = "PKR 0.00";
-    jazzcashYouReceive.textContent = "0.00";
+    jazzcashAmountStage.style.display = "block";
+    jazzcashPaymentStage.style.display = "none";
 
     jazzcashDepositOverlay.classList.remove("show");
     depositSuccessOverlay.classList.add("show");
@@ -19037,7 +19058,7 @@ submitJazzCashDeposit.addEventListener("click", async function () {
   } finally {
 
     button.disabled = false;
-    button.textContent = "💚 Submit Deposit";
+    button.textContent = "💚 Submit Proof";
 
   }
 
