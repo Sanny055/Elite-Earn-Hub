@@ -1827,6 +1827,190 @@
       </div>
     </section>
 
+
+
+
+
+
+
+<!-- ==========================================
+     DEPOSIT REQUESTS PAGE
+========================================== -->
+
+<section class="deposit-requests-page" id="depositRequestsPage" style="display:none;">
+
+  <!-- PAGE HEADER -->
+  <div class="deposit-page-header">
+    <h2 class="section-heading">Deposit Requests</h2>
+
+    <button type="button" class="deposit-back-btn" id="depositBackBtn">
+      <i class="fa-solid fa-arrow-left"></i>
+      BACK TO ADMIN PANEL
+    </button>
+  </div>
+
+
+  <!-- 01: DEPOSIT OVERVIEW -->
+  <div class="deposit-section">
+
+    <h3 class="deposit-section-heading">Deposit Overview</h3>
+
+    <div class="deposit-stats-grid">
+
+      <div class="deposit-stat-card total">
+        <span>Total Requests</span>
+        <strong id="depositTotalRequests">—</strong>
+      </div>
+
+      <div class="deposit-stat-card pending">
+        <span>Pending</span>
+        <strong id="depositPendingRequests">—</strong>
+      </div>
+
+      <div class="deposit-stat-card accepted">
+        <span>Accepted</span>
+        <strong id="depositAcceptedRequests">—</strong>
+      </div>
+
+      <div class="deposit-stat-card rejected">
+        <span>Rejected</span>
+        <strong id="depositRejectedRequests">—</strong>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 02: NEW DEPOSIT REQUESTS -->
+  <div class="deposit-section">
+
+    <h3 class="deposit-section-heading">
+      NEW DEPOSIT REQUESTS
+    </h3>
+
+    <div class="deposit-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="depositPendingSearch"
+        placeholder="Search Username / User ID / Transaction ID..."
+      >
+    </div>
+
+    <div class="deposit-filter-buttons">
+
+      <button type="button" class="deposit-filter-btn active"
+        data-deposit-filter="all">All</button>
+
+      <button type="button" class="deposit-filter-btn"
+        data-deposit-filter="pending">Pending</button>
+
+    </div>
+
+    <!-- PENDING REQUESTS WILL APPEAR HERE -->
+    <div id="pendingDepositRequestsList" class="deposit-requests-list">
+
+      <div class="deposit-empty-state">
+        <i class="fa-solid fa-inbox"></i>
+        <p>Pending deposit requests will appear here.</p>
+      </div>
+
+    </div>
+
+    <button type="button" class="deposit-load-more-btn"
+      id="loadMoreDepositRequests">
+      LOAD MORE REQUESTS
+    </button>
+
+  </div>
+
+
+  <!-- 03: DEPOSIT HISTORY -->
+  <div class="deposit-section">
+
+    <h3 class="deposit-section-heading">
+      DEPOSIT HISTORY
+    </h3>
+
+    <!-- HISTORY STATISTICS -->
+    <div class="deposit-history-stats">
+
+      <div class="deposit-history-stat-card">
+        <span>Total Processed</span>
+        <strong id="depositHistoryTotal">—</strong>
+      </div>
+
+      <div class="deposit-history-stat-card">
+        <span>Total SNX Deposited</span>
+        <strong id="depositHistoryTotalSNX">—</strong>
+      </div>
+
+    </div>
+
+
+    <!-- HISTORY SEARCH -->
+    <div class="deposit-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="depositHistorySearch"
+        placeholder="Search Username / User ID / Transaction ID..."
+      >
+    </div>
+
+
+    <!-- HISTORY FILTERS -->
+    <div class="deposit-history-filters">
+
+      <select id="depositHistoryStatus">
+        <option value="all">All Status</option>
+        <option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option>
+      </select>
+
+      <select id="depositHistoryMethod">
+        <option value="all">All Methods</option>
+        <option value="binance">Binance BEP-20</option>
+        <option value="jazzcash">JazzCash</option>
+        <option value="easypaisa">EasyPaisa</option>
+      </select>
+
+    </div>
+
+
+    <!-- ACCEPTED AND REJECTED REQUESTS -->
+    <div id="depositHistoryList" class="deposit-history-list">
+
+      <div class="deposit-empty-state">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <p>Deposit history will appear here.</p>
+      </div>
+
+    </div>
+
+    <button type="button" class="deposit-load-more-btn"
+      id="loadMoreDepositHistory">
+      LOAD MORE HISTORY
+    </button>
+
+  </div>
+
+</section>
+
+<!-- END DEPOSIT REQUESTS PAGE -->
+
+
+
+
+
+
+
+
+
+
+    
     <!-- 04: Advertisement Center -->
     <section class="section">
       <h2 class="section-heading">Advertisement Center <span class="section-number">04</span></h2>
