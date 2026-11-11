@@ -10884,116 +10884,102 @@ footer strong{
 
 </div>
 
+
+
+
+
 <!-- BINANCE DEPOSIT POPUP -->
 <div class="binance-deposit-overlay" id="binanceDepositOverlay">
-
   <div class="binance-deposit-popup">
 
-    <button
-      type="button"
-      class="binance-deposit-close"
-      id="binanceDepositClose">
-      ×
-    </button>
+    <button type="button" class="binance-deposit-close" id="binanceDepositClose">×</button>
 
-    <div class="binance-deposit-icon">
-      🟡
-    </div>
-
+    <div class="binance-deposit-icon">🟡</div>
     <h2>Binance Deposit</h2>
+    <p class="binance-deposit-subtitle">Deposit USDT via BEP-20</p>
 
-    <p class="binance-deposit-subtitle">
-      Deposit USDT via BEP-20
-    </p>
+    <!-- STAGE 1: ENTER SNX AMOUNT -->
+    <div id="binanceAmountStage">
 
-    <!-- PAYMENT DETAILS -->
-    <div class="binance-payment-details">
-
-      <div class="payment-label">
-        Binance USDT (BEP-20) Address
+      <div class="deposit-field">
+        <label for="binanceAmount">Amount in SNX</label>
+        <input
+          type="number"
+          id="binanceAmount"
+          min="67.5"
+          step="0.01"
+          placeholder="Minimum 67.5 SNX"
+        >
+        <small>Minimum Deposit: 67.5 SNX</small>
       </div>
 
-      <div class="payment-address-row">
-
-        <span id="binanceWalletAddress">
-          YOUR_BINANCE_BEP20_ADDRESS
-        </span>
-
-        <button
-          type="button"
-          id="copyBinanceAddress">
-          Copy
-        </button>
-
-      </div>
+      <button type="button" class="binance-submit-btn" id="binancePayButton">
+        Pay
+      </button>
 
     </div>
 
-    <!-- AMOUNT -->
-    <div class="deposit-field">
+    <!-- STAGE 2: PAYMENT DETAILS -->
+    <div id="binancePaymentStage" style="display:none;">
 
-      <label for="binanceAmount">
-        Amount (USD)
-      </label>
+      <div class="binance-payment-details">
+        <div class="payment-label">Binance USDT (BEP-20) Address</div>
 
-      <input
-        type="number"
-        id="binanceAmount"
-        min="1"
-        step="0.01"
-        placeholder="Minimum $1"
-      >
-
-    </div>
-
-    <!-- CALCULATION -->
-    <div class="binance-calculation">
-
-      <div>
-        <span>Transaction Fee (10%)</span>
-        <strong id="binanceFee">$0.00</strong>
+        <div class="payment-address-row">
+          <span id="binanceWalletAddress">YOUR_BINANCE_BEP20_ADDRESS</span>
+          <button type="button" id="copyBinanceAddress">Copy</button>
+        </div>
       </div>
 
-      <div>
-        <span>You Pay</span>
-        <strong id="binanceYouPay">$0.00</strong>
+      <div class="binance-calculation">
+        <div>
+          <span>Deposit Amount</span>
+          <strong><span id="binanceSummarySNX">0.00</span> SNX</strong>
+        </div>
+
+        <div>
+          <span>Payment Amount</span>
+          <strong id="binancePaymentAmount">$0.00</strong>
+        </div>
+
+        <div>
+          <span>Platform Fee (10%)</span>
+          <strong id="binanceFee">$0.00</strong>
+        </div>
+
+        <div>
+          <span>Total Amount to Pay</span>
+          <strong id="binanceYouPay">$0.00</strong>
+        </div>
+
+        <div>
+          <span>You Will Receive</span>
+          <strong><span id="binanceYouReceive">0.00</span> SNX</strong>
+        </div>
       </div>
 
-      <div>
-        <span>You Receive</span>
-        <strong>
-          <span id="binanceYouReceive">0.00</span> SNX
-        </strong>
+      <div class="deposit-field">
+        <label for="binanceScreenshot">Payment Screenshot</label>
+        <input type="file" id="binanceScreenshot" accept="image/*">
       </div>
 
-    </div>
-
-    <!-- SCREENSHOT -->
-    <div class="deposit-field">
-
-      <label for="binanceScreenshot">
-        Payment Screenshot
-      </label>
-
-      <input
-        type="file"
-        id="binanceScreenshot"
-        accept="image/*"
-      >
+      <button type="button" class="binance-submit-btn" id="submitBinanceDeposit">
+        Submit Proof
+      </button>
 
     </div>
-
-    <!-- SUBMIT -->
-    <button
-      type="button"
-      class="binance-submit-btn"
-      id="submitBinanceDeposit">
-      Submit Deposit
-    </button>
-
   </div>
-
 </div>
+
+
+
+
+
+
+
+    
+
+    
 
 <!-- DEPOSIT REQUEST SUBMITTED POPUP -->
 <div class="deposit-success-overlay" id="depositSuccessOverlay">
@@ -18712,48 +18698,55 @@ binanceDepositClose.addEventListener("click", function () {
   
 
     
-    const binanceAmount =
-  document.getElementById("binanceAmount");
+    
 
-const binanceFee =
-  document.getElementById("binanceFee");
+const binanceAmount = document.getElementById("binanceAmount");
 
-const binanceYouPay =
-  document.getElementById("binanceYouPay");
+const binanceFee = document.getElementById("binanceFee");
+const binanceYouPay = document.getElementById("binanceYouPay");
+const binanceYouReceive = document.getElementById("binanceYouReceive");
 
-const binanceYouReceive =
-  document.getElementById("binanceYouReceive");
+const binanceAmountStage = document.getElementById("binanceAmountStage");
+const binancePaymentStage = document.getElementById("binancePaymentStage");
+
+const binancePayButton = document.getElementById("binancePayButton");
+
+const binanceSummarySNX = document.getElementById("binanceSummarySNX");
+const binancePaymentAmount = document.getElementById("binancePaymentAmount");
+
+let binancePendingSNX = 0;
+let binancePendingUSDT = 0;
+
+binancePayButton.addEventListener("click", function () {
+
+    const snxAmount = parseFloat(binanceAmount.value) || 0;
+
+    if (snxAmount < 67.5) {
+        alert("Minimum deposit is 67.5 SNX.");
+        binanceAmount.focus();
+        return;
+    }
+
+    const usdtAmount = snxAmount / 67.5;
+    const fee = usdtAmount * 0.10;
+    const total = usdtAmount + fee;
+
+    binancePendingSNX = snxAmount;
+    binancePendingUSDT = usdtAmount;
+
+    binanceSummarySNX.textContent = snxAmount.toFixed(2);
+    binancePaymentAmount.textContent = "$" + usdtAmount.toFixed(2);
+    binanceFee.textContent = "$" + fee.toFixed(2);
+    binanceYouPay.textContent = "$" + total.toFixed(2);
+    binanceYouReceive.textContent = snxAmount.toFixed(2);
+
+    binanceAmountStage.style.display = "none";
+    binancePaymentStage.style.display = "block";
+
+});
 
 
-binanceAmount.addEventListener("input", function () {
-
-  const amount =
-    parseFloat(binanceAmount.value) || 0;
-
-  const fee =
-    amount * 0.10;
-
-  const youPay =
-    amount + fee;
-
-  const youReceive =
-    amount * 67.5;
-
-
-  binanceFee.textContent =
-    "$" + fee.toFixed(2);
-
-  binanceYouPay.textContent =
-    "$" + youPay.toFixed(2);
-
-  binanceYouReceive.textContent =
-    youReceive.toFixed(2);
-
-}); 
-  
-
-
-
+      
 
 
 // ======================================
@@ -18835,61 +18828,59 @@ const checkTransactionHistory =
 
 submitBinanceDeposit.addEventListener("click", async function () {
 
-  const amount = parseFloat(binanceAmount.value) || 0;
+    if (!binancePendingSNX || binancePendingSNX < 67.5) {
+        alert("Please enter a valid SNX amount.");
+        return;
+    }
 
-  if (!binanceAmount.value || amount <= 0) {
-    alert("Please enter your deposit amount.");
-    binanceAmount.focus();
-    return;
-  }
+    if (!binanceScreenshot.files.length) {
+        alert("Please upload your payment screenshot.");
+        return;
+    }
 
-  if (amount < 1) {
-    alert("Minimum deposit is $1.");
-    binanceAmount.focus();
-    return;
-  }
+    const button = submitBinanceDeposit;
+    button.disabled = true;
+    button.textContent = "Submitting...";
 
-  if (!binanceScreenshot.files.length) {
-    alert("Please upload your payment screenshot.");
-    return;
-  }
+    try {
 
-  const button = submitBinanceDeposit;
-  button.disabled = true;
-  button.textContent = "Submitting...";
+        await saveDepositRequest(
+            "Binance",
+            binancePendingSNX,
+            binanceScreenshot
+        );
 
-  try {
+        binanceAmount.value = "";
+        binanceScreenshot.value = "";
 
-    await saveDepositRequest(
-      "Binance",
-      amount,
-      binanceScreenshot
-    );
+        binancePendingSNX = 0;
+        binancePendingUSDT = 0;
 
-    binanceAmount.value = "";
-    binanceScreenshot.value = "";
-    binanceFee.textContent = "$0.00";
-    binanceYouPay.textContent = "$0.00";
-    binanceYouReceive.textContent = "0.00";
+        binanceFee.textContent = "$0.00";
+        binanceYouPay.textContent = "$0.00";
+        binanceYouReceive.textContent = "0.00";
+        binanceSummarySNX.textContent = "0.00";
+        binancePaymentAmount.textContent = "$0.00";
 
-    binanceDepositOverlay.classList.remove("show");
-    depositSuccessOverlay.classList.add("show");
+        binancePaymentStage.style.display = "none";
+        binanceAmountStage.style.display = "block";
 
-  } catch (error) {
+        binanceDepositOverlay.classList.remove("show");
+        depositSuccessOverlay.classList.add("show");
 
-    console.error("Binance Deposit Error:", error);
-    alert("Deposit submission failed: " + error.message);
+    } catch (error) {
 
-  } finally {
+        console.error("Binance Deposit Error:", error);
+        alert("Deposit submission failed: " + error.message);
 
-    button.disabled = false;
-    button.textContent = "Submit Deposit";
+    } finally {
 
-  }
+        button.disabled = false;
+        button.textContent = "Submit Proof";
+
+    }
 
 });
-
-
 
   
 
