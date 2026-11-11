@@ -2621,11 +2621,12 @@ if (totalUsersCounter) {
 
 (function () {
   const pageIds = new Set([
-    "userProfilePage",
-    "referralPage",
-    "userDetailsPage",
-    "userReferralsPage"
-  ]);
+  "userProfilePage",
+  "referralPage",
+  "userDetailsPage",
+  "userReferralsPage",
+  "depositRequestsPage"
+]);
 
   const pageHistory = [];
   let currentPage = "dashboard";
@@ -2840,15 +2841,17 @@ document.getElementById("userReferralsBackBtn")?.addEventListener("click", funct
 
 
 
-  // DEPOSIT REQUESTS PAGE: OPEN + BACK
+// DEPOSIT REQUESTS PAGE: OPEN + BACK
 
-  document.querySelector('.menu-button[data-label="Deposit Requests"]')
-    ?.addEventListener("click", () => open("depositRequestsPage"));
+document.querySelector('.menu-button[data-label="Deposit Requests"]')
+  ?.addEventListener("click", () => {
+    window.adminPageNavigation.open("depositRequestsPage");
+  });
 
-  document.getElementById("depositBackBtn")
-    ?.addEventListener("click", dashboard);
-
-
+document.getElementById("depositBackBtn")
+  ?.addEventListener("click", () => {
+    window.adminPageNavigation.dashboard();
+  });
 
 
 
