@@ -2856,6 +2856,108 @@ document.getElementById("depositBackBtn")
 
 
 
+<script>
+(function () {
+  const client = window.supabaseClient;
+  const list = document.getElementById("pendingDepositRequestsList");
+
+  async function loadPendingDepositRequests() {
+    if (!list) return;
+
+    if (!window.supabaseClient) {
+      list.textContent = "Supabase connection available nahi hai. Page reload karein.";
+      return;
+    }
+
+    list.innerHTML = '<div class="deposit-empty-state">Loading deposit requests...</div>';
+
+    try {
+      const { data, error } = await window.supabaseClient
+        .from("deposit_requests")
+        .select("*")
+        .eq("status", "pending")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+        list.innerHTML = `
+          <div class="deposit-empty-state">
+            <i class="fa-solid fa-inbox"></i>
+            <p>Abhi koi pending deposit request nahi hai.</p>
+          </div>`;
+        return;
+      }
+
+      const safe = value => String(value ?? "—").replace(
+        /[&<>"']/g,
+        char => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[char]
+      );
+
+      list.innerHTML = data.map(item => {
+        const proof = item.proof_url &&
+          /^https:\/\/\S+$/i.test(item.proof_url)
+          ? `<a href="${safe(item.proof_url)}"
+               target="_blank" rel="noopener noreferrer"
+               style="color:#45B8FF;">View Payment Proof</a>`
+          : "No payment proof";
+
+        return `
+          <div style="
+            background:#1b3028;
+            border:1px solid #39D98A55;
+            border-radius:14px;
+            padding:16px;
+            margin-bottom:13px;
+            color:#fff;
+          ">
+            <h3 style="color:#39D98A;margin:0 0 12px;">
+              ${safe(item.username)}
+            </h3>
+
+            <p>Email: ${safe(item.email)}</p>
+            <p>User ID: ${safe(item.user_id)}</p>
+            <p>Amount: ${safe(item.amount)} SNX</p>
+            <p>Payment Method: ${safe(item.payment_method)}</p>
+            <p>Sender Name: ${safe(item.sender_name)}</p>
+            <p>Transaction ID: ${safe(item.transaction_id)}</p>
+            <p>Submitted: ${safe(
+              item.created_at
+                ? new Date(item.created_at).toLocaleString()
+                : "—"
+            )}</p>
+            <p>${proof}</p>
+
+            <span style="color:#FFD447;font-weight:bold;">
+              PENDING
+            </span>
+          </div>
+        `;
+      }).join("");
+
+    } catch (error) {
+      console.error("Deposit Requests Error:", error);
+      list.textContent = "Error loading requests: " + error.message;
+    }
+  }
+
+  const depositButton = document.querySelector(
+    '.menu-button[data-label="Deposit Requests"]'
+  );
+
+  if (depositButton) {
+    depositButton.addEventListener("click", loadPendingDepositRequests);
+  }
+
+})();
+
+
 
 
     
