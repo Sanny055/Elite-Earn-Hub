@@ -11126,7 +11126,7 @@ footer strong{
 
     
 
-    <!-- EASYPAISA DEPOSIT POPUP -->
+<!-- EASYPAISA DEPOSIT POPUP -->
 <div class="easypaisa-deposit-overlay" id="easypaisaDepositOverlay">
 
   <div class="easypaisa-deposit-popup">
@@ -11145,99 +11145,143 @@ footer strong{
     <h2>EasyPaisa Deposit</h2>
 
     <p class="easypaisa-deposit-subtitle">
-      Deposit PKR using EasyPaisa
+      Deposit using EasyPaisa
     </p>
 
-    <!-- PAYMENT DETAILS -->
-    <div class="easypaisa-payment-details">
+    <!-- STAGE 1: ENTER SNX AMOUNT -->
+    <div id="easypaisaAmountStage">
 
-      <div class="easypaisa-payment-label">
-        EasyPaisa Payment Details
+      <div class="deposit-field">
+
+        <label for="easypaisaAmount">
+          Deposit Amount (SNX)
+        </label>
+
+        <input
+          type="number"
+          id="easypaisaAmount"
+          min="67.5"
+          step="0.01"
+          placeholder="Minimum 67.5 SNX"
+        >
+
       </div>
 
-      <div class="easypaisa-payment-row">
-        <span>EasyPaisa Number</span>
-        <strong id="easypaisaNumber">
-          03XX-XXXXXXX
-        </strong>
-      </div>
+      <div class="easypaisa-calculation">
 
-      <div class="easypaisa-payment-row">
-        <span>Account Name</span>
-        <strong id="easypaisaAccountName">
-          Your Name
-        </strong>
+        <div>
+          <span>Minimum Deposit</span>
+          <strong>67.5 SNX</strong>
+        </div>
+
+        <div>
+          <span>You Will Receive</span>
+          <strong id="easypaisaStage1Receive">0.00 SNX</strong>
+        </div>
+
       </div>
 
       <button
         type="button"
-        id="copyEasyPaisaNumber">
-        📋 Copy Number
+        class="easypaisa-submit-btn"
+        id="easypaisaPayButton">
+        Continue to Payment
       </button>
 
     </div>
 
-    <!-- AMOUNT -->
-    <div class="deposit-field">
 
-      <label for="easypaisaAmount">
-        Deposit Amount (PKR)
-      </label>
+    <!-- STAGE 2: PAYMENT DETAILS -->
+    <div id="easypaisaPaymentStage" style="display:none;">
 
-      <input
-        type="number"
-        id="easypaisaAmount"
-        min="280"
-        step="1"
-        placeholder="Minimum 280 PKR"
-      >
+      <!-- PAYMENT DETAILS -->
+      <div class="easypaisa-payment-details">
 
-    </div>
+        <div class="easypaisa-payment-label">
+          EasyPaisa Payment Details
+        </div>
 
-    <!-- CALCULATION -->
-    <div class="easypaisa-calculation">
+        <div class="easypaisa-payment-row">
+          <span>EasyPaisa Number</span>
 
-      <div>
-        <span>Transaction Fee (10%)</span>
-        <strong id="easypaisaFee">PKR 0.00</strong>
+          <strong id="easypaisaNumber">
+            03XX-XXXXXXX
+          </strong>
+        </div>
+
+        <div class="easypaisa-payment-row">
+          <span>Account Name</span>
+
+          <strong id="easypaisaAccountName">
+            Your Name
+          </strong>
+        </div>
+
+        <button
+          type="button"
+          id="copyEasyPaisaNumber">
+          📋 Copy Number
+        </button>
+
       </div>
 
-      <div>
-        <span>You Pay</span>
-        <strong id="easypaisaYouPay">PKR 0.00</strong>
+
+      <!-- DEPOSIT SUMMARY -->
+      <div class="easypaisa-calculation">
+
+        <div>
+          <span>Deposit Amount</span>
+          <strong id="easypaisaSummarySNX">0.00 SNX</strong>
+        </div>
+
+        <div>
+          <span>Payment Amount</span>
+          <strong id="easypaisaPaymentAmount">PKR 0.00</strong>
+        </div>
+
+        <div>
+          <span>Transaction Fee (10%)</span>
+          <strong id="easypaisaFee">PKR 0.00</strong>
+        </div>
+
+        <div>
+          <span>Total You Pay</span>
+          <strong id="easypaisaYouPay">PKR 0.00</strong>
+        </div>
+
+        <div>
+          <span>You Will Receive</span>
+          <strong id="easypaisaYouReceive">0.00 SNX</strong>
+        </div>
+
       </div>
 
-      <div>
-        <span>You Receive</span>
-        <strong>
-          <span id="easypaisaYouReceive">0.00</span> SNX
-        </strong>
+
+      <!-- SCREENSHOT -->
+      <div class="deposit-field">
+
+        <label for="easypaisaScreenshot">
+          Payment Screenshot
+        </label>
+
+        <input
+          type="file"
+          id="easypaisaScreenshot"
+          accept="image/*"
+        >
+
       </div>
 
-    </div>
 
-    <!-- SCREENSHOT -->
-    <div class="deposit-field">
-
-      <label for="easypaisaScreenshot">
-        Payment Screenshot
-      </label>
-
-      <input
-        type="file"
-        id="easypaisaScreenshot"
-        accept="image/*"
-      >
+      <!-- SUBMIT -->
+      <button
+        type="button"
+        class="easypaisa-submit-btn"
+        id="submitEasyPaisaDeposit">
+        💚 Submit Proof
+      </button>
 
     </div>
-
-    <!-- SUBMIT -->
-    <button
-      type="button"
-      class="easypaisa-submit-btn"
-      id="submitEasyPaisaDeposit">
-      💚 Submit Deposit
-    </button>
 
   </div>
 
@@ -19066,8 +19110,9 @@ submitJazzCashDeposit.addEventListener("click", async function () {
 
 
 
-  // ==========================================
-// EASYPAISA DEPOSIT - COMPLETE JAVASCRIPT
+
+// ==========================================
+// EASYPAISA DEPOSIT - TWO STAGE JAVASCRIPT
 // ==========================================
 
 // ---------- ELEMENTS ----------
@@ -19078,8 +19123,26 @@ const easypaisaDepositOverlay =
 const easypaisaDepositClose =
   document.getElementById("easypaisaDepositClose");
 
+const easypaisaAmountStage =
+  document.getElementById("easypaisaAmountStage");
+
+const easypaisaPaymentStage =
+  document.getElementById("easypaisaPaymentStage");
+
 const easypaisaAmount =
   document.getElementById("easypaisaAmount");
+
+const easypaisaStage1Receive =
+  document.getElementById("easypaisaStage1Receive");
+
+const easypaisaPayButton =
+  document.getElementById("easypaisaPayButton");
+
+const easypaisaSummarySNX =
+  document.getElementById("easypaisaSummarySNX");
+
+const easypaisaPaymentAmount =
+  document.getElementById("easypaisaPaymentAmount");
 
 const easypaisaFee =
   document.getElementById("easypaisaFee");
@@ -19103,6 +19166,14 @@ const easypaisaNumber =
   document.getElementById("easypaisaNumber");
 
 
+// ---------- SETTINGS ----------
+
+const EASYPAISA_MIN_SNX = 67.5;
+const EASYPAISA_PKR_RATE = 280 / 67.5;
+
+let easypaisaPendingSNX = 0;
+
+
 // ---------- OPEN EASYPAISA POPUP ----------
 
 const easypaisaDepositButton =
@@ -19112,16 +19183,16 @@ const easypaisaDepositButton =
 
 if (easypaisaDepositButton) {
 
-  easypaisaDepositButton.addEventListener(
-    "click",
-    function () {
+  easypaisaDepositButton.addEventListener("click", function () {
 
-      newDepositOverlay.classList.remove("show");
+    newDepositOverlay.classList.remove("show");
 
-      easypaisaDepositOverlay.classList.add("show");
+    easypaisaAmountStage.style.display = "block";
+    easypaisaPaymentStage.style.display = "none";
 
-    }
-  );
+    easypaisaDepositOverlay.classList.add("show");
+
+  });
 
 }
 
@@ -19130,52 +19201,79 @@ if (easypaisaDepositButton) {
 
 if (easypaisaDepositClose) {
 
-  easypaisaDepositClose.addEventListener(
-    "click",
-    function () {
+  easypaisaDepositClose.addEventListener("click", function () {
 
-      easypaisaDepositOverlay.classList.remove("show");
+    easypaisaDepositOverlay.classList.remove("show");
 
-    }
-  );
+  });
 
 }
 
 
-// ---------- CALCULATION ----------
+// ---------- STAGE 1 CALCULATION ----------
 
 if (easypaisaAmount) {
 
-  easypaisaAmount.addEventListener(
-    "input",
-    function () {
+  easypaisaAmount.addEventListener("input", function () {
 
-      const amount =
-        parseFloat(easypaisaAmount.value) || 0;
+    const amount = parseFloat(easypaisaAmount.value) || 0;
 
-      // 10% transaction fee
-      const fee =
-        amount * 0.10;
+    easypaisaStage1Receive.textContent =
+      amount.toFixed(2) + " SNX";
 
-      const youPay =
-        amount + fee;
+  });
 
-      // 280 PKR = 67.5 SNX
-      const youReceive =
-        amount * (67.5 / 280);
+}
 
 
-      easypaisaFee.textContent =
-        "PKR " + fee.toFixed(2);
+// ---------- CONTINUE TO PAYMENT ----------
 
-      easypaisaYouPay.textContent =
-        "PKR " + youPay.toFixed(2);
+if (easypaisaPayButton) {
 
-      easypaisaYouReceive.textContent =
-        youReceive.toFixed(2);
+  easypaisaPayButton.addEventListener("click", function () {
 
+    const amount = parseFloat(easypaisaAmount.value) || 0;
+
+    if (!easypaisaAmount.value || amount <= 0) {
+      alert("Please enter your SNX amount.");
+      easypaisaAmount.focus();
+      return;
     }
-  );
+
+    if (amount < EASYPAISA_MIN_SNX) {
+      alert("Minimum deposit is 67.5 SNX.");
+      easypaisaAmount.focus();
+      return;
+    }
+
+    easypaisaPendingSNX = amount;
+
+    // PKR calculation
+    const paymentAmount = amount * EASYPAISA_PKR_RATE;
+    const fee = paymentAmount * 0.10;
+    const total = paymentAmount + fee;
+
+    // Stage 2 summary
+    easypaisaSummarySNX.textContent =
+      amount.toFixed(2) + " SNX";
+
+    easypaisaPaymentAmount.textContent =
+      "PKR " + paymentAmount.toFixed(2);
+
+    easypaisaFee.textContent =
+      "PKR " + fee.toFixed(2);
+
+    easypaisaYouPay.textContent =
+      "PKR " + total.toFixed(2);
+
+    easypaisaYouReceive.textContent =
+      amount.toFixed(2) + " SNX";
+
+    // Switch stages
+    easypaisaAmountStage.style.display = "none";
+    easypaisaPaymentStage.style.display = "block";
+
+  });
 
 }
 
@@ -19184,112 +19282,106 @@ if (easypaisaAmount) {
 
 if (copyEasyPaisaNumber) {
 
-  copyEasyPaisaNumber.addEventListener(
-    "click",
-    function () {
+  copyEasyPaisaNumber.addEventListener("click", function () {
 
-      const number =
-        easypaisaNumber.textContent.trim();
+    const number = easypaisaNumber.textContent.trim();
 
-      navigator.clipboard.writeText(number)
-        .then(function () {
+    navigator.clipboard.writeText(number)
+      .then(function () {
 
-          copyEasyPaisaNumber.textContent =
-            "✅ Copied";
+        copyEasyPaisaNumber.textContent = "✅ Copied";
 
-          setTimeout(function () {
+        setTimeout(function () {
 
-            copyEasyPaisaNumber.textContent =
-              "📋 Copy Number";
+          copyEasyPaisaNumber.textContent = "📋 Copy Number";
 
-          }, 1500);
+        }, 1500);
 
-        })
-        .catch(function () {
+      })
+      .catch(function () {
 
-          alert("Unable to copy number.");
+        alert("Unable to copy number.");
 
-        });
+      });
 
-    }
-  );
+  });
 
 }
 
 
 // ---------- SUBMIT EASYPAISA DEPOSIT ----------
 
+if (submitEasyPaisaDeposit) {
 
-      
+  submitEasyPaisaDeposit.addEventListener("click", async function () {
 
-      if (submitEasyPaisaDeposit) {
+    if (!easypaisaPendingSNX ||
+        easypaisaPendingSNX < EASYPAISA_MIN_SNX) {
 
-  submitEasyPaisaDeposit.addEventListener(
-    "click",
-    async function () {
-
-      const amount =
-        parseFloat(easypaisaAmount.value) || 0;
-
-      if (!easypaisaAmount.value || amount <= 0) {
-        alert("Please enter your deposit amount.");
-        easypaisaAmount.focus();
-        return;
-      }
-
-      if (amount < 280) {
-        alert("Minimum deposit is 280 PKR.");
-        easypaisaAmount.focus();
-        return;
-      }
-
-      if (!easypaisaScreenshot.files.length) {
-        alert("Please upload your payment screenshot.");
-        return;
-      }
-
-      const button = submitEasyPaisaDeposit;
-      button.disabled = true;
-      button.textContent = "Submitting...";
-
-      try {
-
-        await saveDepositRequest(
-          "EasyPaisa",
-          amount,
-          easypaisaScreenshot
-        );
-
-        easypaisaAmount.value = "";
-        easypaisaScreenshot.value = "";
-
-        easypaisaFee.textContent = "PKR 0.00";
-        easypaisaYouPay.textContent = "PKR 0.00";
-        easypaisaYouReceive.textContent = "0.00";
-
-        easypaisaDepositOverlay.classList.remove("show");
-
-        if (depositSuccessOverlay) {
-          depositSuccessOverlay.classList.add("show");
-        }
-
-      } catch (error) {
-
-        console.error("EasyPaisa Deposit Error:", error);
-        alert("Deposit submission failed: " + error.message);
-
-      } finally {
-
-        button.disabled = false;
-        button.textContent = "💚 Submit Deposit";
-
-      }
+      alert("Please enter a valid SNX amount first.");
+      return;
 
     }
-  );
 
+    if (!easypaisaScreenshot.files.length) {
+
+      alert("Please upload your payment screenshot.");
+      return;
+
+    }
+
+    const button = submitEasyPaisaDeposit;
+
+    button.disabled = true;
+    button.textContent = "Submitting...";
+
+    try {
+
+      await saveDepositRequest(
+        "EasyPaisa",
+        easypaisaPendingSNX,
+        easypaisaScreenshot
+      );
+
+      // Reset form
+      easypaisaAmount.value = "";
+      easypaisaScreenshot.value = "";
+
+      easypaisaPendingSNX = 0;
+
+      easypaisaStage1Receive.textContent = "0.00 SNX";
+      easypaisaSummarySNX.textContent = "0.00 SNX";
+      easypaisaPaymentAmount.textContent = "PKR 0.00";
+      easypaisaFee.textContent = "PKR 0.00";
+      easypaisaYouPay.textContent = "PKR 0.00";
+      easypaisaYouReceive.textContent = "0.00 SNX";
+
+      // Return to Stage 1
+      easypaisaAmountStage.style.display = "block";
+      easypaisaPaymentStage.style.display = "none";
+
+      easypaisaDepositOverlay.classList.remove("show");
+
+      if (depositSuccessOverlay) {
+        depositSuccessOverlay.classList.add("show");
       }
 
+    } catch (error) {
+
+      console.error("EasyPaisa Deposit Error:", error);
+
+      alert("Deposit submission failed: " + error.message);
+
+    } finally {
+
+      button.disabled = false;
+      button.textContent = "💚 Submit Proof";
+
+    }
+
+  });
+
+}
 
   
 
