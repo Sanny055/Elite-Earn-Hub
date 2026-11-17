@@ -2321,7 +2321,7 @@
 
       <select id="depositHistoryStatus">
         <option value="all">All Status</option>
-        <option value="accepted">Accepted</option>
+        <option value="approved">Accepted</option>
         <option value="rejected">Rejected</option>
       </select>
 
@@ -3211,7 +3211,7 @@ await loadDepositHistory();
       const { data, error } = await window.supabaseClient
         .from("deposit_requests")
         .select("*")
-        .in("status", ["accepted", "rejected"])
+        .in("status", ["approved", "rejected"])
         .order("reviewed_at", { ascending: false });
 
       if (error) throw error;
@@ -3234,8 +3234,7 @@ await loadDepositHistory();
         requests.filter(x => x.status === "pending").length;
 
       document.getElementById("depositAcceptedRequests").textContent =
-        requests.filter(x => x.status === "accepted").length;
-
+        requests.filter(x => x.status === "approved").length;
       document.getElementById("depositRejectedRequests").textContent =
         requests.filter(x => x.status === "rejected").length;
 
@@ -3244,7 +3243,7 @@ await loadDepositHistory();
 
       document.getElementById("depositHistoryTotalSNX").textContent =
         allDepositHistory
-          .filter(x => x.status === "accepted")
+          .filter(x => x.status === "approved")
           .reduce((sum, x) => sum + Number(x.amount || 0), 0)
           .toFixed(2) + " SNX";
 
@@ -3344,8 +3343,8 @@ await loadDepositHistory();
                 </strong>
 
                 <span style="
-                  background:${item.status === "accepted" ? "#174C35" : "#5B2525"};
-                  color:${item.status === "accepted" ? "#39D98A" : "#FF7777"};
+                  background:${item.status === "approved" ?  "#174C35" : "#5B2525"};
+                  color:${item.status === "approved" ? "#39D98A": "#FF7777"};
                   padding:3px 8px;
                   border-radius:20px;
                   font-size:10px;
