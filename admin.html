@@ -1730,8 +1730,8 @@
         </article>
         <article class="stat-card">
           <div class="stat-icon blue-bg"><i class="fa-solid fa-arrow-down-to-bracket"></i></div>
-          <div class="stat-label">Total Deposit Requests</div>
-          <div class="stat-value" id="totalDeposits">—</div>
+          <div class="stat-label">Pending Deposit Requests</div>
+          <div class="stat-value" id="pendingDeposits">—</div>
           <div class="stat-status">Awaiting database connection</div>
         </article>
         <article class="stat-card">
@@ -2591,6 +2591,25 @@ if (totalUsersCounter) {
     
     
     
+
+// LOAD PENDING DEPOSIT REQUESTS COUNTER
+const pendingDepositCounter = document.getElementById("pendingDeposits");
+
+if (pendingDepositCounter) {
+  const { count, error } = await supabaseClient
+    .from("deposit_requests")
+    .select("id", { count: "exact", head: true })
+    .eq("status", "pending");
+
+  if (error) {
+    console.error("Pending Deposits Counter Error:", error);
+    pendingDepositCounter.textContent = "—";
+  } else {
+    pendingDepositCounter.textContent = count ?? 0;
+  }
+}
+
+
     
     
     // Only verified admins can see the Admin Panel.
@@ -2898,7 +2917,19 @@ document.getElementById("depositBackBtn")
 
       if (error) throw error;
 
-      if (!data || data.length === 0) {
+     
+      
+    const dashboardPendingCounter =
+  document.getElementById("pendingDeposits");
+
+if (dashboardPendingCounter) {
+  dashboardPendingCounter.textContent = data?.length ?? 0;
+}
+    
+    
+    
+    
+    if (!data || data.length === 0) {
         list.innerHTML = `
           <div class="deposit-empty-state">
             <i class="fa-solid fa-inbox"></i>
@@ -3474,6 +3505,25 @@ await loadDepositHistory();
   });
   }
 
+
+// LIVE PENDING DEPOSIT COUNTER
+if (window.supabaseClient && !window.pendingDepositsLiveChannel) {
+  window.pendingDepositsLiveChannel = window.supabaseClient
+    .channel("dashboard-pending-deposits-live")
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "deposit_requests"
+      },
+      () => loadPendingDepositRequests()
+    )
+    .subscribe();
+}
+
+
+    
 })();
 
   
