@@ -18795,7 +18795,14 @@ binancePayButton.addEventListener("click", function () {
 // SUPABASE DEPOSIT SUBMISSION FUNCTION
 // ======================================
 
-async function saveDepositRequest(paymentMethod, amount, screenshot) {
+
+
+async function saveDepositRequest(
+  paymentMethod,
+  amount,
+  screenshot,
+  paymentDetails = {}
+) {
 
   if (!currentUser || !currentProfile) {
     throw new Error("User profile is not loaded. Please refresh the page.");
@@ -18820,7 +18827,6 @@ async function saveDepositRequest(paymentMethod, amount, screenshot) {
   const filePath =
     currentUser.id + "/" + crypto.randomUUID() + "." + extension;
 
-  // Upload screenshot to private Storage bucket
   const { data: uploadedFile, error: uploadError } =
     await supabaseClient.storage
       .from("deposit-proofs")
@@ -18833,7 +18839,6 @@ async function saveDepositRequest(paymentMethod, amount, screenshot) {
     throw uploadError;
   }
 
-  // Save deposit request in database
   const { error: insertError } =
     await supabaseClient
       .from("deposit_requests")
@@ -18841,8 +18846,15 @@ async function saveDepositRequest(paymentMethod, amount, screenshot) {
         user_id: currentUser.id,
         username: currentProfile.username || currentUser.email?.split("@")[0] || "User",
         email: currentUser.email || "",
+
         amount: amount,
         payment_method: paymentMethod,
+
+        currency: paymentDetails.currency || null,
+        payment_amount: paymentDetails.paymentAmount ?? null,
+        platform_fee: paymentDetails.platformFee ?? null,
+        total_paid: paymentDetails.totalPaid ?? null,
+
         proof_url: uploadedFile.path,
         status: "pending"
       });
@@ -18853,6 +18865,13 @@ async function saveDepositRequest(paymentMethod, amount, screenshot) {
 
   return true;
 }
+
+
+
+
+
+
+    
 
 
 
