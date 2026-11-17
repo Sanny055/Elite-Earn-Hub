@@ -18905,11 +18905,19 @@ submitBinanceDeposit.addEventListener("click", async function () {
 
     try {
 
-        await saveDepositRequest(
-            "Binance",
-            binancePendingSNX,
-            binanceScreenshot
-        );
+        
+await saveDepositRequest(
+    "Binance",
+    binancePendingSNX,
+    binanceScreenshot,
+    {
+        currency: "USDT",
+        paymentAmount: binancePendingUSDT,
+        platformFee: binancePendingUSDT * 0.10,
+        totalPaid: binancePendingUSDT * 1.10
+    }
+);
+
 
         binanceAmount.value = "";
         binanceScreenshot.value = "";
