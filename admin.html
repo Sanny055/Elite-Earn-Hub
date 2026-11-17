@@ -3072,6 +3072,49 @@ document.getElementById("depositBackBtn")
               </span>
             </div>
 
+
+
+            <div style="
+              display:flex;
+              gap:8px;
+              margin-top:12px;
+            ">
+              <button
+                type="button"
+                data-deposit-action="accept"
+                data-request-id="${safe(item.id)}"
+                style="
+                  flex:1;
+                  padding:10px;
+                  background:#39D98A;
+                  color:#14251F;
+                  border:0;
+                  border-radius:7px;
+                  font-weight:800;
+                ">
+                ACCEPT
+              </button>
+
+              <button
+                type="button"
+                data-deposit-action="reject"
+                data-request-id="${safe(item.id)}"
+                style="
+                  flex:1;
+                  padding:10px;
+                  background:#D94A4A;
+                  color:#fff;
+                  border:0;
+                  border-radius:7px;
+                  font-weight:800;
+                ">
+                REJECT
+              </button>
+            </div>
+
+
+
+  
           </div>
         `;
       }));
@@ -3084,12 +3127,352 @@ document.getElementById("depositBackBtn")
     }
   }
 
+
+
+
+  
+  // ACCEPT / REJECT DEPOSIT REQUESTS
+  list.addEventListener("click", async function (event) {
+
+    const button = event.target.closest("[data-deposit-action]");
+    if (!button) return;
+
+    const requestId = button.dataset.requestId;
+    const action = button.dataset.depositAction;
+
+    const actionName = action === "accept" ? "ACCEPT" : "REJECT";
+
+    if (!confirm("Are you sure you want to " + actionName + " this deposit?")) {
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "PROCESSING...";
+
+    const { data, error } = await window.supabaseClient.rpc(
+      "review_deposit_request",
+      {
+        p_request_id: requestId,
+        p_action: action,
+        p_admin_note: null
+      }
+    );
+
+    if (error) {
+      console.error("Deposit Review Error:", error);
+      alert("Request process nahi hui: " + error.message);
+      button.disabled = false;
+      button.textContent = actionName;
+      return;
+    }
+
+    alert("Deposit request successfully " + data.status + "!");
+    await loadPendingDepositRequests();
+await loadDepositHistory();
+
+    
+  });
+
+
+
+
+
+  // ===== LOAD DEPOSIT HISTORY FROM SUPABASE =====
+
+  let allDepositHistory = [];
+
+  async function loadDepositHistory() {
+
+    const historyList = document.getElementById("depositHistoryList");
+    if (!historyList) return;
+
+    historyList.innerHTML = "Loading deposit history...";
+
+    const safeHistory = value => String(value ?? "—").replace(
+      /[&<>"']/g,
+      char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]
+    );
+
+    const moneyHistory = (value, currency) => {
+      const number = Number(value);
+      return Number.isFinite(number)
+        ? number.toFixed(2) + " " + safeHistory(currency)
+        : "—";
+    };
+
+    try {
+
+      const { data, error } = await window.supabaseClient
+        .from("deposit_requests")
+        .select("*")
+        .in("status", ["accepted", "rejected"])
+        .order("reviewed_at", { ascending: false });
+
+      if (error) throw error;
+
+      allDepositHistory = data || [];
+
+      const { data: allRequests, error: statsError } =
+        await window.supabaseClient
+          .from("deposit_requests")
+          .select("status, amount");
+
+      if (statsError) throw statsError;
+
+      const requests = allRequests || [];
+
+      document.getElementById("depositTotalRequests").textContent =
+        requests.length;
+
+      document.getElementById("depositPendingRequests").textContent =
+        requests.filter(x => x.status === "pending").length;
+
+      document.getElementById("depositAcceptedRequests").textContent =
+        requests.filter(x => x.status === "accepted").length;
+
+      document.getElementById("depositRejectedRequests").textContent =
+        requests.filter(x => x.status === "rejected").length;
+
+      document.getElementById("depositHistoryTotal").textContent =
+        allDepositHistory.length;
+
+      document.getElementById("depositHistoryTotalSNX").textContent =
+        allDepositHistory
+          .filter(x => x.status === "accepted")
+          .reduce((sum, x) => sum + Number(x.amount || 0), 0)
+          .toFixed(2) + " SNX";
+
+      async function renderDepositHistory() {
+
+        const statusFilter =
+          document.getElementById("depositHistoryStatus").value;
+
+        const methodFilter =
+          document.getElementById("depositHistoryMethod").value;
+
+        const search =
+          document.getElementById("depositHistorySearch").value
+            .toLowerCase().trim();
+
+        const filtered = allDepositHistory.filter(item => {
+
+          const matchesStatus =
+            statusFilter === "all" || item.status === statusFilter;
+
+          const matchesMethod =
+            methodFilter === "all" ||
+            String(item.payment_method || "").toLowerCase()
+              .includes(methodFilter);
+
+          const searchable = [
+            item.username,
+            item.user_id,
+            item.transaction_id,
+            item.email
+          ].join(" ").toLowerCase();
+
+          return matchesStatus && matchesMethod &&
+            searchable.includes(search);
+        });
+
+        if (!filtered.length) {
+          historyList.innerHTML = `
+            <div class="deposit-empty-state">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <p>No deposit history found.</p>
+            </div>`;
+          return;
+        }
+
+        const cards = await Promise.all(filtered.map(async item => {
+
+          let proofLink = "Payment proof not available.";
+
+          if (item.proof_url) {
+
+            if (/^https:\/\/\S+$/i.test(item.proof_url)) {
+              proofLink = `
+                <a href="${safeHistory(item.proof_url)}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="color:#45B8FF;text-decoration:none;font-weight:600;">
+                  <i class="fa-solid fa-image"></i> View Payment Screenshot
+                </a>`;
+            } else {
+
+              const { data: signed, error: signError } =
+                await window.supabaseClient.storage
+                  .from("deposit-proofs")
+                  .createSignedUrl(item.proof_url, 3600);
+
+              if (!signError && signed?.signedUrl) {
+                proofLink = `
+                  <a href="${safeHistory(signed.signedUrl)}"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     style="color:#45B8FF;text-decoration:none;font-weight:600;">
+                    <i class="fa-solid fa-image"></i> View Payment Screenshot
+                  </a>`;
+              }
+            }
+          }
+
+          const currency = item.currency || "PKR";
+
+          return `
+            <div style="
+              background:#1b3028;
+              border:1px solid #39D98A66;
+              border-radius:12px;
+              padding:11px;
+              margin-bottom:9px;
+              color:#fff;
+              font-size:12px;
+              line-height:1.45;
+              box-sizing:border-box;
+            ">
+
+              <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px;">
+                <strong style="color:#39D98A;font-size:14px;">
+                  ${safeHistory(item.username)}
+                </strong>
+
+                <span style="
+                  background:${item.status === "accepted" ? "#174C35" : "#5B2525"};
+                  color:${item.status === "accepted" ? "#39D98A" : "#FF7777"};
+                  padding:3px 8px;
+                  border-radius:20px;
+                  font-size:10px;
+                  font-weight:bold;
+                ">
+                  ${safeHistory(item.status).toUpperCase()}
+                </span>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;">
+
+                <div>
+                  <span style="color:#A9C2B4;">Email</span><br>
+                  <strong>${safeHistory(item.email)}</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">User ID</span><br>
+                  <strong style="overflow-wrap:anywhere;">${safeHistory(item.user_id)}</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">Deposit Amount</span><br>
+                  <strong>${safeHistory(item.amount)} SNX</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">Payment Method</span><br>
+                  <strong>${safeHistory(item.payment_method)}</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">Sender Name</span><br>
+                  <strong>${safeHistory(item.sender_name)}</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">Transaction ID</span><br>
+                  <strong>${safeHistory(item.transaction_id)}</strong>
+                </div>
+
+              </div>
+
+              <div style="border-top:1px solid #39D98A44;margin-top:9px;padding-top:8px;">
+
+                <div style="color:#39D98A;font-weight:bold;margin-bottom:6px;">
+                  PAYMENT BREAKDOWN
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:#A9C2B4;">Currency</span>
+                  <strong>${safeHistory(currency)}</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:#A9C2B4;">Payment Amount</span>
+                  <strong>${moneyHistory(item.payment_amount, currency)}</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:#A9C2B4;">Platform Fee (10%)</span>
+                  <strong>${moneyHistory(item.platform_fee, currency)}</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;align-items:center;background:#14251F;padding:7px 9px;border-radius:7px;margin-top:7px;">
+                  <strong>TOTAL PAID</strong>
+                  <strong style="color:#39D98A;font-size:14px;">
+                    ${moneyHistory(item.total_paid, currency)}
+                  </strong>
+                </div>
+
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;margin-top:9px;">
+                <div>${proofLink}</div>
+                <span style="color:#A9C2B4;font-size:10px;">
+                  ${safeHistory(item.reviewed_at
+                    ? new Date(item.reviewed_at).toLocaleString()
+                    : item.created_at
+                      ? new Date(item.created_at).toLocaleString()
+                      : "—")}
+                </span>
+              </div>
+
+              ${item.admin_note ? `
+                <div style="margin-top:8px;color:#FFD447;">
+                  Admin Note: ${safeHistory(item.admin_note)}
+                </div>` : ""}
+
+            </div>
+          `;
+        }));
+
+        historyList.innerHTML = cards.join("");
+      }
+
+      await renderDepositHistory();
+
+    } catch (error) {
+      console.error("Deposit History Error:", error);
+      historyList.textContent =
+        "History load nahi hui: " + error.message;
+    }
+  }
+
+  document.getElementById("depositHistoryStatus")
+    ?.addEventListener("change", () => loadDepositHistory());
+
+  document.getElementById("depositHistoryMethod")
+    ?.addEventListener("change", () => loadDepositHistory());
+
+  document.getElementById("depositHistorySearch")
+    ?.addEventListener("input", () => loadDepositHistory());
+
+
+
+  
+    
   const depositButton = document.querySelector(
     '.menu-button[data-label="Deposit Requests"]'
   );
 
   if (depositButton) {
-    depositButton.addEventListener("click", loadPendingDepositRequests);
+  depositButton.addEventListener("click", async function () {
+    await loadPendingDepositRequests();
+    await loadDepositHistory();
+  });
   }
 
 })();
