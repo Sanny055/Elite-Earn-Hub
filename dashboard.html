@@ -19105,11 +19105,20 @@ submitJazzCashDeposit.addEventListener("click", async function () {
 
   try {
 
-    await saveDepositRequest(
-      "JazzCash",
-      jazzcashPendingSNX,
-      jazzcashScreenshot
-    );
+
+await saveDepositRequest(
+    "JazzCash",
+    jazzcashPendingSNX,
+    jazzcashScreenshot,
+    {
+        currency: "PKR",
+        paymentAmount: jazzcashPendingSNX * (280 / 67.5),
+        platformFee: jazzcashPendingSNX * (280 / 67.5) * 0.10,
+        totalPaid: jazzcashPendingSNX * (280 / 67.5) * 1.10
+    }
+);
+
+  
 
     jazzcashAmount.value = "";
     jazzcashScreenshot.value = "";
@@ -19365,11 +19374,17 @@ if (submitEasyPaisaDeposit) {
     try {
 
       await saveDepositRequest(
-        "EasyPaisa",
-        easypaisaPendingSNX,
-        easypaisaScreenshot
-      );
-
+    "EasyPaisa",
+    easypaisaPendingSNX,
+    easypaisaScreenshot,
+    {
+        currency: "PKR",
+        paymentAmount: easypaisaPendingSNX * (280 / 67.5),
+        platformFee: easypaisaPendingSNX * (280 / 67.5) * 0.10,
+        totalPaid: easypaisaPendingSNX * (280 / 67.5) * 1.10
+    }
+);
+    
       // Reset form
       easypaisaAmount.value = "";
       easypaisaScreenshot.value = "";
