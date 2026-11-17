@@ -2857,8 +2857,8 @@ document.getElementById("depositBackBtn")
 
 
 
+
 (function () {
-  const client = window.supabaseClient;
   const list = document.getElementById("pendingDepositRequestsList");
 
   async function loadPendingDepositRequests() {
@@ -2870,6 +2870,24 @@ document.getElementById("depositBackBtn")
     }
 
     list.innerHTML = '<div class="deposit-empty-state">Loading deposit requests...</div>';
+
+    const safe = value => String(value ?? "—").replace(
+      /[&<>"']/g,
+      char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]
+    );
+
+    const money = (value, currency) => {
+      const number = Number(value);
+      return Number.isFinite(number)
+        ? number.toFixed(2) + " " + safe(currency)
+        : "—";
+    };
 
     try {
       const { data, error } = await window.supabaseClient
@@ -2889,57 +2907,176 @@ document.getElementById("depositBackBtn")
         return;
       }
 
-      const safe = value => String(value ?? "—").replace(
-        /[&<>"']/g,
-        char => ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        })[char]
-      );
+      const cards = await Promise.all(data.map(async item => {
+        let proofLink = "Payment proof available nahi hai.";
 
-      list.innerHTML = data.map(item => {
-        const proof = item.proof_url &&
-          /^https:\/\/\S+$/i.test(item.proof_url)
-          ? `<a href="${safe(item.proof_url)}"
-               target="_blank" rel="noopener noreferrer"
-               style="color:#45B8FF;">View Payment Proof</a>`
-          : "No payment proof";
+        if (item.proof_url) {
+          if (/^https:\/\/\S+$/i.test(item.proof_url)) {
+            proofLink = `
+              <a href="${safe(item.proof_url)}"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 style="color:#45B8FF;text-decoration:none;font-weight:600;">
+                <i class="fa-solid fa-image"></i> View Payment Screenshot
+              </a>`;
+          } else {
+            const { data: signed, error: signError } =
+              await window.supabaseClient
+                .storage
+                .from("deposit-proofs")
+                .createSignedUrl(item.proof_url, 3600);
+
+            if (!signError && signed?.signedUrl) {
+              proofLink = `
+                <a href="${safe(signed.signedUrl)}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="color:#45B8FF;text-decoration:none;font-weight:600;">
+                  <i class="fa-solid fa-image"></i> View Payment Screenshot
+                </a>`;
+            } else {
+              proofLink = "Payment screenshot open nahi ho saka.";
+            }
+          }
+        }
+
+        const currency = item.currency || "PKR";
+        const submitted = item.created_at
+          ? new Date(item.created_at).toLocaleString()
+          : "—";
 
         return `
           <div style="
             background:#1b3028;
-            border:1px solid #39D98A55;
-            border-radius:14px;
-            padding:16px;
-            margin-bottom:13px;
+            border:1px solid #39D98A66;
+            border-radius:12px;
+            padding:11px;
+            margin-bottom:9px;
             color:#fff;
+            font-size:12px;
+            line-height:1.45;
+            box-sizing:border-box;
           ">
-            <h3 style="color:#39D98A;margin:0 0 12px;">
-              ${safe(item.username)}
-            </h3>
 
-            <p>Email: ${safe(item.email)}</p>
-            <p>User ID: ${safe(item.user_id)}</p>
-            <p>Amount: ${safe(item.amount)} SNX</p>
-            <p>Payment Method: ${safe(item.payment_method)}</p>
-            <p>Sender Name: ${safe(item.sender_name)}</p>
-            <p>Transaction ID: ${safe(item.transaction_id)}</p>
-            <p>Submitted: ${safe(
-              item.created_at
-                ? new Date(item.created_at).toLocaleString()
-                : "—"
-            )}</p>
-            <p>${proof}</p>
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+              gap:8px;
+              margin-bottom:8px;
+            ">
+              <strong style="color:#39D98A;font-size:14px;">
+                ${safe(item.username)}
+              </strong>
 
-            <span style="color:#FFD447;font-weight:bold;">
-              PENDING
-            </span>
+              <span style="
+                background:#5b4614;
+                color:#FFD447;
+                padding:3px 8px;
+                border-radius:20px;
+                font-size:10px;
+                font-weight:bold;
+              ">PENDING</span>
+            </div>
+
+            <div style="
+              display:grid;
+              grid-template-columns:1fr 1fr;
+              gap:7px 12px;
+            ">
+              <div>
+                <span style="color:#A9C2B4;">Email</span><br>
+                <strong style="overflow-wrap:anywhere;">${safe(item.email)}</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">User ID</span><br>
+                <strong style="overflow-wrap:anywhere;">${safe(item.user_id)}</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">Deposit Amount</span><br>
+                <strong>${safe(item.amount)} SNX</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">Payment Method</span><br>
+                <strong>${safe(item.payment_method)}</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">Sender Name</span><br>
+                <strong>${safe(item.sender_name)}</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">Transaction ID</span><br>
+                <strong style="overflow-wrap:anywhere;">${safe(item.transaction_id)}</strong>
+              </div>
+            </div>
+
+            <div style="
+              border-top:1px solid #39D98A44;
+              margin-top:9px;
+              padding-top:8px;
+            ">
+              <div style="
+                color:#39D98A;
+                font-weight:bold;
+                margin-bottom:6px;
+                font-size:11px;
+              ">PAYMENT BREAKDOWN</div>
+
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="color:#A9C2B4;">Currency</span>
+                <strong>${safe(currency)}</strong>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="color:#A9C2B4;">Payment Amount</span>
+                <strong>${money(item.payment_amount, currency)}</strong>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="color:#A9C2B4;">Platform Fee (10%)</span>
+                <strong>${money(item.platform_fee, currency)}</strong>
+              </div>
+
+              <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                background:#14251F;
+                padding:7px 9px;
+                border-radius:7px;
+                margin-top:7px;
+              ">
+                <strong>TOTAL PAID</strong>
+                <strong style="color:#39D98A;font-size:14px;">
+                  ${money(item.total_paid, currency)}
+                </strong>
+              </div>
+            </div>
+
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+              flex-wrap:wrap;
+              gap:7px;
+              margin-top:9px;
+            ">
+              <div>${proofLink}</div>
+              <span style="color:#A9C2B4;font-size:10px;">
+                ${safe(submitted)}
+              </span>
+            </div>
+
           </div>
         `;
-      }).join("");
+      }));
+
+      list.innerHTML = cards.join("");
 
     } catch (error) {
       console.error("Deposit Requests Error:", error);
@@ -2956,6 +3093,8 @@ document.getElementById("depositBackBtn")
   }
 
 })();
+
+  
 
 
 
