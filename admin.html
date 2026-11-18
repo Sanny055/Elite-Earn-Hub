@@ -1075,6 +1075,276 @@
     }
 
 
+
+
+
+
+/* ==========================================
+   WITHDRAWAL REQUESTS PAGE
+========================================== */
+
+.withdrawal-requests-page {
+  width: 100%;
+  padding-bottom: 25px;
+}
+
+.withdrawal-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.withdrawal-page-header .section-heading {
+  margin: 0;
+}
+
+.withdrawal-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border: 1px solid #39D98A;
+  border-radius: 9px;
+  background: #192F27;
+  color: #39D98A;
+  font-size: 9px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.withdrawal-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 23px;
+}
+
+.withdrawal-stat-card {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #345447;
+  border-radius: 12px;
+  background: #192F27;
+}
+
+.withdrawal-stat-card span {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.withdrawal-stat-card strong {
+  display: block;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.withdrawal-stat-card.total {
+  border-color: #45B8FF;
+}
+.withdrawal-stat-card.total span {
+  color: #45B8FF;
+}
+
+.withdrawal-stat-card.pending {
+  border-color: #FFD447;
+}
+.withdrawal-stat-card.pending span {
+  color: #FFD447;
+}
+
+.withdrawal-stat-card.approved {
+  border-color: #39D98A;
+}
+.withdrawal-stat-card.approved span {
+  color: #39D98A;
+}
+
+.withdrawal-stat-card.rejected {
+  border-color: #FF8FA3;
+}
+.withdrawal-stat-card.rejected span {
+  color: #FF8FA3;
+}
+
+/* SECTIONS */
+
+.withdrawal-section {
+  margin-bottom: 23px;
+  padding: 14px;
+  border: 1px solid rgba(190,218,201,.16);
+  border-radius: 13px;
+  background: rgba(25,47,39,.65);
+}
+
+.withdrawal-section-heading {
+  margin: 0 0 13px;
+  color: #39D98A;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* FILTER BUTTONS */
+
+.withdrawal-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.withdrawal-filter-btn {
+  padding: 7px 11px;
+  border: 1px solid #345447;
+  border-radius: 20px;
+  background: #192F27;
+  color: #AABBB1;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.withdrawal-filter-btn.active {
+  border-color: #39D98A;
+  background: rgba(57,217,138,.13);
+  color: #39D98A;
+}
+
+/* REQUEST AND HISTORY LISTS */
+
+.withdrawal-requests-list,
+.withdrawal-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.withdrawal-empty-state {
+  padding: 22px 12px;
+  border: 1px dashed #345447;
+  border-radius: 11px;
+  color: #AABBB1;
+  text-align: center;
+}
+
+.withdrawal-empty-state i {
+  display: block;
+  margin-bottom: 9px;
+  color: #39D98A;
+  font-size: 22px;
+}
+
+.withdrawal-empty-state p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* SEARCH */
+
+.withdrawal-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #345447;
+  border-radius: 10px;
+  background: #192F27;
+}
+
+.withdrawal-search i {
+  color: #39D98A;
+  font-size: 13px;
+}
+
+.withdrawal-search input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 11px;
+}
+
+.withdrawal-search input::placeholder {
+  color: #8FA69A;
+}
+
+/* HISTORY FILTERS */
+
+.withdrawal-history-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
+.withdrawal-history-filters select {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 9px;
+  border: 1px solid #345447;
+  border-radius: 9px;
+  outline: none;
+  background: #192F27;
+  color: #F5F8F5;
+  font-size: 10px;
+}
+
+/* LOAD MORE */
+
+.withdrawal-load-more-btn {
+  display: block;
+  width: 100%;
+  margin-top: 13px;
+  padding: 11px;
+  border: 1px solid #39D98A;
+  border-radius: 9px;
+  background: rgba(57,217,138,.10);
+  color: #39D98A;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* MOBILE */
+
+@media (max-width: 520px) {
+  .withdrawal-section {
+    padding: 11px;
+  }
+
+  .withdrawal-page-header {
+    align-items: flex-start;
+  }
+
+  .withdrawal-stat-card {
+    padding: 11px;
+  }
+
+  .withdrawal-stat-card strong {
+    font-size: 19px;
+  }
+
+  .withdrawal-history-filters {
+    gap: 7px;
+  }
+}
+
+
+
+
+
+
+  
     
 
 /* REFERRAL MANAGEMENT PAGE */
@@ -2363,6 +2633,146 @@
 
 
 
+    
+<!-- ==========================================
+     WITHDRAWAL REQUESTS PAGE
+========================================== -->
+
+<section class="withdrawal-requests-page" id="withdrawalRequestsPage" style="display:none;">
+
+  <!-- PAGE HEADER -->
+  <div class="withdrawal-page-header">
+    <h2 class="section-heading">Withdrawal Requests</h2>
+
+    <button type="button" class="withdrawal-back-btn" id="withdrawalBackBtn">
+      <i class="fa-solid fa-arrow-left"></i>
+      BACK TO ADMIN PANEL
+    </button>
+  </div>
+
+  <!-- OVERVIEW STATS -->
+  <div class="withdrawal-stats-grid">
+
+    <div class="withdrawal-stat-card total">
+      <span>Total Requests</span>
+      <strong id="totalWithdrawalRequests">—</strong>
+    </div>
+
+    <div class="withdrawal-stat-card pending">
+      <span>Pending Requests</span>
+      <strong id="pendingWithdrawalRequests">—</strong>
+    </div>
+
+    <div class="withdrawal-stat-card approved">
+      <span>Approved Requests</span>
+      <strong id="approvedWithdrawalRequests">—</strong>
+    </div>
+
+    <div class="withdrawal-stat-card rejected">
+      <span>Rejected Requests</span>
+      <strong id="rejectedWithdrawalRequests">—</strong>
+    </div>
+
+  </div>
+
+  <!-- PENDING REQUESTS -->
+  <div class="withdrawal-section">
+
+    <h3 class="withdrawal-section-heading">Pending Requests</h3>
+
+    <div class="withdrawal-filter-buttons">
+
+      <button type="button" class="withdrawal-filter-btn active" data-filter="all">
+        All
+      </button>
+
+      <button type="button" class="withdrawal-filter-btn" data-filter="pending">
+        Pending
+      </button>
+
+      <button type="button" class="withdrawal-filter-btn" data-filter="approved">
+        Approved
+      </button>
+
+      <button type="button" class="withdrawal-filter-btn" data-filter="rejected">
+        Rejected
+      </button>
+
+    </div>
+
+    <div id="pendingWithdrawalRequestsList" class="withdrawal-requests-list">
+
+      <div class="withdrawal-empty-state">
+        <i class="fa-solid fa-money-bill-transfer"></i>
+        <p>Withdrawal requests will appear here after database connection.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- WITHDRAWAL HISTORY -->
+  <div class="withdrawal-section">
+
+    <h3 class="withdrawal-section-heading">Withdrawal History</h3>
+
+    <!-- SEARCH -->
+    <div class="withdrawal-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="withdrawalHistorySearch"
+        placeholder="Search username or User ID..."
+      >
+    </div>
+
+    <!-- HISTORY FILTERS -->
+    <div class="withdrawal-history-filters">
+
+      <select id="withdrawalHistoryStatus">
+        <option value="all">All Status</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+
+      <select id="withdrawalHistoryMethod">
+        <option value="all">All Methods</option>
+        <option value="jazzcash">JazzCash</option>
+        <option value="easypaisa">EasyPaisa</option>
+        <option value="binance">Binance UID</option>
+      </select>
+
+    </div>
+
+    <!-- HISTORY LIST -->
+    <div id="withdrawalHistoryList" class="withdrawal-history-list">
+
+      <div class="withdrawal-empty-state">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <p>Withdrawal history will appear here after database connection.</p>
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="withdrawal-load-more-btn"
+      id="withdrawalHistoryLoadMore"
+      style="display:none;"
+    >
+      LOAD MORE
+    </button>
+
+  </div>
+
+</section>
+
+<!-- END WITHDRAWAL REQUESTS PAGE -->
+
+
+
+
 
 
     
@@ -2644,7 +3054,8 @@ if (pendingDepositCounter) {
   "referralPage",
   "userDetailsPage",
   "userReferralsPage",
-  "depositRequestsPage"
+  "depositRequestsPage",
+"withdrawalRequestsPage"
 ]);
 
   const pageHistory = [];
@@ -2873,6 +3284,22 @@ document.getElementById("depositBackBtn")
   });
 
 
+
+// WITHDRAWAL REQUESTS PAGE: OPEN + BACK
+
+document.querySelector('.menu-button[data-label="Withdrawal Requests"]')
+  ?.addEventListener("click", () => {
+    window.adminPageNavigation.open("withdrawalRequestsPage");
+  });
+
+document.getElementById("withdrawalBackBtn")
+  ?.addEventListener("click", () => {
+    window.adminPageNavigation.dashboard();
+  });
+
+
+
+    
 
 
 
