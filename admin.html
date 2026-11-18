@@ -4476,6 +4476,363 @@ function renderUsers(users) {
   
   
   
+/* ==========================================
+   WITHDRAWAL REQUESTS - SUPABASE CONNECTION
+========================================== */
+
+(function () {
+  const $ = id => document.getElementById(id);
+
+  const requestList = $("pendingWithdrawalRequestsList");
+  const historyList = $("withdrawalHistoryList");
+
+  if (!requestList || !historyList) return;
+
+  let allRequests = [];
+  let allHistory = [];
+  let historyLimit = 10;
+
+  const esc = value => String(value ?? "—").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[ch]);
+
+  const money = value => {
+    const n = Number(value);
+    return Number.isFinite(n) ? n.toFixed(2) + " SNX" : "—";
+  };
+
+  const date = value =>
+    value ? new Date(value).toLocaleString() : "—";
+
+  function showEmpty(list, message) {
+    list.innerHTML = `
+      <div class="withdrawal-empty-state">
+        <i class="fa-solid fa-inbox"></i>
+        <p>${esc(message)}</p>
+      </div>`;
+  }
+
+  async function loadWithdrawalRequests() {
+    const client = window.supabaseClient;
+
+    if (!client) {
+      showEmpty(requestList, "Supabase connection available nahi hai.");
+      return;
+    }
+
+    showEmpty(requestList, "Loading withdrawal requests...");
+    showEmpty(historyList, "Loading withdrawal history...");
+
+    try {
+      const { data: requests, error } = await client
+        .from("withdrawal_requests")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      const rows = requests || [];
+
+      const userIds = [...new Set(rows.map(x => x.user_id).filter(Boolean))];
+
+      let profiles = [];
+
+      if (userIds.length) {
+        const { data, error: profileError } = await client
+          .from("profiles")
+          .select("id, username, email")
+          .in("id", userIds);
+
+        if (profileError) throw profileError;
+        profiles = data || [];
+      }
+
+      const profileMap = new Map(profiles.map(user => [user.id, user]));
+
+      allRequests = rows.map(item => ({
+        ...item,
+        username: profileMap.get(item.user_id)?.username || "Unknown User",
+        email: profileMap.get(item.user_id)?.email || "—"
+      }));
+
+      allHistory = allRequests.filter(item =>
+        ["approved", "rejected"].includes(item.status)
+      );
+
+      updateWithdrawalStats();
+      renderWithdrawalRequests();
+      renderWithdrawalHistory();
+
+    } catch (error) {
+      console.error("Withdrawal Loading Error:", error);
+      showEmpty(requestList, "Error: " + error.message);
+      showEmpty(historyList, "History load nahi hui: " + error.message);
+    }
+  }
+
+  function updateWithdrawalStats() {
+    $("totalWithdrawalRequests").textContent = allRequests.length;
+
+    $("pendingWithdrawalRequests").textContent =
+      allRequests.filter(x => x.status === "pending").length;
+
+    $("approvedWithdrawalRequests").textContent =
+      allRequests.filter(x => x.status === "approved").length;
+
+    $("rejectedWithdrawalRequests").textContent =
+      allRequests.filter(x => x.status === "rejected").length;
+
+    const dashboardCounter = $("totalWithdrawals");
+    if (dashboardCounter) {
+      dashboardCounter.textContent = allRequests.length;
+    }
+  }
+
+  function renderWithdrawalRequests() {
+    const activeFilter =
+      document.querySelector(".withdrawal-filter-btn.active")?.dataset.filter || "all";
+
+    const filtered = allRequests.filter(item =>
+      activeFilter === "all" || item.status === activeFilter
+    );
+
+    if (!filtered.length) {
+      showEmpty(requestList, "Is filter mein koi withdrawal request nahi mili.");
+      return;
+    }
+
+    requestList.innerHTML = filtered.map(item => `
+      <article style="
+        background:#1b3028;
+        border:1px solid #39D98A66;
+        border-radius:12px;
+        padding:12px;
+        color:#fff;
+        font-size:11px;
+        line-height:1.6;
+        overflow-wrap:anywhere;
+      ">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:9px;">
+          <strong style="color:#39D98A;font-size:14px;">
+            ${esc(item.username)}
+          </strong>
+          <span style="
+            color:${item.status === "pending" ? "#FFD447" : item.status === "approved" ? "#39D98A" : "#FF8FA3"};
+            font-weight:800;
+          ">${esc(item.status.toUpperCase())}</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div><b style="color:#FFD447;">AMOUNT</b><br>${money(item.amount)}</div>
+          <div><b style="color:#45B8FF;">PAYMENT METHOD</b><br>${esc(item.payment_method)}</div>
+          <div><b style="color:#45B8FF;">USER ID</b><br>${esc(item.user_id)}</div>
+          <div><b style="color:#A78BFA;">REQUEST DATE</b><br>${esc(date(item.created_at))}</div>
+        </div>
+
+        <div style="margin-top:9px;padding-top:8px;border-top:1px solid #345447;">
+          <b style="color:#39D98A;">ACCOUNT DETAILS</b><br>
+          ${esc(item.account_details)}
+        </div>
+
+        <div id="withdrawalDetails-${esc(item.id)}" style="display:none;margin-top:8px;padding:9px;background:#14251F;border-radius:8px;">
+          <b style="color:#45B8FF;">EMAIL:</b> ${esc(item.email)}<br>
+          <b style="color:#FFD447;">REQUEST ID:</b> ${esc(item.id)}<br>
+          <b style="color:#A78BFA;">ADMIN NOTE:</b> ${esc(item.admin_note || "—")}<br>
+          <b style="color:#39D98A;">REVIEWED:</b> ${esc(date(item.reviewed_at))}
+        </div>
+
+        <div style="display:flex;gap:7px;margin-top:11px;flex-wrap:wrap;">
+          <button type="button" data-withdrawal-details="${esc(item.id)}"
+            style="flex:1;padding:9px;background:#20372D;color:#45B8FF;border:1px solid #45B8FF;border-radius:7px;font-weight:800;">
+            DETAILS
+          </button>
+
+          ${item.status === "pending" ? `
+            <button type="button" data-withdrawal-action="approved" data-request-id="${esc(item.id)}"
+              style="flex:1;padding:9px;background:#39D98A;color:#14251F;border:0;border-radius:7px;font-weight:800;">
+              APPROVE
+            </button>
+            <button type="button" data-withdrawal-action="rejected" data-request-id="${esc(item.id)}"
+              style="flex:1;padding:9px;background:#A83245;color:#fff;border:0;border-radius:7px;font-weight:800;">
+              REJECT
+            </button>
+          ` : ""}
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function renderWithdrawalHistory() {
+    const status = $("withdrawalHistoryStatus").value;
+    const method = $("withdrawalHistoryMethod").value;
+    const search = $("withdrawalHistorySearch").value.toLowerCase().trim();
+
+    const filtered = allHistory.filter(item => {
+      const matchesStatus = status === "all" || item.status === status;
+      const matchesMethod = method === "all" || item.payment_method === method;
+
+      const searchable = [
+        item.username,
+        item.user_id,
+        item.email
+      ].join(" ").toLowerCase();
+
+      return matchesStatus && matchesMethod && searchable.includes(search);
+    });
+
+    const visible = filtered.slice(0, historyLimit);
+
+    if (!visible.length) {
+      showEmpty(historyList, "Koi matching withdrawal history nahi mili.");
+    } else {
+      historyList.innerHTML = visible.map(item => `
+        <article style="
+          background:#1b3028;
+          border:1px solid #345447;
+          border-radius:11px;
+          padding:12px;
+          margin-bottom:8px;
+          color:#fff;
+          font-size:11px;
+          line-height:1.6;
+          overflow-wrap:anywhere;
+        ">
+          <div style="display:flex;justify-content:space-between;gap:8px;">
+            <strong style="color:#39D98A;font-size:13px;">${esc(item.username)}</strong>
+            <strong style="color:${item.status === "approved" ? "#39D98A" : "#FF8FA3"};">
+              ${esc(item.status.toUpperCase())}
+            </strong>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px;">
+            <div><b style="color:#FFD447;">AMOUNT</b><br>${money(item.amount)}</div>
+            <div><b style="color:#45B8FF;">METHOD</b><br>${esc(item.payment_method)}</div>
+            <div><b style="color:#45B8FF;">USER ID</b><br>${esc(item.user_id)}</div>
+            <div><b style="color:#A78BFA;">REVIEWED</b><br>${esc(date(item.reviewed_at))}</div>
+          </div>
+          <div style="margin-top:8px;padding-top:7px;border-top:1px solid #345447;">
+            <b style="color:#39D98A;">ACCOUNT:</b> ${esc(item.account_details)}<br>
+            <b style="color:#FFD447;">ADMIN NOTE:</b> ${esc(item.admin_note || "—")}
+          </div>
+        </article>
+      `).join("");
+    }
+
+    const loadMore = $("withdrawalHistoryLoadMore");
+    loadMore.style.display = filtered.length > historyLimit ? "block" : "none";
+  }
+
+  // Request status filters
+  document.querySelectorAll(".withdrawal-filter-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".withdrawal-filter-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+      button.classList.add("active");
+      renderWithdrawalRequests();
+    });
+  });
+
+  // Approve, reject and details actions
+  requestList.addEventListener("click", async event => {
+    const detailsButton = event.target.closest("[data-withdrawal-details]");
+
+    if (detailsButton) {
+      const id = detailsButton.dataset.withdrawalDetails;
+      const panel = $("withdrawalDetails-" + id);
+
+      if (panel) {
+        panel.style.display = panel.style.display === "none" ? "block" : "none";
+      }
+      return;
+    }
+
+    const button = event.target.closest("[data-withdrawal-action]");
+    if (!button) return;
+
+    const requestId = button.dataset.requestId;
+    const decision = button.dataset.withdrawalAction;
+
+    const confirmed = confirm(
+      decision === "approved"
+        ? "Kya aap is withdrawal ko APPROVE karna chahte hain? Amount user ke Main Balance se deduct hoga."
+        : "Kya aap is withdrawal ko REJECT karna chahte hain?"
+    );
+
+    if (!confirmed) return;
+
+    button.disabled = true;
+    button.textContent = "PROCESSING...";
+
+    try {
+      const { data, error } = await window.supabaseClient.rpc(
+        "review_withdrawal_request",
+        {
+          p_request_id: requestId,
+          p_decision: decision,
+          p_admin_note: null
+        }
+      );
+
+      if (error) throw error;
+
+      alert("Withdrawal request successfully " + decision + "!");
+      await loadWithdrawalRequests();
+
+    } catch (error) {
+      console.error("Withdrawal Review Error:", error);
+      alert("Request process nahi hui: " + error.message);
+      button.disabled = false;
+      button.textContent = decision === "approved" ? "APPROVE" : "REJECT";
+    }
+  });
+
+  // History search and filters
+  $("withdrawalHistorySearch").addEventListener("input", () => {
+    historyLimit = 10;
+    renderWithdrawalHistory();
+  });
+
+  $("withdrawalHistoryStatus").addEventListener("change", () => {
+    historyLimit = 10;
+    renderWithdrawalHistory();
+  });
+
+  $("withdrawalHistoryMethod").addEventListener("change", () => {
+    historyLimit = 10;
+    renderWithdrawalHistory();
+  });
+
+  $("withdrawalHistoryLoadMore").addEventListener("click", () => {
+    historyLimit += 10;
+    renderWithdrawalHistory();
+  });
+
+  // Load data when page opens
+  document.querySelector('.menu-button[data-label="Withdrawal Requests"]')
+    ?.addEventListener("click", loadWithdrawalRequests);
+
+  // Live updates
+  if (window.supabaseClient && !window.withdrawalLiveChannel) {
+    window.withdrawalLiveChannel = window.supabaseClient
+      .channel("admin-withdrawal-requests-live")
+      .on("postgres_changes", {
+        event: "*",
+        schema: "public",
+        table: "withdrawal_requests"
+      }, () => {
+        if ($("withdrawalRequestsPage").style.display !== "none") {
+          loadWithdrawalRequests();
+        }
+      })
+      .subscribe();
+  }
+
+})();
+
   
   
   
