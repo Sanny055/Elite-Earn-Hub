@@ -1,0 +1,5192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ==========================================
+       SECTION 1: HTML HEAD
+       Elite Earn Hub Admin Panel
+       ========================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14251F">
+  <script>document.documentElement.classList.add("auth-pending");</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>Elite Earn Hub | Admin Panel</title>
+
+  <!-- Fonts: heading and smaller button text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- ==========================================
+       SECTION 2: CSS
+       Theme, layout, premium borders and animations
+       ========================================== -->
+  <style>
+    :root {
+      --bg: #14251F;
+      --panel: #192F27;
+      --panel2: #20372D;
+      --green: #39D98A;
+      --yellow: #FFD447;
+      --blue: #45B8FF;
+      --purple: #A78BFA;
+      --rose: #FF8FA3;
+      --text: #F5F8F5;
+      --muted: #AABBB1;
+      --border: rgba(190,218,201,.16);
+    }
+
+    /* Keep admin content hidden until access is verified. */
+    .auth-pending body { visibility: hidden; }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at top left, rgba(57,217,138,.10), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", Arial, sans-serif;
+    }
+
+    .app {
+      width: min(1160px, 100%);
+      margin: auto;
+      padding: 20px 16px 35px;
+    }
+
+    /* Premium top header */
+    .hero {
+      text-align: center;
+      padding: 28px 18px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,212,71,.48);
+      border-radius: 23px;
+      background: linear-gradient(140deg, #1C382D, #172A22 65%, #14251F);
+      box-shadow: 0 18px 42px rgba(0,0,0,.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      color: var(--yellow);
+      border: 1px solid var(--yellow);
+      border-radius: 18px;
+      background: #243F32;
+      font-size: 25px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--green);
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(25px, 4vw, 37px);
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .hero h2 {
+      margin: 7px 0 13px;
+      font-family: "Manrope", sans-serif;
+      font-size: 18px;
+      letter-spacing: .16em;
+    }
+
+    .hero-line {
+      width: 90px;
+      height: 2px;
+      margin: auto auto 12px;
+      background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+    }
+
+    .owner {
+      margin: 0;
+      color: var(--yellow);
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .role { margin: 5px 0; font-size: 13px; }
+    .intro { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+
+    /* Section headings */
+    .section { margin-top: 27px; }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      font-family: "Manrope", sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .section-heading::before {
+      content: "";
+      width: 4px;
+      height: 23px;
+      border-radius: 10px;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(57,217,138,.25);
+    }
+
+    .section-number {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .1em;
+    }
+
+  
+
+
+
+
+
+
+
+    
+/* =====================================
+   USER REFERRALS PAGE
+===================================== */
+
+.user-referrals-page {
+  width: 100%;
+  padding: 16px;
+  color: #ffffff;
+}
+
+.user-referrals-header {
+  margin-bottom: 18px;
+}
+
+.user-referrals-header h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 800;
+  color: #39D98A;
+  letter-spacing: 0.7px;
+}
+
+.user-referrals-header p {
+  margin: 5px 0 0;
+  color: #AABBB1;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.user-referrals-back-btn {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border: 1px solid #39D98A;
+  border-radius: 10px;
+  background: #192F27;
+  color: #39D98A;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* TOP STAT CARDS */
+
+.user-referrals-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.user-referrals-stat-card {
+  min-width: 0;
+  padding: 15px 10px;
+  border-radius: 13px;
+  background: #192F27;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-referrals-stat-card i {
+  font-size: 19px;
+}
+
+.user-referrals-stat-card strong {
+  font-size: 19px;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.user-referrals-stat-card span {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.total-users-card {
+  border: 1px solid #39D98A;
+}
+
+.total-users-card i,
+.total-users-card span {
+  color: #39D98A;
+}
+
+.active-users-card {
+  border: 1px solid #45B8FF;
+}
+
+.active-users-card i,
+.active-users-card span {
+  color: #45B8FF;
+}
+
+/* TOTAL TEAM REFERRALS */
+
+.user-team-referrals-card {
+  padding: 13px 15px;
+  margin-bottom: 22px;
+  border: 1px solid #A78BFA;
+  border-radius: 12px;
+  background: #192F27;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.user-team-referrals-card span {
+  color: #A78BFA;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.user-team-referrals-card strong {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* USERS LIST */
+
+.user-referrals-list-section h3 {
+  margin: 0 0 13px;
+  color: #39D98A;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* SEARCH */
+
+.user-referrals-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 12px;
+  margin-bottom: 14px;
+  border: 1px solid #345447;
+  border-radius: 10px;
+  background: #192F27;
+}
+
+.user-referrals-search i {
+  color: #39D98A;
+  font-size: 13px;
+}
+
+.user-referrals-search input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 11px;
+}
+
+.user-referrals-search input::placeholder {
+  color: #8FA69A;
+}
+
+/* INDIVIDUAL USER CARD */
+
+.user-referrals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-referral-card {
+  padding: 12px;
+  border: 1px solid #39D98A;
+  border-radius: 12px;
+  background: #192F27;
+}
+
+.user-referral-card.non-active {
+  border-color: #FF8FA3;
+}
+
+.user-referral-user-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.user-referral-username {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.user-referral-status {
+  flex-shrink: 0;
+  padding: 4px 7px;
+  border-radius: 20px;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.user-referral-status.active {
+  color: #39D98A;
+  background: rgba(57, 217, 138, 0.13);
+}
+
+.user-referral-status.non-active {
+  color: #FF8FA3;
+  background: rgba(255, 143, 163, 0.13);
+}
+
+.user-referral-id {
+  color: #45B8FF;
+  font-size: 9px;
+  margin-bottom: 10px;
+}
+
+.user-referral-divider {
+  height: 1px;
+  background: #345447;
+  margin-bottom: 10px;
+}
+
+.user-referral-balances {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.user-referral-balance-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.user-referral-balance-label.main {
+  color: #FFD447;
+}
+
+.user-referral-balance-label.ad {
+  color: #A78BFA;
+}
+
+.user-referral-balance-value {
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.user-referral-count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid #345447;
+  font-size: 9px;
+  color: #AABBB1;
+}
+
+.user-referral-count strong {
+  color: #39D98A;
+  font-size: 9px;
+}
+
+/* EMPTY MESSAGE */
+
+.user-referrals-empty {
+  padding: 20px 12px;
+  text-align: center;
+  color: #AABBB1;
+  font-size: 11px;
+  border: 1px dashed #345447;
+  border-radius: 10px;
+}
+
+/* MOBILE */
+
+@media (max-width: 380px) {
+  .user-referrals-page {
+    padding: 12px;
+  }
+
+  .user-referral-card {
+    padding: 10px;
+  }
+
+  .user-referral-username {
+    font-size: 13px;
+  }
+
+  .user-referral-balance-value {
+    font-size: 9px;
+  }
+}
+
+
+
+
+
+
+
+
+    
+/* ==========================================
+   DEPOSIT REQUESTS PAGE
+========================================== */
+
+.deposit-requests-page {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  color: #e8f5ee;
+  animation: depositPageFade 0.3s ease;
+}
+
+@keyframes depositPageFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* PAGE HEADER */
+
+.deposit-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.deposit-page-header .section-heading {
+  color: #39D98A;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.deposit-back-btn {
+  background: linear-gradient(135deg, #39D98A, #20a96a);
+  color: #14251F;
+  border: none;
+  border-radius: 9px;
+  padding: 11px 17px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.deposit-back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px #39D98A30;
+}
+
+/* COMMON SECTIONS */
+
+.deposit-section {
+  background: #1b3028;
+  border: 1px solid #39D98A25;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 22px;
+  box-shadow: 0 5px 18px #00000018;
+}
+
+.deposit-section-heading {
+  color: #39D98A;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 17px;
+  letter-spacing: 0.5px;
+}
+
+/* OVERVIEW STATS */
+
+.deposit-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.deposit-stat-card {
+  background: #213b30;
+  border: 1px solid #ffffff12;
+  border-radius: 11px;
+  padding: 17px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.deposit-stat-card span,
+.deposit-history-stat-card span {
+  color: #b5c9bd;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.deposit-stat-card strong {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.deposit-stat-card.total {
+  border-left: 3px solid #45B8FF;
+}
+
+.deposit-stat-card.pending {
+  border-left: 3px solid #FFD447;
+}
+
+.deposit-stat-card.accepted {
+  border-left: 3px solid #39D98A;
+}
+
+.deposit-stat-card.rejected {
+  border-left: 3px solid #ff6b75;
+}
+
+.deposit-stat-card.total strong {
+  color: #45B8FF;
+}
+
+.deposit-stat-card.pending strong {
+  color: #FFD447;
+}
+
+.deposit-stat-card.accepted strong {
+  color: #39D98A;
+}
+
+.deposit-stat-card.rejected strong {
+  color: #ff6b75;
+}
+
+/* SEARCH */
+
+.deposit-search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #14251F;
+  border: 1px solid #ffffff18;
+  border-radius: 9px;
+  padding: 0 13px;
+  margin-bottom: 14px;
+}
+
+.deposit-search i {
+  color: #39D98A;
+  font-size: 14px;
+}
+
+.deposit-search input {
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 13px 0;
+  font-size: 12px;
+}
+
+.deposit-search input::placeholder {
+  color: #82968a;
+}
+
+/* FILTER BUTTONS */
+
+.deposit-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.deposit-filter-btn {
+  background: #263e33;
+  color: #b9cbbf;
+  border: 1px solid #ffffff15;
+  border-radius: 7px;
+  padding: 8px 17px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.deposit-filter-btn.active,
+.deposit-filter-btn:hover {
+  background: #39D98A;
+  color: #14251F;
+  border-color: #39D98A;
+}
+
+/* REQUEST LISTS */
+
+.deposit-requests-list,
+.deposit-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* EMPTY STATE */
+
+.deposit-empty-state {
+  text-align: center;
+  padding: 35px 15px;
+  background: #14251F;
+  border: 1px dashed #39D98A35;
+  border-radius: 10px;
+  color: #91a99a;
+}
+
+.deposit-empty-state i {
+  font-size: 27px;
+  color: #39D98A;
+  margin-bottom: 10px;
+}
+
+.deposit-empty-state p {
+  font-size: 12px;
+  margin: 0;
+}
+
+/* HISTORY STATS */
+
+.deposit-history-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 17px;
+}
+
+.deposit-history-stat-card {
+  background: #213b30;
+  border: 1px solid #39D98A25;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deposit-history-stat-card strong {
+  color: #39D98A;
+  font-size: 21px;
+}
+
+/* HISTORY FILTERS */
+
+.deposit-history-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.deposit-history-filters select {
+  width: 100%;
+  background: #14251F;
+  color: #e8f5ee;
+  border: 1px solid #ffffff20;
+  border-radius: 8px;
+  padding: 11px;
+  outline: none;
+  font-size: 11px;
+}
+
+/* LOAD MORE */
+
+.deposit-load-more-btn {
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  background: #263e33;
+  color: #39D98A;
+  border: 1px solid #39D98A55;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.deposit-load-more-btn:hover {
+  background: #39D98A;
+  color: #14251F;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .deposit-requests-page {
+    padding: 15px;
+  }
+
+  .deposit-page-header .section-heading {
+    font-size: 21px;
+  }
+
+  .deposit-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .deposit-stat-card {
+    padding: 13px 11px;
+  }
+
+  .deposit-stat-card strong {
+    font-size: 21px;
+  }
+
+  .deposit-section {
+    padding: 14px;
+    border-radius: 11px;
+  }
+
+  .deposit-history-filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .deposit-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .deposit-back-btn {
+    width: 100%;
+  }
+}
+
+
+
+
+
+    
+
+/* =====================================
+   USER DETAILS PAGE - PREMIUM DESIGN
+===================================== */
+
+.user-details-page {
+  width: 100%;
+  padding: 12px 0 25px;
+  color: #eaf4ee;
+  font-family: 'Outfit', 'Trebuchet MS', sans-serif;
+}
+
+/* SECTION SPACING */
+
+.details-section {
+  margin-bottom: 17px;
+}
+
+/* SECTION HEADINGS */
+
+.details-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 10px;
+  color: #39D98A;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.details-section-heading i {
+  font-size: 15px;
+  color: #45B8FF;
+}
+
+/* MAIN INFORMATION CARDS */
+
+.details-card {
+  background: linear-gradient(145deg, #1c332a, #192e25);
+  border: 1px solid rgba(57, 217, 138, 0.24);
+  border-radius: 13px;
+  padding: 14px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.16);
+}
+
+/* INFORMATION GRID */
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px 12px;
+}
+
+.details-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+/* PREMIUM FIELD LABELS */
+
+.details-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.9px;
+  line-height: 1.4;
+  color: #39D98A;
+}
+
+/* DIFFERENT LABEL COLORS */
+
+.details-item:nth-child(4n+2) .details-label {
+  color: #45B8FF;
+}
+
+.details-item:nth-child(4n+3) .details-label {
+  color: #FFD447;
+}
+
+.details-item:nth-child(4n+4) .details-label {
+  color: #A78BFA;
+}
+
+/* USER INFORMATION VALUES */
+
+.details-value {
+  color: #f1f7f3;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ACTION BUTTON */
+
+.details-action-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px 13px;
+  border: 1px solid #39D98A;
+  border-radius: 9px;
+  background: linear-gradient(120deg, #1b4935, #19382b);
+  color: #39D98A;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.details-action-btn:active {
+  transform: scale(0.97);
+  background: #24583f;
+}
+
+/* REFERRED USERS */
+
+.referred-users-section {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #315b48;
+}
+
+.referred-users-section h4 {
+  margin: 0 0 10px;
+  color: #45B8FF;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+.referred-users-grid {
+  background: #14251F;
+  border: 1px solid #315b48;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.referred-users-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 11px;
+  color: #39D98A;
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+/* HISTORY BUTTONS */
+
+.details-history-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 2px;
+  border: none;
+  border-bottom: 1px solid rgba(49, 91, 72, 0.7);
+  background: transparent;
+  color: #eaf4ee;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.details-history-btn:last-child {
+  border-bottom: none;
+}
+
+.details-history-btn span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-history-btn span i {
+  color: #39D98A;
+  font-size: 16px;
+}
+
+.details-history-btn:active {
+  color: #39D98A;
+  transform: scale(0.98);
+}
+
+/* BACK BUTTON */
+
+.details-back-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 7px;
+  padding: 13px;
+  border: 1px solid #39D98A;
+  border-radius: 9px;
+  background: transparent;
+  color: #39D98A;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.details-back-btn:active {
+  background: #1c4935;
+  transform: scale(0.98);
+}
+
+/* SMALL SCREEN OPTIMIZATION */
+
+@media (max-width: 380px) {
+
+  .details-card {
+    padding: 12px;
+  }
+
+  .details-grid {
+    gap: 13px 8px;
+  }
+
+  .details-label {
+    font-size: 9px;
+  }
+
+  .details-value {
+    font-size: 12px;
+  }
+
+  .details-section-heading {
+    font-size: 12px;
+  }
+    }
+
+
+
+
+
+
+/* ==========================================
+   WITHDRAWAL REQUESTS PAGE
+========================================== */
+
+.withdrawal-requests-page {
+  width: 100%;
+  padding-bottom: 25px;
+}
+
+.withdrawal-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.withdrawal-page-header .section-heading {
+  margin: 0;
+}
+
+.withdrawal-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border: 1px solid #39D98A;
+  border-radius: 9px;
+  background: #192F27;
+  color: #39D98A;
+  font-size: 9px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.withdrawal-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 23px;
+}
+
+.withdrawal-stat-card {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #345447;
+  border-radius: 12px;
+  background: #192F27;
+}
+
+.withdrawal-stat-card span {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.withdrawal-stat-card strong {
+  display: block;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.withdrawal-stat-card.total {
+  border-color: #45B8FF;
+}
+.withdrawal-stat-card.total span {
+  color: #45B8FF;
+}
+
+.withdrawal-stat-card.pending {
+  border-color: #FFD447;
+}
+.withdrawal-stat-card.pending span {
+  color: #FFD447;
+}
+
+.withdrawal-stat-card.approved {
+  border-color: #39D98A;
+}
+.withdrawal-stat-card.approved span {
+  color: #39D98A;
+}
+
+.withdrawal-stat-card.rejected {
+  border-color: #FF8FA3;
+}
+.withdrawal-stat-card.rejected span {
+  color: #FF8FA3;
+}
+
+/* SECTIONS */
+
+.withdrawal-section {
+  margin-bottom: 23px;
+  padding: 14px;
+  border: 1px solid rgba(190,218,201,.16);
+  border-radius: 13px;
+  background: rgba(25,47,39,.65);
+}
+
+.withdrawal-section-heading {
+  margin: 0 0 13px;
+  color: #39D98A;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* FILTER BUTTONS */
+
+.withdrawal-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.withdrawal-filter-btn {
+  padding: 7px 11px;
+  border: 1px solid #345447;
+  border-radius: 20px;
+  background: #192F27;
+  color: #AABBB1;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.withdrawal-filter-btn.active {
+  border-color: #39D98A;
+  background: rgba(57,217,138,.13);
+  color: #39D98A;
+}
+
+/* REQUEST AND HISTORY LISTS */
+
+.withdrawal-requests-list,
+.withdrawal-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.withdrawal-empty-state {
+  padding: 22px 12px;
+  border: 1px dashed #345447;
+  border-radius: 11px;
+  color: #AABBB1;
+  text-align: center;
+}
+
+.withdrawal-empty-state i {
+  display: block;
+  margin-bottom: 9px;
+  color: #39D98A;
+  font-size: 22px;
+}
+
+.withdrawal-empty-state p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* SEARCH */
+
+.withdrawal-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #345447;
+  border-radius: 10px;
+  background: #192F27;
+}
+
+.withdrawal-search i {
+  color: #39D98A;
+  font-size: 13px;
+}
+
+.withdrawal-search input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 11px;
+}
+
+.withdrawal-search input::placeholder {
+  color: #8FA69A;
+}
+
+/* HISTORY FILTERS */
+
+.withdrawal-history-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
+.withdrawal-history-filters select {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 9px;
+  border: 1px solid #345447;
+  border-radius: 9px;
+  outline: none;
+  background: #192F27;
+  color: #F5F8F5;
+  font-size: 10px;
+}
+
+/* LOAD MORE */
+
+.withdrawal-load-more-btn {
+  display: block;
+  width: 100%;
+  margin-top: 13px;
+  padding: 11px;
+  border: 1px solid #39D98A;
+  border-radius: 9px;
+  background: rgba(57,217,138,.10);
+  color: #39D98A;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* MOBILE */
+
+@media (max-width: 520px) {
+  .withdrawal-section {
+    padding: 11px;
+  }
+
+  .withdrawal-page-header {
+    align-items: flex-start;
+  }
+
+  .withdrawal-stat-card {
+    padding: 11px;
+  }
+
+  .withdrawal-stat-card strong {
+    font-size: 19px;
+  }
+
+  .withdrawal-history-filters {
+    gap: 7px;
+  }
+}
+
+
+
+
+
+
+  
+    
+
+/* REFERRAL MANAGEMENT PAGE */
+
+.referral-page {
+  width: 100%;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.referral-page .section-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #39D98A;
+  margin-bottom: 18px;
+}
+
+.referral-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 17px;
+  background: #192F27;
+  color: #45B8FF;
+  border: 1px solid #45B8FF;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+
+.referral-back-btn:active {
+  transform: scale(0.97);
+}
+
+.referral-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.referral-stat-card {
+  background: #192F27;
+  border: 1px solid rgba(57, 217, 138, 0.25);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referral-stat-card span {
+  color: #b7c9c0;
+  font-size: 13px;
+}
+
+.referral-stat-card strong {
+  color: #39D98A;
+  font-size: 27px;
+}
+
+.referral-section {
+  background: #192F27;
+  border: 1px solid rgba(57, 217, 138, 0.20);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
+
+.referral-section h3 {
+  font-size: 18px;
+  color: #FFD447;
+  margin: 0 0 10px;
+}
+
+.referral-description {
+  color: #a9bdb2;
+  font-size: 13px;
+  margin-bottom: 17px;
+  line-height: 1.6;
+}
+
+.referral-empty {
+  background: rgba(20, 37, 31, 0.65);
+  border: 1px dashed #456456;
+  border-radius: 12px;
+  padding: 30px 15px;
+  text-align: center;
+  color: #a9bdb2;
+}
+
+.referral-empty i {
+  font-size: 30px;
+  color: #39D98A;
+  margin-bottom: 12px;
+}
+
+.referral-empty p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.referral-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #14251F;
+  border: 1px solid #345447;
+  border-radius: 12px;
+  padding: 0 15px;
+  min-height: 50px;
+  margin: 15px 0;
+}
+
+.referral-search i {
+  color: #45B8FF;
+}
+
+.referral-search input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.referral-search input::placeholder {
+  color: #91a69b;
+}
+
+@media (max-width: 600px) {
+  .referral-page {
+    padding: 14px;
+  }
+
+  .referral-stats {
+    gap: 10px;
+  }
+
+  .referral-stat-card {
+    padding: 14px 11px;
+  }
+
+  .referral-stat-card span {
+    font-size: 12px;
+  }
+
+  .referral-stat-card strong {
+    font-size: 23px;
+  }
+
+  .referral-section {
+    padding: 15px;
+  }
+
+  .referral-section h3 {
+    font-size: 16px;
+  }
+    }
+
+
+
+      
+
+
+    /* USER PROFILE PAGE */
+.user-profile-page {
+  width: 100%;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.user-profile-page .section-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #39D98A;
+  margin-bottom: 18px;
+}
+
+.profile-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 17px;
+  background: #192F27;
+  color: #45B8FF;
+  border: 1px solid #45B8FF;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+
+.profile-back-btn:active {
+  transform: scale(0.97);
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.profile-stat-card {
+  background: #192F27;
+  border: 1px solid rgba(57, 217, 138, 0.25);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-stat-card span {
+  color: #b7c9c0;
+  font-size: 13px;
+}
+
+.profile-stat-card strong {
+  color: #39D98A;
+  font-size: 27px;
+}
+
+.profile-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #192F27;
+  border: 1px solid #345447;
+  border-radius: 12px;
+  padding: 0 15px;
+  margin-bottom: 25px;
+  min-height: 50px;
+}
+
+.profile-search i {
+  color: #45B8FF;
+}
+
+.profile-search input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.profile-search input::placeholder {
+  color: #91a69b;
+}
+
+.profile-list-heading {
+  font-size: 17px;
+  color: #FFD447;
+  margin-bottom: 14px;
+}
+
+.profile-empty {
+  background: #192F27;
+  border: 1px dashed #456456;
+  border-radius: 14px;
+  padding: 35px 15px;
+  text-align: center;
+  color: #a9bdb2;
+}
+
+.profile-empty i {
+  font-size: 32px;
+  color: #39D98A;
+  margin-bottom: 12px;
+}
+
+.profile-empty p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .user-profile-page {
+    padding: 14px;
+  }
+
+  .profile-stats {
+    gap: 10px;
+  }
+
+  .profile-stat-card {
+    padding: 14px 11px;
+  }
+
+  .profile-stat-card span {
+    font-size: 12px;
+  }
+
+  .profile-stat-card strong {
+    font-size: 23px;
+  }
+    }
+                       
+      
+      
+      
+    
+    /* Dashboard statistics */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .stat-card {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(145deg, #20372D, #172B22);
+    }
+
+    .stat-icon {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    .green-bg { color: var(--green); background: rgba(57,217,138,.10); }
+    .gold-bg { color: var(--yellow); background: rgba(255,212,71,.10); }
+    .blue-bg { color: var(--blue); background: rgba(69,184,255,.10); }
+    .purple-bg { color: var(--purple); background: rgba(167,139,250,.10); }
+
+    .stat-label {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .stat-value {
+      margin-top: 5px;
+      font-family: "Manrope", sans-serif;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .stat-status {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* ==========================================
+       PREMIUM BUTTON CSS
+       All menu buttons are clickable.
+       The pages are intentionally not opened yet.
+       ========================================== */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .menu-button {
+      --accent: var(--green);
+      width: 100%;
+      min-width: 0;
+      min-height: 76px;
+      padding: 13px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+      color: var(--text);
+      background: linear-gradient(145deg, #20372D, #192F27);
+      border: 1px solid color-mix(in srgb, var(--accent) 62%, transparent);
+      border-radius: 15px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04),
+                  0 8px 20px rgba(0,0,0,.13);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .18s ease, box-shadow .18s ease,
+                  border-color .18s ease, background .18s ease;
+    }
+
+    .menu-button:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 24px rgba(0,0,0,.20);
+    }
+
+    .menu-button:active,
+    .menu-button.is-clicked {
+      transform: scale(.975);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+
+    .menu-button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .icon-box {
+      flex: 0 0 40px;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 11%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    /* Button text is intentionally smaller than headings */
+    .button-label {
+      min-width: 0;
+      font-family: "DM Sans", sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .button-arrow {
+      margin-left: auto;
+      color: var(--accent);
+      font-size: 11px;
+    }
+
+    .accent-green { --accent: var(--green); }
+    .accent-gold { --accent: var(--yellow); }
+    .accent-blue { --accent: var(--blue); }
+    .accent-purple { --accent: var(--purple); }
+    .accent-rose { --accent: var(--rose); }
+
+    /* YouTube Like / Subscribe / View: equal dimensions */
+    .youtube-panel {
+      margin-top: 13px;
+      padding: 15px;
+      border: 1px solid rgba(57,217,138,.48);
+      border-radius: 18px;
+      background: linear-gradient(140deg, #1E392B, #14251F);
+      box-shadow: 0 12px 30px rgba(0,0,0,.15);
+    }
+
+    .youtube-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 13px;
+      font-family: "Manrope", sans-serif;
+      font-size: 15px;
+    }
+
+    .youtube-title i { color: var(--green); font-size: 19px; }
+
+    .youtube-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .youtube-grid .menu-button {
+      min-height: 78px;
+      padding: 10px 5px;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      gap: 7px;
+    }
+
+    .youtube-grid .icon-box {
+      width: 32px;
+      height: 32px;
+      flex-basis: 32px;
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .youtube-grid .button-label { font-size: 12px; }
+    .youtube-grid .button-arrow { display: none; }
+
+    /* Live Activity Feed */
+    .activity-panel {
+      padding: 16px;
+      border: 1px solid rgba(69,184,255,.38);
+      border-radius: 18px;
+      background: linear-gradient(145deg, #1B3039, #172B22);
+    }
+
+    .activity-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 13px;
+    }
+
+    .activity-head h3 {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      font-size: 15px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 1.6s infinite;
+    }
+
+    .live-pill {
+      margin-left: auto;
+      padding: 5px 8px;
+      border: 1px solid rgba(57,217,138,.35);
+      border-radius: 20px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .activity-empty {
+      padding: 16px;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .activity-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    /* Click feedback toast */
+    .toast {
+      position: fixed;
+      z-index: 99;
+      left: 50%;
+      bottom: 22px;
+      transform: translate(-50%,18px);
+      width: max-content;
+      max-width: calc(100% - 28px);
+      padding: 12px 16px;
+      border: 1px solid rgba(57,217,138,.5);
+      border-radius: 13px;
+      background: #1B352A;
+      color: var(--text);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%,0);
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px 8px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 4px rgba(57,217,138,.08); }
+      50% { box-shadow: 0 0 0 7px rgba(57,217,138,.02); }
+    }
+
+    @media (max-width: 850px) {
+      .stats-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .app { padding: 13px 12px 28px; }
+      .hero { padding: 23px 13px; }
+      .stats-grid { gap: 9px; }
+      .stat-card { padding: 13px; }
+      .stat-value { font-size: 22px; }
+      .button-grid { gap: 9px; }
+      .menu-button { min-height: 72px; padding: 10px; gap: 8px; }
+      .icon-box { width: 35px; height: 35px; flex-basis: 35px; }
+      .button-label { font-size: 11.5px; }
+      .youtube-grid { gap: 7px; }
+      .youtube-grid .menu-button { min-height: 72px; }
+      .youtube-grid .button-label { font-size: 11px; }
+      .section-heading { font-size: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ==========================================
+       SECTION 3: HTML BODY
+       Complete dashboard layout and all buttons
+       ========================================== -->
+  <div class="app">
+
+    <!-- Header -->
+    <header class="hero">
+      <div class="logo"><i class="fa-solid fa-shield-halved"></i></div>
+      <h1>ELITE EARN HUB</h1>
+      <h2>ADMIN PANEL</h2>
+      <div class="hero-line"></div>
+      <p class="owner">Sanny Jatt</p>
+      <p class="role">CEO &amp; Managing Director</p>
+      <p class="intro">Founder &amp; Administrator of Elite Earn Hub</p>
+    </header>
+
+    <!-- 01: Dashboard Overview -->
+    <section class="section">
+      <h2 class="section-heading">Dashboard Overview <span class="section-number">01</span></h2>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon green-bg"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-label">Total Users</div>
+          <div class="stat-value" id="totalUsers">—</div>
+          <div class="stat-status">Awaiting database connection</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon gold-bg"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+          <div class="stat-label">Pending Withdrawal Requests</div>
+          <div class="stat-value" id="totalWithdrawals">0</div>
+          <div class="stat-status">Live database counter</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon blue-bg"><i class="fa-solid fa-arrow-down-to-bracket"></i></div>
+          <div class="stat-label">Pending Deposit Requests</div>
+          <div class="stat-value" id="pendingDeposits">—</div>
+          <div class="stat-status">Awaiting database connection</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon purple-bg"><i class="fa-solid fa-user-check"></i></div>
+          <div class="stat-label">Today's Verifications</div>
+          <div class="stat-value" id="todayVerifications">—</div>
+          <div class="stat-status">Awaiting database connection</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 02: User Management -->
+    <section class="section">
+      <h2 class="section-heading">User Management <span class="section-number">02</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-green" data-label="User Profile">
+          <span class="icon-box"><i class="fa-solid fa-user"></i></span>
+          <span class="button-label">User Profile</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-blue" data-label="Referral">
+          <span class="icon-box"><i class="fa-solid fa-people-arrows-left-right"></i></span>
+          <span class="button-label">Referral</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+  
+    
+          <!-- USER PROFILE SECTION -->
+<section class="user-profile-page" id="userProfilePage" style="display:none;">
+
+  <h2 class="section-heading">User Profiles</h2>
+
+  <button class="profile-back-btn" id="profileBackBtn">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Admin Panel
+  </button>
+
+  <div class="profile-stats">
+
+    <div class="profile-stat-card">
+      <span>Total Registered Users</span>
+      <strong id="profileTotalUsers">—</strong>
+    </div>
+
+    <div class="profile-stat-card">
+      <span>New Users Today</span>
+      <strong id="profileNewUsers">—</strong>
+    </div>
+
+  </div>
+
+  <div class="profile-search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input
+      type="search"
+      id="profileSearch"
+      placeholder="Search username, Gmail or User ID..."
+    >
+  </div>
+
+  <h3 class="profile-list-heading">All Registered Users</h3>
+
+  <div id="registeredUsersList" class="profile-empty">
+    <i class="fa-solid fa-users"></i>
+    <p>User records will appear here after database connection.</p>
+  </div>
+
+      </section>
+                                                                   
+  
+
+<!-- USER DETAILS PAGE -->
+<section class="user-details-page" id="userDetailsPage" style="display:none;">
+
+  <!-- 01: PERSONAL INFORMATION -->
+  <div class="details-section">
+
+    <h3 class="details-section-heading">
+      <i class="fa-solid fa-user"></i>
+      PERSONAL INFORMATION
+    </h3>
+
+    <div class="details-card">
+
+      <div class="details-grid">
+
+        <div class="details-item">
+          <span class="details-label">USERNAME</span>
+          <span class="details-value" id="detailUsername">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">EMAIL ADDRESS</span>
+          <span class="details-value" id="detailEmail">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">USER ID</span>
+          <span class="details-value" id="detailUserId">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">JOINED DATE</span>
+          <span class="details-value" id="detailJoinedDate">—</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 02: WALLET INFORMATION -->
+  <div class="details-section">
+
+    <h3 class="details-section-heading">
+      <i class="fa-solid fa-wallet"></i>
+      WALLET INFORMATION
+    </h3>
+
+    <div class="details-card">
+
+      <div class="details-grid">
+
+        <div class="details-item">
+          <span class="details-label">MAIN BALANCE</span>
+          <span class="details-value" id="detailMainBalance">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">ADVERTISEMENT BALANCE</span>
+          <span class="details-value" id="detailAdBalance">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">RATING POINTS</span>
+          <span class="details-value" id="detailRatingPoints">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">ACCOUNT STATUS</span>
+          <span class="details-value" id="detailAccountStatus">—</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 03: REFERRAL INFORMATION -->
+  <div class="details-section">
+
+    <h3 class="details-section-heading">
+      <i class="fa-solid fa-users"></i>
+      REFERRAL INFORMATION
+    </h3>
+
+    <div class="details-card">
+
+      <div class="details-grid">
+
+        <div class="details-item">
+          <span class="details-label">TOTAL REFERRALS</span>
+          <span class="details-value" id="detailTotalReferrals">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">ACTIVE REFERRALS</span>
+          <span class="details-value" id="detailActiveReferrals">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">REFERRED BY</span>
+          <span class="details-value" id="detailReferredBy">—</span>
+        </div>
+
+        <div class="details-item">
+          <span class="details-label">REFERRAL CODE</span>
+          <span class="details-value" id="detailReferralCode">—</span>
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="details-action-btn"
+        id="checkReferralsBtn"
+      >
+        <i class="fa-solid fa-people-group"></i>
+        CHECK REFERRALS
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      
+
+    </div>
+  </div>
+
+
+  <!-- 04: ACCOUNT ACTIVITY -->
+  <div class="details-section">
+
+    <h3 class="details-section-heading">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      ACCOUNT ACTIVITY
+    </h3>
+
+    <div class="details-card">
+
+      <button
+        type="button"
+        class="details-history-btn"
+        id="detailDepositHistoryBtn"
+      >
+        <span>
+          <i class="fa-solid fa-circle-arrow-down"></i>
+          DEPOSIT HISTORY
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <button
+        type="button"
+        class="details-history-btn"
+        id="detailWithdrawalHistoryBtn"
+      >
+        <span>
+          <i class="fa-solid fa-circle-arrow-up"></i>
+          WITHDRAWAL HISTORY
+        </span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- BACK TO USER PROFILES -->
+  <button
+    type="button"
+    class="details-back-btn"
+    id="detailsBackBtn"
+  >
+    <i class="fa-solid fa-arrow-left"></i>
+    BACK TO USER PROFILES
+  </button>
+
+</section>
+<!-- END USER DETAILS PAGE -->
+
+<!-- INDIVIDUAL USER DEPOSIT HISTORY PAGE -->
+<section class="user-details-page" id="individualDepositHistoryPage" style="display:none;">
+  <div class="details-section">
+    <h3 class="details-section-heading"><i class="fa-solid fa-circle-arrow-down"></i> DEPOSIT HISTORY</h3>
+    <div class="details-card">
+      <div style="margin-bottom:12px;color:#A9C2B4;font-size:12px;">User: <strong id="userDepositHistoryName" style="color:#39D98A;">—</strong></div>
+      <div class="individual-history-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:9px;margin-bottom:14px;">
+        <div style="background:#1b3028;border:1px solid #39D98A66;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">TOTAL DEPOSITS</span><strong id="depositStatTotal" style="display:block;color:#F5F8F5;font-size:22px;">—</strong></div>
+        <div style="background:#1b3028;border:1px solid #45B8FF66;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">TOTAL AMOUNT</span><strong id="depositStatAmount" style="display:block;color:#45B8FF;font-size:18px;">—</strong></div>
+        <div style="background:#1b3028;border:1px solid #39D98A66;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">APPROVED</span><strong id="depositStatApproved" style="display:block;color:#39D98A;font-size:22px;">—</strong></div>
+        <div style="background:#1b3028;border:1px solid #FFD44766;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">PENDING</span><strong id="depositStatPending" style="display:block;color:#FFD447;font-size:22px;">—</strong></div>
+        <div style="background:#1b3028;border:1px solid #FF8FA366;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">REJECTED</span><strong id="depositStatRejected" style="display:block;color:#FF8FA3;font-size:22px;">—</strong></div>
+      </div>
+      <div id="individualDepositHistoryList" style="display:grid;gap:10px;">
+        <div style="color:#A9C2B4;">Deposit history yahan show hogi.</div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="details-back-btn" id="individualDepositHistoryBack"><i class="fa-solid fa-arrow-left"></i> BACK TO USER DETAILS</button>
+</section>
+
+<!-- INDIVIDUAL USER WITHDRAWAL HISTORY PAGE -->
+<section class="user-details-page" id="individualWithdrawalHistoryPage" style="display:none;">
+  <div class="details-section">
+    <h3 class="details-section-heading"><i class="fa-solid fa-circle-arrow-up"></i> WITHDRAWAL HISTORY</h3>
+    <div class="details-card">
+      <div style="margin-bottom:12px;color:#A9C2B4;font-size:12px;">User: <strong id="userWithdrawalHistoryName" style="color:#39D98A;">—</strong></div>
+      <div class="individual-history-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:9px;margin-bottom:14px;">
+        <div style="background:#1b3028;border:1px solid #39D98A66;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">TOTAL REQUESTS</span><strong id="withdrawStatTotal" style="display:block;color:#F5F8F5;font-size:22px;">—</strong></div>
+        <div style="background:#1b3028;border:1px solid #45B8FF66;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">TOTAL WITHDRAWN</span><strong id="withdrawStatAmount" style="display:block;color:#45B8FF;font-size:18px;">—</strong></div>
+        <div style="background:#1b3028;border:1px solid #39D98A66;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">APPROVED</span><strong id="withdrawStatApproved" style="display:block;color:#39D98A;font-size:22px;">—</strong></div>
+        <div style="background:#1b3028;border:1px solid #FFD44766;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">PENDING</span><strong id="withdrawStatPending" style="display:block;color:#FFD447;font-size:22px;">—</strong></div>
+        <div style="background:#1b3028;border:1px solid #FF8FA366;border-radius:10px;padding:12px;"><span style="display:block;color:#A9C2B4;font-size:10px;">REJECTED</span><strong id="withdrawStatRejected" style="display:block;color:#FF8FA3;font-size:22px;">—</strong></div>
+      </div>
+      <div id="individualWithdrawalHistoryList" style="display:grid;gap:10px;">
+        <div style="color:#A9C2B4;">Withdrawal history yahan show hogi.</div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="details-back-btn" id="individualWithdrawalHistoryBack"><i class="fa-solid fa-arrow-left"></i> BACK TO USER DETAILS</button>
+</section>
+
+
+
+
+
+
+<!-- USER REFERRALS PAGE -->
+<section class="user-referrals-page" id="userReferralsPage" style="display: none;">
+
+  <!-- PAGE HEADER -->
+  <div class="user-referrals-header">
+    <h2>CHECK REFERRALS</h2>
+    <p>USER REFERRAL DETAILS</p>
+  </div>
+
+  <!-- BACK BUTTON -->
+  <button type="button" class="user-referrals-back-btn" id="userReferralsBackBtn">
+    <i class="fa-solid fa-arrow-left"></i>
+    BACK TO USER DETAILS
+  </button>
+
+  <!-- MAIN STATS -->
+  <div class="user-referrals-stats">
+
+    <div class="user-referrals-stat-card total-users-card">
+      <i class="fa-solid fa-users"></i>
+      <strong id="selectedUserTotalReferrals">—</strong>
+      <span>TOTAL USERS</span>
+    </div>
+
+    <div class="user-referrals-stat-card active-users-card">
+      <i class="fa-solid fa-user-check"></i>
+      <strong id="selectedUserActiveReferrals">—</strong>
+      <span>ACTIVE USERS</span>
+    </div>
+
+  </div>
+
+  <!-- TOTAL TEAM REFERRALS -->
+  <div class="user-team-referrals-card">
+    <span>TOTAL TEAM REFERRALS</span>
+    <strong id="selectedUserTeamReferrals">—</strong>
+  </div>
+
+  <!-- REFERRED USERS LIST -->
+  <div class="user-referrals-list-section">
+
+    <h3>ALL REFERRED USERS</h3>
+
+    <!-- SEARCH -->
+    <div class="user-referrals-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input
+        type="search"
+        id="userReferralsSearch"
+        placeholder="Search Username or User ID..."
+        autocomplete="off"
+      >
+    </div>
+
+    <!-- USERS WILL LOAD HERE -->
+    <div class="user-referrals-list" id="userReferralsList">
+
+      <div class="user-referrals-empty">
+        Referred users will appear here.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- END USER REFERRALS PAGE -->
+
+
+
+
+
+
+
+
+    
+    
+    
+    <!-- REFERRAL MANAGEMENT PAGE -->
+<section class="referral-page" id="referralPage" style="display: none;">
+
+  <h2 class="section-heading">Referral Management</h2>
+
+  <!-- BACK BUTTON -->
+  <button class="referral-back-btn" id="referralBackBtn">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Admin Panel
+  </button>
+
+  <!-- ADMIN REFERRAL STATS -->
+  <div class="referral-stats">
+
+    <div class="referral-stat-card">
+      <span>My Total Referrals</span>
+      <strong id="myTotalReferrals">—</strong>
+    </div>
+
+    <div class="referral-stat-card">
+      <span>My Active Referrals</span>
+      <strong id="myActiveReferrals">—</strong>
+    </div>
+
+  </div>
+
+  <!-- MY ADMIN REFERRALS -->
+  <div class="referral-section">
+
+    <h3>My Admin Referrals</h3>
+
+    <p class="referral-description">
+      Users registered through Admin referral link.
+    </p>
+
+    <div id="myAdminReferralList" class="referral-empty">
+      <i class="fa-solid fa-users"></i>
+      <p>Admin referral records will appear here after database connection.</p>
+    </div>
+
+  </div>
+
+  <!-- TOP REFERRAL USERS -->
+  <div class="referral-section">
+
+    <h3>Top Referral Users</h3>
+
+    <p class="referral-description">
+      Users ranked by their total referral count.
+    </p>
+
+    <div id="topReferralUsersList" class="referral-empty">
+      <i class="fa-solid fa-ranking-star"></i>
+      <p>Top referral users will appear here after database connection.</p>
+    </div>
+
+  </div>
+
+  <!-- REFERRAL HISTORY -->
+  <div class="referral-section">
+
+    <h3>Referral History – All Users</h3>
+
+    <!-- SEARCH -->
+    <div class="referral-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="referralHistorySearch"
+        placeholder="Search username..."
+      >
+    </div>
+
+    <div id="referralHistoryList" class="referral-empty">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      <p>Referral history will appear here after database connection.</p>
+    </div>
+
+  </div>
+
+</section>
+<!-- END REFERRAL MANAGEMENT PAGE -->
+    
+    
+    
+  
+    
+    <!-- 03: Requests & Finance -->
+    <section class="section">
+      <h2 class="section-heading">Requests &amp; Finance <span class="section-number">03</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-blue" data-label="Deposit Requests">
+          <span class="icon-box"><i class="fa-solid fa-arrow-down-to-bracket"></i></span>
+          <span class="button-label">Deposit Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-gold" data-label="Withdrawal Requests">
+          <span class="icon-box"><i class="fa-solid fa-arrow-up-from-bracket"></i></span>
+          <span class="button-label">Withdrawal Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-purple" data-label="Transaction History">
+          <span class="icon-box"><i class="fa-solid fa-clock-rotate-left"></i></span>
+          <span class="button-label">Transaction History</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-green" data-label="Platform Wallet">
+          <span class="icon-box"><i class="fa-solid fa-building-columns"></i></span>
+          <span class="button-label">Platform Wallet</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+
+
+
+
+
+
+<!-- ==========================================
+     DEPOSIT REQUESTS PAGE
+========================================== -->
+
+<section class="deposit-requests-page" id="depositRequestsPage" style="display:none;">
+
+  <!-- PAGE HEADER -->
+  <div class="deposit-page-header">
+    <h2 class="section-heading">Deposit Requests</h2>
+
+    <button type="button" class="deposit-back-btn" id="depositBackBtn">
+      <i class="fa-solid fa-arrow-left"></i>
+      BACK TO ADMIN PANEL
+    </button>
+  </div>
+
+
+  <!-- 01: DEPOSIT OVERVIEW -->
+  <div class="deposit-section">
+
+    <h3 class="deposit-section-heading">Deposit Overview</h3>
+
+    <div class="deposit-stats-grid">
+
+      <div class="deposit-stat-card total">
+        <span>Total Requests</span>
+        <strong id="depositTotalRequests">—</strong>
+      </div>
+
+      <div class="deposit-stat-card pending">
+        <span>Pending</span>
+        <strong id="depositPendingRequests">—</strong>
+      </div>
+
+      <div class="deposit-stat-card accepted">
+        <span>Accepted</span>
+        <strong id="depositAcceptedRequests">—</strong>
+      </div>
+
+      <div class="deposit-stat-card rejected">
+        <span>Rejected</span>
+        <strong id="depositRejectedRequests">—</strong>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 02: NEW DEPOSIT REQUESTS -->
+  <div class="deposit-section">
+
+    <h3 class="deposit-section-heading">
+      NEW DEPOSIT REQUESTS
+    </h3>
+
+    <div class="deposit-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="depositPendingSearch"
+        placeholder="Search Username / User ID / Transaction ID..."
+      >
+    </div>
+
+    <div class="deposit-filter-buttons">
+
+      <button type="button" class="deposit-filter-btn active"
+        data-deposit-filter="all">All</button>
+
+      <button type="button" class="deposit-filter-btn"
+        data-deposit-filter="pending">Pending</button>
+
+    </div>
+
+    <!-- PENDING REQUESTS WILL APPEAR HERE -->
+    <div id="pendingDepositRequestsList" class="deposit-requests-list">
+
+      <div class="deposit-empty-state">
+        <i class="fa-solid fa-inbox"></i>
+        <p>Pending deposit requests will appear here.</p>
+      </div>
+
+    </div>
+
+    <button type="button" class="deposit-load-more-btn"
+      id="loadMoreDepositRequests">
+      LOAD MORE REQUESTS
+    </button>
+
+  </div>
+
+
+  <!-- 03: DEPOSIT HISTORY -->
+  <div class="deposit-section">
+
+    <h3 class="deposit-section-heading">
+      DEPOSIT HISTORY
+    </h3>
+
+    <!-- HISTORY STATISTICS -->
+    <div class="deposit-history-stats">
+
+      <div class="deposit-history-stat-card">
+        <span>Total Processed</span>
+        <strong id="depositHistoryTotal">—</strong>
+      </div>
+
+      <div class="deposit-history-stat-card">
+        <span>Total SNX Deposited</span>
+        <strong id="depositHistoryTotalSNX">—</strong>
+      </div>
+
+    </div>
+
+
+    <!-- HISTORY SEARCH -->
+    <div class="deposit-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="depositHistorySearch"
+        placeholder="Search Username / User ID / Transaction ID..."
+      >
+    </div>
+
+
+    <!-- HISTORY FILTERS -->
+    <div class="deposit-history-filters">
+
+      <select id="depositHistoryStatus">
+        <option value="all">All Status</option>
+        <option value="approved">Accepted</option>
+        <option value="rejected">Rejected</option>
+      </select>
+
+      <select id="depositHistoryMethod">
+        <option value="all">All Methods</option>
+        <option value="binance">Binance BEP-20</option>
+        <option value="jazzcash">JazzCash</option>
+        <option value="easypaisa">EasyPaisa</option>
+      </select>
+
+    </div>
+
+
+    <!-- ACCEPTED AND REJECTED REQUESTS -->
+    <div id="depositHistoryList" class="deposit-history-list">
+
+      <div class="deposit-empty-state">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <p>Deposit history will appear here.</p>
+      </div>
+
+    </div>
+
+    <button type="button" class="deposit-load-more-btn"
+      id="loadMoreDepositHistory">
+      LOAD MORE HISTORY
+    </button>
+
+  </div>
+
+</section>
+
+<!-- END DEPOSIT REQUESTS PAGE -->
+
+
+
+
+
+
+
+
+    
+<!-- ==========================================
+     WITHDRAWAL REQUESTS PAGE
+========================================== -->
+
+<section class="withdrawal-requests-page" id="withdrawalRequestsPage" style="display:none;">
+
+  <!-- PAGE HEADER -->
+  <div class="withdrawal-page-header">
+    <h2 class="section-heading">Withdrawal Requests</h2>
+
+    <button type="button" class="withdrawal-back-btn" id="withdrawalBackBtn">
+      <i class="fa-solid fa-arrow-left"></i>
+      BACK TO ADMIN PANEL
+    </button>
+  </div>
+
+  <!-- OVERVIEW STATS -->
+  <div class="withdrawal-stats-grid">
+
+    <div class="withdrawal-stat-card total">
+      <span>Total Requests</span>
+      <strong id="totalWithdrawalRequests">—</strong>
+    </div>
+
+    <div class="withdrawal-stat-card pending">
+      <span>Pending Requests</span>
+      <strong id="pendingWithdrawalRequests">—</strong>
+    </div>
+
+    <div class="withdrawal-stat-card approved">
+      <span>Approved Requests</span>
+      <strong id="approvedWithdrawalRequests">—</strong>
+    </div>
+
+    <div class="withdrawal-stat-card rejected">
+      <span>Rejected Requests</span>
+      <strong id="rejectedWithdrawalRequests">—</strong>
+    </div>
+
+  </div>
+
+  <!-- PENDING REQUESTS -->
+  <div class="withdrawal-section">
+
+    <h3 class="withdrawal-section-heading">Pending Requests</h3>
+
+    <div id="pendingWithdrawalRequestsList" class="withdrawal-requests-list">
+
+      <div class="withdrawal-empty-state">
+        <i class="fa-solid fa-money-bill-transfer"></i>
+        <p>Withdrawal requests will appear here after database connection.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- WITHDRAWAL HISTORY -->
+  <div class="withdrawal-section">
+
+    <h3 class="withdrawal-section-heading">Withdrawal History</h3>
+
+    <!-- SEARCH -->
+    <div class="withdrawal-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="withdrawalHistorySearch"
+        placeholder="Search username or User ID..."
+      >
+    </div>
+
+    <!-- HISTORY FILTERS -->
+    <div class="withdrawal-history-filters">
+
+      <select id="withdrawalHistoryStatus">
+        <option value="all">All Status</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+
+      <select id="withdrawalHistoryMethod">
+        <option value="all">All Methods</option>
+        <option value="jazzcash">JazzCash</option>
+        <option value="easypaisa">EasyPaisa</option>
+        <option value="binance">Binance UID</option>
+      </select>
+
+    </div>
+
+    <!-- HISTORY LIST -->
+    <div id="withdrawalHistoryList" class="withdrawal-history-list">
+
+      <div class="withdrawal-empty-state">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <p>Withdrawal history will appear here after database connection.</p>
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="withdrawal-load-more-btn"
+      id="withdrawalHistoryLoadMore"
+      style="display:none;"
+    >
+      LOAD MORE
+    </button>
+
+  </div>
+
+</section>
+
+<!-- END WITHDRAWAL REQUESTS PAGE -->
+
+
+
+
+
+
+    
+    <!-- 04: Advertisement Center -->
+    <section class="section">
+      <h2 class="section-heading">Advertisement Center <span class="section-number">04</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-green" data-label="Task Requests">
+          <span class="icon-box"><i class="fa-solid fa-list-check"></i></span>
+          <span class="button-label">Task Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-blue" data-label="Surfing Requests">
+          <span class="icon-box"><i class="fa-solid fa-water"></i></span>
+          <span class="button-label">Surfing Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+
+      <div class="youtube-panel">
+        <h3 class="youtube-title"><i class="fa-brands fa-youtube"></i> YouTube</h3>
+        <div class="youtube-grid">
+          <button class="menu-button accent-green" data-label="YouTube Like">
+            <span class="icon-box"><i class="fa-solid fa-thumbs-up"></i></span>
+            <span class="button-label">Like</span>
+          </button>
+          <button class="menu-button accent-green" data-label="YouTube Subscribe">
+            <span class="icon-box"><i class="fa-solid fa-bell"></i></span>
+            <span class="button-label">Subscribe</span>
+          </button>
+          <button class="menu-button accent-green" data-label="YouTube View">
+            <span class="icon-box"><i class="fa-solid fa-play"></i></span>
+            <span class="button-label">View</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05: Mandatory Tasks -->
+    <section class="section">
+      <h2 class="section-heading">Mandatory Tasks <span class="section-number">05</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-green" data-label="Create Mandatory Task">
+          <span class="icon-box"><i class="fa-solid fa-circle-plus"></i></span>
+          <span class="button-label">Create Mandatory Task</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-purple" data-label="Manage Mandatory Tasks">
+          <span class="icon-box"><i class="fa-solid fa-list-check"></i></span>
+          <span class="button-label">Manage Mandatory Tasks</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 06: Verification & Service Requests -->
+    <section class="section">
+      <h2 class="section-heading">Verification &amp; Service Requests <span class="section-number">06</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-blue" data-label="Face Verification Requests">
+          <span class="icon-box"><i class="fa-solid fa-face-smile"></i></span>
+          <span class="button-label">Face Verification Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-green" data-label="Service Requests">
+          <span class="icon-box"><i class="fa-solid fa-clipboard-list"></i></span>
+          <span class="button-label">Service Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-purple" data-label="Leaderboard">
+          <span class="icon-box"><i class="fa-solid fa-trophy"></i></span>
+          <span class="button-label">Leaderboard</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-gold" data-label="Pin Task Requests">
+          <span class="icon-box"><i class="fa-solid fa-thumbtack"></i></span>
+          <span class="button-label">Pin Task Requests</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 07: Notifications -->
+    <section class="section">
+      <h2 class="section-heading">Notifications <span class="section-number">07</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-green" data-label="Login Notification">
+          <span class="icon-box"><i class="fa-solid fa-bell"></i></span>
+          <span class="button-label">Login Notification</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-blue" data-label="Scrolling Notification">
+          <span class="icon-box"><i class="fa-solid fa-bars-staggered"></i></span>
+          <span class="button-label">Scrolling Notification</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 08: Help, Feedback & Gifts -->
+    <section class="section">
+      <h2 class="section-heading">Help, Feedback &amp; Gifts <span class="section-number">08</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-blue" data-label="Help & Feedback">
+          <span class="icon-box"><i class="fa-solid fa-comments"></i></span>
+          <span class="button-label">Help &amp; Feedback</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-green" data-label="Send Gift">
+          <span class="icon-box"><i class="fa-solid fa-gift"></i></span>
+          <span class="button-label">Send Gift</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 09: User & Platform Controls -->
+    <section class="section">
+      <h2 class="section-heading">User &amp; Platform Controls <span class="section-number">09</span></h2>
+      <div class="button-grid">
+        <button class="menu-button accent-rose" data-label="Block User">
+          <span class="icon-box"><i class="fa-solid fa-user-slash"></i></span>
+          <span class="button-label">Block User</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+        <button class="menu-button accent-purple" data-label="Platform Settings">
+          <span class="icon-box"><i class="fa-solid fa-sliders"></i></span>
+          <span class="button-label">Platform Settings</span>
+          <i class="fa-solid fa-chevron-right button-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 10: Live Activity Feed -->
+    <section class="section">
+      <h2 class="section-heading">Live Activity Feed <span class="section-number">10</span></h2>
+      <div class="activity-panel">
+        <div class="activity-head">
+          <span class="live-dot"></span>
+          <h3>Recent Platform Activity</h3>
+          <span class="live-pill">LIVE FEED</span>
+        </div>
+        <div class="activity-empty" id="activityList">
+          Live activities will appear here after the registration, deposit,
+          withdrawal and conversion tables are connected to Supabase.
+        </div>
+        <div class="activity-note">
+          Real usernames, timestamps and successful statuses will come from
+          confirmed database records after integration.
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Elite Earn Hub · Admin Control Panel<br>
+      Pages and database functions will be added step by step.
+    </footer>
+  </div>
+
+  <div class="toast" id="buttonToast" role="status" aria-live="polite"></div>
+
+  <!-- ==========================================
+       SECTION 4: JAVASCRIPT
+       Button click animation + message.
+       No next page opens at this stage.
+       ========================================== -->
+  <script>
+    // ADMIN ACCESS GATE: same Supabase project and same browser origin as Dashboard.
+    (async function verifyAdminAccess() {
+      const SUPABASE_URL = "https://cdgmtleyzggeryvugcrf.supabase.co";
+      const SUPABASE_ANON_KEY = "sb_publishable_9veiB1eRPPyLHR8X2oldMQ_AcLz9Jb2";
+
+      try {
+        if (!window.supabase || !window.supabase.createClient) {
+          throw new Error("Supabase library could not be loaded.");
+        }
+
+        const supabaseClient = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
+
+     window.supabaseClient = supabaseClient;
+        
+    
+    
+    const { data: userData, error: userError } =
+          await supabaseClient.auth.getUser();
+
+        if (userError) throw userError;
+
+        if (!userData || !userData.user) {
+          window.location.replace("login.html");
+          return;
+        }
+
+        const { data: profile, error: profileError } = await supabaseClient
+          .from("profiles")
+          .select("role")
+          .eq("id", userData.user.id)
+          .maybeSingle();
+
+        if (profileError) throw profileError;
+
+        if (!profile || profile.role !== "admin") {
+          window.location.replace("dashboard.html");
+          return;
+        }
+
+       
+        // LOAD TOTAL USERS ON INITIAL DASHBOARD OPEN
+const totalUsersCounter = document.getElementById("totalUsers");
+
+if (totalUsersCounter) {
+  const { count, error } = await supabaseClient
+    .from("profiles")
+    .select("id", { count: "exact", head: true })
+    .neq("role", "admin");
+
+  if (error) {
+    console.error("Dashboard Total Users Error:", error);
+  } else {
+    totalUsersCounter.textContent = count ?? 0;
+  }
+            }
+    
+    
+    
+
+// LOAD PENDING DEPOSIT REQUESTS COUNTER
+const pendingDepositCounter = document.getElementById("pendingDeposits");
+
+if (pendingDepositCounter) {
+  const { count, error } = await supabaseClient
+    .from("deposit_requests")
+    .select("id", { count: "exact", head: true })
+    .eq("status", "pending");
+
+  if (error) {
+    console.error("Pending Deposits Counter Error:", error);
+    pendingDepositCounter.textContent = "—";
+  } else {
+    pendingDepositCounter.textContent = count ?? 0;
+  }
+}
+
+
+    
+    
+    // Only verified admins can see the Admin Panel.
+        document.documentElement.classList.remove("auth-pending");
+      } catch (error) {
+        console.error("Admin access verification failed:", error);
+        document.documentElement.classList.remove("auth-pending");
+        document.body.innerHTML = `
+          <main style="min-height:100vh;display:grid;place-items:center;padding:24px;background:#14251F;color:#F5F8F5;font-family:Arial,sans-serif;text-align:center">
+            <section style="max-width:440px;padding:28px;border:1px solid rgba(255,212,71,.45);border-radius:18px;background:#192F27">
+              <h2 style="color:#FFD447;margin-top:0">Admin access could not be verified</h2>
+              <p style="line-height:1.6">Please check your internet connection, Supabase access and the profiles table permissions, then try again.</p>
+              <button onclick="location.reload()" style="padding:11px 18px;border:0;border-radius:9px;background:#39D98A;color:#14251F;font-weight:700">Try Again</button>
+            </section>
+          </main>`;
+      }
+    })();
+
+  
+
+
+
+
+    
+/* =========================================
+   ELITE EARN HUB — SINGLE PAGE NAVIGATION
+========================================= */
+
+(function () {
+  const pageIds = new Set([
+  "userProfilePage",
+  "referralPage",
+  "userDetailsPage",
+  "userReferralsPage",
+  "individualDepositHistoryPage",
+  "individualWithdrawalHistoryPage",
+  "depositRequestsPage",
+"withdrawalRequestsPage"
+]);
+
+  const pageHistory = [];
+  let currentPage = "dashboard";
+
+  function hideAllPages() {
+    document.querySelectorAll(".app > section").forEach(section => {
+      if (pageIds.has(section.id)) section.style.display = "none";
+    });
+  }
+
+  function dashboard() {
+    pageHistory.length = 0;
+    hideAllPages();
+
+    document.querySelectorAll(".app > section").forEach(section => {
+      if (!pageIds.has(section.id)) section.style.display = "";
+    });
+
+    const hero = document.querySelector(".hero");
+    if (hero) hero.style.display = "";
+
+    currentPage = "dashboard";
+    window.scrollTo(0, 0);
+  }
+
+  function open(pageId) {
+    const target = document.getElementById(pageId);
+    if (!target) {
+      console.error("Admin page not found:", pageId);
+      return false;
+    }
+
+    if (currentPage === pageId) return true;
+
+    pageIds.add(pageId);
+    pageHistory.push(currentPage);
+
+    document.querySelectorAll(".app > section").forEach(section => {
+      section.style.display = "none";
+    });
+
+    const hero = document.querySelector(".hero");
+    if (hero) hero.style.display = "none";
+
+    target.style.display = "block";
+    currentPage = pageId;
+    window.scrollTo(0, 0);
+    return true;
+  }
+
+  function back() {
+    const previousPage = pageHistory.pop();
+
+    if (!previousPage || previousPage === "dashboard") {
+      dashboard();
+      return;
+    }
+
+    const target = document.getElementById(previousPage);
+    if (!target) {
+      dashboard();
+      return;
+    }
+
+    document.querySelectorAll(".app > section").forEach(section => {
+      section.style.display = "none";
+    });
+
+    target.style.display = "block";
+
+    const hero = document.querySelector(".hero");
+    if (hero) hero.style.display = "none";
+
+    currentPage = previousPage;
+    window.scrollTo(0, 0);
+  }
+
+  window.adminPageNavigation = { open, back, dashboard };
+
+  // Start with only the dashboard visible.
+  dashboard();
+
+  // Main dashboard pages
+  document.querySelector('.menu-button[data-label="User Profile"]')
+    ?.addEventListener("click", () => open("userProfilePage"));
+
+  document.getElementById("profileBackBtn")
+    ?.addEventListener("click", dashboard);
+
+  document.querySelector('.menu-button[data-label="Referral"]')
+    ?.addEventListener("click", () => open("referralPage"));
+
+  document.getElementById("referralBackBtn")
+    ?.addEventListener("click", dashboard);
+
+})();
+
+
+// =====================================
+// USER DETAILS: OPEN + LOAD USER DATA
+// =====================================
+
+document.addEventListener("click", async function (e) {
+
+  const viewBtn = e.target.closest(".view-user-details-btn");
+  if (!viewBtn) return;
+
+  const userId = viewBtn.dataset.userId;
+  window.currentDetailUserId = userId;
+  const profilePage = document.getElementById("userProfilePage");
+  const detailsPage = document.getElementById("userDetailsPage");
+  const client = window.supabaseClient;
+
+  if (!userId || !client) {
+    alert("User ID ya Supabase connection available nahi hai.");
+    return;
+  }
+
+  if (!window.adminPageNavigation?.open("userDetailsPage")) return;
+
+  // Reset fields while loading
+  [
+    "detailUsername",
+    "detailEmail",
+    "detailUserId",
+    "detailJoinedDate",
+    "detailMainBalance",
+    "detailAdBalance",
+    "detailRatingPoints",
+    "detailAccountStatus",
+    "detailTotalReferrals",
+    "detailActiveReferrals",
+    "detailReferredBy",
+    "detailReferralCode"
+  ].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = "Loading...";
+  });
+
+  try {
+
+    const { data: user, error } = await client
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .single();
+
+    if (error) throw error;
+
+    const setValue = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent =
+        value === null || value === undefined || value === ""
+          ? "Not available"
+          : value;
+    };
+
+    // PERSONAL INFORMATION
+    setValue("detailUsername", user.username);
+    setValue("detailEmail", user.email);
+    setValue("detailUserId", user.id);
+    setValue(
+      "detailJoinedDate",
+      user.created_at
+        ? new Date(user.created_at).toLocaleDateString()
+        : "Unknown"
+    );
+
+    // WALLET INFORMATION
+    setValue("detailMainBalance", Number(user.main_balance || 0) + " SNX");
+    setValue("detailAdBalance", Number(user.advertisement_balance || 0) + " SNX");
+    setValue("detailRatingPoints", Number(user.rating_points || 0));
+    setValue("detailAccountStatus", user.account_status || "ACTIVE");
+
+    // REFERRAL FIELDS — awaiting database column confirmation
+    setValue("detailTotalReferrals", "—");
+    setValue("detailActiveReferrals", "—");
+    setValue("detailReferredBy", "—");
+    setValue("detailReferralCode", "—");
+
+  } catch (error) {
+
+    console.error("User Details Error:", error);
+    alert("User details load nahi ho sake: " + error.message);
+
+  }
+
+});
+
+
+// BACK TO USER PROFILES
+document.getElementById("detailsBackBtn")
+  ?.addEventListener("click", function () {
+    window.adminPageNavigation?.back();
+  });
+
+
+
+
+// INDIVIDUAL USER DEPOSIT / WITHDRAWAL HISTORY PAGES
+(function () {
+  const $ = id => document.getElementById(id);
+  const escapeHtml = value => String(value ?? "—").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[ch]);
+  const formatDate = value => value ? new Date(value).toLocaleString() : "—";
+  const formatAmount = value => {
+    const amount = Number(value);
+    return Number.isFinite(amount) ? amount.toFixed(2) + " SNX" : "—";
+  };
+  const statusColor = status => ({
+    pending: "#FFD447", approved: "#39D98A", rejected: "#FF8FA3"
+  }[String(status || "").toLowerCase()] || "#A9C2B4");
+
+  function showHistoryError(target, message) {
+    target.innerHTML = `<div style="padding:12px;border:1px solid #A83245;border-radius:10px;color:#FF8FA3;">${escapeHtml(message)}</div>`;
+  }
+
+  function updateStats(kind, rows) {
+    const isDeposit = kind === "deposit";
+    const prefix = isDeposit ? "depositStat" : "withdrawStat";
+    const statuses = rows.map(row => String(row.status || "").toLowerCase());
+    const approved = statuses.filter(status => status === "approved").length;
+    const pending = statuses.filter(status => status === "pending").length;
+    const rejected = statuses.filter(status => status === "rejected").length;
+    const total = rows.length;
+    const amount = rows.reduce((sum, row) => {
+      const value = Number(row.amount);
+      if (!Number.isFinite(value)) return sum;
+      if (!isDeposit && String(row.status || "").toLowerCase() !== "approved") return sum;
+      return sum + value;
+    }, 0);
+
+    $(prefix + "Total").textContent = total;
+    $(prefix + "Amount").textContent = amount.toFixed(2) + " SNX";
+    $(prefix + "Approved").textContent = approved;
+    $(prefix + "Pending").textContent = pending;
+    $(prefix + "Rejected").textContent = rejected;
+  }
+
+  async function loadIndividualHistory(kind) {
+    const isDeposit = kind === "deposit";
+    const list = $(isDeposit ? "individualDepositHistoryList" : "individualWithdrawalHistoryList");
+    const nameEl = $(isDeposit ? "userDepositHistoryName" : "userWithdrawalHistoryName");
+    const userId = window.currentDetailUserId;
+    const client = window.supabaseClient;
+    if (!list) return;
+    if (!userId || !client) {
+      showHistoryError(list, "User ya Supabase connection available nahi hai.");
+      return;
+    }
+    list.innerHTML = '<div style="color:#A9C2B4;padding:10px;">Loading history...</div>';
+    nameEl.textContent = document.getElementById("detailUsername")?.textContent || "User";
+    try {
+      const table = isDeposit ? "deposit_requests" : "withdrawal_requests";
+      const { data, error } = await client.from(table).select("*")
+        .eq("user_id", userId).order("created_at", { ascending: false });
+      if (error) throw error;
+      const rows = data || [];
+      updateStats(kind, rows);
+
+      if (!rows.length) {
+        list.innerHTML = `<div style="padding:14px;text-align:center;color:#A9C2B4;border:1px dashed #345447;border-radius:10px;">No ${isDeposit ? "deposit" : "withdrawal"} history found for this user.</div>`;
+        return;
+      }
+      list.innerHTML = rows.map(item => {
+        const status = String(item.status || "unknown").toLowerCase();
+        const method = item.payment_method || item.method || "—";
+        const extra = isDeposit
+          ? `<div><span style="color:#A9C2B4;">Transaction ID</span><br><strong>${escapeHtml(item.transaction_id || "—")}</strong></div>
+             <div><span style="color:#A9C2B4;">Sender Name</span><br><strong>${escapeHtml(item.sender_name || "—")}</strong></div>`
+          : `<div style="grid-column:1/-1;"><span style="color:#A9C2B4;">Account Details</span><br><strong style="overflow-wrap:anywhere;">${escapeHtml(item.account_details || "—")}</strong></div>`;
+        return `<article style="background:#14251F;border:1px solid #345447;border-radius:10px;padding:12px;color:#F5F8F5;font-size:12px;line-height:1.6;overflow-wrap:anywhere;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;">
+            <strong style="color:#FFD447;font-size:14px;">${formatAmount(item.amount)}</strong>
+            <span style="color:${statusColor(status)};font-weight:800;text-transform:uppercase;">${escapeHtml(status)}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div><span style="color:#A9C2B4;">Payment Method</span><br><strong>${escapeHtml(method)}</strong></div>
+            <div><span style="color:#A9C2B4;">Request Date</span><br><strong>${escapeHtml(formatDate(item.created_at))}</strong></div>
+            ${extra}
+            <div><span style="color:#A9C2B4;">Reviewed Date</span><br><strong>${escapeHtml(formatDate(item.reviewed_at))}</strong></div>
+          </div>
+          ${item.admin_note ? `<div style="margin-top:8px;padding-top:7px;border-top:1px solid #345447;color:#FFD447;">Admin Note: ${escapeHtml(item.admin_note)}</div>` : ""}
+        </article>`;
+      }).join("");
+    } catch (error) {
+      console.error("Individual " + kind + " history error:", error);
+      showHistoryError(list, "History load nahi hui: " + error.message);
+    }
+  }
+
+  $("detailDepositHistoryBtn")?.addEventListener("click", async () => {
+    if (window.adminPageNavigation?.open("individualDepositHistoryPage")) await loadIndividualHistory("deposit");
+  });
+  $("detailWithdrawalHistoryBtn")?.addEventListener("click", async () => {
+    if (window.adminPageNavigation?.open("individualWithdrawalHistoryPage")) await loadIndividualHistory("withdrawal");
+  });
+  $("individualDepositHistoryBack")?.addEventListener("click", () => window.adminPageNavigation?.back());
+  $("individualWithdrawalHistoryBack")?.addEventListener("click", () => window.adminPageNavigation?.back());
+})();
+
+
+// OPEN CHECK REFERRALS PAGE
+document.getElementById("checkReferralsBtn")?.addEventListener("click", function () {
+    window.adminPageNavigation?.open("userReferralsPage");
+});
+
+
+// BACK TO USER DETAILS PAGE
+document.getElementById("userReferralsBackBtn")?.addEventListener("click", function () {
+    window.adminPageNavigation?.back();
+});
+
+
+
+
+
+
+// DEPOSIT REQUESTS PAGE: OPEN + BACK
+
+document.querySelector('.menu-button[data-label="Deposit Requests"]')
+  ?.addEventListener("click", () => {
+    window.adminPageNavigation.open("depositRequestsPage");
+  });
+
+document.getElementById("depositBackBtn")
+  ?.addEventListener("click", () => {
+    window.adminPageNavigation.dashboard();
+  });
+
+
+
+// WITHDRAWAL REQUESTS PAGE: OPEN + BACK
+
+document.querySelector('.menu-button[data-label="Withdrawal Requests"]')
+  ?.addEventListener("click", () => {
+    window.adminPageNavigation.open("withdrawalRequestsPage");
+  });
+
+document.getElementById("withdrawalBackBtn")
+  ?.addEventListener("click", () => {
+    window.adminPageNavigation.dashboard();
+  });
+
+
+
+    
+
+
+
+
+(function () {
+  const list = document.getElementById("pendingDepositRequestsList");
+
+  async function loadPendingDepositRequests() {
+    if (!list) return;
+
+    if (!window.supabaseClient) {
+      list.textContent = "Supabase connection available nahi hai. Page reload karein.";
+      return;
+    }
+
+    list.innerHTML = '<div class="deposit-empty-state">Loading deposit requests...</div>';
+
+    const safe = value => String(value ?? "—").replace(
+      /[&<>"']/g,
+      char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]
+    );
+
+    const money = (value, currency) => {
+      const number = Number(value);
+      return Number.isFinite(number)
+        ? number.toFixed(2) + " " + safe(currency)
+        : "—";
+    };
+
+    try {
+      const { data, error } = await window.supabaseClient
+        .from("deposit_requests")
+        .select("*")
+        .eq("status", "pending")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+     
+      
+    const dashboardPendingCounter =
+  document.getElementById("pendingDeposits");
+
+if (dashboardPendingCounter) {
+  dashboardPendingCounter.textContent = data?.length ?? 0;
+}
+    
+    
+    
+    
+    if (!data || data.length === 0) {
+        list.innerHTML = `
+          <div class="deposit-empty-state">
+            <i class="fa-solid fa-inbox"></i>
+            <p>Abhi koi pending deposit request nahi hai.</p>
+          </div>`;
+        return;
+      }
+
+      const cards = await Promise.all(data.map(async item => {
+        let proofLink = "Payment proof available nahi hai.";
+
+        if (item.proof_url) {
+          if (/^https:\/\/\S+$/i.test(item.proof_url)) {
+            proofLink = `
+              <a href="${safe(item.proof_url)}"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 style="color:#45B8FF;text-decoration:none;font-weight:600;">
+                <i class="fa-solid fa-image"></i> View Payment Screenshot
+              </a>`;
+          } else {
+            const { data: signed, error: signError } =
+              await window.supabaseClient
+                .storage
+                .from("deposit-proofs")
+                .createSignedUrl(item.proof_url, 3600);
+
+            if (!signError && signed?.signedUrl) {
+              proofLink = `
+                <a href="${safe(signed.signedUrl)}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="color:#45B8FF;text-decoration:none;font-weight:600;">
+                  <i class="fa-solid fa-image"></i> View Payment Screenshot
+                </a>`;
+            } else {
+              proofLink = "Payment screenshot open nahi ho saka.";
+            }
+          }
+        }
+
+        const currency = item.currency || "PKR";
+        const submitted = item.created_at
+          ? new Date(item.created_at).toLocaleString()
+          : "—";
+
+        return `
+          <div style="
+            background:#1b3028;
+            border:1px solid #39D98A66;
+            border-radius:12px;
+            padding:11px;
+            margin-bottom:9px;
+            color:#fff;
+            font-size:12px;
+            line-height:1.45;
+            box-sizing:border-box;
+          ">
+
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+              gap:8px;
+              margin-bottom:8px;
+            ">
+              <strong style="color:#39D98A;font-size:14px;">
+                ${safe(item.username)}
+              </strong>
+
+              <span style="
+                background:#5b4614;
+                color:#FFD447;
+                padding:3px 8px;
+                border-radius:20px;
+                font-size:10px;
+                font-weight:bold;
+              ">PENDING</span>
+            </div>
+
+            <div style="
+              display:grid;
+              grid-template-columns:1fr 1fr;
+              gap:7px 12px;
+            ">
+              <div>
+                <span style="color:#A9C2B4;">Email</span><br>
+                <strong style="overflow-wrap:anywhere;">${safe(item.email)}</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">User ID</span><br>
+                <strong style="overflow-wrap:anywhere;">${safe(item.user_id)}</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">Deposit Amount</span><br>
+                <strong>${safe(item.amount)} SNX</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">Payment Method</span><br>
+                <strong>${safe(item.payment_method)}</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">Sender Name</span><br>
+                <strong>${safe(item.sender_name)}</strong>
+              </div>
+
+              <div>
+                <span style="color:#A9C2B4;">Transaction ID</span><br>
+                <strong style="overflow-wrap:anywhere;">${safe(item.transaction_id)}</strong>
+              </div>
+            </div>
+
+            <div style="
+              border-top:1px solid #39D98A44;
+              margin-top:9px;
+              padding-top:8px;
+            ">
+              <div style="
+                color:#39D98A;
+                font-weight:bold;
+                margin-bottom:6px;
+                font-size:11px;
+              ">PAYMENT BREAKDOWN</div>
+
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="color:#A9C2B4;">Currency</span>
+                <strong>${safe(currency)}</strong>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="color:#A9C2B4;">Payment Amount</span>
+                <strong>${money(item.payment_amount, currency)}</strong>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="color:#A9C2B4;">Platform Fee (10%)</span>
+                <strong>${money(item.platform_fee, currency)}</strong>
+              </div>
+
+              <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                background:#14251F;
+                padding:7px 9px;
+                border-radius:7px;
+                margin-top:7px;
+              ">
+                <strong>TOTAL PAID</strong>
+                <strong style="color:#39D98A;font-size:14px;">
+                  ${money(item.total_paid, currency)}
+                </strong>
+              </div>
+            </div>
+
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+              flex-wrap:wrap;
+              gap:7px;
+              margin-top:9px;
+            ">
+              <div>${proofLink}</div>
+              <span style="color:#A9C2B4;font-size:10px;">
+                ${safe(submitted)}
+              </span>
+            </div>
+
+
+
+            <div style="
+              display:flex;
+              gap:8px;
+              margin-top:12px;
+            ">
+              <button
+                type="button"
+                data-deposit-action="accept"
+                data-request-id="${safe(item.id)}"
+                style="
+                  flex:1;
+                  padding:10px;
+                  background:#39D98A;
+                  color:#14251F;
+                  border:0;
+                  border-radius:7px;
+                  font-weight:800;
+                ">
+                ACCEPT
+              </button>
+
+              <button
+                type="button"
+                data-deposit-action="reject"
+                data-request-id="${safe(item.id)}"
+                style="
+                  flex:1;
+                  padding:10px;
+                  background:#D94A4A;
+                  color:#fff;
+                  border:0;
+                  border-radius:7px;
+                  font-weight:800;
+                ">
+                REJECT
+              </button>
+            </div>
+
+
+
+  
+          </div>
+        `;
+      }));
+
+      list.innerHTML = cards.join("");
+
+    } catch (error) {
+      console.error("Deposit Requests Error:", error);
+      list.textContent = "Error loading requests: " + error.message;
+    }
+  }
+
+
+
+
+  
+  // ACCEPT / REJECT DEPOSIT REQUESTS
+  list.addEventListener("click", async function (event) {
+
+    const button = event.target.closest("[data-deposit-action]");
+    if (!button) return;
+
+    const requestId = button.dataset.requestId;
+    const action = button.dataset.depositAction;
+
+    const actionName = action === "accept" ? "ACCEPT" : "REJECT";
+
+    if (!confirm("Are you sure you want to " + actionName + " this deposit?")) {
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "PROCESSING...";
+
+    const { data, error } = await window.supabaseClient.rpc(
+      "review_deposit_request",
+      {
+        p_request_id: requestId,
+        p_action: action,
+        p_admin_note: null
+      }
+    );
+
+    if (error) {
+      console.error("Deposit Review Error:", error);
+      alert("Request process nahi hui: " + error.message);
+      button.disabled = false;
+      button.textContent = actionName;
+      return;
+    }
+
+    alert("Deposit request successfully " + data.status + "!");
+    await loadPendingDepositRequests();
+await loadDepositHistory();
+
+    
+  });
+
+
+
+
+
+  // ===== LOAD DEPOSIT HISTORY FROM SUPABASE =====
+
+  let allDepositHistory = [];
+
+  async function loadDepositHistory() {
+
+    const historyList = document.getElementById("depositHistoryList");
+    if (!historyList) return;
+
+    historyList.innerHTML = "Loading deposit history...";
+
+    const safeHistory = value => String(value ?? "—").replace(
+      /[&<>"']/g,
+      char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]
+    );
+
+    const moneyHistory = (value, currency) => {
+      const number = Number(value);
+      return Number.isFinite(number)
+        ? number.toFixed(2) + " " + safeHistory(currency)
+        : "—";
+    };
+
+    try {
+
+      const { data, error } = await window.supabaseClient
+        .from("deposit_requests")
+        .select("*")
+        .in("status", ["approved", "rejected"])
+        .order("reviewed_at", { ascending: false });
+
+      if (error) throw error;
+
+      allDepositHistory = data || [];
+
+      const { data: allRequests, error: statsError } =
+        await window.supabaseClient
+          .from("deposit_requests")
+          .select("status, amount");
+
+      if (statsError) throw statsError;
+
+      const requests = allRequests || [];
+
+      document.getElementById("depositTotalRequests").textContent =
+        requests.length;
+
+      document.getElementById("depositPendingRequests").textContent =
+        requests.filter(x => x.status === "pending").length;
+
+      document.getElementById("depositAcceptedRequests").textContent =
+        requests.filter(x => x.status === "approved").length;
+      document.getElementById("depositRejectedRequests").textContent =
+        requests.filter(x => x.status === "rejected").length;
+
+      document.getElementById("depositHistoryTotal").textContent =
+        allDepositHistory.length;
+
+      document.getElementById("depositHistoryTotalSNX").textContent =
+        allDepositHistory
+          .filter(x => x.status === "approved")
+          .reduce((sum, x) => sum + Number(x.amount || 0), 0)
+          .toFixed(2) + " SNX";
+
+      async function renderDepositHistory() {
+
+        const statusFilter =
+          document.getElementById("depositHistoryStatus").value;
+
+        const methodFilter =
+          document.getElementById("depositHistoryMethod").value;
+
+        const search =
+          document.getElementById("depositHistorySearch").value
+            .toLowerCase().trim();
+
+        const filtered = allDepositHistory.filter(item => {
+
+          const matchesStatus =
+            statusFilter === "all" || item.status === statusFilter;
+
+          const matchesMethod =
+            methodFilter === "all" ||
+            String(item.payment_method || "").toLowerCase()
+              .includes(methodFilter);
+
+          const searchable = [
+            item.username,
+            item.user_id,
+            item.transaction_id,
+            item.email
+          ].join(" ").toLowerCase();
+
+          return matchesStatus && matchesMethod &&
+            searchable.includes(search);
+        });
+
+        if (!filtered.length) {
+          historyList.innerHTML = `
+            <div class="deposit-empty-state">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <p>No deposit history found.</p>
+            </div>`;
+          return;
+        }
+
+        const cards = await Promise.all(filtered.map(async item => {
+
+          let proofLink = "Payment proof not available.";
+
+          if (item.proof_url) {
+
+            if (/^https:\/\/\S+$/i.test(item.proof_url)) {
+              proofLink = `
+                <a href="${safeHistory(item.proof_url)}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="color:#45B8FF;text-decoration:none;font-weight:600;">
+                  <i class="fa-solid fa-image"></i> View Payment Screenshot
+                </a>`;
+            } else {
+
+              const { data: signed, error: signError } =
+                await window.supabaseClient.storage
+                  .from("deposit-proofs")
+                  .createSignedUrl(item.proof_url, 3600);
+
+              if (!signError && signed?.signedUrl) {
+                proofLink = `
+                  <a href="${safeHistory(signed.signedUrl)}"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     style="color:#45B8FF;text-decoration:none;font-weight:600;">
+                    <i class="fa-solid fa-image"></i> View Payment Screenshot
+                  </a>`;
+              }
+            }
+          }
+
+          const currency = item.currency || "PKR";
+
+          return `
+            <div style="
+              background:#1b3028;
+              border:1px solid #39D98A66;
+              border-radius:12px;
+              padding:11px;
+              margin-bottom:9px;
+              color:#fff;
+              font-size:12px;
+              line-height:1.45;
+              box-sizing:border-box;
+            ">
+
+              <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px;">
+                <strong style="color:#39D98A;font-size:14px;">
+                  ${safeHistory(item.username)}
+                </strong>
+
+                <span style="
+                  background:${item.status === "approved" ?  "#174C35" : "#5B2525"};
+                  color:${item.status === "approved" ? "#39D98A": "#FF7777"};
+                  padding:3px 8px;
+                  border-radius:20px;
+                  font-size:10px;
+                  font-weight:bold;
+                ">
+                  ${safeHistory(item.status).toUpperCase()}
+                </span>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;">
+
+                <div>
+                  <span style="color:#A9C2B4;">Email</span><br>
+                  <strong>${safeHistory(item.email)}</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">User ID</span><br>
+                  <strong style="overflow-wrap:anywhere;">${safeHistory(item.user_id)}</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">Deposit Amount</span><br>
+                  <strong>${safeHistory(item.amount)} SNX</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">Payment Method</span><br>
+                  <strong>${safeHistory(item.payment_method)}</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">Sender Name</span><br>
+                  <strong>${safeHistory(item.sender_name)}</strong>
+                </div>
+
+                <div>
+                  <span style="color:#A9C2B4;">Transaction ID</span><br>
+                  <strong>${safeHistory(item.transaction_id)}</strong>
+                </div>
+
+              </div>
+
+              <div style="border-top:1px solid #39D98A44;margin-top:9px;padding-top:8px;">
+
+                <div style="color:#39D98A;font-weight:bold;margin-bottom:6px;">
+                  PAYMENT BREAKDOWN
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:#A9C2B4;">Currency</span>
+                  <strong>${safeHistory(currency)}</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:#A9C2B4;">Payment Amount</span>
+                  <strong>${moneyHistory(item.payment_amount, currency)}</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:#A9C2B4;">Platform Fee (10%)</span>
+                  <strong>${moneyHistory(item.platform_fee, currency)}</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;align-items:center;background:#14251F;padding:7px 9px;border-radius:7px;margin-top:7px;">
+                  <strong>TOTAL PAID</strong>
+                  <strong style="color:#39D98A;font-size:14px;">
+                    ${moneyHistory(item.total_paid, currency)}
+                  </strong>
+                </div>
+
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;margin-top:9px;">
+                <div>${proofLink}</div>
+                <span style="color:#A9C2B4;font-size:10px;">
+                  ${safeHistory(item.reviewed_at
+                    ? new Date(item.reviewed_at).toLocaleString()
+                    : item.created_at
+                      ? new Date(item.created_at).toLocaleString()
+                      : "—")}
+                </span>
+              </div>
+
+              ${item.admin_note ? `
+                <div style="margin-top:8px;color:#FFD447;">
+                  Admin Note: ${safeHistory(item.admin_note)}
+                </div>` : ""}
+
+            </div>
+          `;
+        }));
+
+        historyList.innerHTML = cards.join("");
+      }
+
+      await renderDepositHistory();
+
+    } catch (error) {
+      console.error("Deposit History Error:", error);
+      historyList.textContent =
+        "History load nahi hui: " + error.message;
+    }
+  }
+
+  document.getElementById("depositHistoryStatus")
+    ?.addEventListener("change", () => loadDepositHistory());
+
+  document.getElementById("depositHistoryMethod")
+    ?.addEventListener("change", () => loadDepositHistory());
+
+  document.getElementById("depositHistorySearch")
+    ?.addEventListener("input", () => loadDepositHistory());
+
+
+
+  
+    
+  const depositButton = document.querySelector(
+    '.menu-button[data-label="Deposit Requests"]'
+  );
+
+  if (depositButton) {
+  depositButton.addEventListener("click", async function () {
+    await loadPendingDepositRequests();
+    await loadDepositHistory();
+  });
+  }
+
+
+// LIVE PENDING DEPOSIT COUNTER
+if (window.supabaseClient && !window.pendingDepositsLiveChannel) {
+  window.pendingDepositsLiveChannel = window.supabaseClient
+    .channel("dashboard-pending-deposits-live")
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "deposit_requests"
+      },
+      () => loadPendingDepositRequests()
+    )
+    .subscribe();
+}
+
+
+    
+})();
+
+  
+
+
+
+    
+    
+    
+  
+  
+            </script>
+
+  <script>
+    const buttons = document.querySelectorAll(".menu-button");
+    const toast = document.getElementById("buttonToast");
+    let toastTimer;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1900);
+    }
+
+    buttons.forEach((button) => {
+      button.type = "button";
+
+      button.addEventListener("click", () => {
+        button.classList.remove("is-clicked");
+
+        // Restart the animation on every click.
+        void button.offsetWidth;
+        button.classList.add("is-clicked");
+
+        setTimeout(() => {
+          button.classList.remove("is-clicked");
+        }, 320);
+
+        const label = button.dataset.label || "This section";
+        showToast(label + " selected.");
+      });
+    });
+
+
+
+
+
+
+
+
+
+    
+// ===== LOAD REAL USER PROFILES FROM SUPABASE =====
+document.addEventListener("DOMContentLoaded", function () {
+
+  const profileBtn = document.querySelector(
+    '.menu-button[data-label="User Profile"]'
+  );
+
+  const searchInput = document.getElementById("profileSearch");
+  const usersList = document.getElementById("registeredUsersList");
+
+  let allUsers = [];
+
+  async function loadRegisteredUsers() {
+
+    const client = window.supabaseClient;
+
+    if (!client) {
+      usersList.textContent = "Supabase connection not ready. Please reload.";
+      return;
+    }
+
+    usersList.textContent = "Loading users...";
+
+    const { data, error } = await client
+      .from("profiles")
+.select("*")
+.neq("role", "admin")
+
+    if (error) {
+      console.error("User loading error:", error);
+      usersList.textContent = "Could not load users: " + error.message;
+      return;
+    }
+
+    allUsers = data || [];
+
+
+  // ===== LIVE DASHBOARD TOTAL USERS COUNTER =====
+  async function loadOverviewTotalUsers() {
+    const client = window.supabaseClient;
+    const counter = document.getElementById("totalUsers");
+
+    if (!client || !counter) return;
+
+    const { count, error } = await client
+      .from("profiles")
+      .select("id", { count: "exact", head: true })
+      .neq("role", "admin");
+
+    if (error) {
+      console.error("Total Users Counter Error:", error);
+      counter.textContent = "—";
+      return;
+    }
+
+    counter.textContent = count ?? 0;
+  }
+
+  // Dashboard khulte hi total users load karein
+  loadOverviewTotalUsers();
+
+  // Database mein user add/delete hone par counter refresh karein
+  if (!window.usersLiveChannel) {
+  window.usersLiveChannel = window.supabaseClient
+    .channel("dashboard-total-users-live")
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "profiles"
+      },
+      () => loadOverviewTotalUsers()
+    )
+    .subscribe();
+    }
+
+
+
+
+
+
+    
+
+
+
+    
+
+    document.getElementById("profileTotalUsers").textContent =
+      allUsers.length;
+
+    const today = new Date().toDateString();
+
+    const newUsersToday = allUsers.filter(user =>
+      user.created_at &&
+      new Date(user.created_at).toDateString() === today
+    ).length;
+
+    document.getElementById("profileNewUsers").textContent =
+      newUsersToday;
+
+    renderUsers(allUsers);
+  }
+
+
+
+
+
+function renderUsers(users) {
+
+  if (!users.length) {
+    usersList.textContent = "No registered users found.";
+    return;
+  }
+
+  usersList.innerHTML = users.map(user => `
+    <div style="
+      background:#1c332a;
+      border:1px solid #315b48;
+      border-radius:10px;
+      padding:11px 13px;
+      margin-bottom:9px;
+      color:#e5eee9;
+      font-size:13px;
+      line-height:1.5;
+      overflow-wrap:anywhere;
+    ">
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:8px;
+        margin-bottom:8px;
+      ">
+        <strong style="color:#39D98A;font-size:15px;">
+          ${escapeHTML(user.username || "Unknown User")}
+        </strong>
+
+        <span style="
+          color:#39D98A;
+          background:#39D98A18;
+          padding:3px 8px;
+          border-radius:20px;
+          font-size:10px;
+          font-weight:bold;
+        ">
+          ${escapeHTML(user.account_status || "ACTIVE").toUpperCase()}
+        </span>
+      </div>
+
+      <div style="
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:8px 12px;
+      ">
+
+        <div>
+          <b style="color:#45B8FF;">EMAIL</b><br>
+          ${escapeHTML(user.email || "Not available")}
+        </div>
+
+        <div>
+          <b style="color:#FFD447;">MAIN BALANCE</b><br>
+          ${Number(user.main_balance || 0)} SNX
+        </div>
+
+        <div>
+          <b style="color:#A78BFA;">ADVERTISEMENT BALANCE</b><br>
+          ${Number(user.advertisement_balance || 0)} SNX
+        </div>
+
+        <div>
+          <b style="color:#39D98A;">RATING POINTS</b><br>
+          ${Number(user.rating_points || 0)}
+        </div>
+
+      </div>
+
+      <div style="
+        margin-top:8px;
+        border-top:1px solid #315b48;
+        padding-top:7px;
+      ">
+        <b style="color:#45B8FF;">USER ID:</b>
+        <span style="font-size:11px;">
+          ${escapeHTML(user.id || "")}
+        </span>
+      </div>
+
+      <div style="margin-top:4px;">
+        <b style="color:#FFD447;">REGISTERED:</b>
+        ${user.created_at
+          ? new Date(user.created_at).toLocaleDateString()
+          : "Unknown"}
+      </div>
+
+      <button
+        type="button"
+        class="view-user-details-btn"
+        data-user-id="${escapeHTML(user.id || "")}"
+        style="
+          width:100%;
+          margin-top:12px;
+          padding:11px;
+          background:linear-gradient(135deg,#39D98A,#27B875);
+          color:#14251F;
+          border:1px solid #39D98A;
+          border-radius:8px;
+          font-size:13px;
+          font-weight:800;
+          cursor:pointer;
+        "
+      >
+        VIEW DETAILS →
+      </button>
+
+    </div>
+  `).join("");
+}
+
+
+
+
+
+
+
+
+
+
+            
+    
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  if (profileBtn) {
+    profileBtn.addEventListener("click", loadRegisteredUsers);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+
+      const filtered = allUsers.filter(user =>
+        String(user.username || "").toLowerCase().includes(query) ||
+        String(user.email || "").toLowerCase().includes(query) ||
+        String(user.id || "").toLowerCase().includes(query)
+      );
+
+      renderUsers(filtered);
+    });
+  }
+
+});
+
+
+
+
+
+
+(function () {
+  let selectedUserId = null;
+  let allProfiles = [];
+  let directReferrals = [];
+
+  const $ = id => document.getElementById(id);
+
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[ch]);
+
+  const active = user =>
+    ['ACTIVE', 'VERIFIED', 'APPROVED'].includes(
+      String(user.account_status || user.status || 'ACTIVE').toUpperCase()
+    );
+
+  function setText(id, value) {
+    const el = $(id);
+    if (el) el.textContent = value;
+  }
+
+  function teamCount(userId) {
+    const visited = new Set([userId]);
+    let current = [userId];
+    let total = 0;
+
+    while (current.length) {
+      const next = [];
+
+      allProfiles.forEach(user => {
+        if (user.referred_by && current.includes(user.referred_by)
+            && !visited.has(user.id)) {
+          visited.add(user.id);
+          next.push(user.id);
+          total++;
+        }
+      });
+
+      current = next;
+    }
+
+    return total;
+  }
+
+  function renderReferralList(query = '') {
+    const list = $('userReferralsList');
+    if (!list) return;
+
+    const q = query.trim().toLowerCase();
+    const filtered = directReferrals.filter(user => {
+      const haystack = [user.username, user.email, user.id, user.referral_code]
+        .map(value => String(value || '').toLowerCase())
+        .join(' ');
+      return haystack.includes(q);
+    });
+
+    if (!filtered.length) {
+      list.innerHTML = '<div class="user-referrals-empty">No referred users found.</div>';
+      return;
+    }
+
+    const byId = new Map(allProfiles.map(user => [user.id, user]));
+
+    list.innerHTML = filtered.map(user => {
+      const userReferrals = allProfiles.filter(row => row.referred_by === user.id);
+      const activeReferrals = userReferrals.filter(active).length;
+      const status = String(user.account_status || user.status || 'ACTIVE').toUpperCase();
+      const isUserActive = active(user);
+
+      return `
+        <article class="user-referral-card ${isUserActive ? '' : 'non-active'}">
+          <div class="user-referral-user-top">
+            <strong class="user-referral-username">${esc(user.username || 'Unknown User')}</strong>
+            <span class="user-referral-status ${isUserActive ? 'active' : 'non-active'}">${esc(status)}</span>
+          </div>
+          <div class="user-referral-id">User ID: ${esc(user.id || 'Not available')}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px 12px;font-size:10px;line-height:1.5;overflow-wrap:anywhere;">
+            <div><b style="color:#45B8FF;">EMAIL</b><br>${esc(user.email || 'Not available')}</div>
+            <div><b style="color:#FFD447;">REFERRED BY</b><br>${esc(byId.get(user.referred_by)?.username || (user.referred_by ? 'Referrer not found' : 'Admin'))}</div>
+            <div><b style="color:#A78BFA;">REFERRAL CODE</b><br>${esc(user.referral_code || 'Not available')}</div>
+            <div><b style="color:#FFD447;">JOINED</b><br>${esc(user.created_at ? new Date(user.created_at).toLocaleDateString() : 'Unknown')}</div>
+            <div><b style="color:#39D98A;">MAIN BALANCE</b><br>${Number(user.main_balance || 0)} SNX</div>
+            <div><b style="color:#45B8FF;">ADVERTISEMENT BALANCE</b><br>${Number(user.advertisement_balance || 0)} SNX</div>
+            <div><b style="color:#A78BFA;">DIRECT REFERRALS</b><br>${userReferrals.length}</div>
+            <div><b style="color:#39D98A;">ACTIVE REFERRALS</b><br>${activeReferrals}</div>
+          </div>
+          <div style="margin-top:9px;padding-top:8px;border-top:1px solid #345447;font-size:9px;color:#AABBB1;overflow-wrap:anywhere;">
+            <b style="color:#45B8FF;">REFERRED BY ID:</b> ${esc(user.referred_by || 'Not available')}
+          </div>
+        </article>`;
+    }).join('');
+  }
+
+  async function loadSelectedUserReferrals() {
+    const client = window.supabaseClient;
+    const list = $('userReferralsList');
+
+    if (!selectedUserId) {
+      if (list) list.innerHTML = '<div class="user-referrals-empty">Please open a user profile first, then choose Check Referrals.</div>';
+      return;
+    }
+
+    if (!client) {
+      if (list) list.innerHTML = '<div class="user-referrals-empty">Supabase connection is not ready. Please reload the Admin Panel.</div>';
+      return;
+    }
+
+    const ids = [
+      'detailTotalReferrals', 'detailActiveReferrals', 'detailReferredBy',
+      'detailReferralCode', 'selectedUserTotalReferrals',
+      'selectedUserActiveReferrals', 'selectedUserTeamReferrals'
+    ];
+    ids.forEach(id => setText(id, 'Loading...'));
+    if (list) list.innerHTML = '<div class="user-referrals-empty">Loading referral data...</div>';
+
+    try {
+      const { data, error } = await client
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+
+      allProfiles = data || [];
+      const selectedUser = allProfiles.find(user => user.id === selectedUserId);
+      if (!selectedUser) throw new Error('Selected user not found in profiles table.');
+
+      directReferrals = allProfiles.filter(user => user.referred_by === selectedUserId);
+      const total = directReferrals.length;
+      const activeTotal = directReferrals.filter(active).length;
+      const byId = new Map(allProfiles.map(user => [user.id, user]));
+      const referrer = byId.get(selectedUser.referred_by);
+
+      setText('detailTotalReferrals', total);
+      setText('detailActiveReferrals', activeTotal);
+      setText('detailReferralCode', selectedUser.referral_code || 'Not available');
+      setText('detailReferredBy', referrer ? (referrer.username || 'Admin') : (selectedUser.referred_by ? 'Referrer not found' : 'Admin'));
+      setText('selectedUserTotalReferrals', total);
+      setText('selectedUserActiveReferrals', activeTotal);
+      setText('selectedUserTeamReferrals', teamCount(selectedUserId));
+
+      const oldList = $('referredUsersList');
+      const oldSection = $('referredUsersSection');
+      if (oldSection) oldSection.style.display = 'block';
+      if (oldList) {
+        oldList.innerHTML = directReferrals.length
+          ? directReferrals.map(user => `
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px;border-bottom:1px solid #315b48;color:#fff;font-size:11px;">
+                <span>${esc(user.username || 'Unknown User')}</span>
+                <span>${Number(user.main_balance || 0)} SNX</span>
+              </div>`).join('')
+          : '<div style="padding:12px;color:#AABBB1;">No referred users found.</div>';
+      }
+
+      renderReferralList($('userReferralsSearch')?.value || '');
+    } catch (error) {
+      console.error('User Referral Data Error:', error);
+      ids.forEach(id => setText(id, 'Error'));
+      if (list) list.innerHTML = `<div class="user-referrals-empty">Could not load referral data: ${esc(error.message)}</div>`;
+    }
+  }
+
+  // Detect which user's details are being opened
+  document.addEventListener('click', function (e) {
+    const button = e.target.closest('.view-user-details-btn');
+    if (!button) return;
+
+    selectedUserId = button.dataset.userId;
+    loadSelectedUserReferrals();
+  });
+
+  // Open Check Referrals page
+  $('checkReferralsBtn')?.addEventListener('click', function () {
+    loadSelectedUserReferrals();
+  });
+
+  // Search referred users
+  $('userReferralsSearch')?.addEventListener('input', function () {
+    renderReferralList(this.value);
+  });
+
+  if (window.supabaseClient && !window.userReferralsLiveChannel) {
+    window.userReferralsLiveChannel = window.supabaseClient
+      .channel('admin-selected-user-referrals-live')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => {
+        const page = $('userReferralsPage');
+        if (page && page.style.display !== 'none' && selectedUserId) loadSelectedUserReferrals();
+      })
+      .subscribe();
+  }
+
+})();
+
+  
+  
+  
+  
+  
+/* ==========================================
+   WITHDRAWAL REQUESTS - SUPABASE CONNECTION
+========================================== */
+
+(function () {
+  const $ = id => document.getElementById(id);
+
+  const requestList = $("pendingWithdrawalRequestsList");
+  const historyList = $("withdrawalHistoryList");
+
+  if (!requestList || !historyList) return;
+
+  let allRequests = [];
+  let allHistory = [];
+  let historyLimit = 10;
+
+  const esc = value => String(value ?? "—").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[ch]);
+
+  const money = value => {
+    const n = Number(value);
+    return Number.isFinite(n) ? n.toFixed(2) + " SNX" : "—";
+  };
+
+  const date = value =>
+    value ? new Date(value).toLocaleString() : "—";
+
+  function showEmpty(list, message) {
+    list.innerHTML = `
+      <div class="withdrawal-empty-state">
+        <i class="fa-solid fa-inbox"></i>
+        <p>${esc(message)}</p>
+      </div>`;
+  }
+
+  async function loadWithdrawalRequests() {
+    const client = window.supabaseClient;
+
+    if (!client) {
+      showEmpty(requestList, "Supabase connection available nahi hai.");
+      return;
+    }
+
+    showEmpty(requestList, "Loading withdrawal requests...");
+    showEmpty(historyList, "Loading withdrawal history...");
+
+    try {
+      const { data: requests, error } = await client
+        .from("withdrawal_requests")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      const rows = requests || [];
+
+      const userIds = [...new Set(rows.map(x => x.user_id).filter(Boolean))];
+
+      let profiles = [];
+
+      if (userIds.length) {
+        const { data, error: profileError } = await client
+          .from("profiles")
+          .select("id, username, email")
+          .in("id", userIds);
+
+        if (profileError) throw profileError;
+        profiles = data || [];
+      }
+
+      const profileMap = new Map(profiles.map(user => [user.id, user]));
+
+      allRequests = rows.map(item => ({
+        ...item,
+        username: profileMap.get(item.user_id)?.username || "Unknown User",
+        email: profileMap.get(item.user_id)?.email || "—"
+      }));
+
+      allHistory = allRequests.filter(item =>
+        ["approved", "rejected"].includes(item.status)
+      );
+
+      updateWithdrawalStats();
+      renderWithdrawalRequests();
+      renderWithdrawalHistory();
+
+    } catch (error) {
+      console.error("Withdrawal Loading Error:", error);
+      showEmpty(requestList, "Error: " + error.message);
+      showEmpty(historyList, "History load nahi hui: " + error.message);
+    }
+  }
+
+  function updateWithdrawalStats() {
+    $("totalWithdrawalRequests").textContent = allRequests.length;
+
+    $("pendingWithdrawalRequests").textContent =
+      allRequests.filter(x => x.status === "pending").length;
+
+    $("approvedWithdrawalRequests").textContent =
+      allRequests.filter(x => x.status === "approved").length;
+
+    $("rejectedWithdrawalRequests").textContent =
+      allRequests.filter(x => x.status === "rejected").length;
+
+    const dashboardCounter = $("totalWithdrawals");
+    if (dashboardCounter) {
+      dashboardCounter.textContent = allRequests.filter(x => x.status === "pending").length;
+    }
+  }
+
+  function renderWithdrawalRequests() {
+    // Keep only pending requests in the action queue.
+    // Approved/rejected requests are shown exclusively in Withdrawal History.
+    const filtered = allRequests.filter(item => item.status === "pending");
+
+    if (!filtered.length) {
+      showEmpty(requestList, "Is filter mein koi withdrawal request nahi mili.");
+      return;
+    }
+
+    requestList.innerHTML = filtered.map(item => `
+      <article style="
+        background:#1b3028;
+        border:1px solid #39D98A66;
+        border-radius:12px;
+        padding:12px;
+        color:#fff;
+        font-size:11px;
+        line-height:1.6;
+        overflow-wrap:anywhere;
+      ">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:9px;">
+          <strong style="color:#39D98A;font-size:14px;">
+            ${esc(item.username)}
+          </strong>
+          <span style="
+            color:${item.status === "pending" ? "#FFD447" : item.status === "approved" ? "#39D98A" : "#FF8FA3"};
+            font-weight:800;
+          ">${esc(item.status.toUpperCase())}</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div><b style="color:#FFD447;">AMOUNT</b><br>${money(item.amount)}</div>
+          <div><b style="color:#45B8FF;">PAYMENT METHOD</b><br>${esc(item.payment_method)}</div>
+          <div><b style="color:#45B8FF;">USER ID</b><br>${esc(item.user_id)}</div>
+          <div><b style="color:#A78BFA;">REQUEST DATE</b><br>${esc(date(item.created_at))}</div>
+        </div>
+
+        <div style="margin-top:9px;padding-top:8px;border-top:1px solid #345447;">
+          <b style="color:#39D98A;">ACCOUNT DETAILS</b><br>
+          ${esc(item.account_details)}
+        </div>
+
+        <div id="withdrawalDetails-${esc(item.id)}" style="display:none;margin-top:8px;padding:9px;background:#14251F;border-radius:8px;">
+          <b style="color:#45B8FF;">EMAIL:</b> ${esc(item.email)}<br>
+          <b style="color:#FFD447;">REQUEST ID:</b> ${esc(item.id)}<br>
+          <b style="color:#A78BFA;">ADMIN NOTE:</b> ${esc(item.admin_note || "—")}<br>
+          <b style="color:#39D98A;">REVIEWED:</b> ${esc(date(item.reviewed_at))}
+        </div>
+
+        <div style="display:flex;gap:7px;margin-top:11px;flex-wrap:wrap;">
+          <button type="button" data-withdrawal-details="${esc(item.id)}"
+            style="flex:1;padding:9px;background:#20372D;color:#45B8FF;border:1px solid #45B8FF;border-radius:7px;font-weight:800;">
+            DETAILS
+          </button>
+
+          ${item.status === "pending" ? `
+            <button type="button" data-withdrawal-action="approved" data-request-id="${esc(item.id)}"
+              style="flex:1;padding:9px;background:#39D98A;color:#14251F;border:0;border-radius:7px;font-weight:800;">
+              APPROVE
+            </button>
+            <button type="button" data-withdrawal-action="rejected" data-request-id="${esc(item.id)}"
+              style="flex:1;padding:9px;background:#A83245;color:#fff;border:0;border-radius:7px;font-weight:800;">
+              REJECT
+            </button>
+          ` : ""}
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function renderWithdrawalHistory() {
+    const status = $("withdrawalHistoryStatus").value;
+    const method = $("withdrawalHistoryMethod").value;
+    const search = $("withdrawalHistorySearch").value.toLowerCase().trim();
+
+    const filtered = allHistory.filter(item => {
+      const matchesStatus = status === "all" || item.status === status;
+      const matchesMethod = method === "all" || item.payment_method === method;
+
+      const searchable = [
+        item.username,
+        item.user_id,
+        item.email
+      ].join(" ").toLowerCase();
+
+      return matchesStatus && matchesMethod && searchable.includes(search);
+    });
+
+    const visible = filtered.slice(0, historyLimit);
+
+    if (!visible.length) {
+      showEmpty(historyList, "Koi matching withdrawal history nahi mili.");
+    } else {
+      historyList.innerHTML = visible.map(item => `
+        <article style="
+          background:#1b3028;
+          border:1px solid #345447;
+          border-radius:11px;
+          padding:12px;
+          margin-bottom:8px;
+          color:#fff;
+          font-size:11px;
+          line-height:1.6;
+          overflow-wrap:anywhere;
+        ">
+          <div style="display:flex;justify-content:space-between;gap:8px;">
+            <strong style="color:#39D98A;font-size:13px;">${esc(item.username)}</strong>
+            <strong style="color:${item.status === "approved" ? "#39D98A" : "#FF8FA3"};">
+              ${esc(item.status.toUpperCase())}
+            </strong>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px;">
+            <div><b style="color:#FFD447;">AMOUNT</b><br>${money(item.amount)}</div>
+            <div><b style="color:#45B8FF;">METHOD</b><br>${esc(item.payment_method)}</div>
+            <div><b style="color:#45B8FF;">USER ID</b><br>${esc(item.user_id)}</div>
+            <div><b style="color:#A78BFA;">REVIEWED</b><br>${esc(date(item.reviewed_at))}</div>
+          </div>
+          <div style="margin-top:8px;padding-top:7px;border-top:1px solid #345447;">
+            <b style="color:#39D98A;">ACCOUNT:</b> ${esc(item.account_details)}<br>
+            <b style="color:#FFD447;">ADMIN NOTE:</b> ${esc(item.admin_note || "—")}
+          </div>
+        </article>
+      `).join("");
+    }
+
+    const loadMore = $("withdrawalHistoryLoadMore");
+    loadMore.style.display = filtered.length > historyLimit ? "block" : "none";
+  }
+
+  // Approve, reject and details actions
+  requestList.addEventListener("click", async event => {
+    const detailsButton = event.target.closest("[data-withdrawal-details]");
+
+    if (detailsButton) {
+      const id = detailsButton.dataset.withdrawalDetails;
+      const panel = $("withdrawalDetails-" + id);
+
+      if (panel) {
+        panel.style.display = panel.style.display === "none" ? "block" : "none";
+      }
+      return;
+    }
+
+    const button = event.target.closest("[data-withdrawal-action]");
+    if (!button) return;
+
+    const requestId = button.dataset.requestId;
+    const decision = button.dataset.withdrawalAction;
+
+    const confirmed = confirm(
+      decision === "approved"
+        ? "Kya aap is withdrawal ko APPROVE karna chahte hain? Amount user ke Main Balance se deduct hoga."
+        : "Kya aap is withdrawal ko REJECT karna chahte hain?"
+    );
+
+    if (!confirmed) return;
+
+    button.disabled = true;
+    button.textContent = "PROCESSING...";
+
+    try {
+      const { data, error } = await window.supabaseClient.rpc(
+        "review_withdrawal_request",
+        {
+          p_request_id: requestId,
+          p_decision: decision,
+          p_admin_note: null
+        }
+      );
+
+      if (error) throw error;
+
+      alert("Withdrawal request successfully " + decision + "!");
+      await loadWithdrawalRequests();
+
+    } catch (error) {
+      console.error("Withdrawal Review Error:", error);
+      alert("Request process nahi hui: " + error.message);
+      button.disabled = false;
+      button.textContent = decision === "approved" ? "APPROVE" : "REJECT";
+    }
+  });
+
+  // History search and filters
+  $("withdrawalHistorySearch").addEventListener("input", () => {
+    historyLimit = 10;
+    renderWithdrawalHistory();
+  });
+
+  $("withdrawalHistoryStatus").addEventListener("change", () => {
+    historyLimit = 10;
+    renderWithdrawalHistory();
+  });
+
+  $("withdrawalHistoryMethod").addEventListener("change", () => {
+    historyLimit = 10;
+    renderWithdrawalHistory();
+  });
+
+  $("withdrawalHistoryLoadMore").addEventListener("click", () => {
+    historyLimit += 10;
+    renderWithdrawalHistory();
+  });
+
+  // Load data when page opens
+  document.querySelector('.menu-button[data-label="Withdrawal Requests"]')
+    ?.addEventListener("click", loadWithdrawalRequests);
+
+  // Live updates
+  if (window.supabaseClient && !window.withdrawalLiveChannel) {
+    window.withdrawalLiveChannel = window.supabaseClient
+      .channel("admin-withdrawal-requests-live")
+      .on("postgres_changes", {
+        event: "*",
+        schema: "public",
+        table: "withdrawal_requests"
+      }, () => {
+        // Keep the overview counter and both withdrawal sections in sync.
+        loadWithdrawalRequests();
+      })
+      .subscribe();
+  }
+
+  // Load once on Admin Panel startup so Dashboard Overview is populated
+  // without first opening the Withdrawal Requests page.
+  loadWithdrawalRequests();
+
+})();
+
+  
+  
+  
+  
+  </script>
+
+
+
+
+
+
+
+
+
+    
+                                 
+  
+
+<!-- REFERRAL MANAGEMENT: LIVE SUPABASE DATA -->
+<script>
+(function () {
+  const referralPage = document.getElementById('referralPage');
+  const referralButton = document.querySelector('.menu-button[data-label="Referral"]');
+  const searchInput = document.getElementById('referralHistorySearch');
+  const adminList = document.getElementById('myAdminReferralList');
+  const topList = document.getElementById('topReferralUsersList');
+  const historyList = document.getElementById('referralHistoryList');
+  const totalEl = document.getElementById('myTotalReferrals');
+  const activeEl = document.getElementById('myActiveReferrals');
+  let referralRows = [];
+  let adminId = null;
+  let adminUsername = 'Admin';
+  let isLoading = false;
+
+  const esc = (value) => String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[ch]);
+  const statusOf = (user) => String(user.account_status || user.status || 'ACTIVE').toUpperCase();
+  const isActive = (user) => ['ACTIVE', 'VERIFIED', 'APPROVED'].includes(statusOf(user));
+  const dateOf = (value) => value ? new Date(value).toLocaleDateString() : 'Unknown';
+  const userName = (user) => user?.username || 'Unknown User';
+
+  function renderCard(user, referrerName, directCount, activeCount) {
+    return `
+      <article style="background:#1c332a;border:1px solid #315b48;border-radius:12px;padding:13px;margin:0 0 10px;color:#eaf4ee;line-height:1.55;overflow-wrap:anywhere;">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px;">
+          <strong style="color:#39D98A;font-size:14px;">${esc(userName(user))}</strong>
+          <span style="font-size:9px;font-weight:800;color:${isActive(user) ? '#39D98A' : '#FF8FA3'};background:${isActive(user) ? '#39D98A18' : '#FF8FA318'};padding:4px 8px;border-radius:20px;">${esc(statusOf(user))}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;font-size:11px;">
+          <div><b style="color:#45B8FF;">EMAIL</b><br>${esc(user.email || 'Not available')}</div>
+          <div><b style="color:#FFD447;">REFERRER USERNAME</b><br>${esc(referrerName || 'Not available')}</div>
+          <div><b style="color:#A78BFA;">DIRECT REFERRALS</b><br>${directCount}</div>
+          <div><b style="color:#39D98A;">ACTIVE REFERRALS</b><br>${activeCount}</div>
+          <div><b style="color:#45B8FF;">REFERRAL CODE</b><br>${esc(user.referral_code || 'Not available')}</div>
+          <div><b style="color:#FFD447;">JOINED</b><br>${esc(dateOf(user.created_at))}</div>
+        </div>
+        <div style="margin-top:9px;padding-top:8px;border-top:1px solid #315b48;font-size:10px;">
+          <b style="color:#45B8FF;">USER ID:</b> ${esc(user.id || 'Not available')}<br>
+          <b style="color:#A78BFA;">REFERRED BY ID:</b> ${esc(user.referred_by || 'Not available')}
+        </div>
+      </article>`;
+  }
+
+  function showEmpty(el, message) {
+    if (!el) return;
+    el.className = 'referral-empty';
+    el.innerHTML = `<i class="fa-solid fa-circle-info"></i><p>${esc(message)}</p>`;
+  }
+
+  function getReferrerName(user, byId) {
+    if (user.referrer_username) return user.referrer_username;
+    if (user.referred_by && byId.has(user.referred_by)) return userName(byId.get(user.referred_by));
+    if (user.referred_by === adminId) return adminUsername;
+    return user.referred_by ? 'Username not saved' : 'No referrer recorded';
+  }
+
+  function directCounts(rows) {
+    const counts = new Map();
+    const activeCounts = new Map();
+    rows.forEach(user => {
+      if (!user.referred_by) return;
+      counts.set(user.referred_by, (counts.get(user.referred_by) || 0) + 1);
+      if (isActive(user)) activeCounts.set(user.referred_by, (activeCounts.get(user.referred_by) || 0) + 1);
+    });
+    return { counts, activeCounts };
+  }
+
+  function renderAdminReferrals(rows, counts, activeCounts) {
+    const mine = rows.filter(user => user.referred_by === adminId);
+    if (totalEl) totalEl.textContent = mine.length;
+    if (activeEl) activeEl.textContent = mine.filter(isActive).length;
+    if (!mine.length) return showEmpty(adminList, 'No users have registered through the Admin referral yet.');
+    adminList.className = 'referral-list';
+    adminList.innerHTML = mine.map(user => renderCard(user, adminUsername, counts.get(user.id) || 0, activeCounts.get(user.id) || 0)).join('');
+  }
+
+  function renderTopUsers(rows, byId, counts, activeCounts) {
+    const ranked = rows
+      .filter(user => user.id !== adminId && (counts.get(user.id) || 0) > 0)
+      .sort((a, b) => (counts.get(b.id) || 0) - (counts.get(a.id) || 0))
+      .slice(0, 10);
+    if (!ranked.length) return showEmpty(topList, 'No referral activity has been recorded yet.');
+    topList.className = 'referral-list';
+    topList.innerHTML = ranked.map((user, index) => `
+      <div style="background:#1c332a;border:1px solid #315b48;border-radius:11px;padding:12px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div style="min-width:0;">
+          <strong style="color:#FFD447;font-size:12px;">#${index + 1} ${esc(userName(user))}</strong>
+          <div style="color:#AABBB1;font-size:10px;margin-top:4px;">${esc(user.email || 'No email')} · Referred by: ${esc(getReferrerName(user, byId))}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;font-size:10px;color:#AABBB1;">
+          <strong style="display:block;color:#39D98A;font-size:17px;">${counts.get(user.id) || 0}</strong>
+          ${activeCounts.get(user.id) || 0} active
+        </div>
+      </div>`).join('');
+  }
+
+
+
+
+function renderHistory(query = '') {
+  const { counts } = directCounts(referralRows);
+  const q = query.toLowerCase().trim();
+
+  const filtered = referralRows
+    .filter(user => user.id !== adminId)
+    .filter(user =>
+      String(user.username || '')
+        .toLowerCase()
+        .includes(q)
+    );
+
+  if (!filtered.length) {
+    return showEmpty(
+      historyList,
+      q ? 'No matching users found.' : 'No users found.'
+    );
+  }
+
+  historyList.className = 'referral-list';
+
+  historyList.innerHTML = filtered.map(user => `
+    <article style="
+      background:#1c332a;
+      border:1px solid #315b48;
+      border-radius:12px;
+      padding:15px;
+      margin-bottom:10px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    ">
+      <strong style="
+        color:#ffffff;
+        font-size:14px;
+        overflow-wrap:anywhere;
+      ">
+        ${esc(user.username || 'Unknown User')}
+      </strong>
+
+      <span style="
+        color:#39D98A;
+        font-size:13px;
+        font-weight:800;
+        white-space:nowrap;
+      ">
+        ${counts.get(user.id) || 0} Referrals
+      </span>
+    </article>
+  `).join('');
+}
+
+
+
+
+
+
+  
+
+  async function loadReferralManagement() {
+    if (isLoading) return;
+    const client = window.supabaseClient;
+    if (!client) {
+      showEmpty(adminList, 'Supabase connection is not ready. Reload the Admin Panel.');
+      return;
+    }
+    isLoading = true;
+    showEmpty(adminList, 'Loading Admin referrals...');
+    showEmpty(topList, 'Loading top referral users...');
+    showEmpty(historyList, 'Loading referral history...');
+    try {
+      const { data: authData, error: authError } = await client.auth.getUser();
+      if (authError) throw authError;
+      adminId = authData?.user?.id || null;
+      if (!adminId) throw new Error('Admin session not found. Please log in again.');
+
+      const { data: rows, error } = await client
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      referralRows = rows || [];
+      const byId = new Map(referralRows.map(user => [user.id, user]));
+      adminUsername = userName(byId.get(adminId));
+      const { counts, activeCounts } = directCounts(referralRows);
+      renderAdminReferrals(referralRows, counts, activeCounts);
+      renderTopUsers(referralRows, byId, counts, activeCounts);
+      renderHistory(searchInput?.value || '');
+    } catch (error) {
+      console.error('Referral Management Error:', error);
+      showEmpty(adminList, 'Could not load referral data: ' + error.message);
+      showEmpty(topList, 'Could not load referral data: ' + error.message);
+      showEmpty(historyList, 'Could not load referral data: ' + error.message);
+      if (totalEl) totalEl.textContent = '—';
+      if (activeEl) activeEl.textContent = '—';
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  if (referralButton) referralButton.addEventListener('click', loadReferralManagement);
+  if (searchInput) searchInput.addEventListener('input', () => renderHistory(searchInput.value));
+
+  if (window.supabaseClient && !window.referralLiveChannel) {
+    window.referralLiveChannel = window.supabaseClient
+      .channel('admin-referral-management-live')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => {
+        if (referralPage && referralPage.style.display !== 'none') loadReferralManagement();
+      })
+      .subscribe();
+  }
+})();
+</script>
+
+</body>
+</html>
